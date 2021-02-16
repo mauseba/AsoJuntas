@@ -1,11 +1,13 @@
 @extends('adminlte::page')
 
-@section('title', 'Coders Free')
+@section('title', 'Asojuntas')
 
 @section('content_header')
 
-    <a class="btn btn-secondary btn-sm float-right" href="{{route('admin.posts.create')}}">Nuevo post</a>
-
+    @can('admin.posts.create')
+        <a class="btn btn-secondary btn-sm float-right" href="{{route('admin.posts.create')}}">Nuevo post</a>
+    @endcan
+    
     <h1>Listado de post</h1>
 @stop
 
