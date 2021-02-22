@@ -262,7 +262,7 @@ return [
             'can'       => 'admin.tags.index'
         ],
         
-        ['header' => 'OPCIONES DE BLOG'],
+        ['header' => 'OPCIONES DE PAGINA PRINCIPAL'],
         [
             'text'       => 'Lista de post',
             'route'        => 'admin.posts.index',

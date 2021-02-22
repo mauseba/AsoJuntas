@@ -27,7 +27,7 @@
                                 @endcan
                             </td>
                             <td with="10px">
-                                @can('dmin.posts.destroy')
+                                @can('admin.posts.destroy')
                                     <form action="{{route('admin.posts.destroy', $post)}}" method="POST">
                                         @csrf
                                         @method('DELETE')
