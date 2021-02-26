@@ -264,13 +264,13 @@ return [
         
         ['header' => 'OPCIONES DE PAGINA PRINCIPAL'],
         [
-            'text'       => 'Lista de post',
+            'text'       => 'Lista de Publicaciones',
             'route'        => 'admin.posts.index',
             'icon'      => 'fas fa-fw fa-clipboard',
             'can'       => 'admin.posts.index'
         ],
         [
-            'text'       => 'Crear nuevo post',
+            'text'       => 'Crear nueva noticia',
             'route'        => 'admin.posts.create',
             'icon'      => 'fas fa-fw fa-file',
             'can'       => 'admin.posts.create'

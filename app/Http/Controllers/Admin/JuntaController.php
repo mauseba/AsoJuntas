@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Junta;
 use Illuminate\Http\Request;
 
-use App\Models\Juntas;
 
-class JuntasController extends Controller
+class JuntaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -46,7 +46,7 @@ class JuntasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Juntas $juntas)
+    public function show(Junta $juntas)
     {
         return view('admin.juntas.show',compact('juntas'));
     }
@@ -57,7 +57,7 @@ class JuntasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Juntas $juntas)
+    public function edit(Junta $juntas)
     {
         return view('admin.juntas.edit',compact('juntas'));
     }
@@ -69,7 +69,7 @@ class JuntasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Juntas $juntas)
+    public function update(Request $request,Junta $juntas)
     {
         //
     }
@@ -80,7 +80,7 @@ class JuntasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Juntas $juntas)
+    public function destroy(Junta $juntas)
     {
         //
     }

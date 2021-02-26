@@ -7,7 +7,7 @@
                 <thead>
                     <tr>
                         <th>                                    
-                            <h1 class="text-4xl text-black leading-8 font-bold mt-2">Noticias</h1>
+                            <h1 class="text-4xl text-black leading-8 font-bold mt-2">Publicaciones</h1>
                         </th>
                     </tr>
                 </thead>

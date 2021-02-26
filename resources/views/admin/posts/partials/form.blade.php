@@ -1,6 +1,6 @@
 <div class="form-group">
-    {!! Form::label('name', 'Nombre:') !!}
-    {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el nombre del post']) !!}
+    {!! Form::label('name', 'Titulo:') !!}
+    {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el titulo de la noticia']) !!}
 
     @error('name')
         <small class="text-danger">{{$message}}</small>
@@ -10,7 +10,7 @@
 
 <div class="form-group">
     {!! Form::label('slug', 'Slug:') !!}
-    {!! Form::text('slug', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el slug del post', 'readonly']) !!}
+    {!! Form::text('slug', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el slug de la noticia', 'readonly']) !!}
     
     @error('slug')
         <small class="text-danger">{{$message}}</small>
@@ -79,7 +79,7 @@
 
     <div class="col">
         <div class="form-group">
-            {!! Form::label('file', 'Imagen que se mostrará en el post') !!}
+            {!! Form::label('file', 'Imagen que se mostrará en la publicacion') !!}
             {!! Form::file('file', ['class' => 'form-control-file', 'accept' => 'image/*']) !!}
 
             @error('file')

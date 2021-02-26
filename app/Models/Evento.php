@@ -5,15 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Juntas extends Model
+class Evento extends Model
 {
     use HasFactory;
+    
+    //relacion muchos a muchos
 
-    //relacion uno a muchos
+    public function juntas(){
 
-    public function userjun(){
-
-        return $this->hasMany(UserJun::class);
-
+        return $this->belongsToMany(Junta::class);
     }
 }

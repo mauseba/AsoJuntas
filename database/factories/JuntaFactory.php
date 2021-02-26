@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\Juntas;
+use App\Models\Junta;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class JuntasFactory extends Factory
+class JuntaFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Juntas::class;
+    protected $model = Junta::class;
 
     /**
      * Define the model's default state.

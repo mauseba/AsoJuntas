@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Category;
-use App\Models\Juntas;
+use App\Models\Junta;
 use App\Models\Tag;
 use App\Models\UserJun;
 use Illuminate\Database\Seeder;
@@ -28,8 +28,9 @@ class DatabaseSeeder extends Seeder
         Category::factory(4)->create();
         Tag::factory(8)->create();
         $this->call(PostSeeder::class);
-        Juntas::factory(10)->create();
-        UserJun::factory(10)->create();
+        Junta::factory(20)->create();
+        UserJun::factory(40)->create();
+        $this->call(EventoSeeder::class);
 
     }
 }

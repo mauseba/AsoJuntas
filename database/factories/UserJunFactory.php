@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\Juntas;
+use App\Models\Junta;
 use App\Models\UserJun;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -30,7 +30,7 @@ class UserJunFactory extends Factory
             'Niv_educacion'=> $this->faker->word(20),
             'Correo'=> $this->faker->unique()->email,
             'Cargo'=> $this->faker->jobTitle,
-            'junta_id'=> Juntas::all()->random()->id
+            'junta_id'=> Junta::all()->random()->id
         ];
     }
 }

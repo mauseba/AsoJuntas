@@ -3,7 +3,7 @@
 @section('title', 'Asojuntas')
 
 @section('content_header')
-    <h1>Crear nuevo post</h1>
+    <h1>Crear nueva Noticia</h1>
 @stop
 
 @section('content')

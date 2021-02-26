@@ -8,7 +8,7 @@
         <a class="btn btn-secondary btn-sm float-right" href="{{route('admin.posts.create')}}">Nuevo post</a>
     @endcan
     
-    <h1>Listado de post</h1>
+    <h1>Listado de Publicaciones</h1>
 @stop
 
 @section('content')
@@ -23,7 +23,7 @@
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
+   
 @stop
 
 @section('js')
