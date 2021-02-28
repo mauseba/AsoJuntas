@@ -3,7 +3,7 @@
 @section('title', 'Asojuntas')
 
 @section('content_header')
-    <h1>Crear nueva Noticia</h1>
+    <h1>Crear nueva Publicacion</h1>
 @stop
 
 @section('content')
@@ -13,7 +13,7 @@
 
                 @include('admin.posts.partials.form')
 
-                {!! Form::submit('Crear post', ['class' => 'btn btn-primary']) !!}
+                {!! Form::submit('Crear publicacion', ['class' => 'btn btn-primary']) !!}
 
             {!! Form::close() !!}
         </div>

@@ -3,11 +3,20 @@
 @section('title', 'Asojuntas')
 
 @section('content_header')
-    <h1>Pagina principal index</h1>
+   
+
+    <h1>Mostrar lista de Juntas</h1>
 @stop
 
 @section('content')
-    <p>Welcome to this beautiful admin panel.</p>
+
+    @if (session('info'))
+        <div class="alert alert-success">
+            <strong>{{session('info')}}</strong>
+        </div>
+    @endif
+
+    @livewire('admin.juntas-index')            
 @stop
 
 @section('css')

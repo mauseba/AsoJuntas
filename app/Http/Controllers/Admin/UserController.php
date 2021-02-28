@@ -21,7 +21,6 @@ class UserController extends Controller
         return view('admin.users.index');
     }
 
-
     public function edit(User $user)
     {
         $roles = Role::all();

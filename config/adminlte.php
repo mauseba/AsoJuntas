@@ -241,6 +241,11 @@ return [
             'can'       => 'admin.home'
         ],
         [
+            'text'        => 'Juntas',
+            'route'         => 'admin.juntas.index',
+            'icon'        => 'fas fa-users fa-fw',
+        ],
+        [
             'text'        => 'Usuarios',
             'route'         => 'admin.users.index',
             'icon'        => 'fas fa-users fa-fw',

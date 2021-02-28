@@ -41,7 +41,7 @@
                 <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
                 {{-- <a href="#" class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium">Dashboard</a> --}}
                 @foreach ($categories as $category)
-                  <a href="{{route('posts.category', $category)}}" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">{{$category->name}}</a>
+                  <a href="{{route('posts.category', $category)}}" class="text-gray-300 hover:bg-yellow-400 hover:text-white px-5 py-5 rounded-md text-base font-medium">{{$category->name}}</a>
                 @endforeach
                 </div>
             </div>
@@ -102,11 +102,11 @@
         @else
 
           <div>
-            <a href="{{route('login')}}" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+            <a href="{{route('login')}}" class="bg-transparent hover:bg-yellow-300 text-yellow-400 font-semibold hover:text-white py-4 px-8 border border-yellow-500 hover:border-transparent rounded">
               Login
             </a>
             <a href="{{route('register')}}" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
-              Register
+              Registrarse
             </a>
           </div>
 
@@ -120,7 +120,7 @@
         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
         {{-- <a href="#" class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium">Dashboard</a> --}}
         @foreach ($categories as $category)
-          <a href="{{route('posts.category', $category)}}" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">{{$category->name}}</a>
+          <a href="{{route('posts.category', $category)}}" class="text-gray-300 hover:bg-yellow-700 hover:text-white block px-3 py-2 rounded-md text-sm font-medium">{{$category->name}}</a>
         @endforeach
       </div>
     </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Junta;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 
 class JuntaController extends Controller
@@ -26,7 +27,9 @@ class JuntaController extends Controller
      */
     public function create()
     {
-        return view('admin.juntas.create');
+        $date = Carbon::now();
+
+        return view('admin.juntas.create',compact('date'));
     }
 
     /**

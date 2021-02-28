@@ -20,7 +20,7 @@
 
                 @include('admin.posts.partials.form')
 
-                {!! Form::submit('Actualizar post', ['class' => 'btn btn-primary']) !!}
+                {!! Form::submit('Actualizar Publicacion', ['class' => 'btn btn-primary']) !!}
 
             {!! Form::close() !!}
         </div>

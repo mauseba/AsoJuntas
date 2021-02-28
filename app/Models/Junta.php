@@ -9,6 +9,7 @@ class Junta extends Model
 {
     use HasFactory;
 
+    protected $fillabe = ['FechaC','Vereda', 'Nit','D_NIT','D_Resolucion'];
     //relacion uno a muchos
 
     public function userjun(){
