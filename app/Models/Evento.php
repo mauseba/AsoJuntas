@@ -8,6 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Evento extends Model
 {
     use HasFactory;
+
+    protected $fillable=[
+        'Fecha',
+        'hora_inicio',
+        'hora_final',
+        'hora_inicio',
+        'Asunto',
+        'descripcion'
+    ];
     
     //relacion muchos a muchos
 

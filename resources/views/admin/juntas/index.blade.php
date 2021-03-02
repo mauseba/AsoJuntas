@@ -3,7 +3,7 @@
 @section('title', 'Asojuntas')
 
 @section('content_header')
-   
+    <a class="btn btn-secondary btn-sm float-right" href="{{route('admin.juntas.create')}}">Nueva junta</a>
 
     <h1>Mostrar lista de Juntas</h1>
 @stop
@@ -24,5 +24,5 @@
 @stop
 
 @section('js')
-    <script> console.log('Hi!'); </script>
+
 @stop

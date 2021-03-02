@@ -246,6 +246,11 @@ return [
             'icon'        => 'fas fa-users fa-fw',
         ],
         [
+            'text'        => 'Eventos',
+            'route'         => 'admin.eventos.index',
+            'icon'        => 'fas fa-users fa-fw',
+        ],
+        [
             'text'        => 'Usuarios',
             'route'         => 'admin.users.index',
             'icon'        => 'fas fa-users fa-fw',
