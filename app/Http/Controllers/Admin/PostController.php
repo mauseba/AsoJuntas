@@ -126,7 +126,7 @@ class PostController extends Controller
             $post->tags()->sync($request->tags);
         }
 
-        return redirect()->route('admin.posts.edit', $post)->with('info', 'El post se actualizó con éxito');
+        return redirect()->route('admin.posts.edit', $post)->with('info', 'La publicacion se actualizó con éxito');
     }
 
     /**
@@ -142,6 +142,6 @@ class PostController extends Controller
 
         $post->delete();
 
-        return redirect()->route('admin.posts.index')->with('info', 'El post se eliminó con éxito');
+        return redirect()->route('admin.posts.index')->with('info', 'La publicacion se eliminó con éxito');
     }
 }

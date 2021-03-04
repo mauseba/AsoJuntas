@@ -16,11 +16,11 @@ class CreateEventosTable extends Migration
         Schema::create('eventos', function (Blueprint $table) {
             $table->id();
             
-            $table-> datetime('Fecha');
+            $table-> date('Fecha'); 
             $table-> string('hora_inicio',15);
             $table-> string('hora_final',15);
             $table-> string('Asunto');
-            $table-> string('Descripcion');
+            $table-> string('descripcion')->nullable();
 
             $table->timestamps();
         });

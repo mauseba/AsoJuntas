@@ -4,11 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Evento;
-use App\Models\Junta;
-use PhpParser\Node\Stmt\Else_;
 
-class EventoController extends Controller
+class RoleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +14,7 @@ class EventoController extends Controller
      */
     public function index()
     {
-        $juntas = Junta::all();
-
-        return view('admin.eventos.index', compact('juntas'));
+        //
     }
 
     /**
@@ -32,9 +27,6 @@ class EventoController extends Controller
         //
     }
 
-
-
-
     /**
      * Store a newly created resource in storage.
      *
@@ -43,18 +35,7 @@ class EventoController extends Controller
      */
     public function store(Request $request)
     {
-
-
-        $datosEvento= request()->except('_token','_method');
-        
-
-        $evento=Evento::create($datosEvento);
-
-        if($request->juntas){
-            $evento->juntas()->attach($request->juntas);
-        }
-  
-
+        //
     }
 
     /**
@@ -63,28 +44,9 @@ class EventoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show($id)
     {
-        $data=Evento::all();
-        $nueva_data = [];
-
-        foreach($data as $value){
-            $nueva_data[] = [
-                "id" => $value->id,
-                "end" => $value->Fecha . " " . $value->hora_final,
-                "start" => $value->Fecha . " " . $value->hora_inicio,
-                "title" =>$value->Asunto,
-                "backgroundColor"=>'#1ADE6C',
-                "textColor"=>'#fff',
-                "display"=>'block',
-                "extendedProps"=>[
-                    'descripcion'=>$value->descripcion
-                ]
-            ];
-
-        }
-
-        return response()->json($nueva_data);
+        //
     }
 
     /**

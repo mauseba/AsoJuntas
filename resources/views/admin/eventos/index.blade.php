@@ -12,6 +12,72 @@
             <div id='calendar'></div>
         </div>
     </div>
+    <div class="modal fade" id="evento_modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Agregar Evento</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <form id="formulario_evento">
+                    @csrf
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="">Fecha</label>
+                                <input type="date" class="form-control" id="txtFecha" name="txtFecha">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="">Hora inicial</label>
+                                <input type="time" class="form-control" id="txtHoraInicial" name="txtHoraInicial">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="">Hora Final</label>
+                                <input type="time" class="form-control" id="txtHoraFinal" name="txtHoraFinal">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="">Juntas</label>
+                                <select id="ddlJuntas" class="form-control">
+                                    <option value="">Seleccione...</option>
+                                    @foreach ($juntas as $junta)
+                                        <option value="{{$junta->id}}">{{$junta->Vereda}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="">Asunto</label>
+                                <input type="text" class="form-control" id="txtAsunto" name="txtAsunto">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label for="">Descripcion</label>
+                            <textarea id="txtDescripcion" class="form-control" name="txtDescripcion" cols="40" rows="10" ></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-success" id="btnGuardar" >Guardar</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            </div>
+          </div>
+        </div>
+      </div>
 @stop
 
 @section('css')
@@ -23,6 +89,8 @@
 @section('js')
     <script src='{{asset('vendor/fullcalendar/main.js')}}'></script>>
     <script src='{{asset('vendor/fullcalendar/locales/es.js')}}'></script>>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.33/moment-timezone.min.js"></script>
     <script>
         $(function(){
             var calendarEl = document.getElementById('calendar');
@@ -39,21 +107,103 @@
                 selectable: true,
                 selectMirror: true,
                 select: function(arg) {
-                    console.log(arg);
-                 /*var title = prompt('Event Title:');
-                    if (title) {
-                    calendar.addEvent({
-                        title: title,
-                        start: arg.start,
-                        end: arg.end,
-                        allDay: arg.allDay
-                        })
-                    }*/
-                    calendar.unselect()
+                    let Fe = moment(arg.start).format('YYYY-MM-DD');
+                    let Hi = moment(arg.start).format('HH:mm:ss');
+                    let Hf = moment(arg.end).format('HH:mm:ss');
+
+                    $('#txtFecha').val(Fe);
+                    $('#txtHoraInicial').val(Hi);
+                    $('#txtHoraFinal').val(Hf);
+
+                    $('#evento_modal').modal();
+
+                    calendar.unselect();
                 },
+                eventClick: function(arg) {
+                    console.log(arg.event.end);
+                    let Fe = moment(arg.event.start).format('YYYY-MM-DD');
+                    let Hi = moment(arg.event.start).format('HH:mm:ss');
+                    let Hf = moment(arg.event.end).format('HH:mm:ss');
+
+                    $('#txtFecha').val(Fe);
+                    $('#txtHoraInicial').val(Hi);
+                    $('#txtHoraFinal').val(Hf);
+                    $('#ddlJuntas').val();
+                    $('#txtAsunto').val(arg.event.title);
+                    $('#txtDescripcion').val(arg.event.extendedProps.descripcion);
+                   
+
+                    $('#evento_modal').modal();
+                },
+                editable: true,
+                dayMaxEvents: true,
+                events:"{{url('admin/eventos/show')}}"
             });
 
             calendar.render();
+            $('#evento_modal').on('hidden.bs.modal', function() { calendar.refetchEvents(); }); 
         })
+
+        /*function guardar(){
+
+           // var fd = new FormData(document.getElementById("formulario_evento"));
+            nuevoEvento={
+                Fecha:$('#txtFecha').val(),
+                hora_inicio:$('#txtHoraInicial').val(),
+                hora_final:$('#txtHoraFinal').val(),
+                juntas:$('#ddlJuntas').val(),
+                Asunto:$('#txtAsunto').val(),
+                descripcion:$('#txtDescripcion').val(),
+                '_token' : $("meta[name='csrf-token']").attr("content"),
+                '_method':method
+            }
+
+            console.log(fd);
+            $.ajax({
+                url: "{{route('admin.eventos.store')}}",
+                type: "POST",
+                data: fd,
+                processData: false,  // tell jQuery not to process the data
+                contentType: false   // tell jQuery not to set contentType
+            })
+        }*/
+
+        $('#btnGuardar').click(function(){
+            objEvento=recolectarDatos("POST");
+            enviarInformacion(objEvento);
+        });
+
+        function recolectarDatos(method){
+
+            nuevoEvento={
+                Fecha:$('#txtFecha').val(),
+                hora_inicio:$('#txtHoraInicial').val(),
+                hora_final:$('#txtHoraFinal').val(),
+                juntas:$('#ddlJuntas').val(),
+                Asunto:$('#txtAsunto').val(),
+                descripcion:$('#txtDescripcion').val(),
+                '_token' : $("meta[name='csrf-token']").attr("content"),
+                '_method':method
+            }
+
+            return(nuevoEvento);
+        }
+
+        function enviarInformacion(objEvento){
+
+            $.ajax({
+                url: "{{route('admin.eventos.store')}}",
+                type: "POST",
+                data: objEvento,
+                success:function(msg){
+                    console.log(msg);
+
+                    $('#evento_modal').modal('toggle');
+                },
+                error: function(){alert("Hay un error");}
+            })
+
+        }
+
     </script>
 @stop
