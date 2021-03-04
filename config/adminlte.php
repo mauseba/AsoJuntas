@@ -243,18 +243,24 @@ return [
         [
             'text'        => 'Juntas',
             'route'         => 'admin.juntas.index',
-            'icon'        => 'fas fa-users fa-fw',
+            'icon'        => 'fas fa-users',
         ],
         [
             'text'        => 'Eventos',
             'route'         => 'admin.eventos.index',
-            'icon'        => 'fas fa-users fa-fw',
+            'icon'        => 'fas fa-calendar-alt',
         ],
         [
             'text'        => 'Usuarios',
             'route'         => 'admin.users.index',
             'icon'        => 'fas fa-users fa-fw',
             'can'       => 'admin.users.index'
+        ],
+        [
+            'text'        => 'Lista de roles',
+            'route'         => 'admin.roles.index',
+            'icon'        => 'fas fa-users-cog fa-fw',
+            //'can'       => 'admin.users.index'
         ],
         
         [

@@ -107,6 +107,7 @@
                 selectable: true,
                 selectMirror: true,
                 select: function(arg) {
+                    limpiar();
                     let Fe = moment(arg.start).format('YYYY-MM-DD');
                     let Hi = moment(arg.start).format('HH:mm:ss');
                     let Hf = moment(arg.end).format('HH:mm:ss');
@@ -120,6 +121,7 @@
                     calendar.unselect();
                 },
                 eventClick: function(arg) {
+                    limpiar();
                     console.log(arg.event.end);
                     let Fe = moment(arg.event.start).format('YYYY-MM-DD');
                     let Hi = moment(arg.event.start).format('HH:mm:ss');
@@ -144,29 +146,6 @@
             $('#evento_modal').on('hidden.bs.modal', function() { calendar.refetchEvents(); }); 
         })
 
-        /*function guardar(){
-
-           // var fd = new FormData(document.getElementById("formulario_evento"));
-            nuevoEvento={
-                Fecha:$('#txtFecha').val(),
-                hora_inicio:$('#txtHoraInicial').val(),
-                hora_final:$('#txtHoraFinal').val(),
-                juntas:$('#ddlJuntas').val(),
-                Asunto:$('#txtAsunto').val(),
-                descripcion:$('#txtDescripcion').val(),
-                '_token' : $("meta[name='csrf-token']").attr("content"),
-                '_method':method
-            }
-
-            console.log(fd);
-            $.ajax({
-                url: "{{route('admin.eventos.store')}}",
-                type: "POST",
-                data: fd,
-                processData: false,  // tell jQuery not to process the data
-                contentType: false   // tell jQuery not to set contentType
-            })
-        }*/
 
         $('#btnGuardar').click(function(){
             objEvento=recolectarDatos("POST");
@@ -197,11 +176,22 @@
                 data: objEvento,
                 success:function(msg){
                     console.log(msg);
-
-                    $('#evento_modal').modal('toggle');
+                    $('#evento_modal').modal('hide');
+                    
+                   
                 },
                 error: function(){alert("Hay un error");}
             })
+
+        }
+        function limpiar(){
+            
+            $('#txtFecha').val("");
+            $('#txtHoraInicial').val("");
+            $('#txtHoraFinal').val("");
+            $('#ddlJuntas').val("");
+            $('#txtAsunto').val("");
+            $('#txtDescripcion').val("");
 
         }
 
