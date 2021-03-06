@@ -45,7 +45,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col">
                             <div class="form-group">
                                 <label for="">Juntas</label>
                                 <select id="ddlJuntas" class="form-control">
@@ -61,6 +61,15 @@
                                 <label for="">Asunto</label>
                                 <input type="text" class="form-control" id="txtAsunto" name="txtAsunto">
                             </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <p>¿Desea enviar un correo a los participante?</p>
+                            <input type="radio" id="1" name="opcion" value="1">
+                            <label for="si">Si</label><br>
+                            <input type="radio" id="2" name="opcion" value="0">
+                            <label for="no">No</label><br>
                         </div>
                     </div>
                     <div class="row">
@@ -141,6 +150,7 @@
                 dayMaxEvents: true,
                 events:"{{url('admin/eventos/show')}}"
             });
+            
 
             calendar.render();
             $('#evento_modal').on('hidden.bs.modal', function() { calendar.refetchEvents(); }); 
@@ -153,17 +163,20 @@
         });
 
         function recolectarDatos(method){
-
+            
             nuevoEvento={
                 Fecha:$('#txtFecha').val(),
                 hora_inicio:$('#txtHoraInicial').val(),
                 hora_final:$('#txtHoraFinal').val(),
                 juntas:$('#ddlJuntas').val(),
                 Asunto:$('#txtAsunto').val(),
+                opcion:$('input[name="opcion"]:checked').val(),
                 descripcion:$('#txtDescripcion').val(),
                 '_token' : $("meta[name='csrf-token']").attr("content"),
                 '_method':method
             }
+
+            console.log(nuevoEvento['opcion']);
 
             return(nuevoEvento);
         }
@@ -175,10 +188,9 @@
                 type: "POST",
                 data: objEvento,
                 success:function(msg){
-                    console.log(msg);
-                    $('#evento_modal').modal('hide');
-                    
-                   
+                    console.log('no hubo ningun problema');
+                    $('#evento_modal').modal('hide'); 
+     
                 },
                 error: function(){alert("Hay un error");}
             })

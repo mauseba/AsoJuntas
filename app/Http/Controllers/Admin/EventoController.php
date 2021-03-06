@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Evento;
 use App\Models\Junta;
-use PhpParser\Node\Stmt\Else_;
+use App\Models\UserJun;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\EventosMailable;
 
 class EventoController extends Controller
 {
@@ -33,8 +35,6 @@ class EventoController extends Controller
     }
 
 
-
-
     /**
      * Store a newly created resource in storage.
      *
@@ -43,19 +43,46 @@ class EventoController extends Controller
      */
     public function store(Request $request)
     {
-
-
-        $datosEvento= request()->except('_token','_method');
         
+
+        request()->validate([
+            'Fecha'=> 'required',
+            'hora_inicio'=> 'required',
+            'hora_final'=> 'required',
+            'juntas'=> 'required',
+            'Asunto'=> 'required',
+            'opcion'=> 'required',
+            'descripcion'=> 'required',
+        ]);
+
+        $datosEvento= request()->except('opcion','_token','_method');
+        
+
 
         $evento=Evento::create($datosEvento);
 
         if($request->juntas){
             $evento->juntas()->attach($request->juntas);
+        
         }
-  
+
+        if($request['opcion']==1){
+
+            $user = UserJun::select('Correo')->where('junta_id',$request['juntas'])->get();
+
+            foreach($user as $users){
+    
+                Mail::to($users['Correo'])->send(new EventosMailable($datosEvento));
+    
+            }
+        }
+
+       
+       
 
     }
+
+
 
     /**
      * Display the specified resource.
