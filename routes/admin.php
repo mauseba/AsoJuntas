@@ -7,6 +7,9 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\EpsController;
+use App\Http\Controllers\Admin\BarriosController;
+use App\Http\Controllers\Admin\CensoController;
 
 Route::get('', [HomeController::class, 'index'])->middleware('can:admin.home')->name('admin.home');
 
@@ -17,4 +20,12 @@ Route::resource('categories', CategoryController::class)->except('show')->names(
 Route::resource('tags', TagController::class)->except('show')->names('admin.tags');
 
 Route::resource('posts', PostController::class)->except('show')->names('admin.posts');
+
+Route::resource('eps', EpsController::class)->except('show')->names('admin.eps');
+
+Route::resource('barrios', BarriosController::class)->except('show')->names('admin.barrios');
+
+//Route::resource('censo', BarriosController::class)->except('show')->names('admin.censo');
+
+
 
