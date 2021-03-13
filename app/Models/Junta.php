@@ -9,13 +9,20 @@ class Junta extends Model
 {
     use HasFactory;
 
-    protected $fillabe = ['FechaC','Vereda', 'Nit','D_NIT','D_Resolucion'];
-    //relacion uno a muchos
+    protected $fillable = ['FechaC','Vereda','Nit','D_Recibopago','D_NIT','D_Resolucion','Observaciones'];
 
+    protected $guarded = ['id', 'created_at', 'updated_at'];
+
+    //relacion uno a muchos
     public function userjun(){
 
         return $this->hasMany(UserJun::class);
 
+    }
+
+    //relacion uno a muchos
+    public function psuscripcion(){
+        return $this->hasMany(Psuscripcion::class);
     }
 
     //relacion muchos a muchos

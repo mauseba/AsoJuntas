@@ -65,6 +65,25 @@
     </div>
 </div>
 <div class="form-group">
+    <p class="font-weight-bold">Estado</p>
+
+    <label>
+        {!! Form::radio('status', 1, true) !!}
+        Vigente
+    </label>
+
+    <label>
+        {!! Form::radio('status', 2) !!}
+        Desvinculada
+    </label>
+
+    @error('status')
+        <br>
+        <small class="text-danger">{{$message}}</small>
+    @enderror
+
+</div>
+<div class="form-group">
     {!! Form::label('Observaciones', 'Observaciones de la junta:') !!}
     {!! Form::textarea('Observaciones',null,['class'=>'form-control', 'rows' => 2, 'cols' => 40, 'placeholder' => 'Ingrese alguna observacion (opcional)']) !!}
 

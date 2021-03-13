@@ -3,7 +3,7 @@
 @section('title', 'Asojuntas')
 
 @section('content_header')
-    <h1>index</h1>
+    <h1>Calendario</h1>
 @stop
 
 @section('content')
@@ -12,86 +12,16 @@
             <div id='calendar'></div>
         </div>
     </div>
-    <div class="modal fade" id="evento_modal" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-lg" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Agregar Evento</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-                <form id="formulario_evento">
-                    @csrf
-                    <div class="row">
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="">Fecha</label>
-                                <input type="date" class="form-control" id="txtFecha" name="txtFecha">
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-group">
-                                <label for="">Hora inicial</label>
-                                <input type="time" class="form-control" id="txtHoraInicial" name="txtHoraInicial">
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-group">
-                                <label for="">Hora Final</label>
-                                <input type="time" class="form-control" id="txtHoraFinal" name="txtHoraFinal">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <div class="form-group">
-                                <label for="">Juntas</label>
-                                <select id="ddlJuntas" class="form-control">
-                                    <option value="">Seleccione...</option>
-                                    @foreach ($juntas as $junta)
-                                        <option value="{{$junta->id}}">{{$junta->Vereda}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-group">
-                                <label for="">Asunto</label>
-                                <input type="text" class="form-control" id="txtAsunto" name="txtAsunto">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="form-group">
-                            <p>¿Desea enviar un correo a los participante?</p>
-                            <input type="radio" id="1" name="opcion" value="1">
-                            <label for="si">Si</label><br>
-                            <input type="radio" id="2" name="opcion" value="0">
-                            <label for="no">No</label><br>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <label for="">Descripcion</label>
-                            <textarea id="txtDescripcion" class="form-control" name="txtDescripcion" cols="40" rows="10" ></textarea>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-success" id="btnGuardar" >Guardar</button>
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-            </div>
-          </div>
-        </div>
-      </div>
+
+    @include('admin.eventos.create')
+
 @stop
 
 @section('css')
     <link href='{{asset('vendor/fullcalendar/main.css')}}' rel='stylesheet' />
     <link href='https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.css' rel='stylesheet' />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.16/css/bootstrap-multiselect.css" rel="stylesheet">
+  
     
 @stop
 
@@ -99,6 +29,7 @@
     <script src='{{asset('vendor/fullcalendar/main.js')}}'></script>>
     <script src='{{asset('vendor/fullcalendar/locales/es.js')}}'></script>>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.16/js/bootstrap-multiselect.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.33/moment-timezone.min.js"></script>
     <script>
         $(function(){
@@ -120,38 +51,46 @@
                     let Fe = moment(arg.start).format('YYYY-MM-DD');
                     let Hi = moment(arg.start).format('HH:mm:ss');
                     let Hf = moment(arg.end).format('HH:mm:ss');
-
+                    
                     $('#txtFecha').val(Fe);
                     $('#txtHoraInicial').val(Hi);
                     $('#txtHoraFinal').val(Hf);
 
+                    $('#btnEditar').prop("disabled",true);
+                    $('#btnEliminar').prop("disabled",true);
+                    $('#btnGuardar').prop("disabled",false);
+
                     $('#evento_modal').modal();
+                    
 
                     calendar.unselect();
                 },
                 eventClick: function(arg) {
                     limpiar();
-                    console.log(arg.event.end);
                     let Fe = moment(arg.event.start).format('YYYY-MM-DD');
                     let Hi = moment(arg.event.start).format('HH:mm:ss');
                     let Hf = moment(arg.event.end).format('HH:mm:ss');
-
+                    
+                    $('#txtid').val(arg.event.id);    
                     $('#txtFecha').val(Fe);
                     $('#txtHoraInicial').val(Hi);
                     $('#txtHoraFinal').val(Hf);
                     $('#ddlJuntas').val();
                     $('#txtAsunto').val(arg.event.title);
                     $('#txtDescripcion').val(arg.event.extendedProps.descripcion);
-                   
+
+                    $('#btnEditar').prop("disabled",false);
+                    $('#btnEliminar').prop("disabled",false);
+                    $('#btnGuardar').prop("disabled",true);
 
                     $('#evento_modal').modal();
+
                 },
                 editable: true,
                 dayMaxEvents: true,
                 events:"{{url('admin/eventos/show')}}"
             });
             
-
             calendar.render();
             $('#evento_modal').on('hidden.bs.modal', function() { calendar.refetchEvents(); }); 
         })
@@ -161,6 +100,17 @@
             objEvento=recolectarDatos("POST");
             enviarInformacion(objEvento);
         });
+
+        $('#btnEliminar').click(function(){
+            objEvento=recolectarDatos("DELETE");
+            editarInformacion('/'+$('#txtid').val(),objEvento);
+        });
+
+        $('#btnEditar').click(function(){
+            objEvento= recolectarDatos("PATCH");
+            editarInformacion('/'+$('#txtid').val(),objEvento);
+        });
+
 
         function recolectarDatos(method){
             
@@ -176,13 +126,10 @@
                 '_method':method
             }
 
-            console.log(nuevoEvento['opcion']);
-
             return(nuevoEvento);
         }
 
         function enviarInformacion(objEvento){
-
             $.ajax({
                 url: "{{route('admin.eventos.store')}}",
                 type: "POST",
@@ -196,8 +143,26 @@
             })
 
         }
+        
+        function editarInformacion(accion,objEvento){
+
+            $.ajax({
+                url: "{{url('admin/eventos')}}"+accion,
+                type: "POST",
+                data: objEvento,
+                success:function(msg){
+                    console.log('no hubo ningun problema');
+                    $('#evento_modal').modal('hide'); 
+     
+                },
+                error: function(){alert("Hay un error");}
+            })
+
+        }
+         
         function limpiar(){
-            
+
+            $('#txtid').val("")   
             $('#txtFecha').val("");
             $('#txtHoraInicial').val("");
             $('#txtHoraFinal').val("");
@@ -207,5 +172,8 @@
 
         }
 
+    </script>
+     <script>
+        $('#ddlJuntas').multiselect();
     </script>
 @stop

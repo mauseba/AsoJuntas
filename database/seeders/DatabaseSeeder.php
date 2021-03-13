@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Junta;
 use App\Models\Tag;
 use App\Models\UserJun;
+use App\Models\Eps;
 use Illuminate\Database\Seeder;
 
 use Illuminate\Support\Facades\Storage;
@@ -27,6 +28,7 @@ class DatabaseSeeder extends Seeder
         $this->call(UserSeeder::class);
         Category::factory(4)->create();
         Tag::factory(8)->create();
+        Eps::factory(15)->create();
         $this->call(PostSeeder::class);
         Junta::factory(20)->create();
         UserJun::factory(40)->create();

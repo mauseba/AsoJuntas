@@ -12,11 +12,14 @@ use App\Mail\EventosMailable;
 
 class EventoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct(){
+
+        $this->middleware('can:admin.eventos.index')->only('index');
+        $this->middleware('can:admin.eventos.create')->only('store');
+        $this->middleware('can:admin.eventos.edit')->only('update');
+        $this->middleware('can:admin.eventos.destroy')->only('destroy');
+    }
+
     public function index()
     {
         $juntas = Junta::all();
@@ -44,7 +47,6 @@ class EventoController extends Controller
     public function store(Request $request)
     {
         
-
         request()->validate([
             'Fecha'=> 'required',
             'hora_inicio'=> 'required',
@@ -57,7 +59,6 @@ class EventoController extends Controller
 
         $datosEvento= request()->except('opcion','_token','_method');
         
-
 
         $evento=Evento::create($datosEvento);
 
@@ -76,10 +77,7 @@ class EventoController extends Controller
     
             }
         }
-
        
-       
-
     }
 
 
@@ -132,9 +130,19 @@ class EventoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Evento $evento)
     {
-        //
+
+       $datosEvento= request()->except('opcion','_token','_method');
+
+       $evento->update($datosEvento);
+
+
+       if($request->juntas){
+            $evento->juntas()->sync($request->juntas);
+        }
+
+        return response()->json($evento);
     }
 
     /**
@@ -143,8 +151,10 @@ class EventoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Evento $evento)
     {
-        //
+        $evento->delete();
+        return response()->json($evento);
+
     }
 }

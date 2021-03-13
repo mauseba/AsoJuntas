@@ -20,7 +20,11 @@
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
+    <style>
+    table th {
+        text-align: center;
+    }
+    </style>
 @stop
 
 @section('js')

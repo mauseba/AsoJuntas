@@ -22,10 +22,10 @@ class JuntaFactory extends Factory
     public function definition()
     {
         return [ 
-            'FechaC' => $this->faker->dateTime(),
+            'FechaC' => $this->faker->date(),
             'Vereda' => $this->faker->state(),
             'NIT' => $this->faker->ipv4(),
-            'D_recibo de pago'=> $this->faker->url(),
+            'D_Recibopago'=> $this->faker->url(),
             'D_NIT'=> $this->faker->url(),
             'D_Resolucion'=> $this->faker->url(),
             'status'=> $this->faker->randomElement([1,2]),

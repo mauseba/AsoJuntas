@@ -7,9 +7,10 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class EventosMailable extends Mailable
+class EventosMailable extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
+    
     public $subject = 'Evento Nuevo';
     public $Datos;
 

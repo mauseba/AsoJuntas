@@ -65,11 +65,11 @@ return [
     */
 
     'usermenu_enabled' => true,
-    'usermenu_header' => false,
+    'usermenu_header' => true,
     'usermenu_header_class' => 'bg-primary',
-    'usermenu_image' => false,
-    'usermenu_desc' => false,
-    'usermenu_profile_url' => false,
+    'usermenu_image' => true,
+    'usermenu_desc' => true,
+    'usermenu_profile_url' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -86,7 +86,7 @@ return [
     'layout_topnav' => null,
     'layout_boxed' => null,
     'layout_fixed_sidebar' => true,
-    'layout_fixed_navbar' => null,
+    'layout_fixed_navbar' => true,
     'layout_fixed_footer' => null,
 
     /*
@@ -121,12 +121,12 @@ return [
     */
 
     'classes_body' => '',
-    'classes_brand' => '',
+    'classes_brand' => 'bg-green',
     'classes_brand_text' => '',
     'classes_content_wrapper' => '',
     'classes_content_header' => '',
     'classes_content' => '',
-    'classes_sidebar' => 'sidebar-dark-primary elevation-4',
+    'classes_sidebar' => 'sidebar-dark-yellow elevation-4',
     'classes_sidebar_nav' => '',
     'classes_topnav' => 'navbar-white navbar-light',
     'classes_topnav_nav' => 'navbar-expand',
@@ -145,7 +145,7 @@ return [
     */
 
     'sidebar_mini' => true,
-    'sidebar_collapse' => false,
+    'sidebar_collapse' => true,
     'sidebar_collapse_auto_size' => false,
     'sidebar_collapse_remember' => false,
     'sidebar_collapse_remember_no_transition' => true,
@@ -226,8 +226,8 @@ return [
     'menu' => [
         [
             'text' => 'search',
-            'search' => true,
-            'topnav' => true,
+            'search' => false,
+            'topnav' => false,
         ],
         [
             'text' => 'blog',
@@ -243,12 +243,14 @@ return [
         [
             'text'        => 'Juntas',
             'route'         => 'admin.juntas.index',
-            'icon'        => 'fas fa-users',
+            'icon'        => 'fas fa-american-sign-language-interpreting',
+            'can'       => 'admin.juntas.index'
         ],
         [
             'text'        => 'Eventos',
             'route'         => 'admin.eventos.index',
             'icon'        => 'fas fa-calendar-alt',
+            'can'       => 'admin.eventos.index'
         ],
         [
             'text'        => 'Usuarios',
@@ -262,6 +264,8 @@ return [
             'icon'        => 'fas fa-users-cog fa-fw',
             //'can'       => 'admin.users.index'
         ],
+
+        ['header' => 'OPCIONES DE PAGINA PRINCIPAL'],
         
         [
             'text' => 'Categorías',
@@ -278,7 +282,6 @@ return [
             'can'       => 'admin.tags.index'
         ],
         
-        ['header' => 'OPCIONES DE PAGINA PRINCIPAL'],
         [
             'text'       => 'Lista de Publicaciones',
             'route'        => 'admin.posts.index',

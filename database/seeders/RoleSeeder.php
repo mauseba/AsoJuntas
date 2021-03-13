@@ -56,5 +56,22 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'admin.posts.destroy',
                              'description' => 'Eliminar publicacion'])->syncRoles([$role1, $role2]);
 
+        Permission::create(['name' => 'admin.eventos.index',
+                             'description' => 'Ver Calendario'])->syncRoles([$role1]);
+        Permission::create(['name' => 'admin.eventos.create',
+                             'description' => 'Guardar evento'])->syncRoles([$role1]);
+        Permission::create(['name' => 'admin.eventos.edit',
+                             'description' => 'Editar evento'])->syncRoles([$role1]);
+        Permission::create(['name' => 'admin.eventos.destroy',
+                             'description' => 'Eliminar evento'])->syncRoles([$role1]);
+
+        Permission::create(['name' => 'admin.juntas.index',
+                             'description' => 'Ver listado de juntas'])->syncRoles([$role1]);
+        Permission::create(['name' => 'admin.juntas.create',
+                             'description' => 'Guardar junta'])->syncRoles([$role1]);
+        Permission::create(['name' => 'admin.juntas.edit',
+                             'description' => 'Editar junta'])->syncRoles([$role1]);
+        Permission::create(['name' => 'admin.juntas.destroy',
+                                 'description' => 'Eliminar junta'])->syncRoles([$role1]);                           
     }
 }

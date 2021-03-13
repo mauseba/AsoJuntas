@@ -66,4 +66,20 @@ class User extends Authenticatable
     public function posts(){
         return $this->hasMany(Post::class);
     }
+
+    public function adminlte_image()
+    {
+        $foto=auth()->user()->profile_photo_url;
+        return $foto;
+    }
+
+    public function adminlte_desc()
+    {
+        return 'Administrador';
+    }
+
+    public function adminlte_profile_url()
+    {
+        return route('profile.show');
+    }
 }

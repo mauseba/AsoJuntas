@@ -2,8 +2,8 @@
 
 <footer class="bg-gray-200 text-gray-600 px-6 lg:px-8 py-12">
 <div class=" max-w-screen-xl mx-auto mb-12 lg:mb-16  ">
-    <div class="inline-block ">
-        <img class="h-16" src="{{asset('imagenes/logo3.png')}}" alt="UptimeMate logo">
+    <div class="inline-block">
+        <img class="h-16" src="{{asset('imagenes/logo.png')}}" alt="UptimeMate logo">
         
     </div>
     

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUserJunsTable extends Migration
+class CreatePsuscripcionTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,22 +13,13 @@ class CreateUserJunsTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_juns', function (Blueprint $table) {
+        Schema::create('psuscripcion', function (Blueprint $table) {
             $table->id();
+            $table->string('Mes');
+            $table->string('tipo');
 
-            $table->string('nombre');
-            $table->string('Tip_identificacion');
-            $table->string('Num_identificacion');
-            $table->string('Num_contacto');
-            $table->string('Niv_educacion');
-            $table->string('Correo');
-            $table->string('Cargo');
-
-            $table->unsignedBigInteger('junta_id');
-
+            $table->unsignedBigInteger('junta_id'); 
             $table->foreign('junta_id')->references('id')->on('juntas')->onDelete('cascade');
-            
-
 
             $table->timestamps();
         });
@@ -41,6 +32,6 @@ class CreateUserJunsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_juns');
+        Schema::dropIfExists('psuscripcion');
     }
 }

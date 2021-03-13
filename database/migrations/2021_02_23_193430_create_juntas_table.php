@@ -15,16 +15,16 @@ class CreateJuntasTable extends Migration
     {
         Schema::create('juntas', function (Blueprint $table) {
             $table->id();
-            $table->dateTime('FechaC');
+            $table->date('FechaC');
             $table->string('Vereda', 50);
             $table->string('Nit',20);
 
-            $table->string('D_recibo de pago');
+            $table->string('D_Recibopago');
             $table->string('D_NIT');
             $table->string('D_Resolucion');
-            $table->enum('status',[1,2]);
-
+            $table->enum('status',[1,2])->default(1);
             $table->string('Observaciones',200);
+            
             $table->timestamps();
         });
     }
