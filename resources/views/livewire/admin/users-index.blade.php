@@ -7,7 +7,7 @@
      
         @if ($users->count())
 
-            <div class="card-body">
+            <div class="card-body table-responsive">
                 <table class="table table-striped">
                     <thead>
                         <tr>

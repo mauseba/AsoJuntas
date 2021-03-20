@@ -12,58 +12,37 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-        <script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
-        <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
 
         @livewireStyles
 
         <!-- Scripts -->
-        <script src="{{ mix('js/app.js') }}" defer></script>
-        <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css">
-        <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+        <script src="{{ mix('js/app.js') }}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        
+        
+        
 
-        @livewire('navigation')
-       
     </head>
     <body class="font-sans antialiased">
 
+        
+        @livewire('navigation')
+        @include('Slider.slider')
+
         <div class="min-h-screen bg-gray-100">
-
-            @include('Slider.slider')
-
+            
             <!-- Page Content -->
             <main>
                 {{ $slot }}
             </main>
+               
         </div>
 
         @stack('modals')
-        
 
         @livewireScripts
-        <script>
-          	var mySwiper = new Swiper ('.swiper-container', {
-            // Optional parameters
-            direction: 'horizontal',
-            loop: true,
-
-            // If we need pagination
-            pagination: {
-                el: '.swiper-pagination',
-            },
-
-            // Navigation arrows
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-
-            // And if we need scrollbar
-            scrollbar: {
-                el: '.swiper-scrollbar',
-            },
-        })
-        </script>
+      
     </body>
     <footer>
         @livewire('footer')

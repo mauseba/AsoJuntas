@@ -69,9 +69,13 @@ class EventoController extends Controller
 
         if($request['opcion']==1){
 
-            $user = UserJun::select('Correo')->where('junta_id',$request['juntas'])->get();
+            $user = UserJun::select('Correo')->where([
+                ['junta_id',$request['juntas']],
+                ['Cargo','Chemical Engineer']
+            ])->get();
 
-            foreach($user as $users){
+            
+           foreach($user as $users){
     
                 Mail::to($users['Correo'])->send(new EventosMailable($datosEvento));
     

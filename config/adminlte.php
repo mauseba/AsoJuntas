@@ -241,17 +241,32 @@ return [
             'can'       => 'admin.home'
         ],
         [
-            'text'        => 'Juntas',
-            'route'         => 'admin.juntas.index',
-            'icon'        => 'fas fa-american-sign-language-interpreting',
-            'can'       => 'admin.juntas.index'
+            'text'        => 'Gestion de juntas',
+            'icon'        => 'fas fa-people-arrows',
+            'submenu'  =>[
+                [
+                    'text'        => 'Juntas',
+                    'route'         => 'admin.juntas.index',
+                    'icon'        => 'fas fa-american-sign-language-interpreting fa-fw',
+                    'can'       => 'admin.juntas.index',
+                ],
+                [
+                    'text'        => 'Usarios de juntas',
+                    'route'         => 'admin.userjun.index',
+                    //'can'       => 'admin.juntas.index',
+                ]
+
+            ]
+           
         ],
+        
         [
             'text'        => 'Eventos',
             'route'         => 'admin.eventos.index',
             'icon'        => 'fas fa-calendar-alt',
             'can'       => 'admin.eventos.index'
         ],
+
         [
             'text'        => 'Usuarios',
             'route'         => 'admin.users.index',
@@ -287,13 +302,6 @@ return [
             'route'        => 'admin.posts.index',
             'icon'      => 'fas fa-fw fa-clipboard',
             'can'       => 'admin.posts.index'
-        ],
-        [
-            'text'       => 'Crear nueva noticia',
-            'route'        => 'admin.posts.create',
-            'icon'      => 'fas fa-fw fa-file',
-            'can'       => 'admin.posts.create'
-
         ],
        
     ],

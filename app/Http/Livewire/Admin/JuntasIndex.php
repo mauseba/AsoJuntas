@@ -15,6 +15,8 @@ class JuntasIndex extends Component
     protected $paginationTheme = "bootstrap";
 
     public $search;
+    
+    public $seleccion;
 
     public function updatingSearch(){
         $this->resetPage();
@@ -22,11 +24,21 @@ class JuntasIndex extends Component
 
     public function render()
     {
-        $juntas = Junta::where('Vereda', 'LIKE','%' . $this->search . '%')
-        ->orWhere('Nit', 'LIKE','%' . $this->search . '%')
-        ->latest('id')
-        ->paginate();
+        if($this->search){
+             $juntas = Junta::where('Vereda', 'LIKE','%' . $this->search . '%')
+            ->orWhere('Nit', 'LIKE','%' . $this->search . '%')
+            ->latest('id')
+            ->paginate();
+        }elseif($this->seleccion==1 || $this->seleccion==2){
+            $juntas = Junta::where('status', 'LIKE','%' . $this->seleccion . '%')
+            ->latest('id')
+            ->paginate();
+        }else {
+            $juntas = Junta::latest('id')
+            ->paginate();
+        }   
         
+
         
         return view('livewire.admin.juntas-index',compact('juntas'));
     }

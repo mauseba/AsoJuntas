@@ -1,9 +1,8 @@
 
-
-<footer class="bg-gray-200 text-gray-600 px-6 lg:px-8 py-12">
+<footer class="bg-gradient-to-r from-green-600 to-yellow-300 text-white px-6 lg:px-8 py-12">
 <div class=" max-w-screen-xl mx-auto mb-12 lg:mb-16  ">
     <div class="inline-block">
-        <img class="h-16" src="{{asset('imagenes/logo.png')}}" alt="UptimeMate logo">
+        <img class="h-16" src="{{asset('imagenes/logo3.png')}}" alt="UptimeMate logo">
         
     </div>
     
@@ -19,7 +18,7 @@
 <div class="max-w-screen-xl mx-auto ">
     <div class="grid grid-cols-8 md:grid-cols-9  lg:grid-cols-8  divide-gray-300 divide-y-2 md:divide-x-2 md:divide-y-0 md:-mx-8">
     <div class="col-span-8 md:col-span-3 lg:col-span-2 md:px-8 py-4 md:py-0">
-        <h5 class="text-xl font-semibold text-gray-700">Asociacion de juntas de accion Comunal - Algeciras</h5>
+        <h5 class="text-xl font-semibold text-yellow-300">Asociacion de juntas de accion Comunal - Algeciras</h5>
 
         <nav class="mt-4">
         <ul class="space-y-2">
@@ -36,7 +35,7 @@
         </nav>
     </div>
     <div class="col-span-8 md:col-span-3 lg:col-span-3 md:px-8 py-4 md:py-0">
-        <h5 class="text-xl font-semibold text-gray-700">Categorias</h5>
+        <h5 class="text-xl font-semibold text-yellow-300">Categorias</h5>
         <nav class="mt-4">
         <ul class="grid lg:grid-cols-2">
             @foreach ($categories as $category)
@@ -49,7 +48,7 @@
         </nav>
     </div>
     <div class="col-span-8 md:col-span-3 lg:col-span-3 md:px-8 py-4 md:py-0">
-        <h5 class="text-xl font-semibold text-gray-700">Contacto</h5>
+        <h5 class="text-xl font-semibold text-yellow-300">Contacto</h5>
         <nav class="mt-4">
         <ul class="grid lg:grid-cols-2">
             <li class="mb-2">

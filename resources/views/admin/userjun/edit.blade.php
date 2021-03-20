@@ -3,7 +3,7 @@
 @section('title', 'Asojuntas')
 
 @section('content_header')
-    <h1>Editar Junta de Accion Comunal</h1>
+    <h1>Editar Usuarios de Juntas de Accion Comunal </h1>
 @stop
 
 @section('content')
@@ -16,11 +16,11 @@
 
 <div class="card">
     <div class="card-body">
-        {!! Form::model( $junta,['route' => ['admin.juntas.update', $junta], 'autocomplete' => 'off', 'files' => true, 'method' => 'put']) !!}
+        {!! Form::model( $userjun,['route' => ['admin.userjun.update', $userjun], 'autocomplete' => 'off', 'method' => 'put']) !!}
 
-            @include('admin.juntas.partials.form2')
+            @include('admin.userjun.partials.form2')
 
-            {!! Form::submit('Actualizar junta', ['class' => 'btn btn-primary']) !!}
+            {!! Form::submit('Actualizar Usuario', ['class' => 'btn btn-primary']) !!}
 
         {!! Form::close() !!}
     </div>

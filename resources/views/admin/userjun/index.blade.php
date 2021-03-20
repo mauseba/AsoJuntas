@@ -3,9 +3,8 @@
 @section('title', 'Asojuntas')
 
 @section('content_header')
-    <a class="btn btn-secondary btn-sm float-right" href="{{route('admin.juntas.create')}}">Nueva junta</a>
 
-    <h1>Mostrar lista de Juntas</h1>
+    <h1>Mostrar lista de usuario de juntas</h1>
 @stop
 
 @section('content')
@@ -15,7 +14,11 @@
             <strong>{{session('info')}}</strong>
         </div>
     @endif
-    @livewire('admin.juntas-index')            
+
+    @livewire('admin.userjun-index')  
+
+
+    
 @stop
 
 @section('css')

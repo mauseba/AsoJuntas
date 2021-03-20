@@ -68,13 +68,13 @@
     <p class="font-weight-bold">Estado</p>
 
     <label>
-        {!! Form::radio('status', 1, true) !!}
-        Vigente
+        {!! Form::radio('status', 1) !!}
+        Activa
     </label>
 
     <label>
         {!! Form::radio('status', 2) !!}
-        Desvinculada
+        Inactiva
     </label>
 
     @error('status')

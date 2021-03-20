@@ -1,9 +1,21 @@
 <div class="card">
     <div class="card-header">
-        <input wire:model="search" class="form-control " placeholder="Ingrese la vereda o nit de la junta de accion comunal">
+        <div class="row">
+            <div class="col-9">
+                <input wire:model="search" class="form-control " placeholder="Ingrese la vereda o nit de la junta de accion comunal">
+            </div>
+            <div class="col">
+                <select wire:model="seleccion" class="form-control ">
+                    <option selected>Seleccione...</option>
+                    <option value="1">Activas</option>
+                    <option value="2">Inactivas</option>
+                </select>
+            </div>
+        </div>
+        
     </div>
     @if ($juntas->count())
-        <div class="card-body">
+        <div class="card-body table-responsive">
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -15,7 +27,7 @@
                         <th>Documento_NIT</th>
                         <th>Documento_Resolucion</th>
                         <th>Observaciones</th>
-                        <th colspan="2"></th>dpodrn 
+                        <th colspan="2"></th>
                     </tr>
                 </thead>
 
@@ -63,6 +75,9 @@
                     @endforeach
                 </tbody>
             </table>
+        </div>
+        <div class="card-footer">
+            {{$juntas->links()}}
         </div>
     @else
 

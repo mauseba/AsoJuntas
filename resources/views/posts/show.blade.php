@@ -2,6 +2,7 @@
 
     <div class="container py-8">
         <h1 class="text-4xl font-bold text-gray-600">{{$post->name}}</h1>
+        <p class="font-bold text-gray-600">Creado el: {{$post->created_at}}</p><br>
 
         <div class="text-lg text-gray-500 mb-2">
             {!!$post->extract!!}

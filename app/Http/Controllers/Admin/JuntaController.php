@@ -29,10 +29,10 @@ class JuntaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Junta $junta)
     {  
         $date = Carbon::now('America/Bogota');
-        return view('admin.juntas.create',compact('date'));
+        return view('admin.juntas.create',compact('date','junta'));
     }
 
     /**
@@ -64,7 +64,7 @@ class JuntaController extends Controller
         
         $junta = Junta::create($url);
         
-        return redirect()->route('admin.juntas.edit', $junta)->with('info', 'La junta de accion comunal se creó con éxito');
+        return redirect()->route('admin.juntas.create', $junta)->with('info', 'La junta de accion comunal se creó con éxito');
     }
 
     /**

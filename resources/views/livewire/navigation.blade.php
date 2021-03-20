@@ -1,5 +1,5 @@
-<nav class="bg-green-800" x-data="{ open: false }">
-    <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+<nav class="bg-green-700" x-data="{ open: false }">
+    <div class="static max-w-7xl mx-auto px-2 sm:px-6 lg:px-5">
       <div class="relative flex items-center justify-between h-16">
 
         <!-- Mobile menu button-->
@@ -78,7 +78,7 @@
                       From: "transform opacity-100 scale-100"
                       To: "transform opacity-0 scale-95"
                   -->
-                  <div x-show="open" x-on:click.away="open = false" class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
+                  <div x-show="open" x-on:click.away="open = false" class="origin-top-right absolute z-40 right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
                       <a href="{{route('profile.show')}}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Tu perfil</a>
                      
                       @can('admin.home')
@@ -125,4 +125,5 @@
       </div>
     </div>
 </nav>
+
   

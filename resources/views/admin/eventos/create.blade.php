@@ -28,13 +28,13 @@
                     <div class="col">
                         <div class="form-group">
                             <label for="">Hora inicial</label>
-                            <input type="time" class="form-control" id="txtHoraInicial" name="txtHoraInicial">
+                            <input type="time" class="form-control" id="txtHoraInicial" name="txtHoraInicial" min="09:00" max="18:00">
                         </div>
                     </div>
                     <div class="col">
                         <div class="form-group">
                             <label for="">Hora Final</label>
-                            <input type="time" class="form-control" id="txtHoraFinal" name="txtHoraFinal">
+                            <input type="time" class="form-control" id="txtHoraFinal" name="txtHoraFinal" min="09:00" max="18:00">
                         </div>
                     </div>
                 </div>

@@ -19,10 +19,7 @@
 
 @section('css')
     <link href='{{asset('vendor/fullcalendar/main.css')}}' rel='stylesheet' />
-    <link href='https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.css' rel='stylesheet' />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.16/css/bootstrap-multiselect.css" rel="stylesheet">
-  
-    
 @stop
 
 @section('js')
@@ -31,6 +28,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.16/js/bootstrap-multiselect.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.33/moment-timezone.min.js"></script>
+
     <script>
         $(function(){
             var calendarEl = document.getElementById('calendar');

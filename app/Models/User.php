@@ -75,7 +75,9 @@ class User extends Authenticatable
 
     public function adminlte_desc()
     {
-        return 'Administrador';
+        $Rol= auth()->user()->getRoleNames()->get(0);
+    
+        return $Rol;
     }
 
     public function adminlte_profile_url()

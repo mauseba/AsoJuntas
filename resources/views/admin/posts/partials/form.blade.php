@@ -1,6 +1,6 @@
 <div class="form-group">
     {!! Form::label('name', 'Titulo:') !!}
-    {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el titulo de la noticia']) !!}
+    {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el titulo de la publicacion']) !!}
 
     @error('name')
         <small class="text-danger">{{$message}}</small>
@@ -10,7 +10,7 @@
 
 <div class="form-group">
     {!! Form::label('slug', 'Slug:') !!}
-    {!! Form::text('slug', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el slug de la noticia', 'readonly']) !!}
+    {!! Form::text('slug', null, ['class' => 'form-control', 'placeholder' => 'Slug de la publicacion', 'readonly']) !!}
     
     @error('slug')
         <small class="text-danger">{{$message}}</small>
@@ -100,7 +100,7 @@
 </div>
 
 <div class="form-group">
-    {!! Form::label('body', 'Cuerpo del post:') !!}
+    {!! Form::label('body', 'Cuerpo de la publicacion:') !!}
     {!! Form::textarea('body', null, ['class' => 'form-control']) !!}
 
     @error('body')
