@@ -26,6 +26,8 @@ class UserJunFactory extends Factory
             'nombre' => $this->faker->name(),
             'Tip_identificacion' => $this->faker->word(20),
             'Num_identificacion' => $this->faker->ipv4(),
+            'Sexo' => $this->faker->randomElement(['M','F','O']),
+            'Edad' => $this->faker->numberBetween($min = 0, $max = 90),
             'Num_contacto'=> $this->faker->phoneNumber(),
             'Niv_educacion'=> $this->faker->word(20),
             'Correo'=> $this->faker->unique()->email,

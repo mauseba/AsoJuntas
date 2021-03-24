@@ -24,6 +24,13 @@
 
         {!! Form::close() !!}
     </div>
+    <div class="card-footer">
+        @if (session('info'))
+        <div>
+            <a class="btn btn-secondary" href="{{route('admin.userjun.index')}}" role="button">Atras</a>
+        </div>
+        @endif
+    </div>
 </div>
 @stop
 

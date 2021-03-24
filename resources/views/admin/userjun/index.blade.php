@@ -3,8 +3,9 @@
 @section('title', 'Asojuntas')
 
 @section('content_header')
-
+<a class="btn btn-secondary btn-sm float-right" href="{{route('admin.userjun.create')}}">Crear usuario</a>
     <h1>Mostrar lista de usuario de juntas</h1>
+    
 @stop
 
 @section('content')

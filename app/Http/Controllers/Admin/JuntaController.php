@@ -32,6 +32,7 @@ class JuntaController extends Controller
     public function create(Junta $junta)
     {  
         $date = Carbon::now('America/Bogota');
+        
         return view('admin.juntas.create',compact('date','junta'));
     }
 
@@ -46,8 +47,9 @@ class JuntaController extends Controller
         
         $request->validate([
                 'FechaC'  => 'required',
-                'Vereda' => 'required',
                 'Nit'=>'required|unique:juntas|regex:/^\d{1,3}(?:\.\d\d\d)(?:\.\d\d\d)*(?:-\d{1,2})?$/',
+                'Direccion' => 'required',
+                'Nombre' => 'required',
                 'D_Recibopago'=> 'required|mimes:pdf|max:2048',
                 'D_NIT' => 'required|mimes:pdf|max:2048',
                 'D_Resolucion' => 'required|mimes:pdf|max:2048',

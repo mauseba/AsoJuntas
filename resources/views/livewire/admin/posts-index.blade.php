@@ -1,6 +1,7 @@
 <div class="card">
 
     <div class="card-header">
+        <label for="">Buscar:</label>
         <input wire:model="search" class="form-control" placeholder="Ingrese el nombre de un post">
     </div>
 

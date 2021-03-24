@@ -71,7 +71,8 @@ class EventoController extends Controller
 
             $user = UserJun::select('Correo')->where([
                 ['junta_id',$request['juntas']],
-                ['Cargo','Chemical Engineer']
+                ['Cargo','presidente'],
+                ['Cargo','secretario']
             ])->get();
 
             

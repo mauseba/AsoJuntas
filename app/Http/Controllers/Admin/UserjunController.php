@@ -26,11 +26,11 @@ class UserjunController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(UserJun $userjun)
     {
         $documen=Documento::pluck('nombre','tipo');
         $estudio=Estudio::pluck('nombre','prefijo');
-        $junta=Junta::all()->last();
+        $junta=Junta::orderBy('id', 'desc')->pluck('Nombre','id');
 
         return view('admin.userjun.create',compact('junta','estudio','documen'));
     }
@@ -43,26 +43,29 @@ class UserjunController extends Controller
      */
     public function store(Request $request)
     {
-        /*$request->validate([
-            'nombre'  => 'required',
-            'Tip_identificacion' => 'required',
-            'Num_identificacion'=>'numeric|required|unique:userjun|digits_between:7,11',
-            'Num_contacto'=> 'numeric|required',
-            'Niv_educacion' => 'required',
-            'Correo' => 'required|email',
-            'Cargo'=> 'required',
-            'junta_id'=> 'required'
+    /*$request->validate([
+            'nombre'  => 'required|array',
+            'Tip_identificacion[]' => 'required',
+            'Num_identificacion[]'=>'numeric|required|unique:userjun|digits_between:7,11',
+            'Num_contacto[]'=> 'numeric|required',
+            'Niv_educacion[]' => 'required',
+            'Correo[]' => 'required|email',
+            'Cargo[]'=> 'required',
+            'junta_id[]'=> 'required'
         ]);*/
 
-       $url = $request->except('_token');
+       $url = [];
+        foreach($request->except('_token') as $key => $value) {
+            for($i = 0; $i < count($value); ++$i) {
+                $url[$i][$key] = $value[$i];
+            }
+        }
        
        foreach($url as $ur){
-            UserJun::create($ur);
+            $userjun=UserJun::create($ur);
         }
-        //dd($ur);
-        //UserJun::create($req);
         
-        return redirect()->route('admin.userjun.index');
+        return redirect()->route('admin.userjun.index',$userjun)->with('info', 'El usuario se creo con éxito');
     }
 
     /**
@@ -86,7 +89,7 @@ class UserjunController extends Controller
     {
         $documen=Documento::pluck('nombre','tipo');
         $estudio=Estudio::pluck('nombre','prefijo');
-        $juntas=Junta::pluck('Vereda','id');
+        $juntas=Junta::pluck('Nombre','id');
 
         return view('admin.userjun.edit',compact('juntas','userjun','estudio','documen'));
 
@@ -104,7 +107,7 @@ class UserjunController extends Controller
         $request->validate([
             'nombre'  => 'required',
             'Tip_identificacion' => 'required',
-            'Num_identificacion'=>'numeric|required|digits_between:7,11|unique:userjun,Num_identificacion,'.$userjun->id,
+            'Num_identificacion'=>'numeric|required|digits_between:7,11|unique:user_juns,Num_identificacion,'.$userjun->id,
             'Num_contacto'=> 'numeric|required',
             'Niv_educacion' => 'required',
             'Correo' => 'required|email',

@@ -2,9 +2,11 @@
     <div class="card-header">
         <div class="row">
             <div class="col-9">
+                <label for="">Buscar:</label>
                 <input wire:model="search" class="form-control " placeholder="Ingrese la vereda o nit de la junta de accion comunal">
             </div>
             <div class="col">
+                <label for="">Filtrar por:</label>
                 <select wire:model="seleccion" class="form-control ">
                     <option selected>Seleccione...</option>
                     <option value="1">Activas</option>
@@ -21,8 +23,8 @@
                     <tr>
                         <th>ID</th>
                         <th>Fecha de registro</th>
-                        <th>Vereda</th>
                         <th>NIT</th>
+                        <th>Nombre</th>
                         <th>Recibo de pago</th>
                         <th>Documento_NIT</th>
                         <th>Documento_Resolucion</th>
@@ -36,8 +38,8 @@
                         <tr>
                             <td>{{$junta->id}}</td>
                             <td>{{$junta->FechaC}}</td>
-                            <td>{{$junta->Vereda}}</td>
                             <td>{{$junta->Nit}}</td>
+                            <td>{{$junta->Nombre}}</td>
                             <td align="center">
                                 <a class="btn btn-light btn-sm" target="_blank" href="{{Storage::url($junta->D_Recibopago)}}">
                                     <i class="far fa-eye"></i>

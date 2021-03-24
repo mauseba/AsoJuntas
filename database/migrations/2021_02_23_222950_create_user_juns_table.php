@@ -19,6 +19,8 @@ class CreateUserJunsTable extends Migration
             $table->string('nombre');
             $table->string('Tip_identificacion');
             $table->string('Num_identificacion');
+            $table->string('Sexo');
+            $table->string('Edad');
             $table->string('Num_contacto');
             $table->string('Niv_educacion');
             $table->string('Correo');

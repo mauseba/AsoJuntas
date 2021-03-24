@@ -19,20 +19,9 @@
     <div class="grid grid-cols-8 md:grid-cols-9  lg:grid-cols-8  divide-gray-300 divide-y-2 md:divide-x-2 md:divide-y-0 md:-mx-8">
     <div class="col-span-8 md:col-span-3 lg:col-span-2 md:px-8 py-4 md:py-0">
         <h5 class="text-xl font-semibold text-yellow-300">Asociacion de juntas de accion Comunal - Algeciras</h5>
-
-        <nav class="mt-4">
-        <ul class="space-y-2">
-            <li>
-            <a href="#" class="font-normal text-base hover:text-gray-400">Landingpages</a>
-            </li>
-            <li>
-            <a href="#" class="font-normal text-base hover:text-gray-400">Features</a>
-            </li>
-            <li>
-            <a href="#" class="font-normal text-base hover:text-gray-400">Download brochure</a>
-            </li>
-        </ul>
-        </nav>
+         <p class="font-normal text-base hover:text-gray-400">
+            Esta asociación se constituye, en el acta N° 001 del 08 de junio de 2019, entregada a la gobernación del departamento del Huila, cuyo principal objetivo es  procurar un desarrollo integral, sostenible y sustentable con fundamento en el ejercicio de la democracia participativa.
+        </p>
     </div>
     <div class="col-span-8 md:col-span-3 lg:col-span-3 md:px-8 py-4 md:py-0">
         <h5 class="text-xl font-semibold text-yellow-300">Categorias</h5>

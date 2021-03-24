@@ -44,7 +44,7 @@
                             <label for="">Juntas</label> <br>
                             <select id="ddlJuntas" class="form-control selectpicker" data-live-search="true" multiple>
                                 @foreach ($juntas as $junta)
-                                    <option value="{{$junta->id}}">{{$junta->Vereda}}</option>
+                                    <option value="{{$junta->id}}">{{$junta->Nombre}}</option>
                                 @endforeach
                             </select>
                         </div>

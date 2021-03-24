@@ -2,6 +2,7 @@
     <div class="card">
 
         <div class="card-header">
+            <label for="">Buscar:</label>
             <input wire:model="search" class="form-control" placeholder="Ingrese el nombre o documento de un usuario">
         </div>
     
@@ -33,7 +34,7 @@
                                 <td>{{$userju->Niv_educacion}}</td>
                                 <td>{{$userju->Correo}}</td>
                                 <td>{{$userju->Cargo}}</td>
-                                <td>{{$userju->Vereda}}</td>
+                                <td>{{$userju->Nombre}}</td>
                                 <td with="10px">
                                     
                                     <a class="btn btn-primary btn-sm" href="{{route('admin.userjun.edit', $userju)}}">Editar</a>

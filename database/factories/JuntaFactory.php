@@ -23,8 +23,9 @@ class JuntaFactory extends Factory
     {
         return [ 
             'FechaC' => $this->faker->date(),
-            'Vereda' => $this->faker->state(),
             'NIT' => $this->faker->ipv4(),
+            'Direccion' => $this->faker->streetAddress(),
+            'Nombre' => $this->faker->state(),
             'D_Recibopago'=> $this->faker->url(),
             'D_NIT'=> $this->faker->url(),
             'D_Resolucion'=> $this->faker->url(),

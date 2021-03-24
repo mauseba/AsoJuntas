@@ -18,9 +18,9 @@ class UserjunIndex extends Component
 
     public function render()
     {
-        $userj = UserJun::join('juntas','juntas.id', '=', 'user_juns.junta_id')
-        ->select('user_juns.*','juntas.Vereda')
-        ->where('nombre', 'LIKE','%' . $this->search . '%')
+        $userj = UserJun::join('juntas','user_juns.junta_id', '=','juntas.id')
+        ->select('user_juns.*','juntas.Nombre')
+        ->where('user_juns.nombre', 'LIKE','%' . $this->search . '%')
         ->orWhere('Num_identificacion', 'LIKE','%' . $this->search . '%')
         ->latest('id')
         ->paginate();

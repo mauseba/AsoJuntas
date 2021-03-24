@@ -12,15 +12,6 @@
     </div>
 </div>
 <div class="form-group">
-    {!! Form::label('Vereda', 'Vereda/Barrio:') !!}
-    {!! Form::text('Vereda', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el titulo de la ubicacion de la junta']) !!}
-
-    @error('Vereda')
-        <small class="text-danger">{{$message}}</small>
-    @enderror
-
-</div>
-<div class="form-group">
     {!! Form::label('Nit', 'Numero de Nit:') !!}
     {!! Form::text('Nit', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el numero de Nit de la junta']) !!}
 
@@ -29,6 +20,25 @@
     @enderror
 
 </div>
+<div class="form-group">
+    {!! Form::label('Direccion', 'Vereda/Barrio:') !!}
+    {!! Form::text('Direccion', null, ['class' => 'form-control', 'placeholder' => 'Ingrese la ubicacion de la junta']) !!}
+
+    @error('Direccion')
+        <small class="text-danger">{{$message}}</small>
+    @enderror
+
+</div>
+<div class="form-group">
+    {!! Form::label('Nombre', 'Nombre:') !!}
+    {!! Form::text('Nombre', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el nombre de la junta']) !!}
+
+    @error('Nombre')
+        <small class="text-danger">{{$message}}</small>
+    @enderror
+
+</div>
+
 <div class="row mb-3">
     <div class="col">
         <div class="form-group">

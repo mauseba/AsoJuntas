@@ -5,7 +5,7 @@
 @section('content_header')
 
     @can('admin.posts.create')
-        <a class="btn btn-secondary btn-sm float-right" href="{{route('admin.posts.create')}}">Nuevo post</a>
+        <a class="btn btn-secondary btn-sm float-right" href="{{route('admin.posts.create')}}">Nueva publicacion</a>
     @endcan
     
     <h1>Listado de Publicaciones</h1>

@@ -12,11 +12,11 @@
     
     <script language="JavaScript" src='{{asset('vendor/fullcalendar/main.js')}}'></script>
     <script language="JavaScript" src='{{asset('vendor/fullcalendar/locales/es.js')}}'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js" charset="utf-8"></script>
     <script>
         $(function(){
             var calendarEl = document.getElementById('calendar');
             var calendar = new FullCalendar.Calendar(calendarEl, {
-                height: 400,
                 locale: 'es',
                 headerToolbar: {
                     left: 'prev,next today',
@@ -26,13 +26,14 @@
 
                 navLinks: true, // can click day/week names to navigate views
                 selectable: true,
-                selectMirror: true,
-                select: function(arg) {
-                    //
+
+
+               /* select: function(arg, $el) {
+                //
                 },
                 eventClick: function(arg) {
                     
-                /*   let Fe = moment(arg.event.start).format('YYYY-MM-DD');
+                   let Fe = moment(arg.event.start).format('YYYY-MM-DD');
                     let Hi = moment(arg.event.start).format('HH:mm:ss');
                     let Hf = moment(arg.event.end).format('HH:mm:ss');
                     
@@ -42,12 +43,10 @@
                     $('#txtHoraFinal').val(Hf);
                     $('#ddlJuntas').val();
                     $('#txtAsunto').val(arg.event.title);
-                    $('#txtDescripcion').val(arg.event.extendedProps.descripcion);*/
+                    $('#txtDescripcion').val(arg.event.extendedProps.descripcion);
 
 
-                },
-                editable: true,
-                dayMaxEvents: true,
+                },*/
                 events:"{{url('/eventos')}}"
             });
             

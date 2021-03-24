@@ -16,8 +16,9 @@ class CreateJuntasTable extends Migration
         Schema::create('juntas', function (Blueprint $table) {
             $table->id();
             $table->date('FechaC');
-            $table->string('Vereda', 50);
             $table->string('Nit',20);
+            $table->string('Direccion',50)->nullable();
+            $table->string('Nombre', 50);
 
             $table->string('D_Recibopago');
             $table->string('D_NIT');
