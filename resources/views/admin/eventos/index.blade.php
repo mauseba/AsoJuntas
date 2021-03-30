@@ -9,25 +9,28 @@
 @section('content')
     <div class="card">
         <div class="card-body">
-            <div id='calendar'></div>
+            <div id='calendar'></div>   
         </div>
     </div>
-
+    
     @include('admin.eventos.create')
 
 @stop
 
 @section('css')
     <link href='{{asset('vendor/fullcalendar/main.css')}}' rel='stylesheet' />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.16/css/bootstrap-multiselect.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
 @stop
 
 @section('js')
+
     <script src='{{asset('vendor/fullcalendar/main.js')}}'></script>>
     <script src='{{asset('vendor/fullcalendar/locales/es.js')}}'></script>>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.16/js/bootstrap-multiselect.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.33/moment-timezone.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
 
     <script>
         $(function(){
@@ -54,11 +57,11 @@
                     $('#txtHoraInicial').val(Hi);
                     $('#txtHoraFinal').val(Hf);
 
-                    $('#btnEditar').prop("disabled",true);
-                    $('#btnEliminar').prop("disabled",true);
-                    $('#btnGuardar').prop("disabled",false);
+                    $('#btnEditar').hide();
+                    $('#btnEliminar').hide();
+                    $('#btnGuardar').show();
 
-                    $('#evento_modal').modal();
+                    $('#evento_modal').modal({backdrop: 'static', keyboard: false});
                     
 
                     calendar.unselect();
@@ -76,12 +79,14 @@
                     $('#ddlJuntas').val();
                     $('#txtAsunto').val(arg.event.title);
                     $('#txtDescripcion').val(arg.event.extendedProps.descripcion);
+                    console.log(arg.event);
 
-                    $('#btnEditar').prop("disabled",false);
-                    $('#btnEliminar').prop("disabled",false);
-                    $('#btnGuardar').prop("disabled",true);
 
-                    $('#evento_modal').modal();
+                    $('#btnEditar').show();
+                    $('#btnEliminar').show();
+                    $('#btnGuardar').hide();
+
+                    $('#evento_modal').modal({backdrop: 'static', keyboard: false});
 
                 },
                 editable: true,
@@ -93,20 +98,21 @@
             $('#evento_modal').on('hidden.bs.modal', function() { calendar.refetchEvents(); }); 
         })
 
+        $('#ddlJuntas').selectpicker();
 
         $('#btnGuardar').click(function(){
             objEvento=recolectarDatos("POST");
-            enviarInformacion(objEvento);
+            enviarInformacion('',objEvento);
         });
 
         $('#btnEliminar').click(function(){
             objEvento=recolectarDatos("DELETE");
-            editarInformacion('/'+$('#txtid').val(),objEvento);
+            enviarInformacion('/'+$('#txtid').val(),objEvento);
         });
 
         $('#btnEditar').click(function(){
             objEvento= recolectarDatos("PATCH");
-            editarInformacion('/'+$('#txtid').val(),objEvento);
+            enviarInformacion('/'+$('#txtid').val(),objEvento);
         });
 
 
@@ -126,23 +132,8 @@
 
             return(nuevoEvento);
         }
-
-        function enviarInformacion(objEvento){
-            $.ajax({
-                url: "{{route('admin.eventos.store')}}",
-                type: "POST",
-                data: objEvento,
-                success:function(msg){
-                    console.log('no hubo ningun problema');
-                    $('#evento_modal').modal('hide'); 
-     
-                },
-                error: function(){alert("Hay un error");}
-            })
-
-        }
         
-        function editarInformacion(accion,objEvento){
+        function enviarInformacion(accion,objEvento){
 
             $.ajax({
                 url: "{{url('admin/eventos')}}"+accion,
@@ -160,7 +151,7 @@
          
         function limpiar(){
 
-            $('#txtid').val("")   
+            $('#txtid').val("");   
             $('#txtFecha').val("");
             $('#txtHoraInicial').val("");
             $('#txtHoraFinal').val("");
@@ -170,8 +161,5 @@
 
         }
 
-    </script>
-     <script>
-        $('#ddlJuntas').multiselect();
     </script>
 @stop

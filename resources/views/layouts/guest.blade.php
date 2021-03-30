@@ -23,8 +23,11 @@
             {{ $slot }}
         </div>
         @livewireScripts
+        <br>
+
+        <footer>
+            @livewire('footer')
+        </footer>
     </body>
-    <footer>
-        @livewire('footer')
-    </footer>
+
 </html>

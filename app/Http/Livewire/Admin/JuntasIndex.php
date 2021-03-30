@@ -25,7 +25,7 @@ class JuntasIndex extends Component
     public function render()
     {
         if($this->search){
-             $juntas = Junta::where('Vereda', 'LIKE','%' . $this->search . '%')
+             $juntas = Junta::where('Nombre', 'LIKE','%' . $this->search . '%')
             ->orWhere('Nit', 'LIKE','%' . $this->search . '%')
             ->latest('id')
             ->paginate();

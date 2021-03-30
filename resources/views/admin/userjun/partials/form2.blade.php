@@ -37,10 +37,32 @@
 <div class="row">
     <div class="col">
         <div class="form-group">
-            {!! Form::label('Sexo', 'Sexo: ') !!}
-            {!! Form::select('Sexo',array('M' => 'Masculico','F' => 'Femenino','O'=> 'Otro'), null, ['class' => 'form-control']) !!}
+            {!! Form::label('Direccion', 'Direccion: ') !!}
+            {!! Form::text('Direccion', null, ['class' => 'form-control', 'placeholder' => 'Ingrese la direccion']) !!}
         
-            @error('Sexo')
+            @error('Direccion')
+                <small class="text-danger">{{$message}}</small>
+            @enderror
+        
+        </div>
+    </div> 
+    <div class="col">
+        <div class="form-group">
+            {!! Form::label('Genero', 'Genero: ') !!}
+            {!! Form::select('Genero',array('M' => 'Masculino','F' => 'Femenino','O'=> 'Otro'), null, ['class' => 'form-control']) !!}
+        
+            @error('Genero[]')
+                <small class="text-danger">{{$message}}</small>
+            @enderror
+        
+        </div>
+    </div> 
+    <div class="col">
+        <div class="form-group">
+            {!! Form::label('estrato', 'Estrato de vivienda: ') !!}
+            {!! Form::select('estrato',array( 1 => '1', 2 => '2', 3 => '3', 4=> '4', 5=> '5'),null, ['class' => 'form-control']) !!}
+        
+            @error('estrato')
                 <small class="text-danger">{{$message}}</small>
             @enderror
         

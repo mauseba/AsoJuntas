@@ -4,9 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Junta;
+use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\JuntasExport;
 
 class JuntaController extends Controller
 {
@@ -49,7 +52,7 @@ class JuntaController extends Controller
                 'FechaC'  => 'required',
                 'Nit'=>'required|unique:juntas|regex:/^\d{1,3}(?:\.\d\d\d)(?:\.\d\d\d)*(?:-\d{1,2})?$/',
                 'Direccion' => 'required',
-                'Nombre' => 'required',
+                'Nombre' => 'required|unique:juntas',
                 'D_Recibopago'=> 'required|mimes:pdf|max:2048',
                 'D_NIT' => 'required|mimes:pdf|max:2048',
                 'D_Resolucion' => 'required|mimes:pdf|max:2048',
@@ -102,19 +105,21 @@ class JuntaController extends Controller
     {
         $request->validate([
             'FechaC'  => 'required',
-            'Vereda' => 'required',
             'Nit'=>'required|regex:/^\d{1,3}(?:\.\d\d\d)(?:\.\d\d\d)*(?:-\d{1,2})?$/|unique:juntas,Nit,'.$junta->id,
-            'D_Recibopago'=> 'mimes:pdf|max:2048',
-            'D_NIT' => 'mimes:pdf|max:2048',
-            'D_Resolucion' => 'mimes:pdf|max:2048',
+            'Direccion' => 'required',
+            'Nombre' => 'required|unique:juntas,Nombre,'.$junta->id,
+            'D_Recibopago'=> 'mimes:pdf|max:1024',
+            'D_NIT' => 'mimes:pdf|max:1024',
+            'D_Resolucion' => 'mimes:pdf|max:1024',
             'status' => 'required|in:1,2',
             'Observaciones'=> 'required'
         ]);
 
-        $url = $request->except('_token');
+       
         
-
         if ($request->hasFile('D_NIT') && $request->hasFile('D_Resolucion') && $request->hasFile('D_Recibopago')){
+            $url = $request->except('_token');
+            //
             Storage::delete($junta->D_Recibopago);
             Storage::delete($junta->D_NIT);
             Storage::delete($junta->D_Resolucion);  
@@ -151,7 +156,7 @@ class JuntaController extends Controller
             $junta->update($url4);
         }
         
-        return redirect()->route('admin.juntas.edit',$junta)->with('info', 'La junta de accion comunal se actualizo correctamente');
+        return redirect()->route('admin.juntas.index',$junta)->with('info', 'La junta de accion comunal se actualizo correctamente');
     }
         
 
@@ -173,4 +178,45 @@ class JuntaController extends Controller
 
         return redirect()->route('admin.juntas.index')->with('info', 'La junta de accion comunal se eliminó con éxito');
     }
+
+
+    public function informe()
+    {
+        return view('admin.juntas.informe');
+    }
+
+    public function generar_informe(Request $request)
+    {
+        switch ($request['opcion']) {
+            case '0':
+                return $this->generar_excel();
+                break;
+            case '1':
+                $input = $request->all();
+                return $this->generar_pdf($input);
+                break;      
+            default:
+                return redirect()->route('admin.juntas.index')->with('info', 'Seleccione una opcion valida');
+                break;
+        }
+    }
+
+    public function generar_pdf($input)
+    {
+        $info = Junta::select('*')
+        ->whereBetween('FechaC',[$input['txtFechaInicial'],$input['txtFechaFinal']])
+        ->get();
+        $cuenta = count($info);
+        if($cuenta > 0){
+            $pdf = PDF::loadView('Admin.pdf.junta', compact('info','cuenta','input'))->setPaper('letter', 'landscape')->stream('informe.pdf');
+            return $pdf;
+        }else{
+            
+        }
+    }
+    public function generar_excel(){
+
+        return Excel::download(new JuntasExport, 'juntas-list.xlsx');
+    }
+
 }

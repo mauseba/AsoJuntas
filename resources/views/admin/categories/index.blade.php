@@ -5,21 +5,14 @@
 @section('content_header')
     
     @can('admin.categories.create')
-         <a class="btn btn-secondary btn-sm float-right" href="{{route('admin.categories.create')}}">Agregar categoría</a>
+         <a class="btn btn-success float-right" href="{{route('admin.categories.create')}}">Agregar categoría</a>
     @endcan
 
     <h1>Lista de categorías</h1>
 @stop
 
 @section('content')
-
-    @if (session('info'))
-        <div class="alert alert-success">
-            <strong>{{session('info')}}</strong>
-        </div>
-    @endif
-
-
+    <br>
     <div class="card">
 
         <div class="card-body">
@@ -44,7 +37,7 @@
                             </td>
                             <td width="10px">
                                 @can('admin.categories.destroy')
-                                    <form action="{{route('admin.categories.destroy', $category)}}" method="POST">
+                                    <form action="{{route('admin.categories.destroy', $category)}}" class="formulario-eliminar" method="POST">
                                         @csrf
                                         @method('delete')
 
@@ -60,4 +53,36 @@
         </div>
 
     </div>
+@stop
+
+@section('js')
+    @if (session('info'))
+        <script>
+            var session = '{{session('info')}}';
+            Swal.fire(
+            'Operacion Completada',
+            session ,
+            'success'
+            )
+        </script>
+    @endif
+    <script>
+         $('.formulario-eliminar').submit(function(e){
+            e.preventDefault();
+            Swal.fire({
+                title: '¿Estas seguro?',
+                text: "No se podra revertir esta operacion",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si, Eliminar registro!'
+                }).then((result) => {
+                if (result.value) {
+            
+                    this.submit();
+                }
+                })
+            })
+    </script>
 @stop

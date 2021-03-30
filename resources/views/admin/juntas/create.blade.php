@@ -8,16 +8,10 @@
 
 @section('content')
 
-    @if (session('info'))
-        <div class="alert alert-success">
-            <strong>{{session('info')}}</strong>
-        </div>
-    @endif
-
  <div class="card">
         <!-- Nav tabs -->
       <div class="card-header">
-          <ul class="nav nav-tabs" role="tablist">
+          <ul class="nav nav-tabs card-header-tabs" role="tablist">
               <li class="nav-item">
                 <a class="nav-link active" data-toggle="tab" href="#home">Datos Basicos</a>
               </li>
@@ -40,7 +34,7 @@
       <div class="card-footer">
           @if (session('info'))
             <div class="d-flex">
-                <a class="btn btn-secondary ml-auto" href="{{route('admin.userjun.create')}}" role="button">Siguiente</a>
+                
               </div>
           @endif
       </div>
@@ -54,11 +48,19 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script>
-  $(function() {
-    $( "#btns" ).click(function() {
-      $( "#men1" ).show("fast");
-    });
-  });
+@if (session('info'))
+    <script>
+      var session = '{{session('info')}}';
+      Swal.fire({
+      title: 'Operacion Completada',
+      type: 'info',
+      text: session,
+      html:
+      '<a class="btn btn-warning" href="{{route('admin.userjun.create')}}" role="button">Registrar Usuarios</a>',
+      confirmButtonText:'<i class="fas fa-angle-double-left"></i> Volver',
+      confirmButtonAriaLabel: 'Thumbs up, Volver'
+    })
 </script>
+@endif
+
 @stop

@@ -3,18 +3,15 @@
 @section('title', 'Asojuntas')
 
 @section('content_header')
-    <a class="btn btn-secondary btn-sm float-right" href="{{route('admin.juntas.create')}}">Nueva junta</a>
-
+    <a class="btn btn-success float-right d-inline" href="{{route('admin.juntas.create')}}">Nueva junta</a>
+    <button class="btn btn-warning  float-right d-inline" data-toggle="modal" data-target="#exampleModal" data-backdrop="static" >Crear informe</button>
     <h1>Mostrar lista de Juntas</h1>
+    
+    @include('admin.juntas.informe') <br>
 @stop
 
 @section('content')
-
-    @if (session('info'))
-        <div class="alert alert-success">
-            <strong>{{session('info')}}</strong>
-        </div>
-    @endif
+<br>
     @livewire('admin.juntas-index')            
 @stop
 
@@ -27,5 +24,29 @@
 @stop
 
 @section('js')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    @if (session('info'))
+        <script>
+            var session = '{{session('info')}}';
+            Swal.fire(
+            'Operacion Completada',
+            session ,
+            'success'
+            )
+        </script>
+    @endif
+    <script>
+        $(function() {
+            $('#excel').click(function(){
+                $("#fecha").hide();
+            });
 
+            $("#pdf").click(function(){
+                $('#txtFechaInicial').val("");
+                $('#txtFechaFinal').val("");
+                $("#fecha").show();
+            });
+
+        });
+    </script>
 @stop

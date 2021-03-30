@@ -20,7 +20,7 @@ class CreateEventosTable extends Migration
             $table-> string('hora_inicio',15);
             $table-> string('hora_final',15);
             $table-> string('Asunto');
-            $table-> longText('descripcion')->nullable();
+            $table-> longText('descripcion');
 
             $table->timestamps();
         });

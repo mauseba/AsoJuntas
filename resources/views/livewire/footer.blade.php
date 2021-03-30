@@ -20,7 +20,6 @@
     <div class="col-span-8 md:col-span-3 lg:col-span-2 md:px-8 py-4 md:py-0">
         <h5 class="text-xl font-semibold text-yellow-300">Asociacion de juntas de accion Comunal - Algeciras</h5>
          <p class="font-normal text-base hover:text-gray-400">
-            Esta asociación se constituye, en el acta N° 001 del 08 de junio de 2019, entregada a la gobernación del departamento del Huila, cuyo principal objetivo es  procurar un desarrollo integral, sostenible y sustentable con fundamento en el ejercicio de la democracia participativa.
         </p>
     </div>
     <div class="col-span-8 md:col-span-3 lg:col-span-3 md:px-8 py-4 md:py-0">
@@ -79,6 +78,6 @@
     <nav class="flex flex-wrap justify-center space-x-6"> 
     <a href="#" class="font-normal text-sm hover:text-gray-400 mb-2">Cookie settings</a>
     </nav>
-    <p class="text-sm text-center md:text-right">&copy;2020 Asojunta. All rights reserved. | All rights reserved</p>
+    <p class="text-sm text-center md:text-right">&copy;2021 Asojunta. All rights reserved. | All rights reserved</p>
 </div>
 </footer>

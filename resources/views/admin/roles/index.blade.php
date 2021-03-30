@@ -3,18 +3,12 @@
 @section('title', 'Asojuntas')
 
 @section('content_header')
-    <a class="btn btn-secondary btn-sm float-right" href="{{route('admin.roles.create')}}">Nuevo rol</a>
+    <a class="btn btn-success float-right" href="{{route('admin.roles.create')}}">Nuevo rol</a>
     <h1>Lista de Roles</h1>
 @stop
 
 @section('content')
-
-@if (session('info'))
-<div class="alert alert-success">
-    <strong>{{session('info')}}</strong>
-</div>
-@endif
-
+<br>
 <div class="card">
     <div class="card-body">
         <table class="table table-striped">
@@ -53,5 +47,14 @@
 @stop
 
 @section('js')
-   
+    @if (session('info'))
+        <script>
+            var session = '{{session('info')}}';
+            Swal.fire(
+            'Operacion Completada',
+            session ,
+            'success'
+            )
+        </script>
+    @endif
 @stop

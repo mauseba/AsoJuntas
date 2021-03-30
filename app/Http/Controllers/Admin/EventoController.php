@@ -27,6 +27,7 @@ class EventoController extends Controller
         return view('admin.eventos.index', compact('juntas'));
     }
 
+
     /**
      * Show the form for creating a new resource.
      *
@@ -64,7 +65,6 @@ class EventoController extends Controller
 
         if($request->juntas){
             $evento->juntas()->attach($request->juntas);
-        
         }
 
         if($request['opcion']==1){
@@ -84,9 +84,6 @@ class EventoController extends Controller
         }
        
     }
-
-
-
     /**
      * Display the specified resource.
      *
@@ -95,7 +92,29 @@ class EventoController extends Controller
      */
     public function show()
     {
-        $data=Evento::all();
+        $data=Evento::with('juntas')->get();
+        
+        $nueva_data = [];
+        foreach($data as $value){
+            foreach($value->juntas as $juntas){
+                $junta=$juntas->id;
+            }
+            $nueva_data[] = [
+                "id" => $value->id,
+                "end" => $value->Fecha . " " . $value->hora_final,
+                "start" => $value->Fecha . " " . $value->hora_inicio,
+                "title" =>$value->Asunto,
+                "backgroundColor"=>'#1ADE6C',
+                "textColor"=>'#fff',
+                "display"=>'block',
+                "extendedProps"=>[
+                    'descripcion'=>$value->descripcion,
+                    'junta'=> $junta
+                ]
+            ];
+        }
+        /*$data=Evento::all();
+        
         $nueva_data = [];
 
         foreach($data as $value){
@@ -112,7 +131,7 @@ class EventoController extends Controller
                 ]
             ];
 
-        }
+        }*/
 
         return response()->json($nueva_data);
     }
@@ -139,12 +158,28 @@ class EventoController extends Controller
     {
 
        $datosEvento= request()->except('opcion','_token','_method');
+   
 
        $evento->update($datosEvento);
 
 
        if($request->juntas){
             $evento->juntas()->sync($request->juntas);
+        }
+
+        if($request['opcion']==1){
+
+            $user = UserJun::select('Correo')->where([
+                ['junta_id',$request['juntas']],
+                ['Cargo',['presidente','secretario']]
+            ])->get();
+
+            
+           foreach($user as $users){
+    
+                Mail::to($users['Correo'])->send(new EventosMailable($datosEvento));
+    
+            }
         }
 
         return response()->json($evento);

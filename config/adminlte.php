@@ -247,7 +247,6 @@ return [
                 [
                     'text'        => 'Juntas',
                     'route'         => 'admin.juntas.index',
-                    'icon'        => 'fas fa-american-sign-language-interpreting fa-fw',
                     'can'       => 'admin.juntas.index',
                 ],
                 [
@@ -259,14 +258,24 @@ return [
             ]
            
         ],
-        
         [
-            'text'        => 'Eventos',
-            'route'         => 'admin.eventos.index',
+            'text'        => 'Gestion de Eventos',
             'icon'        => 'fas fa-calendar-alt',
-            'can'       => 'admin.eventos.index'
-        ],
+            'submenu'  =>[
+                [
+                    'text'        => 'Eventos',
+                    'route'         => 'admin.eventos.index',
+                    'can'       => 'admin.eventos.index'
+                ],
+                [
+                    'text'        => 'Subir acta',
+                    'route'         => 'admin.actas.index',
+                    //'can'       => 'admin.juntas.index',
+                ]
 
+            ]
+           
+        ],
         [
             'text'        => 'Usuarios',
             'route'         => 'admin.users.index',
@@ -387,7 +396,7 @@ return [
             ],
         ],
         'Sweetalert2' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',

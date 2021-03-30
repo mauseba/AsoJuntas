@@ -5,20 +5,14 @@
 @section('content_header')
 
     @can('admin.posts.create')
-        <a class="btn btn-secondary btn-sm float-right" href="{{route('admin.posts.create')}}">Nueva publicacion</a>
+        <a class="btn btn-success float-right" href="{{route('admin.posts.create')}}">Nueva publicacion</a>
     @endcan
     
     <h1>Listado de Publicaciones</h1>
 @stop
 
 @section('content')
-
-    @if (session('info'))
-        <div class="alert alert-success">
-            <strong>{{session('info')}}</strong>
-        </div>
-    @endif
-
+<br>
     @livewire('admin.posts-index')
 @stop
 
@@ -27,5 +21,14 @@
 @stop
 
 @section('js')
-    
+@if (session('info'))
+    <script>
+        var session = '{{session('info')}}';
+        Swal.fire(
+        'Operacion Completada',
+        session ,
+        'success'
+        )
+    </script>
+@endif
 @stop

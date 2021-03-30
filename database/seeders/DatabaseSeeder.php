@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Acta;
 use App\Models\Category;
 use App\Models\Junta;
 use App\Models\Tag;
@@ -20,7 +21,13 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         Storage::deleteDirectory('posts');
+        Storage::deleteDirectory('NIT');
+        Storage::deleteDirectory('recibopago');
+        Storage::deleteDirectory('resolucion');
         Storage::makeDirectory('posts');
+        Storage::makeDirectory('NIT');
+        Storage::makeDirectory('recibopago');
+        Storage::makeDirectory('resolucion');
 
         $this->call(RoleSeeder::class);
         $this->call(DocumentoSeeder::class);
@@ -33,6 +40,7 @@ class DatabaseSeeder extends Seeder
         Junta::factory(20)->create();
         UserJun::factory(40)->create();
         $this->call(EventoSeeder::class);
+        Acta::factory(30)->create();
 
     }
 }

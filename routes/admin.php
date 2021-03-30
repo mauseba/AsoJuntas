@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\JuntaController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserjunController;
+use App\Http\Controllers\Admin\ActaController;
 
 Route::get('', [HomeController::class, 'index'])->middleware('can:admin.home')->name('admin.home');
 
@@ -28,4 +29,13 @@ Route::resource('juntas', JuntaController::class)->names('admin.juntas');
 
 Route::resource('eventos', EventoController::class)->names('admin.eventos');
 
+Route::resource('actas', ActaController::class)->names('admin.actas');
+
 Route::resource('userjun',UserjunController::class)->names('admin.userjun');
+
+Route::get('admin/juntas/informe',[JuntaController::class, 'informe'])->name('admin.juntas.informe');
+Route::post('admin/juntas/generarinforme',[JuntaController::class, 'generar_informe'])->name('admin.juntas.generar');
+
+Route::get('admin/userjun/informe',[UserjunController::class, 'informe'])->name('admin.userjun.informe');
+Route::post('admin/userjun/generarinforme',[UserjunController::class, 'generar_informe'])->name('admin.userjun.generar');
+

@@ -41,7 +41,7 @@
                                     
                                 </td>
                                 <td with="10px">
-                                        <form action="{{route('admin.userjun.destroy', $userju)}}" method="POST">
+                                        <form action="{{route('admin.userjun.destroy', $userju)}}" class="formulario-eliminar" method="POST">
                                             @csrf
                                             @method('DELETE')
     
@@ -64,5 +64,25 @@
             </div>
         @endif
     </div>
-    
+    <script>
+        document.addEventListener('livewire:load', function () {
+            $('.formulario-eliminar').submit(function(e){
+            e.preventDefault();
+            Swal.fire({
+                title: '¿Estas seguro?',
+                text: "No se podra revertir esta operacion!",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si, Eliminar registro!'
+                }).then((result) => {
+                if (result.value) {
+            
+                    this.submit();
+                }
+                })
+            })
+        })
+    </script>
 </div>

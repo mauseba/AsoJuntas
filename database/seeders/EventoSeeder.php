@@ -14,7 +14,7 @@ class EventoSeeder extends Seeder
      */
     public function run()
     {
-        $eventos = Evento::factory(50)->create();
+        $eventos = Evento::factory(30)->create();
 
         foreach($eventos as $evento){
              

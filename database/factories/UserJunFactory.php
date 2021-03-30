@@ -26,12 +26,14 @@ class UserJunFactory extends Factory
             'nombre' => $this->faker->name(),
             'Tip_identificacion' => $this->faker->word(20),
             'Num_identificacion' => $this->faker->ipv4(),
-            'Sexo' => $this->faker->randomElement(['M','F','O']),
+            'Direccion' => $this->faker->streetAddress(),
+            'Genero' => $this->faker->randomElement(['M','F','O']),
+            'estrato' => $this->faker->randomElement([1,2,3,4,5]),
             'Edad' => $this->faker->numberBetween($min = 0, $max = 90),
             'Num_contacto'=> $this->faker->phoneNumber(),
             'Niv_educacion'=> $this->faker->word(20),
             'Correo'=> $this->faker->unique()->email,
-            'Cargo'=> $this->faker->jobTitle,
+            'Cargo'=> $this->faker->randomElement(['asociado','presidente','secretario']),
             'junta_id'=> Junta::all()->random()->id
         ];
     }

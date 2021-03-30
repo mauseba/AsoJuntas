@@ -15,5 +15,14 @@
 @stop
 
 @section('js')
-    <script> </script>
+@if (session('info'))
+    <script>
+        var session = '{{session('info')}}';
+        Swal.fire(
+        'Operacion Completada',
+        session ,
+        'success'
+        )
+    </script>
+@endif
 @stop

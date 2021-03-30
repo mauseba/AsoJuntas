@@ -23,8 +23,8 @@ class EstudioSeeder extends Seeder
             'nombre'=>'Secundaria'
         ]);
         Estudio::create([
-            'prefijo'=>'profesional',
-            'nombre'=>'Profesional'
+            'prefijo'=>'universitaria',
+            'nombre'=>'Universitaria'
         ]);
         Estudio::create([
             'prefijo'=>'maestria',

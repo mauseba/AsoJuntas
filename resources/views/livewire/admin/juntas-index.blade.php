@@ -21,9 +21,8 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Fecha de registro</th>
                         <th>NIT</th>
+                        <th>Fecha de registro</th>
                         <th>Nombre</th>
                         <th>Recibo de pago</th>
                         <th>Documento_NIT</th>
@@ -35,10 +34,9 @@
 
                 <tbody>
                     @foreach ($juntas as $junta)
-                        <tr>
-                            <td>{{$junta->id}}</td>
-                            <td>{{$junta->FechaC}}</td>
+                        <tr>                           
                             <td>{{$junta->Nit}}</td>
+                            <td>{{$junta->FechaC}}</td>
                             <td>{{$junta->Nombre}}</td>
                             <td align="center">
                                 <a class="btn btn-light btn-sm" target="_blank" href="{{Storage::url($junta->D_Recibopago)}}">
@@ -65,7 +63,7 @@
                             </td>
                             <td with="10px">
                                 @can('admin.juntas.destroy')
-                                <form action="{{route('admin.juntas.destroy', $junta)}}" method="POST">
+                                <form action="{{route('admin.juntas.destroy', $junta)}}" class="formulario-eliminar" method="POST">
                                     @csrf
                                     @method('DELETE')
 
@@ -88,4 +86,25 @@
         </div>
         
     @endif  
+    <script>
+        document.addEventListener('livewire:load', function () {
+            $('.formulario-eliminar').submit(function(e){
+            e.preventDefault();
+            Swal.fire({
+                title: '¿Estas seguro?',
+                text: "No se podra revertir esta operacion!",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si, Eliminar registro!'
+                }).then((result) => {
+                if (result.value) {
+            
+                    this.submit();
+                }
+                })
+            })
+        })
+    </script>
 </div>

@@ -1,4 +1,4 @@
-        <!-- Tab panes -->
+       
 <div class="tab-content">
     <div id="home" class="container tab-pane active">  
         <div class="row">
@@ -48,7 +48,7 @@
     </div>
     <div id="menu1" class="container tab-pane fade"><br>
         <div class="row mb-3">
-            <div class="col">
+            <div class="col-sm">
                 <div class="form-group">
                     {!! Form::label('D_Recibopago', 'Suba el documento el recibo de pago') !!}
                     {!! Form::file('D_Recibopago', ['class' => 'form-control-file', 'accept' => '.pdf']) !!}
@@ -59,7 +59,7 @@
                 </div>
             
             </div>
-            <div class="col">
+            <div class="col-sm">
                 <div class="form-group">
                     {!! Form::label('D_NIT', 'Suba el documento del NIT') !!}
                     {!! Form::file('D_NIT', ['class' => 'form-control-file', 'accept' => '.pdf']) !!}
@@ -70,7 +70,7 @@
                 </div>
             
             </div>
-            <div class="col">
+            <div class="col-sm">
                 <div class="form-group">
                     {!! Form::label('D_Resolucion', 'Suba la resolucion de la junta') !!}
                     {!! Form::file('D_Resolucion', ['class' => 'form-control-file', 'accept' => '.pdf']) !!}

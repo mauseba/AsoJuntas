@@ -11,12 +11,12 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
         <!-- Styles -->
-        <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-
-
         @livewireStyles
+        <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+        
 
         <!-- Scripts -->
+        @livewireScripts
         <script src="{{ mix('js/app.js') }}"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         
@@ -26,12 +26,13 @@
     </head>
     <body class="font-sans antialiased">
 
-        
+   
         @livewire('navigation')
         @include('Slider.slider')
-
+    
+       
         <div class="min-h-screen bg-gray-100">
-            
+
             <!-- Page Content -->
             <main>
                 {{ $slot }}
@@ -41,10 +42,12 @@
 
         @stack('modals')
 
-        @livewireScripts
-      
+       
+
+        <footer>
+            @livewire('footer')
+        </footer>
+        
     </body>
-    <footer>
-        @livewire('footer')
-    </footer>
+
 </html>

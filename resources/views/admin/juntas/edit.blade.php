@@ -8,12 +8,6 @@
 
 @section('content')
 
-@if (session('info'))
-<div class="alert alert-success">
-    <strong>{{session('info')}}</strong>
-</div>
-@endif
-
 <div class="card">
     <div class="card-body">
         {!! Form::model( $junta,['route' => ['admin.juntas.update', $junta], 'autocomplete' => 'off', 'files' => true, 'method' => 'put']) !!}

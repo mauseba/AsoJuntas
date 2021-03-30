@@ -24,4 +24,10 @@ class Evento extends Model
 
         return $this->belongsToMany(Junta::class);
     }
+
+    //Relacion uno a muchos
+    public function actas(){
+        return $this->hasMany(Acta::class);
+    }
+    
 }

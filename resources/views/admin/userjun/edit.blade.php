@@ -7,13 +7,6 @@
 @stop
 
 @section('content')
-
-@if (session('info'))
-<div class="alert alert-success">
-    <strong>{{session('info')}}</strong>
-</div>
-@endif
-
 <div class="card">
     <div class="card-body">
         {!! Form::model( $userjun,['route' => ['admin.userjun.update', $userjun], 'autocomplete' => 'off', 'method' => 'put']) !!}
@@ -24,13 +17,6 @@
 
         {!! Form::close() !!}
     </div>
-    <div class="card-footer">
-        @if (session('info'))
-        <div>
-            <a class="btn btn-secondary" href="{{route('admin.userjun.index')}}" role="button">Atras</a>
-        </div>
-        @endif
-    </div>
 </div>
 @stop
 
@@ -38,5 +24,14 @@
 @stop
 
 @section('js')
-    <script> console.log('Hi!'); </script>
+@if (session('error'))
+<script>
+    var session = '{{session('error')}}';
+    Swal.fire(
+    'Operacion Completada',
+    session ,
+    'error'
+    )
+</script>
+@endif
 @stop
