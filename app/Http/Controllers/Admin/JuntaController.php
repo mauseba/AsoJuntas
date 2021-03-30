@@ -196,7 +196,7 @@ class JuntaController extends Controller
                 return $this->generar_pdf($input);
                 break;      
             default:
-                return redirect()->route('admin.juntas.index')->with('info', 'Seleccione una opcion valida');
+                return redirect()->route('admin.juntas.index')->with('error', 'Seleccione una opcion valida');
                 break;
         }
     }
@@ -211,7 +211,7 @@ class JuntaController extends Controller
             $pdf = PDF::loadView('Admin.pdf.junta', compact('info','cuenta','input'))->setPaper('letter', 'landscape')->stream('informe.pdf');
             return $pdf;
         }else{
-            
+            return redirect()->route('admin.junta.index')->with('error', 'No se encuentra ningun registro en las fechas seleccionadas');
         }
     }
     public function generar_excel(){

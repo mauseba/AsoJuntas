@@ -174,7 +174,7 @@ class UserjunController extends Controller
                 return $this->generar_pdf($input);
                 break;      
             default:
-                return redirect()->route('admin.usejun.index')->with('info', 'Seleccione una opcion valida');
+                return redirect()->route('admin.userjun.index')->with('error', 'Seleccione una opcion valida');
                 break;
         }
     }
@@ -192,7 +192,7 @@ class UserjunController extends Controller
             $pdf = PDF::loadView('Admin.pdf.userjun', compact('info','cuenta','input'))->setPaper('letter', 'landscape')->stream('informe.pdf');
             return $pdf;
         }else{
-            
+            return redirect()->route('admin.userjun.index')->with('error', 'No se encuentra ningun registro en las fechas seleccionadas');
         }
     }
     public function generar_excel(){

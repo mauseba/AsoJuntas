@@ -54,7 +54,7 @@
     
     <table width="100%">
         <tr>
-            <td><strong>Total de asociados registrados en la asociacion de juntas</strong> {{$cuenta}}</td>
+            <td><strong>Total de asociados registrados en la asociacion: </strong> {{$cuenta}}</td>
         </tr>
     </table>
 

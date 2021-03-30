@@ -30,6 +30,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.33/moment-timezone.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    @if (session('info'))
+    <script>
+        var session = '{{session('info')}}';
+        Swal.fire(
+        'Operacion Completada',
+        session ,
+        'success'
+        )
+    </script>
+    @endif
 
 
     <script>
@@ -56,6 +66,7 @@
                     $('#txtFecha').val(Fe);
                     $('#txtHoraInicial').val(Hi);
                     $('#txtHoraFinal').val(Hf);
+                    $("#ddlJuntas").selectpicker("refresh");
 
                     $('#btnEditar').hide();
                     $('#btnEliminar').hide();
@@ -79,8 +90,6 @@
                     $('#ddlJuntas').val();
                     $('#txtAsunto').val(arg.event.title);
                     $('#txtDescripcion').val(arg.event.extendedProps.descripcion);
-                    console.log(arg.event);
-
 
                     $('#btnEditar').show();
                     $('#btnEliminar').show();
@@ -140,11 +149,21 @@
                 type: "POST",
                 data: objEvento,
                 success:function(msg){
-                    console.log('no hubo ningun problema');
                     $('#evento_modal').modal('hide'); 
+                    Swal.fire(
+                    'Operacion Completada',
+                    'El evento se creo o modifico con exito' ,
+                    'success'
+                    )
      
                 },
-                error: function(){alert("Hay un error");}
+                error: function(){
+                    Swal.fire(
+                    'Operacion Completada',
+                    'Hubo un error en la operacion' ,
+                    'error'
+                    )
+                }
             })
 
         }
@@ -155,7 +174,7 @@
             $('#txtFecha').val("");
             $('#txtHoraInicial').val("");
             $('#txtHoraFinal').val("");
-            $('#ddlJuntas').val("");
+            $("#ddlJuntas").val('default').selectpicker("refresh");
             $('#txtAsunto').val("");
             $('#txtDescripcion').val("");
 

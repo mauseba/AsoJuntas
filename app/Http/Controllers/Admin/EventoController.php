@@ -10,6 +10,7 @@ use App\Models\UserJun;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\EventosMailable;
 
+
 class EventoController extends Controller
 {
     public function __construct(){
@@ -78,7 +79,7 @@ class EventoController extends Controller
             
            foreach($user as $users){
     
-                Mail::to($users['Correo'])->send(new EventosMailable($datosEvento));
+                Mail::to($users['Correo'])->send(new EventosMailable('',$datosEvento));
     
             }
         }
@@ -92,28 +93,8 @@ class EventoController extends Controller
      */
     public function show()
     {
-        $data=Evento::with('juntas')->get();
-        
-        $nueva_data = [];
-        foreach($data as $value){
-            foreach($value->juntas as $juntas){
-                $junta=$juntas->id;
-            }
-            $nueva_data[] = [
-                "id" => $value->id,
-                "end" => $value->Fecha . " " . $value->hora_final,
-                "start" => $value->Fecha . " " . $value->hora_inicio,
-                "title" =>$value->Asunto,
-                "backgroundColor"=>'#1ADE6C',
-                "textColor"=>'#fff',
-                "display"=>'block',
-                "extendedProps"=>[
-                    'descripcion'=>$value->descripcion,
-                    'junta'=> $junta
-                ]
-            ];
-        }
-        /*$data=Evento::all();
+
+        $data=Evento::all();
         
         $nueva_data = [];
 
@@ -131,7 +112,7 @@ class EventoController extends Controller
                 ]
             ];
 
-        }*/
+        }
 
         return response()->json($nueva_data);
     }
@@ -177,7 +158,7 @@ class EventoController extends Controller
             
            foreach($user as $users){
     
-                Mail::to($users['Correo'])->send(new EventosMailable($datosEvento));
+                Mail::to($users['Correo'])->send(new EventosMailable('',$datosEvento));
     
             }
         }

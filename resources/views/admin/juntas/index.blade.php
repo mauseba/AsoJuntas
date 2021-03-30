@@ -35,6 +35,16 @@
             )
         </script>
     @endif
+    @if (session('error'))
+        <script>
+            var session = '{{session('error')}}';
+            Swal.fire(
+            'Operacion no Completada',
+            session ,
+            'error'
+            )
+        </script>
+    @endif
     <script>
         $(function() {
             $('#excel').click(function(){

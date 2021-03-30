@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\EventoController;
 use Illuminate\Support\Facades\Route;
+use App\Mail\EventosMailable;
 
 use App\Http\Controllers\PostController;
 
@@ -14,6 +15,10 @@ Route::get('category/{category}', [PostController::class, 'category'])->name('po
 Route::get('tag/{tag}', [PostController::class, 'tag'])->name('posts.tag');
 
 Route::get('eventos', [EventoController::class, 'index'])->name('eventos.index');
+
+Route::get('/mailable/evento', function () {
+    return new EventosMailable('motivo','mensaje');
+});
 
 
 

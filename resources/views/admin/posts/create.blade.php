@@ -8,16 +8,28 @@
 
 @section('content')
     <div class="card">
-        <div class="card-body">
-            {!! Form::open(['route' => 'admin.posts.store', 'autocomplete' => 'off', 'files' => true]) !!}
-
-                @include('admin.posts.partials.form')
-
-                {!! Form::submit('Crear publicacion', ['class' => 'btn btn-primary']) !!}
-
-            {!! Form::close() !!}
-        </div>
+           <!-- Nav tabs -->
+      <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" data-toggle="tab" href="#home">Datos Basicos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" id="men1" href="#menu1">Foto de la Publicacion</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" id="men2" href="#menu2">Observaciones</a>
+            </li>
+        </ul>
     </div>
+    <div class="card-body">
+        {!! Form::open(['route' => 'admin.posts.store', 'autocomplete' => 'off', 'files' => true]) !!}
+
+            @include('admin.posts.partials.form')
+
+        {!! Form::close() !!}
+    </div>
+</div>
 @stop
 
 @section('css')

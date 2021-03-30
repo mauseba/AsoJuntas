@@ -42,7 +42,7 @@
                     <div class="col-6">
                         <div class="form-group">
                             <label for="">Juntas</label> <br>
-                            <select id="ddlJuntas" class="selectpicker" multiple data-live-search="true">
+                            <select id="ddlJuntas" class="selectpicker" multiple data-live-search="true" >
                                @foreach ($juntas as $junta)
                                     <option value="{{$junta->id}}">{{$junta->Nombre}}</option>
                                 @endforeach

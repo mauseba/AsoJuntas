@@ -14,13 +14,13 @@
                         <div class="container mx-auto px-6 md:px-20 py-6 ">
                             <div class="w-full md:w-1/2">
                                 <div class="md:border bg-yellow-300 bg-opacity-75 border-gray-100 md:p-10">
-                                    <h3 class="text-5xl leading-tight text-white" style="font-family: Niconne, cursive;">Welcome To </h3>
-                                    <h2 class="font-bold leading-tight text-6xl text-white">Web2Tailwind</h2>
-                                    <p class="text-xl mt-10 font-light text-white">Use complete html components in your projects.
+                                    <h3 class="text-5xl leading-tight text-white" style="font-family: Niconne, cursive;">Bienvenido a</h3>
+                                    <h2 class="font-bold leading-tight text-6xl text-white">Asojuntas</h2>
+                                    <p class="text-xl mt-10 font-light text-white">Asociacion de Juntas de accion comunal del municipio de Algeciras.
                                     </p>
                                 </div>
                                 <div class="my-10 md:mx-10 md:-mt-2"><a href="#appointment"
-                                        class="bg-green-400 ease-linear hover:bg-blue-600 text-white px-6 py-4 rounded-full">USE TEMPLATE</a></div>
+                                        class="bg-green-400 ease-linear hover:bg-blue-600 text-white px-6 py-4 rounded-full">Contactanos</a></div>
                             </div>
                         </div>
                     </div>
@@ -30,7 +30,7 @@
                                 <div class="md:border bg-yellow-300 bg-opacity-75 border-gray-100 md:p-10">
                                     <h3 class="text-5xl leading-tight text-white" style="font-family: Niconne, cursive;">Bienvenido a</h3>
                                     <h2 class="font-bold leading-tight text-6xl text-white">Asojuntas</h2>
-                                    <p class="text-xl mt-10 font-light text-white">Asociacion de Juntas de accion comunal.
+                                    <p class="text-xl mt-10 font-light text-white">Asociacion de Juntas de accion comunal del municipio de Algeciras.
                                     </p>
                                 </div>
                                 <div class="my-10 md:mx-10 md:-mt-2"><a href="#appointment"

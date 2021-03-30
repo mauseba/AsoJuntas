@@ -28,7 +28,7 @@
 <script>
     var session = '{{session('error')}}';
     Swal.fire(
-    'Operacion Completada',
+    'Operacion no Completada',
     session ,
     'error'
     )
