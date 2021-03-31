@@ -10,6 +10,8 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\EpsController;
 use App\Http\Controllers\Admin\BarriosController;
 use App\Http\Controllers\Admin\CensoController;
+use App\Http\Controllers\Admin\BeneficiariosController;
+use App\Http\Controllers\BeneficiariosController as ControllersBeneficiariosController;
 
 Route::get('', [HomeController::class, 'index'])->middleware('can:admin.home')->name('admin.home');
 
@@ -25,7 +27,8 @@ Route::resource('eps', EpsController::class)->except('show')->names('admin.eps')
 
 Route::resource('barrios', BarriosController::class)->except('show')->names('admin.barrios');
 
-//Route::resource('censo', BarriosController::class)->except('show')->names('admin.censo');
+Route::resource('censo', CensoController::class)->except('show')->names('admin.censo');
 
+Route::resource('beneficiarios', BeneficiariosController::class)->except('show')->names('admin.beneficiarios');
 
 

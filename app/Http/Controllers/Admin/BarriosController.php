@@ -24,9 +24,7 @@ class BarriosController extends Controller
   
     
         public function index(){
-         //   $eps   = Eps::orderBy('name', 'DESC')->pluck('name', 'id');
-         $barrios   = Barrios::all();
-
+            $barrios   = Barrios::all();           
          return view('admin.barrios.index',compact('barrios'));
         }
     
@@ -52,7 +50,7 @@ class BarriosController extends Controller
         public function store(Request $request)
         {
             $request->validate([
-                'name' => 'required'
+                'name' => 'required|unique:barrios'
                 
             ]);
     
@@ -78,8 +76,10 @@ class BarriosController extends Controller
          * @param  int  $id
          * @return \Illuminate\Http\Response
          */
-        public function edit(Barrios $barrios)
+        public function edit($id)
         {
+            $barrios = Barrios::find($id);
+
             return view('admin.barrios.edit', compact('barrios'));
         }
     
@@ -90,10 +90,12 @@ class BarriosController extends Controller
          * @param  int  $id
          * @return \Illuminate\Http\Response
          */
-        public function update(Request $request, Barrios $barrios)
+        public function update(Request $request, $id)
         {
+            $barrios = Barrios::find($id);
+
             $request->validate([
-                'name' =>  "required"
+                'name' =>  "required|unique:barrios"
              
             ]);
     
@@ -108,8 +110,9 @@ class BarriosController extends Controller
          * @param  int  $id
          * @return \Illuminate\Http\Response
          */
-        public function destroy(Barrios $barrios)
+        public function destroy($id)
         {
+            $barrios = Barrios::find($id);
             $barrios->delete();
 
             return redirect()->route('admin.barrios.index')->with('info', 'El barrio se eliminó con éxito');;

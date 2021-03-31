@@ -235,7 +235,7 @@ return [
             'can'  => 'manage-blog',
         ],
         [
-            'text'        => 'Dashboard',
+            'text'        => 'Panel de control',
             'route'         => 'admin.home',
             'icon'        => 'fas fa-tachometer-alt fa-fw',
             'can'       => 'admin.home'
@@ -261,7 +261,44 @@ return [
             'active' => ['admin/tags*'],
             'can'       => 'admin.tags.index'
         ],
-        
+        [
+            'text'        => 'Eps y Barrios',
+            'icon'        => '',
+            'submenu'  =>[
+                [
+                    'text' => 'EPS',
+                    'route'  => 'admin.eps.index',
+                    'icon' => 'far fa-hospital fa-fw',
+                   'active' => ['admin/eps*'],
+                ],
+                [
+                    'text' => 'Barrios',
+                    'route'  => 'admin.barrios.index',
+                    'icon' => 'fas fa-map-signs fa-fw',
+                   'active' => ['admin/barrios*'],
+                ]
+
+            ]
+           
+        ],
+        [
+            'text'        => 'Censo Comunal',
+            'icon'        => '',
+            'submenu'  =>[
+                [
+                    'text'       => 'Beneficiarios',
+                    'route'        => 'admin.beneficiarios.index',
+                    'icon'      => 'fas fa-house-user',
+                ],
+                [
+                    'text'       => 'Censo',
+                    'route'        => 'admin.censo.index',
+                    'icon'      => 'far fa-address-book',
+                ]
+
+            ]
+           
+        ],
         ['header' => 'OPCIONES DE PAGINA PRINCIPAL'],
         [
             'text'       => 'Lista de post',

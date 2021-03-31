@@ -33,7 +33,9 @@
 
             {!! Form::close() !!}
         </div>
+       
     </div>
+    <a class="btn btn-secondary" href="{{route('admin.eps.index')}}">Volver</a>
 @stop
 
 @section('css')

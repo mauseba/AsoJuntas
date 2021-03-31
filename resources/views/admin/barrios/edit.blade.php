@@ -35,7 +35,9 @@
 
             {!! Form::close() !!}
         </div>
+       
     </div>
+    <a class="btn btn-secondary" href="{{route('admin.barrios.index')}}">Volver</a>
 @stop
 
 @section('css')

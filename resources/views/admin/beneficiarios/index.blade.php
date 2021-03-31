@@ -4,11 +4,11 @@
 
 @section('content_header')
 
-    @can('admin.eps.create')
-        <a class="btn btn-secondary btn-sm float-right" href="{{route('admin.eps.create')}}">Ingresar EPS</a>
-    @endcan
+   {{--  @can('admin.barrios.create')
+        <a class="btn btn-secondary btn-sm float-right" href="{{route('admin.beneficiar.create')}}">Ingresar Barrio/Vereda</a>
+    @endcan --}}
     
-    <h1>Listado de EPS</h1>
+    <h1>Listado Beneficiarios</h1>
 @stop
 
 @section('content')
@@ -19,7 +19,7 @@
         </div>
     @endif
 
-    @livewire('admin.eps-index')
+    @livewire('admin.beneficiarios-index')
 @stop
 
 @section('css')

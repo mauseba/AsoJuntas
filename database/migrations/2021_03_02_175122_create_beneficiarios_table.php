@@ -21,6 +21,7 @@ class CreateBeneficiariosTable extends Migration
             $table->integer('numero');
             $table->integer('edad');
             $table->string('genero');
+            $table->string('tipo_salud');
             $table->string('salud');
             $table->string('discap');
             $table->string('nivel_edu');
