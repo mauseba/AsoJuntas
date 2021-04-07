@@ -20,26 +20,18 @@
 @section('css')
     <link href='{{asset('vendor/fullcalendar/main.css')}}' rel='stylesheet' />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
 @stop
 
 @section('js')
 
     <script src='{{asset('vendor/fullcalendar/main.js')}}'></script>>
     <script src='{{asset('vendor/fullcalendar/locales/es.js')}}'></script>>
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.33/moment-timezone.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    @if (session('info'))
-    <script>
-        var session = '{{session('info')}}';
-        Swal.fire(
-        'Operacion Completada',
-        session ,
-        'success'
-        )
-    </script>
-    @endif
 
 
     <script>
@@ -107,6 +99,10 @@
             $('#evento_modal').on('hidden.bs.modal', function() { calendar.refetchEvents(); }); 
         })
 
+        $('#txtDescripcion').summernote({
+            height: 300
+        });
+
         $('#ddlJuntas').selectpicker();
 
         $('#btnGuardar').click(function(){
@@ -150,6 +146,7 @@
                 data: objEvento,
                 success:function(msg){
                     $('#evento_modal').modal('hide'); 
+                    console.log(msg);
                     Swal.fire(
                     'Operacion Completada',
                     'El evento se creo o modifico con exito' ,
@@ -159,7 +156,7 @@
                 },
                 error: function(){
                     Swal.fire(
-                    'Operacion Completada',
+                    'Operacion no Completada',
                     'Hubo un error en la operacion' ,
                     'error'
                     )

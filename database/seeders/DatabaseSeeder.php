@@ -8,6 +8,7 @@ use App\Models\Junta;
 use App\Models\Tag;
 use App\Models\UserJun;
 use Illuminate\Database\Seeder;
+use App\Models\Comision;
 
 use Illuminate\Support\Facades\Storage;
 
@@ -34,13 +35,14 @@ class DatabaseSeeder extends Seeder
         $this->call(EstudioSeeder::class);
 
         $this->call(UserSeeder::class);
+        Comision::factory(6)->create();
         Category::factory(4)->create();
         Tag::factory(8)->create();
         $this->call(PostSeeder::class);
         Junta::factory(20)->create();
         UserJun::factory(40)->create();
         $this->call(EventoSeeder::class);
-        Acta::factory(30)->create();
+        //Acta::factory(30)->create();
 
     }
 }

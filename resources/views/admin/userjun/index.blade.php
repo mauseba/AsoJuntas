@@ -5,19 +5,61 @@
 @section('content_header')
 
 <a class="btn btn-success float-right" href="{{route('admin.userjun.create')}}">Crear usuario</a>
+
 <button class="btn btn-warning  float-right d-inline" data-toggle="modal" data-target="#exampleModal" data-backdrop="static" >Crear informe</button>
-    <h1>Mostrar lista de usuario de juntas</h1>
-    @include('admin.userjun.informe') <br>
+<h1>Lista de afiliados de juntas</h1>
+@include('admin.userjun.informe') <br>
     
 @stop
 
 @section('content')
+        <!-- Nav tabs -->
 <br>
-    @livewire('admin.userjun-index')  
+<div class="card">
+    <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#home">Afiliados</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" id="men1" href="#menu1">Directivos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" id="men2" href="#menu2">Fiscal</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" id="men3" href="#menu3">Comisiones especiales</a>
+            </li>
+        </ul>
+    </div>
+    <div class="card-body">
+        <div class="tab-content">
+            <div id="home" class="container tab-pane active">  
+                <h3>Todos los afiliados a juntas</h3>
+                @livewire('admin.userjun-index') 
+            </div>
+            <div id="menu1" class="container tab-pane table-responsive fade">
+                <h3>Directivos de juntas</h3>
+                @livewire('admin.directivos-index')
+            </div>
+            <div id="menu2" class="container tab-pane table-responsive fade">
+                <h3>Fiscales de juntas</h3>
+                @livewire('admin.fiscal-index')
+            </div>
+            <div id="menu3" class="container tab-pane table-responsive fade">
+                <h3>Afil. comisiones especiales</h3>
+                @livewire('admin.especial-index')
+            </div>
+        </div>   
+    </div>
+</div>
+    
+
 
 @stop
 
 @section('css')
+
     <style>
     table th {
         text-align: center;
@@ -57,7 +99,7 @@
             $('#txtFechaFinal').val("");
             $("#fecha").show();
         });
-
+        
     });
 </script>
 @stop

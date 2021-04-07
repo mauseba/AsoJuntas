@@ -11,10 +11,10 @@
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
 @stop
 
 @section('js')
+
 @if (session('info'))
     <script>
         var session = '{{session('info')}}';
@@ -25,4 +25,5 @@
         )
     </script>
 @endif
+
 @stop

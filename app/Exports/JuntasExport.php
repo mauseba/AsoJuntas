@@ -3,15 +3,16 @@
 namespace App\Exports;
 
 use App\Models\Junta;
-use Maatwebsite\Excel\Concerns\FromCollection;
+use Illuminate\Contracts\View\View;
+use Maatwebsite\Excel\Concerns\FromView;
 
-class JuntasExport implements FromCollection
+class JuntasExport implements FromView
 {
-    /**
-    * @return \Illuminate\Support\Collection
-    */
-    public function collection()
+    
+    public function view(): View
     {
-        return Junta::select('*')->get();
+        return view('admin.excel.junta', [
+            'juntas' => Junta::all()
+        ]);
     }
 }

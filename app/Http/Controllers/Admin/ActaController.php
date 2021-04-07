@@ -40,19 +40,23 @@ class ActaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'url'  => 'required',
+            'url'  => 'required|mimes:pdf|max:512',
+            'url2'  => 'mimes:pdf|max:512',
             'evento_id'=>'required|unique:actas',
         ]);
 
         $acta = $request->except('_token','Fecha','asunto');
 
-        if ($request->hasFile('url')){
+        if ($request->hasFile('url') && $request->hasFile('url2')){
+            $acta['url'] = Storage::put('Actas', $request->file('url'));
+            $acta['url2'] = Storage::put('Actas', $request->file('url2'));
+        }else{
             $acta['url'] = Storage::put('Actas', $request->file('url'));
         }
 
         $actas = Acta::create($acta);
 
-        return redirect()->route('admin.actas.index', $actas)->with('info', 'El acta del evento se añadio con exito');
+        return redirect()->route('admin.actas.index', $actas)->with('info', 'El acta y la asistencia al evento, se añadieron con exito');
     }
 
     /**
@@ -88,17 +92,27 @@ class ActaController extends Controller
     public function update(Request $request, Acta $acta)
     {
         $request->validate([
-            'url'  => 'required',
+            'url'  => 'required|mimes:pdf|max:512',
+            'url2'  => 'mimes:pdf|max:512',
             'evento_id'=>'required|unique:actas,evento_id,'.$acta->id,
         ]);
   
         $doc = $request->except('_token','Fecha','asunto');
 
-        if ($request->hasFile('url')){
+        if ($request->hasFile('url') && $request->hasFile('url2')){
 
             Storage::delete($acta->url);
+            Storage::delete($acta->url2);
 
             $doc['url'] = Storage::put('Actas', $request->file('url'));
+            $doc['url2'] = Storage::put('Actas', $request->file('url2'));
+        }elseif($request->hasFile('url')){
+
+            Storage::delete($acta->url);
+            $doc['url'] = Storage::put('Actas', $request->file('url'));
+        }else{
+            Storage::delete($acta->url2);
+            $doc['url2'] = Storage::put('Actas', $request->file('url2'));
         }
 
         $acta->update($doc);

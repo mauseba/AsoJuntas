@@ -20,8 +20,8 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Name</th>
-                        <th colspan="2"></th>
+                        <th>Nombres</th>
+                        <th colspan="2">Acciones</th>
                     </tr>
                 </thead>
 
@@ -32,7 +32,7 @@
                             <td>{{$category->name}}</td>
                             <td width="10px">
                                 @can('admin.categories.edit')
-                                    <a class="btn btn-primary btn-sm" href="{{route('admin.categories.edit', $category)}}">Editar</a>
+                                    <a class="btn btn-primary btn-sm" href="{{route('admin.categories.edit', $category)}}"><i class="fas fa-pen-square"></i></a>
                                 @endcan
                             </td>
                             <td width="10px">
@@ -41,7 +41,7 @@
                                         @csrf
                                         @method('delete')
 
-                                        <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                                        <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-eraser"></i></button>
                                     </form>
                                 @endcan
 

@@ -1,17 +1,17 @@
 <x-app-layout>
-
-    <div class="container py-8">
+    <div class="container py-8 bg-white">
         <h1 class="text-4xl font-bold text-gray-600">{{$post->name}}</h1>
         <p class="font-bold text-gray-600">Creado el: {{$post->created_at}}</p><br>
 
-        <div class="text-lg text-gray-500 mb-2">
-            {!!$post->extract!!}
-        </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
             {{-- Contenido principal --}}
             <div class="lg:col-span-2">
+                <div class="text-lg text-center text-gray-500 mb-2">
+                    {!!$post->extract!!}
+                </div>
+        
 
                 <figure>
                     @if ($post->image)
@@ -21,7 +21,7 @@
                     @endif
                 </figure>
 
-                <div class="text-base text-gray-500 mt-4">
+                <div class="text-base text-black mt-4">
                     {!!$post->body!!}
                 </div>
 

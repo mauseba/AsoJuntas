@@ -24,6 +24,7 @@ class ActaFactory extends Factory
     {
         return [
             'url'=>$this->faker->url(),
+            'url2'=>$this->faker->url(),
             'evento_id'=>Evento::all()->random()->id
         ];
     }

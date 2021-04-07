@@ -16,6 +16,7 @@ class CreateActasTable extends Migration
         Schema::create('actas', function (Blueprint $table) {
             $table->id();
             $table->string('url');
+            $table->string('url2');
             
             $table->unsignedBigInteger('evento_id');
             $table->foreign('evento_id')->references('id')->on('eventos')->onDelete('cascade');

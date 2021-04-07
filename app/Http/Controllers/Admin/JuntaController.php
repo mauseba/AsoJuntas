@@ -53,10 +53,10 @@ class JuntaController extends Controller
                 'Nit'=>'required|unique:juntas|regex:/^\d{1,3}(?:\.\d\d\d)(?:\.\d\d\d)*(?:-\d{1,2})?$/',
                 'Direccion' => 'required',
                 'Nombre' => 'required|unique:juntas',
-                'D_Recibopago'=> 'required|mimes:pdf|max:2048',
-                'D_NIT' => 'required|mimes:pdf|max:2048',
-                'D_Resolucion' => 'required|mimes:pdf|max:2048',
-                'Observaciones'=> 'required'
+                'Correo' => 'required|email',
+                'D_Recibopago'=> 'required|mimes:pdf|max:512',
+                'D_NIT' => 'required|mimes:pdf|max:512',
+                'D_Resolucion' => 'required|mimes:pdf|max:512'
             ]);
         
         $url = $request->except('_token');
@@ -108,11 +108,11 @@ class JuntaController extends Controller
             'Nit'=>'required|regex:/^\d{1,3}(?:\.\d\d\d)(?:\.\d\d\d)*(?:-\d{1,2})?$/|unique:juntas,Nit,'.$junta->id,
             'Direccion' => 'required',
             'Nombre' => 'required|unique:juntas,Nombre,'.$junta->id,
-            'D_Recibopago'=> 'mimes:pdf|max:1024',
-            'D_NIT' => 'mimes:pdf|max:1024',
-            'D_Resolucion' => 'mimes:pdf|max:1024',
-            'status' => 'required|in:1,2',
-            'Observaciones'=> 'required'
+            'Correo' => 'required|email',
+            'D_Recibopago'=> 'mimes:pdf|max:512',
+            'D_NIT' => 'mimes:pdf|max:512',
+            'D_Resolucion' => 'mimes:pdf|max:512',
+            'status' => 'required|in:1,2'
         ]);
 
        
@@ -208,15 +208,17 @@ class JuntaController extends Controller
         ->get();
         $cuenta = count($info);
         if($cuenta > 0){
-            $pdf = PDF::loadView('Admin.pdf.junta', compact('info','cuenta','input'))->setPaper('letter', 'landscape')->stream('informe.pdf');
+            $date = Carbon::now();
+            $pdf = PDF::loadView('Admin.pdf.junta', compact('info','cuenta','input','date'))->setPaper('letter', 'landscape')->stream('informe.pdf');
             return $pdf;
         }else{
-            return redirect()->route('admin.junta.index')->with('error', 'No se encuentra ningun registro en las fechas seleccionadas');
+            return redirect()->route('admin.juntas.index')->with('error', 'No se encuentra ningun registro en las fechas seleccionadas');
         }
     }
     public function generar_excel(){
 
-        return Excel::download(new JuntasExport, 'juntas-list.xlsx');
+        return Excel::download(new JuntasExport , 'Junta-list.xlsx');
+
     }
 
 }

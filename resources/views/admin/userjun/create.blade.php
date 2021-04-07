@@ -3,7 +3,7 @@
 @section('title', 'Asojuntas')
 
 @section('content_header')
-    <h1>Crear Usuarios de junta</h1>
+    <h1>Crear Afiliados de junta</h1>
 @stop
 
 @section('content')
@@ -15,17 +15,19 @@
                     @include('admin.userjun.partials.form')
                 </div>
                 
-                    {!! Form::submit('Crear Asociado', ['class' => 'btn btn-primary']) !!}
+                    {!! Form::submit('Crear Afiliado', ['class' => 'btn btn-primary']) !!}
             {!! Form::close() !!}
         </div>
     </div>
 @stop
 
 @section('css')
+
 @stop
 
 @section('js')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 <script>
     $(function() {
         $('#btn').click(function(){
@@ -37,6 +39,22 @@
         
         $("#btnE").click(function(){
             $(this).closest("#dv").remove();
+        });
+
+        $('#comisionN').click(function(){
+            $("#com").hide();
+            $("#com2").hide();
+            $("#comision2").val("");
+            $("#comision").val("");
+            $("#com1").show();
+        });
+
+        $("#comisionE").click(function(){
+            $("#com").hide();
+            $("#com1").hide();
+            $("#comision1").val("");
+            $("#comision").val("");
+            $("#com2").show();
         });
     });
 </script>

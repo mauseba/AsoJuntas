@@ -24,11 +24,12 @@
                         <th>NIT</th>
                         <th>Fecha de registro</th>
                         <th>Nombre</th>
+                        <th>Correo</th>
                         <th>Recibo de pago</th>
-                        <th>Documento_NIT</th>
-                        <th>Documento_Resolucion</th>
+                        <th>D. NIT</th>
+                        <th>D. Resolucion</th>
                         <th>Observaciones</th>
-                        <th colspan="2"></th>
+                        <th colspan="2">Acciones</th>
                     </tr>
                 </thead>
 
@@ -38,6 +39,7 @@
                             <td>{{$junta->Nit}}</td>
                             <td>{{$junta->FechaC}}</td>
                             <td>{{$junta->Nombre}}</td>
+                            <td>{{$junta->Correo}}</td>
                             <td align="center">
                                 <a class="btn btn-light btn-sm" target="_blank" href="{{Storage::url($junta->D_Recibopago)}}">
                                     <i class="far fa-eye"></i>
@@ -54,20 +56,20 @@
                                 </a>
                             </td>
                             <td>{{$junta->Observaciones}}</td>
-                            <td width="10px">
+                            <td>
                              @can('admin.juntas.edit')
 
-                                <a class="btn btn-primary btn-sm" href="{{route('admin.juntas.edit', $junta)}}">Editar</a>
+                                <a class="btn btn-primary btn-sm" href="{{route('admin.juntas.edit', $junta)}}"><i class="fas fa-pen-square"></i></a>
 
                              @endcan       
                             </td>
-                            <td with="10px">
+                            <td>
                                 @can('admin.juntas.destroy')
                                 <form action="{{route('admin.juntas.destroy', $junta)}}" class="formulario-eliminar" method="POST">
                                     @csrf
                                     @method('DELETE')
 
-                                    <button class="btn btn-danger btn-sm" type="submit">Eliminar</button>
+                                    <button class="btn btn-danger btn-sm" type="submit"><i class="fas fa-eraser"></i></button>
                                 </form>
                                 @endcan 
                             </td>

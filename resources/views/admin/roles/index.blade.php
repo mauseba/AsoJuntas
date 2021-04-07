@@ -16,7 +16,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Role</th>
-                    <th colspan="2"></th>
+                    <th colspan="2">Acciones</th>
                 </tr>
             </thead>
 
@@ -26,13 +26,13 @@
                         <td>{{$role->id}}</td>
                         <td>{{$role->name}}</td>
                         <td width="10px">
-                            <a class="btn btn-primary btn-sm" href="{{route("admin.roles.edit",$role)}}" >Editar</a>
+                            <a class="btn btn-primary btn-sm" href="{{route("admin.roles.edit",$role)}}" ><i class="fas fa-pen-square"></i></a>
                         </td>
                         <td width="10px">
                             <form action="{{route('admin.roles.destroy', $role)}}" method="POST">
                                 @csrf
                                 @method('delete')
-                                <button class="btn btn-danger btn-sm" type="submit">Eliminar</button>
+                                <button class="btn btn-danger btn-sm" type="submit"><i class="fas fa-eraser"></i></button>
                             </form>
                         </td>
                     </tr>

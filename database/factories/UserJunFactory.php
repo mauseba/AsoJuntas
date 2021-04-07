@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Comision;
 use App\Models\Junta;
 use App\Models\UserJun;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -33,8 +34,9 @@ class UserJunFactory extends Factory
             'Num_contacto'=> $this->faker->phoneNumber(),
             'Niv_educacion'=> $this->faker->word(20),
             'Correo'=> $this->faker->unique()->email,
-            'Cargo'=> $this->faker->randomElement(['asociado','presidente','secretario']),
-            'junta_id'=> Junta::all()->random()->id
+            'Cargo'=> $this->faker->randomElement(['afliado','presidente','vicepresidente','tesorero','secretario']),
+            'junta_id'=> Junta::all()->random()->id,
+            'comision_id'=> Comision::all()->random()->id
         ];
     }
 }

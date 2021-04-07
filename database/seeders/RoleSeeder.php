@@ -72,6 +72,24 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'admin.juntas.edit',
                              'description' => 'Editar junta'])->syncRoles([$role1]);
         Permission::create(['name' => 'admin.juntas.destroy',
-                                 'description' => 'Eliminar junta'])->syncRoles([$role1]);                           
-    }
+                                 'description' => 'Eliminar junta'])->syncRoles([$role1]); 
+
+        Permission::create(['name' => 'admin.userjun.index',
+                                 'description' => 'Ver listado Afiliados de juntas'])->syncRoles([$role1]);
+        Permission::create(['name' => 'admin.userjun.create',
+                                'description' => 'Guardar Afiliado de junta'])->syncRoles([$role1]);
+        Permission::create(['name' => 'admin.userjun.edit',
+                                'description' => 'Editar Afiliado de junta'])->syncRoles([$role1]);
+        Permission::create(['name' => 'admin.userjun.destroy',
+                                    'description' => 'Eliminar Afiliado de junta'])->syncRoles([$role1]);   
+                                 
+        Permission::create(['name' => 'admin.comisions.index',
+                                 'description' => 'Ver listado de Comisiones'])->syncRoles([$role1]);
+        Permission::create(['name' => 'admin.comisions.create',
+                                'description' => 'Guardar Comisiones'])->syncRoles([$role1]);
+        Permission::create(['name' => 'admin.comisions.edit',
+                                'description' => 'Editar Comisiones'])->syncRoles([$role1]);
+        Permission::create(['name' => 'admin.comisions.destroy',
+                                    'description' => 'Eliminar Comisiones'])->syncRoles([$role1]);  
+}
 }

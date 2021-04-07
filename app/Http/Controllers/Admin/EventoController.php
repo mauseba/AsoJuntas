@@ -59,6 +59,7 @@ class EventoController extends Controller
             'descripcion'=> 'required',
         ]);
 
+
         $datosEvento= request()->except('opcion','_token','_method');
         
 
@@ -67,19 +68,28 @@ class EventoController extends Controller
         if($request->juntas){
             $evento->juntas()->attach($request->juntas);
         }
-
+        
         if($request['opcion']==1){
 
-            $user = UserJun::select('Correo')->where([
-                ['junta_id',$request['juntas']],
-                ['Cargo','presidente'],
-                ['Cargo','secretario']
-            ])->get();
-
-            
-           foreach($user as $users){
+            foreach ($request['juntas'] as $opcion){
+                $correo=[];
+                $users[] = UserJun::select('Correo')
+                    ->where('junta_id',$opcion)
+                    ->where(Function($query){
+                        $query->where('Cargo','presidente')
+                            ->orWhere('Cargo','secretario');
+                    })->get()->toArray();
     
-                Mail::to($users['Correo'])->send(new EventosMailable('',$datosEvento));
+                foreach($users as $data){
+                    for($i = 0; $i < count($data); ++$i) {
+                        $correo[]= $data[$i]['Correo'];     
+                    }
+                } 
+            }
+
+           foreach($correo as $users){
+    
+                Mail::to($users)->send(new EventosMailable('',$datosEvento));
     
             }
         }
@@ -150,17 +160,28 @@ class EventoController extends Controller
 
         if($request['opcion']==1){
 
-            $user = UserJun::select('Correo')->where([
-                ['junta_id',$request['juntas']],
-                ['Cargo',['presidente','secretario']]
-            ])->get();
-
-            
-           foreach($user as $users){
+            foreach ($request['juntas'] as $opcion){
+                $correo=[];
+                $users[] = UserJun::select('Correo')
+                    ->where('junta_id',$opcion)
+                    ->where(Function($query){
+                        $query->where('Cargo','presidente')
+                            ->orWhere('Cargo','secretario');
+                    })->get()->toArray();
     
-                Mail::to($users['Correo'])->send(new EventosMailable('',$datosEvento));
+                foreach($users as $data){
+                    for($i = 0; $i < count($data); ++$i) {
+                        $correo[]= $data[$i]['Correo'];     
+                    }
+                } 
+            }
+
+           foreach($correo as $users){
+    
+                Mail::to($users)->send(new EventosMailable('',$datosEvento));
     
             }
+            
         }
 
         return response()->json($evento);

@@ -15,7 +15,7 @@
                             <th>ID</th>
                             <th>Nombre</th>
                             <th>Email</th>
-                            <th>Operaciones</th>
+                            <th>Acciones</th>
                         </tr>
                     </thead>
 
@@ -50,5 +50,4 @@
             
 
     </div>
-    <script>
 </div>

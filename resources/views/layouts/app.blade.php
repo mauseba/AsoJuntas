@@ -24,14 +24,14 @@
         
 
     </head>
-    <body class="font-sans antialiased">
+    <body class="font-sans antialiased bg-white">
 
    
         @livewire('navigation')
         @include('Slider.slider')
     
        
-        <div class="min-h-screen bg-gray-100">
+        <div class="min-h-screen">
 
             <!-- Page Content -->
             <main>
@@ -41,8 +41,6 @@
         </div>
 
         @stack('modals')
-
-       
 
         <footer>
             @livewire('footer')

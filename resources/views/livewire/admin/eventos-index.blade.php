@@ -13,9 +13,8 @@
                         <th>fecha</th>
                         <th>Asunto</th>
                         <th>Acta</th>
-                        <th>prueba</th>
-                        <th>Añadir acta</th>
-                        
+                        <th>Asistencia</th>
+                        <th>Editar documentos</th>
                     </tr>
                 </thead>
 
@@ -30,9 +29,13 @@
                                     <i class="far fa-eye"></i>
                                 </a>
                             </td>
-                            <td>{{$evento->evento_id}}</td>
+                            <td align="center">
+                                <a class="btn btn-light btn-sm" target="_blank" href="{{Storage::url($evento->url2)}}">
+                                    <i class="far fa-eye"></i>
+                                </a>
+                            </td>
                             <td >
-                                <a type="button" class="btn btn-primary"  href="{{route('admin.actas.edit',$evento)}}" >Editar Acta</a>
+                                <a type="button" class="btn btn-primary"  href="{{route('admin.actas.edit',$evento)}}" ><i class="fas fa-pen-square"></i></a>
                             </td>
                         </tr>
                     @endforeach

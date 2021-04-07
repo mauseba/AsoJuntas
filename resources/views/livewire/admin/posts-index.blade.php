@@ -10,30 +10,30 @@
         <div class="card-body table-responsive">
             <table class="table table-striped">
                 <thead>
-                    <tr>
+                    <tr align="center">
                         <th>ID</th>
                         <th>Nombre</th>
-                        <th colspan="2"></th>
+                        <th colspan="2">Acciones</th>
                     </tr>
                 </thead>
 
                 <tbody>
                     @foreach ($posts as $post)
-                        <tr>
+                        <tr align="center">
                             <td>{{$post->id}}</td>
                             <td>{{$post->name}}</td>
-                            <td with="10px">
+                            <td>
                                 @can('admin.posts.edit')
-                                     <a class="btn btn-primary btn-sm" href="{{route('admin.posts.edit', $post)}}">Editar</a>
+                                     <a class="btn btn-primary btn-sm" href="{{route('admin.posts.edit', $post)}}"><i class="fas fa-pen-square"></i></a>
                                 @endcan
                             </td>
-                            <td with="10px">
+                            <td>
                                 @can('admin.posts.destroy')
                                     <form action="{{route('admin.posts.destroy', $post)}}" class="formulario-eliminar" method="POST">
                                         @csrf
                                         @method('DELETE')
 
-                                        <button class="btn btn-danger btn-sm" type="submit">Eliminar</button>
+                                        <button class="btn btn-danger btn-sm" type="submit"><i class="fas fa-eraser"></i></button>
                                     </form>
                                 @endcan
                                

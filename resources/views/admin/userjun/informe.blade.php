@@ -11,7 +11,6 @@
         <div class="modal-body">
           <form action="{{route('admin.userjun.generar')}}" method="POST">
               @csrf
-             
               <div class="form-group">
                   <p>¿Como desea el informe?</p>
                   <input type="radio" id="excel" name="opcion" value="0">

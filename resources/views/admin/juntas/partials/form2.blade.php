@@ -39,29 +39,18 @@
 
 </div>
 
+<div class="form-group">
+    {!! Form::label('Correo', 'Correo:') !!}
+    {!! Form::text('Correo', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el correo de la junta ']) !!}
+
+    @error('Correo')
+        <small class="text-danger">{{$message}}</small>
+    @enderror
+
+</div>
+
+
 <div class="row mb-3">
-    <div class="col">
-        <div class="form-group">
-            {!! Form::label('D_Recibopago', 'Suba el documento el recibo de pago') !!}
-            {!! Form::file('D_Recibopago', ['class' => 'form-control-file', 'accept' => '.pdf']) !!}
-    
-            @error('D_Recibopago')
-                <span class="text-danger">{{$message}}</span>
-            @enderror
-        </div>
-    
-    </div>
-    <div class="col">
-        <div class="form-group">
-            {!! Form::label('D_NIT', 'Suba el documento del NIT') !!}
-            {!! Form::file('D_NIT', ['class' => 'form-control-file', 'accept' => '.pdf']) !!}
-    
-            @error('D_NIT')
-                <span class="text-danger">{{$message}}</span>
-            @enderror
-        </div>
-    
-    </div>
     <div class="col">
         <div class="form-group">
             {!! Form::label('D_Resolucion', 'Suba la resolucion de la junta') !!}
@@ -70,9 +59,38 @@
             @error('D_Resolucion')
                 <span class="text-danger">{{$message}}</span>
             @enderror
+            <p class="text-danger text-small">*El archivo a subir debe ser tipo .pdf y no debe ser mayor a 512 kb </p>
+
         </div>
     
     </div>
+    
+    <div class="col">
+        <div class="form-group">
+            {!! Form::label('D_NIT', 'Suba el documento del NIT') !!}
+            {!! Form::file('D_NIT', ['class' => 'form-control-file', 'accept' => '.pdf']) !!}
+    
+            @error('D_NIT')
+                <span class="text-danger">{{$message}}</span>
+            @enderror
+            <p class="text-danger text-small">*El archivo a subir debe ser tipo .pdf y no debe ser mayor a 512 kb </p>
+        </div>
+    
+    </div>
+    <div class="col">
+        <div class="form-group">
+            {!! Form::label('D_Recibopago', 'Suba el documento el recibo de pago') !!}
+            {!! Form::file('D_Recibopago', ['class' => 'form-control-file', 'accept' => '.pdf']) !!}
+    
+            @error('D_Recibopago')
+                <span class="text-danger">{{$message}}</span>
+            @enderror
+            <p class="text-danger text-small">*El archivo a subir debe ser tipo .pdf y no debe ser mayor a 512 kb </p>
+
+        </div>
+    
+    </div>
+
 </div>
 <div class="form-group">
     <p class="font-weight-bold">Estado</p>

@@ -250,10 +250,16 @@ return [
                     'can'       => 'admin.juntas.index',
                 ],
                 [
-                    'text'        => 'Usarios de juntas',
+                    'text'        => 'Afiliados de juntas',
                     'route'         => 'admin.userjun.index',
-                    //'can'       => 'admin.juntas.index',
+                    'can'       => 'admin.userjun.index',
+                ],
+                [
+                    'text'        => 'Comisiones de afiliados',
+                    'route'         => 'admin.comisions.index',
+                    'can'       => 'admin.comisions.index',
                 ]
+
 
             ]
            
@@ -268,7 +274,7 @@ return [
                     'can'       => 'admin.eventos.index'
                 ],
                 [
-                    'text'        => 'Subir acta',
+                    'text'        => 'Subir acta y asistencia',
                     'route'         => 'admin.actas.index',
                     //'can'       => 'admin.juntas.index',
                 ]
@@ -312,8 +318,22 @@ return [
             'icon'      => 'fas fa-fw fa-clipboard',
             'can'       => 'admin.posts.index'
         ],
+        ['header' => 'PAGOS Y CERTIFICADOS'],
+        [
+            'text'       => 'Pagos de Juntas A.C',
+            'route'        => 'admin.posts.index',
+            'icon'      => 'fas fa-fw fa-clipboard',
+        // 'can'       => 'admin.posts.index'
+        ],
+        [
+            'text'       => 'Pagos y Certificados de usuarios',
+            'route'        => 'admin.posts.index',
+            'icon'      => 'fas fa-fw fa-clipboard',
+        // 'can'       => 'admin.posts.index'
+        ],
        
     ],
+    
 
     /*
     |--------------------------------------------------------------------------

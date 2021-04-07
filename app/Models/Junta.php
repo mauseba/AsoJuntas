@@ -9,7 +9,7 @@ class Junta extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['FechaC','Nit','Direccion','Nombre','D_Recibopago','D_NIT','D_Resolucion','status','Observaciones'];
+    protected $fillable = ['FechaC','Nit','Direccion','Nombre','Correo','D_Recibopago','D_NIT','D_Resolucion','status','Observaciones'];
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
 

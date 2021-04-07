@@ -1,5 +1,5 @@
 <div class="modal fade" id="evento_modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
         <div class="modal-content">
         <div class="modal-header">
             <h5 class="modal-title">Agregar o Modificar Evento</h5>
@@ -42,7 +42,7 @@
                     <div class="col-6">
                         <div class="form-group">
                             <label for="">Juntas</label> <br>
-                            <select id="ddlJuntas" class="selectpicker" multiple data-live-search="true" >
+                            <select id="ddlJuntas" name="juntas[]" class="selectpicker" multiple data-live-search="true" >
                                @foreach ($juntas as $junta)
                                     <option value="{{$junta->id}}">{{$junta->Nombre}}</option>
                                 @endforeach

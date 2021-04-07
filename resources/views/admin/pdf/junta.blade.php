@@ -30,6 +30,8 @@
             color: black;
             text-align: center;
             line-height: 14px;
+            font-size: x-small;
+
         }
     </style>
 
@@ -41,7 +43,7 @@
             <td valign="top"><img src="{{asset('imagenes/logo.png')}}" alt="" width="150"/></td>
             <td align="right">
                 <h2>INFORME DE JUNTAS DE ACCION COMUNAL</h2>
-                <h3>Asociacion de juntas de Accion comunal del municipio de Algeciras</h3>
+                <h3>ASOJUNTAS - Asociacion de juntas de Accion comunal del municipio de Algeciras</h3>
                 <pre>
                    Juntas registradas entre el: {{$input['txtFechaInicial']}}
                    hasta: {{$input['txtFechaFinal']}}
@@ -53,7 +55,7 @@
 
     <table width="100%">
         <tr>
-            <td><strong>Total de juntas de accion comunal:</strong> {{$cuenta}}</td>
+            <td><strong>Total de juntas de accion comunal registradas:</strong> {{$cuenta}}</td>
         </tr>
     </table>
 
@@ -65,6 +67,7 @@
                 <th>Nit</th>
                 <th>Direccion</th>
                 <th>Nombre</th>
+                <th>Correo</th>
                 <th>Doc. recibo</th>
                 <th>Doc. Nit</th>
                 <th>Doc. resolucion</th>
@@ -78,6 +81,7 @@
                 <th scope="row">{{$inf->Nit}}</th>
                 <td align="center">{{$inf->Direccion}}</td>
                 <td align="center">{{$inf->Nombre}}</td>
+                <td align="center">{{$inf->Correo}}</td>
                 <td align="center">@if($inf->D_Recibopago) Si @else No @endif</td>
                 <td align="center">@if($inf->D_NIT) Si @else No @endif</td>
                 <td align="center">@if($inf->D_Resolucion) Si @else No @endif</td>
@@ -90,9 +94,10 @@
     </table>
 
     <footer>
-        <p>
+        <p align="center">
             &copy;2021 Asojunta | All rights reserved
         </p>
+        <p align="right"> fecha del informe: {{$date->toDateString()}} a las {{$date->toTimeString()}}  </p>
     </footer>
 
     </body>

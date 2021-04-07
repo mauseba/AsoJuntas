@@ -29,8 +29,10 @@ class CreateUserJunsTable extends Migration
             $table->string('Cargo');
 
             $table->unsignedBigInteger('junta_id');
+            $table->unsignedBigInteger('comision_id');
 
             $table->foreign('junta_id')->references('id')->on('juntas')->onDelete('cascade');
+            $table->foreign('comision_id')->references('id')->on('comisions')->onDelete('cascade');
             
 
 

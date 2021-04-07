@@ -3,15 +3,16 @@
 namespace App\Exports;
 
 use App\Models\UserJun;
-use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\FromView;
+use Illuminate\Contracts\View\View;
 
-class UserJunExport implements FromCollection
+class UserJunExport implements FromView
 {
-    /**
-    * @return \Illuminate\Support\Collection
-    */
-    public function collection()
+
+    public function view(): View
     {
-        return UserJun::all();
+        return view('admin.excel.userjun', [
+            'userjuns' => UserJun::all()
+        ]);
     }
 }

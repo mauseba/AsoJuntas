@@ -19,12 +19,13 @@ class CreateJuntasTable extends Migration
             $table->string('Nit',20);
             $table->string('Direccion',50)->nullable();
             $table->string('Nombre', 50);
+            $table->string('Correo', 50);
 
             $table->string('D_Recibopago');
             $table->string('D_NIT');
             $table->string('D_Resolucion');
             $table->enum('status',[1,2])->default(1);
-            $table->string('Observaciones',200)->default('Ninguna');
+            $table->string('Observaciones',200)->default('Ninguna')->nullable();
             
             $table->timestamps();
         });

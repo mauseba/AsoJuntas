@@ -30,6 +30,7 @@
             color: black;
             text-align: center;
             line-height: 14px;
+            font-size: x-small;
         }
     </style>
 
@@ -40,10 +41,10 @@
         <tr>
             <td valign="top"><img src="{{asset('imagenes/logo.png')}}" alt="" width="150"/></td>
             <td align="right">
-                <h2>INFORME DE ASOCIADOS</h2>
+                <h2>INFORME DE AFILIADOS</h2>
                 <h3>ASOJUNTAS - Asociacion de juntas de Accion comunal del municipio de Algeciras</h3>
                 <pre>
-                    Asociados registrados entre el: {{$input['txtFechaInicial']}}
+                    Afiliados registrados entre el: {{$input['txtFechaInicial']}}
                     hasta: {{$input['txtFechaFinal']}}
                  </pre>
             </td>
@@ -54,7 +55,7 @@
     
     <table width="100%">
         <tr>
-            <td><strong>Total de asociados registrados en la asociacion: </strong> {{$cuenta}}</td>
+            <td><strong>Total de afiliados registrados en la asociacion: </strong> {{$cuenta}}</td>
         </tr>
     </table>
 
@@ -72,7 +73,10 @@
                 <th>Num_contacto</th>
                 <th>Correo</th>
                 <th>Cargo</th>
-                <th>Junta Aso.</th>
+                <th>Junta Asociada</th>
+                <th>Comision</th>
+                <th>T. Comision</th>
+                
             </tr>
         </thead>
         <tbody>
@@ -88,6 +92,8 @@
                 <td align="center">{{$inf->Correo}}</td>
                 <td align="center">{{$inf->Cargo}}</td>
                 <td align="center">{{$inf->Nombre}}</td>
+                <td align="center">{{$inf->comision}}</td>
+                <td align="center">{{$inf->Tipo}}</td>
                 
             </tr>
             @endforeach
@@ -96,9 +102,10 @@
     </table>
 
     <footer>
-        <p>
+        <p align="center">
             &copy;2021 Asojunta | All rights reserved
         </p>
+        <p align="right"> fecha del informe: {{$date->toDateString()}} a las {{$date->toTimeString()}}</p>
     </footer>
 
     </body>

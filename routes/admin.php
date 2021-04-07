@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\JuntaController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserjunController;
 use App\Http\Controllers\Admin\ActaController;
+use App\Http\Controllers\Admin\ComisionController;
 
 Route::get('', [HomeController::class, 'index'])->middleware('can:admin.home','verified')->name('admin.home');
 
@@ -25,15 +26,18 @@ Route::resource('tags', TagController::class)->except('show')->names('admin.tags
 
 Route::resource('posts', PostController::class)->except('show')->names('admin.posts');
 
-Route::resource('juntas', JuntaController::class)->names('admin.juntas');
+Route::resource('juntas', JuntaController::class)->except('show')->names('admin.juntas');
 
 Route::resource('eventos', EventoController::class)->names('admin.eventos');
 
-Route::resource('actas', ActaController::class)->names('admin.actas');
+Route::resource('actas', ActaController::class)->except('show')->names('admin.actas');
 
-Route::resource('userjun',UserjunController::class)->names('admin.userjun');
+Route::resource('userjun',UserjunController::class)->except('show')->names('admin.userjun');
 
-Route::resource('certificados',CertificadosController::class)->names('admin.certificados');
+Route::resource('certificados',CertificadosController::class)->except('show')->names('admin.certificados');
+
+Route::resource('comisions',ComisionController::class)->except('show')->names('admin.comisions');
+
 
 Route::get('admin/juntas/informe',[JuntaController::class, 'informe'])->name('admin.juntas.informe');
 Route::post('admin/juntas/generarinforme',[JuntaController::class, 'generar_informe'])->name('admin.juntas.generar');

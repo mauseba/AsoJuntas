@@ -9,7 +9,7 @@ class Acta extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['url','evento_id'];
+    protected $fillable = ['url','url2','evento_id'];
 
 
     //Relacion uno a muchos inversa

@@ -39,17 +39,34 @@
                     @enderror
                 </div>
 
-                <div class="form-group">
-                    {!! Form::label('url', 'Acta de reunion:') !!}
-                    {!! Form::file('url', ['class' => 'form-control-file', 'accept' => '.pdf']) !!}
-            
-                    @error('url')
-                        <span class="text-danger">{{$message}}</span>
-                    @enderror
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            {!! Form::label('url', 'Acta de reunion:') !!}
+                            {!! Form::file('url', ['class' => 'form-control-file', 'accept' => '.pdf']) !!}
+                    
+                            @error('url')
+                                <span class="text-danger">{{$message}}</span>
+                            @enderror
+                        <p class="text-danger text-small">*El archivo a subir debe ser tipo .pdf y no debe ser mayor a 512 kb </p>
+
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            {!! Form::label('url2', 'Asistencia al evento:') !!}
+                            {!! Form::file('url2', ['class' => 'form-control-file', 'accept' => '.pdf']) !!}
+                    
+                            @error('url2')
+                                <span class="text-danger">{{$message}}</span>
+                            @enderror
+                        <p class="text-danger text-small">*El archivo a subir debe ser tipo .pdf y no debe ser mayor a 512 kb </p>
+
+                        </div>
+                    </div>
                 </div>
-            
         
-                {!! Form::submit('subir acta', ['class' => 'btn btn-primary']) !!}
+                {!! Form::submit('subir documentos/s', ['class' => 'btn btn-primary']) !!}
         {!! Form::close() !!}
     </div>
 </div>

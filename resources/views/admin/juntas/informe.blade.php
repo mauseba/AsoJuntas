@@ -19,6 +19,7 @@
                   <input type="radio" id="pdf" name="opcion" value="1">
                   <label for="pdf">PDF</label><br>
               </div>
+              
 
               <div class="row" id="fecha" style="display:none">
                 <div class="col">

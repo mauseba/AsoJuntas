@@ -108,6 +108,5 @@
                 <small class="text-danger">{{$message}}</small>
             @enderror
         </div>
-        {!! Form::submit('Crear publicacion', ['class' => 'btn btn-primary']) !!}
     </div>
 </div>
