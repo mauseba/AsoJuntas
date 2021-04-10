@@ -66,7 +66,7 @@
                     </div>
                 </div>
         
-                {!! Form::submit('subir documentos/s', ['class' => 'btn btn-primary']) !!}
+                {!! Form::submit('Editar documentos/s', ['class' => 'btn btn-primary']) !!}
         {!! Form::close() !!}
     </div>
 </div>

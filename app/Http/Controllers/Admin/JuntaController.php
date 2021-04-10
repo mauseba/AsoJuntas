@@ -54,6 +54,7 @@ class JuntaController extends Controller
                 'Direccion' => 'required',
                 'Nombre' => 'required|unique:juntas',
                 'Correo' => 'required|email',
+                'Resolucion' => 'numeric|unique:juntas',
                 'D_Recibopago'=> 'required|mimes:pdf|max:512',
                 'D_NIT' => 'required|mimes:pdf|max:512',
                 'D_Resolucion' => 'required|mimes:pdf|max:512'
@@ -109,6 +110,7 @@ class JuntaController extends Controller
             'Direccion' => 'required',
             'Nombre' => 'required|unique:juntas,Nombre,'.$junta->id,
             'Correo' => 'required|email',
+            'Resolucion' => 'numeric|unique:juntas,Resolucion,'.$junta->id,
             'D_Recibopago'=> 'mimes:pdf|max:512',
             'D_NIT' => 'mimes:pdf|max:512',
             'D_Resolucion' => 'mimes:pdf|max:512',

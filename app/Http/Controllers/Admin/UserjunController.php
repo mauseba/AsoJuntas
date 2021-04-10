@@ -60,7 +60,7 @@ class UserjunController extends Controller
     public function store(Request $request)
     {
     /*$request->validate([
-            'nombre'  => 'required|array',
+            'nombre[]'  => 'required|array',
             'Tip_identificacion[]' => 'required',
             'Num_identificacion[]'=>'numeric|required|unique:userjun|digits_between:7,11',
             'Num_contacto[]'=> 'numeric|required',
@@ -122,8 +122,6 @@ class UserjunController extends Controller
                 ['Cargo',$rol],
                 ['junta_id',$junta]
             ])->get();
-
-
 
         if (count($validate) == 0 || $rol == "afiliado" || $cargo == $rol){
             return true;

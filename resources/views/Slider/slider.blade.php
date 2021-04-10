@@ -1,12 +1,4 @@
-<html>
-<head>
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css">
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
-
-    <script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-</head>
-<body>
+<div>
     <div class="w-4/5 mx-auto my-5 bg-white">
         <div id="slider" class="swiper-container w-full">
             <div class="swiper-wrapper">
@@ -24,10 +16,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class=" swiper-slide bg-cover bg-center shadow-lg object-fill" style="background-image:url(imagenes/foto1.jpg)">
+                    <div class=" swiper-slide bg-cover bg-center shadow-lg object-fill" style="background-image:url({{asset('imagenes/foto1.jpg')}})">
                         <div class="container mx-auto px-6 md:px-20 py-6">
                             <div class="w-full  md:w-1/2">
-                                <div class="md:border bg-yellow-300 bg-opacity-75 border-gray-100 md:p-10">
+                                <div class="md:border bg-yellow-300 bg-opacity-75 border-gray-100 md:p-10 h-auto">
                                     <h3 class="text-5xl leading-tight text-white" style="font-family: Niconne, cursive;">Bienvenido a</h3>
                                     <h2 class="font-bold leading-tight text-6xl text-white">Asojuntas</h2>
                                     <p class="text-xl mt-10 font-light text-white">Asociacion de Juntas de accion comunal del municipio de Algeciras.
@@ -72,4 +64,4 @@
         },
         })
   </script>
-</body>
+</div>

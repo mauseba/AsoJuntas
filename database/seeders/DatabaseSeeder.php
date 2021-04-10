@@ -9,6 +9,7 @@ use App\Models\Tag;
 use App\Models\UserJun;
 use Illuminate\Database\Seeder;
 use App\Models\Comision;
+use App\Models\Psuscripcion;
 
 use Illuminate\Support\Facades\Storage;
 
@@ -43,6 +44,7 @@ class DatabaseSeeder extends Seeder
         UserJun::factory(40)->create();
         $this->call(EventoSeeder::class);
         //Acta::factory(30)->create();
+        Psuscripcion::factory(10)->create();
 
     }
 }

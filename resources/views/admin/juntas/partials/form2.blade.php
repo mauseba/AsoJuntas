@@ -38,17 +38,30 @@
     @enderror
 
 </div>
-
-<div class="form-group">
-    {!! Form::label('Correo', 'Correo:') !!}
-    {!! Form::text('Correo', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el correo de la junta ']) !!}
-
-    @error('Correo')
-        <small class="text-danger">{{$message}}</small>
-    @enderror
-
+<div class="row">
+    <div class="col">
+        <div class="form-group">
+            {!! Form::label('Correo', 'Correo:') !!}
+            {!! Form::text('Correo', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el correo de la junta ']) !!}
+        
+            @error('Correo')
+                <small class="text-danger">{{$message}}</small>
+            @enderror
+        
+        </div>
+    </div>
+    <div class="col">
+        <div class="form-group">
+            {!! Form::label('Resolucion', 'Resolucion:') !!}
+            {!! Form::text('Resolucion', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el numero de resolucion de la junta ']) !!}
+        
+            @error('Resolucion')
+                <small class="text-danger">{{$message}}</small>
+            @enderror
+        
+        </div>
+    </div>
 </div>
-
 
 <div class="row mb-3">
     <div class="col">

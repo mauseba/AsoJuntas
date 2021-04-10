@@ -27,6 +27,7 @@ class JuntaFactory extends Factory
             'Direccion' => $this->faker->streetAddress(),
             'Nombre' => $this->faker->state(),
             'Correo' => $this->faker->unique()->email,
+            'Resolucion' => $this->faker->unique()->numberBetween($min = 1000, $max = 9000),
             'D_Recibopago'=> $this->faker->url(),
             'D_NIT'=> $this->faker->url(),
             'D_Resolucion'=> $this->faker->url(),

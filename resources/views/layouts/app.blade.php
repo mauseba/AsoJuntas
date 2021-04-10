@@ -13,12 +13,17 @@
         <!-- Styles -->
         @livewireStyles
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+        <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css">
+        <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+
         
 
         <!-- Scripts -->
         @livewireScripts
         <script src="{{ mix('js/app.js') }}"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
+        <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
         
         
         
@@ -29,7 +34,6 @@
    
         @livewire('navigation')
         @include('Slider.slider')
-    
        
         <div class="min-h-screen">
 

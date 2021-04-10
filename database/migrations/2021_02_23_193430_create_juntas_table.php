@@ -20,6 +20,7 @@ class CreateJuntasTable extends Migration
             $table->string('Direccion',50)->nullable();
             $table->string('Nombre', 50);
             $table->string('Correo', 50);
+            $table->string('Resolucion', 50)->nullable();
 
             $table->string('D_Recibopago');
             $table->string('D_NIT');

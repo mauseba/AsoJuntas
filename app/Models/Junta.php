@@ -9,7 +9,7 @@ class Junta extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['FechaC','Nit','Direccion','Nombre','Correo','D_Recibopago','D_NIT','D_Resolucion','status','Observaciones'];
+    protected $fillable = ['FechaC','Nit','Direccion','Nombre','Correo','Resolucion','D_Recibopago','D_NIT','D_Resolucion','status','Observaciones'];
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
@@ -26,7 +26,6 @@ class Junta extends Model
     //relacion muchos a muchos
 
     public function eventos(){
-
         return $this->belongsToMany(Evento::class);
     }
 }

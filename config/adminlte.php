@@ -187,7 +187,7 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => '/',
+    'dashboard_url' => '/index',
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',
@@ -321,9 +321,9 @@ return [
         ['header' => 'PAGOS Y CERTIFICADOS'],
         [
             'text'       => 'Pagos de Juntas A.C',
-            'route'        => 'admin.posts.index',
+            'route'        => 'admin.psuscripcion.index',
             'icon'      => 'fas fa-fw fa-clipboard',
-        // 'can'       => 'admin.posts.index'
+        // 'can'       => 'admin.psuscripcion.index'
         ],
         [
             'text'       => 'Pagos y Certificados de usuarios',
