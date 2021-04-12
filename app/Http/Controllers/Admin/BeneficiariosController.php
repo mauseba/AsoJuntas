@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Censo\Beneficiarios;
-use App\Models\Censo\Barrios;
 use App\Models\Censo\Eps;
+
+use Barryvdh\DomPDF\Facade as PDF;
+
+use App\Models\User;
 
 class BeneficiariosController extends Controller
 {
@@ -17,16 +21,20 @@ class BeneficiariosController extends Controller
         $this->middleware('can:admin.barrios.edit')->only('edit, update');
         $this->middleware('can:admin.barrios.destroy')->only('destroy');
     } */
-   
+
+    
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+    
+
     public function index()
     {
         $eps = Eps::orderBy('name')->get(); // ordenar por nombre
         $beneficiarios   = Beneficiarios::all();           
+        
         return view('admin.beneficiarios.index',compact('beneficiarios','eps'));
     }
 
@@ -48,12 +56,38 @@ class BeneficiariosController extends Controller
      */
     public function store(Request $request)
     {
-        /* $request->validate([
-            
-            
+        $request->validate([
+          
+            'name' => 'required|max:45',         
+            'numero' => 'required|max:10|',
+            'tipo_doc' => 'required|not_in: Tipo Doc',
+            'edad' => 'required|max:3',
+            'genero' =>'required|in:M,F,O',
+            'tipo_salud' =>'required|in:Ninguna,Subsidiado,Contributivo',
+            'salud'=>'required|not_in:EPS',
+            'discap'=>'required|not_in:Discapacidad',
+            'nivel_edu'=>'required|not_in:Nivel Edu',
+              
         ]);
- */
+ 
         $beneficiarios = Beneficiarios::create($request->all());
+
+        $beneficiarios->name = $request->name;
+        if ($request->edad < 18 and $request->edad > 6 ) {
+            $beneficiarios->tipo_doc= "T.I";
+        }elseif($request->edad <= 7) {
+            $beneficiarios->tipo_doc= "R.C";
+        }else{
+            $beneficiarios->tipo_doc = $request->tipo_doc;
+        }
+        $beneficiarios->numero = $request->numero;
+        $beneficiarios->edad = $request->edad;
+        $beneficiarios->genero = $request->genero;
+        $beneficiarios->tipo_salud = $request->tipo_salud;
+        $beneficiarios->salud = $request->salud;
+        $beneficiarios->discap = $request->discap;
+        $beneficiarios->nivel_edu = $request->nivel_edu;
+        // $beneficiarios->user_Id = $user->id;
 
         return redirect()->route('admin.barrios.edit', $beneficiarios)->with('info', 'Barrio creado con éxito!');;
     }
@@ -95,9 +129,15 @@ class BeneficiariosController extends Controller
         
         $request->validate([
           
-            'name' => 'required|max:30',         
-            'numero' => 'required|max:10',
-            'edad' => 'required|max:2',
+            'name' => 'required|max:45',         
+            'numero' => 'required|max:10|',
+            'tipo_doc' => 'required|not_in: Tipo Doc',
+            'edad' => 'required|max:3',
+            'genero' =>'required|in:M,F,O',
+            'tipo_salud' =>'required|in:Ninguna,Subsidiado,Contributivo',
+            'salud'=>'required|not_in:EPS',
+            'discap'=>'required|not_in:Discapacidad',
+            'nivel_edu'=>'required|not_in:Nivel Edu',
               
         ]);
 
@@ -105,7 +145,13 @@ class BeneficiariosController extends Controller
         $beneficiarios= Beneficiarios::findOrFail($id);
 
         $beneficiarios->name = $request->name;
-        $beneficiarios->tipo_doc = $request->tipo_doc;
+        if ($request->edad < 18 and $request->edad > 6 ) {
+            $beneficiarios->tipo_doc= "T.I";
+        }elseif($request->edad <= 7) {
+            $beneficiarios->tipo_doc= "R.C";
+        }else{
+            $beneficiarios->tipo_doc = $request->tipo_doc;
+        }
         $beneficiarios->numero = $request->numero;
         $beneficiarios->edad = $request->edad;
         $beneficiarios->genero = $request->genero;
@@ -113,6 +159,7 @@ class BeneficiariosController extends Controller
         $beneficiarios->salud = $request->salud;
         $beneficiarios->discap = $request->discap;
         $beneficiarios->nivel_edu = $request->nivel_edu;
+        
         
 
         $beneficiarios->save();

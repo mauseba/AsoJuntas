@@ -97,14 +97,14 @@ input[type=number] {
                     </div>
                   </div></td>
                   <td class="text-left py-3 px-4"><input required name="numero" maxlength="10" class="w-full h-10 px-2 text-xs text-gray-700 placeholder-gray-600  rounded-lg " type="number" placeholder="Numero" value="{{old('number')}}" size="20"/></td>
-                  <td class="text-left py-3 px-4"><input required name="edad" maxlength="2"class="w-full h-10 px-2 text-xs text-gray-700 placeholder-gray-600  rounded-lg " type="number" placeholder="Edad" min="1"  max="99"/></td>
+                  <td class="text-left py-3 px-4"><input required name="edad" maxlength="2"class="w-full h-10 px-2 text-xs text-gray-700 placeholder-gray-600  rounded-lg " type="number" placeholder="Edad" min="1"  max="99"/></td>                              
                   <td class="text-left py-3 px-4">
                     <div class="relative inline-block text-gray-700">
                         <select name="genero" class="w-full h-10 pl-3 pr-6 text-xs placeholder-gray-600 border rounded-lg appearance-none focus:shadow-outline">
                           <option hidden> Género </option>
-                          <option>Masculino</option>
-                          <option>Femenino</option>
-                          <option>Otro</option>
+                          <option value="M">Masculino</option>
+                          <option value="F">Femenino</option>
+                          <option value="O">Otro</option>
                         </select>
                         <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
                           <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" fill-rule="evenodd"></path></svg>
@@ -198,6 +198,7 @@ input[type=number] {
             <div class="form-group pt-2">
               <button type="submit" name="insertar" value="Insertar Alumno" class="bg-green-300 hover:bg-green-400 text-green-800 font-bold py-2 px-4 rounded inline-flex items-center">Agregar Beneficiario</button>
               <a class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center" href="{{route('censo.index')}}">Volver</a>
+              
           </div>
               </form>
          

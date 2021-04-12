@@ -1,28 +1,62 @@
-<div class="card">
 
+<div class="card">
+    
+      
     <div class="card-header">
+         
+        
+        
+        
         <div class="row">
             <div class="col">
         <input wire:model="nombre" class="form-control" placeholder="Nombre">
             </div>
             <div class="col">   
-        <input wire:model="documento" class="form-control" placeholder="Documento">
+        
+        <select wire:model="documento" class="form-control text-muted">
+            <option value=""> Tipo Doc </option>
+            <option value="R.C">R.C</option>
+            <option value="T.I">T.I</option>
+            <option value="C.C">C.C</option>
+            <option value="C.E">C.E</option>
+          </select>
             </div>
             <div class="col">   
         <input wire:model="numero" class="form-control" placeholder="Numero">
     </div>
-        <div class="col">   
-        <input wire:model="edad" class="form-control" placeholder="Edad">
+        <div class="col-md-2">   
+            <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="">Rango Edad</span>
+                </div>
+                <input wire:model="edad_max" class="form-control" placeholder="Max" >
+                <input wire:model="edad_min" class="form-control" placeholder="Min" >
+              </div>
+            
+           
     </div>
         <div class="col">   
-        <input wire:model="genero" class="form-control" placeholder="Genero">
+        
+        <select wire:model="genero" class="form-control text-secondary">
+            <option value=""> Género </option>
+            <option value="M">Masculino</option>
+            <option value="F">Femenino</option>
+            <option value="O">Otro</option>
+          </select>
     </div>
         <div class="col">   
-        <input wire:model="afiliacion" class="form-control" placeholder="Afiliacion">
+       
+        <select  wire:model="afiliacion" class="form-control text-secondary">
+            <option value=""> Tipo Afiliacion </option>
+            <option>Ninguna</option>                         
+            <option>Subsidiado</option>
+            <option>Contributivo</option>                       
+             
+          </select>
     </div>
         <div class="col">   
         <input wire:model="eps" class="form-control" placeholder="EPS">
-        {{-- <select name="salud" class="w-full h-10 pl-3 pr-6 text-xs placeholder-gray-600 border rounded-lg appearance-none focus:shadow-outline">
+        {{-- <select name="salud" class="form-control">
                            
             <option>Ninguna</option>
             @foreach ($eps as $entidad)
@@ -33,22 +67,39 @@
           </select> --}}
     </div>
         <div class="col">   
-        <input wire:model="discapacidad" class="form-control" placeholder="Discapacidad">
+        
+        <select wire:model="discapacidad" class="form-control text-secondary">
+            <option value=""> Discapacidad </option>
+            <option>Ninguna</option>
+            <option>Fisica</option>
+            <option>Mental</option>
+            <option>Sensorial</option>
+          </select>
     </div>
         <div class="col">   
-        <input wire:model="edu" class="form-control" placeholder="Nivel Edu">
+        
+        <select wire:model="edu" class="form-control text-secondary">
+            <option value=""> Nivel Edu </option>
+            <option>Ninguna</option>
+            <option>Primaria</option>
+            <option>Secundaria</option>
+            <option>Universidad</option>
+          </select>
     </div>
-
+    <div class="col">   
+    <input wire:model="afiliado" class="form-control" placeholder="ID-Afiliado">
+    </div>
     </div>
 
     @if ($beneficiarios->count())
         
         <div class="card-body">
             <div class="table-responsive">
-            <table class="table table-striped">
+            <table id="beneficiarios"class="table table-striped">
                 <thead>
                     <tr>
-                        <th >ID</th>
+                        
+                        <th >#</th>                     
                         <th >Nombre</th>
                         <th >Tipo_Doc</th>
                         <th >Numero</th>
@@ -57,16 +108,20 @@
                         <th >Afiliacion salud</th>
                         <th >EPS</th>
                         <th >Discapacidad</th>
-                        <th >Nivel Educativo</th>
+                        <th>Nivel Educativo</th>
                         <th >Afiliado</th>
-                        <th colspan="2"></th> 
+                        <th colspan="2">                                                                       
+                            <div>Exportar</div>                                    
+                            <a class="btn btn-danger text-white" wire:click="exportar">PDF</a>
+                            {{-- <a class="btn btn-success  text-white" wire:click="exportarXL" >Excel</a>                                                               --}}
+                         </th> 
                     </tr>
                 </thead>
 
                 <tbody>
                     @foreach ($beneficiarios as $beneficiario)
                         <tr>
-                            <td>{{$beneficiario->id}}</td>                           
+                            <td>{{$loop->iteration}}</td>                                                                                 
                             <td>{{$beneficiario->name}}</td>
                             <td>{{$beneficiario->tipo_doc}}</td>
                             <td>{{$beneficiario->numero}}</td>
@@ -76,7 +131,7 @@
                             <td>{{$beneficiario->salud}}</td>
                             <td>{{$beneficiario->discap}}</td>
                             <td>{{$beneficiario->nivel_edu}}</td>
-                            <td>{{$beneficiario->user_id }}</td>
+                            <td><a href="{{route('admin.users.index')}}">{{$beneficiario->user['id'].'-'.$beneficiario->user['name'] }}</a></td>
 
                             <td width="10px">
                                 {{-- @can('admin.beneficiarios.edit') --}}
@@ -107,3 +162,12 @@
         </div>
     @endif
 </div>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css"></script>
+<script>
+    
+    $(document).ready(function() {
+  $("#beneficiarios").DataTable();
+});
+    </script>

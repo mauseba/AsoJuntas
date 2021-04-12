@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Censo\Censo;
+use App\Models\Censo\Beneficiarios;
+use App\Models\Censo\Barrios;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class CensoController extends Controller
 {
@@ -11,10 +15,15 @@ class CensoController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
-     */
-    public function index()
+     */    
+     public function index()
     {
-        return view('admin.censo.index');
+        
+        $censo = Censo::all();
+        $barrios = Barrios::orderBy('name')->get();// ordenar por nombre
+        $beneficiarios = Beneficiarios::all();
+
+        return view('admin.censo.index',compact('censo','barrios','beneficiarios'));
     }
 
     /**
@@ -44,7 +53,7 @@ class CensoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
         //
     }

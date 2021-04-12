@@ -25,27 +25,25 @@
         </div>
         <div class="bg-white shadow-md rounded px-8 pt-6 pb-8  flex flex-col  ">    
             <div class="w-full px-4 md:px-6 text-xl text-gray-800 leading-normal">                                          
-                <p class="py-6"> 
-                    El censo poblacional permite conocer cuántos somos, dónde vivimos, cómo vivimos y qué características sociales 
-                    y económicas tenemos en común de acuerdo con nuestros lugares de residencia. 
-                </p>
-                <p class=""> 
-                    En la parte superior podrá encontrar las pestañas para poder llenar el formulario del censo, como lo son los <strong>datos básicos </strong> y sus <strong>beneficiarios</strong>.
-                </p>
-            <h3 class="font-bold font-sans break-normal text-green-700 pt-6 pb-2 text-3xl md:text-4xl">Datos Básicos</h3>
+                
+            <h3 class="font-bold   text-green-700  pb-2 text-3xl md:text-4xl">Paso 1: Datos Básicos</h3>
+           
             <p>
                 En esta seccion podrá registrar información personal acerca del afiliado, donde podrá ingresar datos de vivienda, servicios públicos,
                 sisben, entre otros.
             </p>
 
-           <h3 class="font-bold font-sans break-normal text-green-700 pt-6 pb-2 text-3xl md:text-4xl">Beneficiarios</h3>
+           <h3 class="font-bold font-sans break-normal text-green-700 pt-6 pb-2 text-3xl md:text-4xl">Paso 2: Beneficiarios</h3>
             <p>
-                El afiliado tiene el derecho a nombrar uno o varios beneficiarios, quienes normalmente son el cónyuge y los hijos. 
+                El afiliado tiene el derecho a nombrar uno o varios beneficiarios, quienes normalmente son el cónyuge y los hijos(menores de 14 años). 
                 Ellos podrán disfrutar, al igual que todos los asociados, de los servicios de la institución.
             </p>
-             
 
-
+            <h3 class="font-bold font-sans break-normal text-green-700 pt-6 pb-2 text-3xl md:text-4xl">Paso 3: Guarda tus datos</h3>
+            <p class="pb-4">
+              Al completar el proceso del censo puedes exportar tus datos ingresados a traves de un PDF y conversarlos.
+            </p>
+            <a class="bg-green-300   hover:bg-green-400 text-green-800 font-bold py-2 px-4 rounded inline-flex items-center" href="{{route('censo.pdf')}}">Exportar PDF</a>
 
       {{--       @if ($verificacion = $user)
             <a href="censo/{{ $censo[0]->id }}/edit" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Actualizar Censo</a>              

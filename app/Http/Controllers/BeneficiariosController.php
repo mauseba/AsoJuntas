@@ -54,24 +54,34 @@ class BeneficiariosController extends Controller
         //validate the role fields
         $request->validate([
           
-            'name' => 'required|regex:[a-zA-Z ]|max:45',         
-            'numero' => 'required|max:10',
+            'name' => 'required|max:45',         
+            'numero' => 'required|max:10|',
+            'tipo_doc' => 'required|not_in: Tipo Doc',
             'edad' => 'required|max:3',
-            'genero' =>'required|in:Masculino,Femenino,Otro',
+            'genero' =>'required|in:M,F,O',
             'tipo_salud' =>'required|in:Ninguna,Subsidiado,Contributivo',
             'salud'=>'required|not_in:EPS',
             'discap'=>'required|not_in:Discapacidad',
             'nivel_edu'=>'required|not_in:Nivel Edu',
-
+              
         ]);
 
         $user = auth()->user(); 
         $beneficiarios= new Beneficiarios();
 
         $beneficiarios->name = $request->name;
-        $beneficiarios->tipo_doc = $request->tipo_doc;
+        
         $beneficiarios->numero = $request->numero;
         $beneficiarios->edad = $request->edad;
+
+        if ($request->edad < 18 and $request->edad > 7 ) {
+            $beneficiarios->tipo_doc= "T.I";
+        }elseif($request->edad <= 7) {
+            $beneficiarios->tipo_doc= "R.C";
+        }else{
+            $beneficiarios->tipo_doc = $request->tipo_doc;
+        }
+        
         $beneficiarios->genero = $request->genero;
         $beneficiarios->tipo_salud = $request->tipo_salud;
         $beneficiarios->salud = $request->salud;
@@ -126,10 +136,11 @@ class BeneficiariosController extends Controller
     {
         $request->validate([
           
-            'name' => 'required|regex:[a-zA-Z ]|max:45',         
-            'numero' => 'required|max:10',
+            'name' => 'required|max:45',         
+            'numero' => 'required|max:10|',
+            'tipo_doc' => 'required|not_in: Tipo Doc',
             'edad' => 'required|max:3',
-            'genero' =>'required|in:Masculino,Femenino,Otro',
+            'genero' =>'required|in:M,F,O',
             'tipo_salud' =>'required|in:Ninguna,Subsidiado,Contributivo',
             'salud'=>'required|not_in:EPS',
             'discap'=>'required|not_in:Discapacidad',
@@ -141,7 +152,13 @@ class BeneficiariosController extends Controller
         $beneficiarios= Beneficiarios::findOrFail($beneficiarios->id);
 
         $beneficiarios->name = $request->name;
-        $beneficiarios->tipo_doc = $request->tipo_doc;
+        if ($request->edad < 18 and $request->edad > 6 ) {
+            $beneficiarios->tipo_doc= "T.I";
+        }elseif($request->edad <= 7) {
+            $beneficiarios->tipo_doc= "R.C";
+        }else{
+            $beneficiarios->tipo_doc = $request->tipo_doc;
+        }
         $beneficiarios->numero = $request->numero;
         $beneficiarios->edad = $request->edad;
         $beneficiarios->genero = $request->genero;

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\View;
+use Barryvdh\DomPDF\Facade as PDF;
 
 use App\Models\Censo\Barrios;
 use App\Models\Censo\Beneficiarios;
@@ -11,6 +12,18 @@ use App\Models\Censo\Censo;
 
 class CensoController extends Controller
 {
+    
+    public function exportPdf() // Exportar Informe Usuario Censo 
+    {
+        set_time_limit(300);
+        $user = auth()->user()->id; 
+        $censo = Censo::where('user_id','=',$user)->get();
+        $beneficiarios = Beneficiarios::where('user_id','=',$user)->get();
+
+        $pdf = PDF::loadView('censo.pdf',compact('censo','beneficiarios'))->setPaper('a4', 'landscape');
+        
+        return $pdf->stream('Micenso.pdf');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -18,13 +31,9 @@ class CensoController extends Controller
      */
     public function index()
     {
-        $user = auth()->user()->id; 
-        
-        
-        
+        $user = auth()->user()->id;                         
         $censo = Censo::where('user_id','=',$user)->get();
-        
-       
+               
         return view('censo.index',compact('censo','user',));
     }
 
@@ -36,13 +45,10 @@ class CensoController extends Controller
     public function create()
     {     
         $user = auth()->user()->id; 
-       
-     
-      $barrios = Barrios::orderBy('name')->get();// ordenar por nombre
-       
+            
+      $barrios = Barrios::orderBy('name')->get();// ordenar por nombre       
       $censo = Censo::where('user_id','=',$user)->get(); //llama al formulario del usuario autenticado
-      if ( $censo->count() === 1 ) {// do your magic here
-
+      if ( $censo->count() === 1 ) {
         return redirect()->route('censo.index');
     } 
 
@@ -120,7 +126,11 @@ class CensoController extends Controller
      */
     public function show(Censo $censo)
     {
-        //
+        $user = auth()->user()->id; 
+        $beneficiarios = Beneficiarios::where('user_id','=',$user)->get();
+        $censo = Censo::where('user_id','=',$user)->get(); //llama al formulario del usuario autenticado
+
+       return view('censo.show', compact('censo','beneficiarios'));
     }
 
     /**

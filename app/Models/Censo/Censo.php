@@ -13,6 +13,6 @@ class Censo extends Model
     //protected $fillable = ['barrio','direccion','tipo_vivienda','energia','gas','agua','alcantarilla','escrituras','sisben','sub_vivienda','piso','techo','pañete','baños','baño_nuevo','vivienda_nueva'];
     public function user()
      {
-        return $this->hasOne('App\Models\User','user_Id');
+        return $this->belongsTo('App\Models\User','user_id');
     }
 }
