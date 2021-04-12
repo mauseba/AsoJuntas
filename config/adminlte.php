@@ -65,11 +65,11 @@ return [
     */
 
     'usermenu_enabled' => true,
-    'usermenu_header' => false,
+    'usermenu_header' => true,
     'usermenu_header_class' => 'bg-primary',
-    'usermenu_image' => false,
-    'usermenu_desc' => false,
-    'usermenu_profile_url' => false,
+    'usermenu_image' => true,
+    'usermenu_desc' => true,
+    'usermenu_profile_url' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -86,7 +86,7 @@ return [
     'layout_topnav' => null,
     'layout_boxed' => null,
     'layout_fixed_sidebar' => true,
-    'layout_fixed_navbar' => null,
+    'layout_fixed_navbar' => true,
     'layout_fixed_footer' => null,
 
     /*
@@ -121,12 +121,12 @@ return [
     */
 
     'classes_body' => '',
-    'classes_brand' => '',
+    'classes_brand' => 'bg-green',
     'classes_brand_text' => '',
     'classes_content_wrapper' => '',
     'classes_content_header' => '',
     'classes_content' => '',
-    'classes_sidebar' => 'sidebar-dark-primary elevation-4',
+    'classes_sidebar' => 'sidebar-dark-yellow elevation-4',
     'classes_sidebar_nav' => '',
     'classes_topnav' => 'navbar-white navbar-light',
     'classes_topnav_nav' => 'navbar-expand',
@@ -145,7 +145,7 @@ return [
     */
 
     'sidebar_mini' => true,
-    'sidebar_collapse' => false,
+    'sidebar_collapse' => true,
     'sidebar_collapse_auto_size' => false,
     'sidebar_collapse_remember' => false,
     'sidebar_collapse_remember_no_transition' => true,
@@ -187,7 +187,7 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => '/',
+    'dashboard_url' => '/index',
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',
@@ -226,8 +226,8 @@ return [
     'menu' => [
         [
             'text' => 'search',
-            'search' => true,
-            'topnav' => true,
+            'search' => false,
+            'topnav' => false,
         ],
         [
             'text' => 'blog',
@@ -241,11 +241,61 @@ return [
             'can'       => 'admin.home'
         ],
         [
+            'text'        => 'Gestion de juntas',
+            'icon'        => 'fas fa-people-arrows',
+            'submenu'  =>[
+                [
+                    'text'        => 'Juntas',
+                    'route'         => 'admin.juntas.index',
+                    'can'       => 'admin.juntas.index',
+                ],
+                [
+                    'text'        => 'Afiliados de juntas',
+                    'route'         => 'admin.userjun.index',
+                    'can'       => 'admin.userjun.index',
+                ],
+                [
+                    'text'        => 'Comisiones de afiliados',
+                    'route'         => 'admin.comisions.index',
+                    'can'       => 'admin.comisions.index',
+                ]
+
+
+            ]
+           
+        ],
+        [
+            'text'        => 'Gestion de Eventos',
+            'icon'        => 'fas fa-calendar-alt',
+            'submenu'  =>[
+                [
+                    'text'        => 'Eventos',
+                    'route'         => 'admin.eventos.index',
+                    'can'       => 'admin.eventos.index'
+                ],
+                [
+                    'text'        => 'Subir acta y asistencia',
+                    'route'         => 'admin.actas.index',
+                    //'can'       => 'admin.juntas.index',
+                ]
+
+            ]
+           
+        ],
+        [
             'text'        => 'Usuarios',
             'route'         => 'admin.users.index',
             'icon'        => 'fas fa-users fa-fw',
             'can'       => 'admin.users.index'
         ],
+        [
+            'text'        => 'Lista de roles',
+            'route'         => 'admin.roles.index',
+            'icon'        => 'fas fa-users-cog fa-fw',
+            //'can'       => 'admin.users.index'
+        ],
+
+        ['header' => 'OPCIONES DE PAGINA PRINCIPAL'],
         
         [
             'text' => 'Categorías',
@@ -301,20 +351,27 @@ return [
         ],
         ['header' => 'OPCIONES DE PAGINA PRINCIPAL'],
         [
-            'text'       => 'Lista de post',
+            'text'       => 'Lista de Publicaciones',
             'route'        => 'admin.posts.index',
             'icon'      => 'fas fa-fw fa-clipboard',
             'can'       => 'admin.posts.index'
         ],
+        ['header' => 'PAGOS Y CERTIFICADOS'],
         [
-            'text'       => 'Crear nuevo post',
-            'route'        => 'admin.posts.create',
-            'icon'      => 'fas fa-fw fa-file',
-            'can'       => 'admin.posts.create'
-
+            'text'       => 'Pagos de Juntas A.C',
+            'route'        => 'admin.psuscripcion.index',
+            'icon'      => 'fas fa-fw fa-clipboard',
+        // 'can'       => 'admin.psuscripcion.index'
+        ],
+        [
+            'text'       => 'Pagos y Certificados de usuarios',
+            'route'        => 'admin.posts.index',
+            'icon'      => 'fas fa-fw fa-clipboard',
+        // 'can'       => 'admin.posts.index'
         ],
        
     ],
+    
 
     /*
     |--------------------------------------------------------------------------
@@ -397,7 +454,7 @@ return [
             ],
         ],
         'Sweetalert2' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',

@@ -11,9 +11,19 @@
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
 @stop
 
 @section('js')
-    <script> console.log('Hi!'); </script>
+
+@if (session('info'))
+    <script>
+        var session = '{{session('info')}}';
+        Swal.fire(
+        'Operacion Completada',
+        session ,
+        'success'
+        )
+    </script>
+@endif
+
 @stop

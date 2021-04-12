@@ -21,7 +21,6 @@ class UserController extends Controller
         return view('admin.users.index');
     }
 
-
     public function edit(User $user)
     {
         $roles = Role::all();
@@ -36,5 +35,4 @@ class UserController extends Controller
         return redirect()->route('admin.users.edit', $user)->with('info','se asigno los roles correctamente');
 
     }
-
 }
