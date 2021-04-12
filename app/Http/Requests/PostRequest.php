@@ -42,7 +42,7 @@ class PostRequest extends FormRequest
                 'category_id' => 'required',
                 'tags' => 'required',
                 'extract' => 'required',
-                'body' => 'required'
+                'body' => ''
             ]);
         }
 

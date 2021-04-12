@@ -2,31 +2,32 @@
     <div class="card">
 
         <div class="card-header">
+            <label for="">Buscar:</label>
             <input wire:model="search" class="form-control " placeholder="Ingrese el nombre o correo de un usuario">
         </div>
      
         @if ($users->count())
 
-            <div class="card-body">
+            <div class="card-body table-responsive">
                 <table class="table table-striped">
                     <thead>
-                        <tr>
+                        <tr align="center">
                             <th>ID</th>
                             <th>Nombre</th>
                             <th>Email</th>
-                            <th colspan="2"></th>
+                            <th>Acciones</th>
                         </tr>
                     </thead>
 
                     <tbody>
                         @foreach ($users as $user)
-                            <tr>
+                            <tr align="center">
                                 <td>{{$user->id}}</td>
                                 <td>{{$user->name}}</td>
                                 <td>{{$user->email}}</td>
-                                <td with="10px">
+                                <td>
                                     @can('admin.users.edit')
-                                        <a class="btn btn-primary btn-sm" href="{{route('admin.users.edit', $user)}}">Editar</a>
+                                        <a class="btn btn-primary btn-sm" href="{{route('admin.users.edit', $user)}}">Asignar Rol</a>
                                     @endcan
                                 </td>
                             </tr>

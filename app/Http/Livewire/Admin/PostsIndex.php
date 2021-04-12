@@ -23,7 +23,6 @@ class PostsIndex extends Component
 
     public function render()
     {
-        //Curso de programación en php avanzado
         $posts = Post::where('user_id', auth()->user()->id)
                     ->where('name', 'LIKE','%' . $this->search . '%')
                     ->latest('id')
