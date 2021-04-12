@@ -56,6 +56,17 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'admin.posts.destroy',
                              'description' => 'Eliminar publicacion'])->syncRoles([$role1, $role2]);
 
+
+        Permission::create(['name' => 'admin.eps.index'])->syncRoles([$role1]);
+        Permission::create(['name' => 'admin.eps.create'])->syncRoles([$role1]);
+        Permission::create(['name' => 'admin.eps.edit'])->syncRoles([$role1]);
+        Permission::create(['name' => 'admin.eps.destroy'])->syncRoles([$role1]);
+
+        Permission::create(['name' => 'admin.barrios.index'])->syncRoles([$role1]);
+        Permission::create(['name' => 'admin.barrios.create'])->syncRoles([$role1]);
+        Permission::create(['name' => 'admin.barrios.edit'])->syncRoles([$role1]);
+        Permission::create(['name' => 'admin.barrios.destroy'])->syncRoles([$role1]);
+
         Permission::create(['name' => 'admin.eventos.index',
                              'description' => 'Ver Calendario'])->syncRoles([$role1]);
         Permission::create(['name' => 'admin.eventos.create',
@@ -92,4 +103,5 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'admin.comisions.destroy',
                                     'description' => 'Eliminar Comisiones'])->syncRoles([$role1]);  
 }
+
 }
