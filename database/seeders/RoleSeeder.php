@@ -56,6 +56,7 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'admin.posts.destroy',
                              'description' => 'Eliminar publicacion'])->syncRoles([$role1, $role2]);
 
+
         Permission::create(['name' => 'admin.eps.index'])->syncRoles([$role1]);
         Permission::create(['name' => 'admin.eps.create'])->syncRoles([$role1]);
         Permission::create(['name' => 'admin.eps.edit'])->syncRoles([$role1]);
@@ -105,4 +106,6 @@ class RoleSeeder extends Seeder
 
     }
 }
+
+
 
