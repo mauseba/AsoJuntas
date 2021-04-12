@@ -25,6 +25,8 @@ Route::resource('censo', CensoController::class)->middleware('auth');;
 
 // Route::resource('beneficiarios', [BeneficiariosController::class]);
 
+Route::get('censo-pdf',[CensoController::class, 'exportPdf'])->name('censo.pdf');
+
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
