@@ -8,6 +8,11 @@ use App\Http\Controllers\Admin\EventoController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\EpsController;
+use App\Http\Controllers\Admin\BarriosController;
+use App\Http\Controllers\Admin\CensoController;
+use App\Http\Controllers\Admin\BeneficiariosController;
+use App\Http\Controllers\BeneficiariosController as ControllersBeneficiariosController;
 use App\Http\Controllers\Admin\JuntaController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserjunController;
@@ -26,6 +31,14 @@ Route::resource('categories', CategoryController::class)->except('show')->names(
 Route::resource('tags', TagController::class)->except('show')->names('admin.tags');
 
 Route::resource('posts', PostController::class)->except('show')->names('admin.posts');
+
+Route::resource('eps', EpsController::class)->except('show')->names('admin.eps');
+
+Route::resource('barrios', BarriosController::class)->except('show')->names('admin.barrios');
+
+Route::resource('censo', CensoController::class)->except('show')->names('admin.censo');
+
+Route::resource('beneficiarios', BeneficiariosController::class)->except('show')->names('admin.beneficiarios');
 
 Route::resource('juntas', JuntaController::class)->except('show')->names('admin.juntas');
 
