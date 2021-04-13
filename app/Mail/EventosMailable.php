@@ -7,11 +7,10 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class EventosMailable extends Mailable implements ShouldQueue
+class EventosMailable extends Mailable
 {
     use Queueable, SerializesModels;
     
-    public $txtsubject;
     public $txtDatos;
 
     /**
@@ -19,10 +18,9 @@ class EventosMailable extends Mailable implements ShouldQueue
      *
      * @return void
      */
-    public function __construct($subject,$Datos)
+    public function __construct($Datos)
     {
         $this->txtDatos = $Datos;
-        $this->txtsubject = $subject;
     }
 
     /**

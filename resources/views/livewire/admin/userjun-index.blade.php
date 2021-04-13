@@ -3,7 +3,7 @@
 
     <div class="card-header">
         <label for="">Buscar:</label>
-        <input wire:model="search" class="form-control" placeholder="Ingrese el nombre o documento de un afiliados">
+        <input wire:model="search" class="form-control" placeholder="Puede ingresar documento o junta de una afiliado">
     </div>
 
     @if ($userj->count())

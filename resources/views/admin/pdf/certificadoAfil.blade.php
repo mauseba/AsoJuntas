@@ -35,13 +35,13 @@
             Certifica Que: 
         </h4><br>
         <p style="text-align:justify; font-size: 13pt;">
-            El (la) señor(a) <strong  style="text-transform:uppercase;" >{{$datosu['nombre']}}</strong>  identificado(a) con {{$datosu['Tdocumento']}}  N° {{$datosu['Documento']}} expedida en {{$datosu['Expedido']}}, verificándose y 
-            encontrándose que se encuentra en la base de datos identificado con el numero {{$datosu['ID']}}, y con reconocimiento desde gobernación del 
+            El (la) señor(a) <strong  style="text-transform:uppercase;" >{{$datosu['nombre']}}</strong>  identificado(a) con {{$datosu['Tdocumento']}}  N° {{$datosu['Documento']}} expedida en {{$datosu['Expedido']}}, verificado
+            que se encuentra en la base de datos identificado con el numero {{$datosu['ID']}}, y con reconocimiento de la gobernación del 
             Huila, bajo código de registro n°0031 a fecha  de 31-01-2017. <br><br>
 
 
             Demostrando siempre ser una persona amable, honesta, trabajadora   y cumplidora con los deberes de la comunidad. <br><br>
-            Dada en Algeciras-Huila, el día {{$date->format('d')}} del mes {{$date->format('m')}} del {{$date->format('Y')}} a solicitud del    interesado(a).  <br><br> <br>
+            Dada en Algeciras-Huila, el día {{$date->format('d')}} del mes {{$date->format('m')}} del {{$date->format('Y')}} a solicitud del  interesado(a).  <br><br> <br>
 
             Firma En constancia, 
         </p>

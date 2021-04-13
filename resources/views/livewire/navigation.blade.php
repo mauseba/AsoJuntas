@@ -143,6 +143,7 @@
                 <a href="{{ route('posts.category', $category) }}"
                     class="text-gray-300 hover:bg-yellow-500 hover:text-white block px-3 py-2 rounded-md text-sm font-medium">{{ $category->name }}</a>
             @endforeach
+                
         </div>
     </div>
 </nav>

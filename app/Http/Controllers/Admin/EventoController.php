@@ -62,6 +62,7 @@ class EventoController extends Controller
 
         $datosEvento= request()->except('opcion','_token','_method');
         
+        
 
         $evento=Evento::create($datosEvento);
 
@@ -89,8 +90,8 @@ class EventoController extends Controller
 
            foreach($correo as $users){
     
-                Mail::to($users)->send(new EventosMailable('',$datosEvento));
-    
+                Mail::to($users)->send(new EventosMailable($datosEvento));
+
             }
         }
        
@@ -177,9 +178,7 @@ class EventoController extends Controller
             }
 
            foreach($correo as $users){
-    
-                Mail::to($users)->send(new EventosMailable('',$datosEvento));
-    
+                Mail::to($users)->send(new EventosMailable($datosEvento));
             }
             
         }

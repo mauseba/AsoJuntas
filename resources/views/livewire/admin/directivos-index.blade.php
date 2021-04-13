@@ -2,7 +2,7 @@
 
     <div class="card-header">
         <label for="">Buscar:</label>
-        <input wire:model="search" class="form-control" placeholder="Ingrese el nombre de un Afiliado">
+        <input wire:model="search" class="form-control" placeholder="Ingrese el Nombre o la Junta de un Afiliado">
     </div>
 
     @if ($userj->count())

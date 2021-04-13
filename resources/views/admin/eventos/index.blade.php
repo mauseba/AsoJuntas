@@ -146,7 +146,6 @@
                 data: objEvento,
                 success:function(msg){
                     $('#evento_modal').modal('hide'); 
-                    console.log(msg);
                     Swal.fire(
                     'Operacion Completada',
                     'El evento se creo o modifico con exito' ,
@@ -173,7 +172,7 @@
             $('#txtHoraFinal').val("");
             $("#ddlJuntas").val('default').selectpicker("refresh");
             $('#txtAsunto').val("");
-            $('#txtDescripcion').val("");
+            $('#txtDescripcion').summernote("reset")
 
         }
 

@@ -83,9 +83,6 @@
     </div>
     <div
         class="max-w-screen-xl mx-auto flex flex-col md:flex-row justify-between items-center space-y-4 mt-8 lg:mt-12 border-t-2 border-gray-300 pt-8">
-        <nav class="flex flex-wrap justify-center space-x-6">
-            <a href="#" class="font-normal text-sm hover:text-gray-400 mb-2">Cookie settings</a>
-        </nav>
         <p class="text-sm text-center md:text-right">&copy;2021 Asojunta. All rights reserved. | All rights reserved</p>
     </div>
 </footer>

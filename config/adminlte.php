@@ -322,12 +322,12 @@ return [
         [
             'text'       => 'Pagos de Juntas A.C',
             'route'        => 'admin.psuscripcion.index',
-            'icon'      => 'fas fa-fw fa-clipboard',
+            'icon'      => 'fas fa-cash-register',
         // 'can'       => 'admin.psuscripcion.index'
         ],
         [
             'text'       => 'Pagos y Certificados de usuarios',
-            'route'        => 'admin.posts.index',
+            'route'        => 'admin.psuscripcion.index',
             'icon'      => 'fas fa-fw fa-clipboard',
         // 'can'       => 'admin.posts.index'
         ],
