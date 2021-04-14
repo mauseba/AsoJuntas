@@ -57,15 +57,23 @@ class RoleSeeder extends Seeder
                              'description' => 'Eliminar publicacion'])->syncRoles([$role1, $role2]);
 
 
-        Permission::create(['name' => 'admin.eps.index'])->syncRoles([$role1]);
-        Permission::create(['name' => 'admin.eps.create'])->syncRoles([$role1]);
-        Permission::create(['name' => 'admin.eps.edit'])->syncRoles([$role1]);
-        Permission::create(['name' => 'admin.eps.destroy'])->syncRoles([$role1]);
+        Permission::create(['name' => 'admin.eps.index',
+                            'description' => 'Ver lista de eps'])->syncRoles([$role1]);
+        Permission::create(['name' => 'admin.eps.create',
+                            'description' => 'Crear eps'])->syncRoles([$role1]);
+        Permission::create(['name' => 'admin.eps.edit',
+                            'description' => 'Editar eps'])->syncRoles([$role1]);
+        Permission::create(['name' => 'admin.eps.destroy',
+                            'description' => 'Eliminar eps'])->syncRoles([$role1]);
 
-        Permission::create(['name' => 'admin.barrios.index'])->syncRoles([$role1]);
-        Permission::create(['name' => 'admin.barrios.create'])->syncRoles([$role1]);
-        Permission::create(['name' => 'admin.barrios.edit'])->syncRoles([$role1]);
-        Permission::create(['name' => 'admin.barrios.destroy'])->syncRoles([$role1]);
+        Permission::create(['name' => 'admin.barrios.index',
+                            'description' => 'Ver lista de barrios'])->syncRoles([$role1]);
+        Permission::create(['name' => 'admin.barrios.create',
+                            'description' => 'Crear barrios'])->syncRoles([$role1]);
+        Permission::create(['name' => 'admin.barrios.edit',
+                            'description' => 'Editar barrio'])->syncRoles([$role1]);
+        Permission::create(['name' => 'admin.barrios.destroy',
+                            'description' => 'Eliminar barrio'])->syncRoles([$role1]);
 
         Permission::create(['name' => 'admin.eventos.index',
                              'description' => 'Ver Calendario'])->syncRoles([$role1]);

@@ -20,7 +20,6 @@
                         <label for="pdf">PDF</label><br>
                     </div>
 
-
                     <div class="row" id="fecha" style="display:none">
                         <div class="col">
                             <label for="">Fecha inicial: </label>

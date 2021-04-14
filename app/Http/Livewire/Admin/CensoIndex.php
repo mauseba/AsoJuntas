@@ -86,7 +86,7 @@ class CensoIndex extends Component
 
         $beneficiarios = Beneficiarios::all();
        
-       $pdf = PDF::loadView('pdf.censo',compact('censo','beneficiarios'))->setPaper('a4', 'landscape')->output();                
-       return response()->streamDownload( fn() => print($pdf),"Informe_Censo_DatosBasicos.pdf");
+       $pdf = PDF::loadView('pdf.censo',compact('censo','beneficiarios'))->setPaper('letter', 'landscape')->stream('informeBeneficiarios.pdf');                
+       return $pdf;
     }
 } 

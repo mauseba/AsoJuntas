@@ -34,7 +34,7 @@ class UserJunFactory extends Factory
             'Num_contacto'=> $this->faker->phoneNumber(),
             'Niv_educacion'=> $this->faker->word(20),
             'Correo'=> $this->faker->unique()->email,
-            'Cargo'=> $this->faker->randomElement(['afliado','presidente','vicepresidente','tesorero','secretario']),
+            'Cargo'=> $this->faker->randomElement(['afiliado','presidente','vicepresidente','tesorero','secretario']),
             'junta_id'=> Junta::all()->random()->id,
             'comision_id'=> Comision::all()->random()->id
         ];

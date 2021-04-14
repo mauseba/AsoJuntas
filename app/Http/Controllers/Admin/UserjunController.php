@@ -9,7 +9,6 @@ use App\Models\Junta;
 use App\Models\Estudio;
 use App\Models\Documento;
 use Carbon\Carbon;
-use App\Models\Evento;
 use Barryvdh\DomPDF\Facade as PDF;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\UserJunExport;
@@ -32,7 +31,9 @@ class UserjunController extends Controller
      */
     public function index()
     {
-        return view('admin.userjun.index');
+        $juntas=Junta::select('Nombre','id')->get();
+        
+        return view('admin.userjun.index',compact('juntas'));
     }
 
     /**
@@ -179,6 +180,8 @@ class UserjunController extends Controller
 
     public function generar_informe(Request $request)
     {
+        
+
         switch ($request['opcion']) {
             case '0':
                 return $this->generar_excel();
@@ -193,23 +196,49 @@ class UserjunController extends Controller
         }
     }
 
-    public function generar_pdf($input)
-    {
-        $info = UserJun::join('juntas','user_juns.junta_id', '=','juntas.id')
-        ->join('comisions','user_juns.comision_id','=','comisions.id')
-        ->select('user_juns.*','juntas.Nombre','comisions.comision','comisions.Tipo')
-        ->whereDate('user_juns.created_at','>', $input['txtFechaInicial'])
-        ->whereDate('user_juns.created_at','<', $input['txtFechaFinal'])
-        ->get();
 
-        $cuenta = count($info);
-        if($cuenta > 0){
-            $date = Carbon::now();
-            $pdf = PDF::loadView('Admin.pdf.userjun', compact('info','cuenta','input','date'))->setPaper('letter', 'landscape')->stream('informe.pdf');
-            return $pdf;
-        }else{
-            return redirect()->route('admin.userjun.index')->with('error', 'No se encuentra ningun registro en las fechas seleccionadas');
+    public function generar_pdf($input)
+        { switch ($input['eleccion']) {
+            case '2':
+                $info = UserJun::join('juntas','user_juns.junta_id', '=','juntas.id')
+                ->join('comisions','user_juns.comision_id','=','comisions.id')
+                ->select('user_juns.*','juntas.Nombre','comisions.comision','comisions.Tipo')
+                ->where('juntas.id', $input['junta'])
+                ->get();
+                $cuenta = count($info);
+                if($cuenta > 0){
+                    $date = Carbon::now();
+                    $pdf = PDF::loadView('Admin.pdf.userjuntas', compact('info','cuenta','date'))->setPaper('letter', 'landscape')->stream('informe.pdf');
+                    return $pdf;
+                }else{
+                    return redirect()->route('admin.userjun.index')->with('error', 'No se encuentra ningun junta con el nombre señalado');
+                }
+            break;
+        
+            case '3':
+                    $info = UserJun::join('juntas','user_juns.junta_id', '=','juntas.id')
+                    ->join('comisions','user_juns.comision_id','=','comisions.id')
+                    ->select('user_juns.*','juntas.Nombre','comisions.comision','comisions.Tipo')
+                    ->whereDate('user_juns.created_at','>', $input['txtFechaInicial'])
+                    ->whereDate('user_juns.created_at','<', $input['txtFechaFinal'])
+                    ->get();
+
+                    $cuenta = count($info);
+                    if($cuenta > 0){
+                        $date = Carbon::now();
+                        $pdf = PDF::loadView('Admin.pdf.userjun', compact('info','cuenta','input','date'))->setPaper('letter', 'landscape')->stream('informe.pdf');
+                        return $pdf;
+                    }else{
+                        return redirect()->route('admin.userjun.index')->with('error', 'No se encuentra ningun registro en las fechas seleccionadas');
+                    }
+
+                break;
+            
+            default:   
+                return redirect()->route('admin.userjun.index')->with('error', 'Seleccione una opcion valida');
+                break;
         }
+        
     }
     public function generar_excel(){
         

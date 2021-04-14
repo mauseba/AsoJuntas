@@ -73,8 +73,8 @@ class BeneficiariosIndex extends Component
                     ->Where('nivel_edu', 'LIKE', '%' . $this->edu .'%')
                     ->get();
           
-       $pdf = PDF::loadView('pdf.beneficiarios',compact('beneficiarios'))->setPaper('a4', 'landscape')->output();                
-       return response()->streamDownload( fn() => print($pdf),"Informe_beneficiarios.pdf");
+       $pdf = PDF::loadView('pdf.beneficiarios',compact('beneficiarios'))->setPaper('letter', 'landscape')->stream('informeBeneficiarios.pdf');                
+       return $pdf;
     }
     public function exportarXL(){
         

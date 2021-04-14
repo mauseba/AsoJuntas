@@ -8,6 +8,7 @@
 
 <button class="btn btn-warning  float-right d-inline" data-toggle="modal" data-target="#exampleModal" data-backdrop="static" >Crear informe</button>
 <h1>Lista de afiliados de juntas</h1>
+
 @include('admin.userjun.informe') <br>
     
 @stop
@@ -53,13 +54,11 @@
         </div>   
     </div>
 </div>
-    
-
 
 @stop
 
 @section('css')
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
     <style>
     table th {
         text-align: center;
@@ -68,6 +67,7 @@
 @stop
 
 @section('js')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
 @if (session('info'))
     <script>
         var session = '{{session('info')}}';
@@ -91,14 +91,25 @@
 <script>
     $(function() {
         $('#excel').click(function(){
-            $("#fecha").hide();
+            $("#oppdf").hide();
         });
 
         $("#pdf").click(function(){
-            $('#txtFechaInicial').val("");
-            $('#txtFechaFinal').val("");
-            $("#fecha").show();
+            $("#oppdf").show();
+            $('#junta').click(function(){
+                $("#tiempo").hide();
+                $("#juntas").show();
+                $("#ddlJuntas").val('default').selectpicker("refresh");
+            });
+            $('#fecha').click(function(){
+                $("#juntas").hide();
+                $("#tiempo").show();
+                $('#txtFechaInicial').val("");
+                $('#txtFechaFinal').val("");
+            });
         });
+
+        $('#ddlJuntas').selectpicker();
         
     });
 </script>

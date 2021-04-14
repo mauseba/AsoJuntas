@@ -1,3 +1,14 @@
+<div>
+    <div>
+        <div class="form-group">
+            <p>¿El afiliado esta a paz y salvo?</p>
+            <input type="radio"  name="opcion" value="0">
+            <label for="Si">Si</label><br>
+            <input type="radio"  name="opcion" value="1">
+            <label for="No">No</label><br>
+        </div>
+    </div>
+</div>
 <div class="row">
     <div class="col-3">
         <div class="form-group">

@@ -7,7 +7,6 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\BeneficiariosController;
 use App\Http\Controllers\CensoController;
 
-Route::get('/index', [PostController::class, 'index'])->middleware(['auth:sanctum', 'verified'])->name('posts.index');
 
 Route::get('/', [PostController::class, 'index'])->name('posts.index');
 
@@ -19,10 +18,6 @@ Route::get('tag/{tag}', [PostController::class, 'tag'])->name('posts.tag');
 
 Route::get('eventos', [EventoController::class, 'index'])->name('eventos.index');
 
-Route::get('/mailable/evento', function () {
-    return new EventosMailable('motivo', 'mensaje');
-});
-
 
 
 Route::get('beneficiarios', [BeneficiariosController::class, 'index'])->name('beneficiarios.index')->middleware('auth');;
@@ -30,7 +25,7 @@ Route::post('beneficiarios', [BeneficiariosController::class, 'store'])->middlew
 Route::patch('beneficiarios/{beneficiarios}', [BeneficiariosController::class, 'update'])->middleware('auth');;
 Route::get('beneficiarios/{beneficiarios}/edit', [BeneficiariosController::class, 'edit'])->middleware('auth');;
 
-Route::resource('censo', CensoController::class)->middleware('auth');;
+Route::resource('censo', CensoController::class)->names('censo')->middleware('auth');
 
 // Route::resource('beneficiarios', [BeneficiariosController::class]);
 

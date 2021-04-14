@@ -3,7 +3,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Generar Certificado</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Generar Informe</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -19,17 +19,39 @@
                   <label for="pdf">PDF</label><br>
               </div>
 
-              <div class="row" id="fecha" style="display:none">
-                <div class="col">
-                  <label for="">Fecha inicial: </label>
-                  <input type="date" class="form-control" id="txtFechaInicial" name="txtFechaInicial">
-                </div>
-                <div class="col">
-                  <label for="">Fecha Final: </label>
-                  <input type="date" class="form-control" id="txtFechaFinal" name="txtFechaFinal">
-                </div>
-              </div>
+              <div id="oppdf" style="display:none">
 
+                <div align='center' class="form-group">
+                    <p>Filtrar por: </p>
+                    <input type="radio" id="junta" name="eleccion" value="2">
+                    <label for="junta">Junta A.C</label> <br>
+                    <input type="radio" id="fecha" name="eleccion" value="3">
+                    <label for="fecha">Fecha de registro</label>
+                </div>
+
+
+                <div class="row" id="tiempo" style="display:none">
+                    <div class="col">
+                        <label for="">Fecha inicial: </label>
+                        <input type="date" class="form-control" id="txtFechaInicial" name="txtFechaInicial">
+                    </div>
+                    <div class="col">
+                        <label for="">Fecha Final: </label>
+                        <input type="date" class="form-control" id="txtFechaFinal" name="txtFechaFinal">
+                    </div>
+                </div>
+
+                <div id="juntas" style="display:none">
+                    <label for="">Juntas</label> <br>
+                    <select id="ddlJuntas" name="junta" class="selectpicker" data-live-search="true" >
+                        @foreach ($juntas as $junta)
+                            <option value={{$junta->id}} >{{$junta->Nombre}}</option>
+                        @endforeach
+                    </select>                 
+                </div>
+               
+              </div>
+              
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button type="submit" class="btn btn-primary">Generar Informe</button>

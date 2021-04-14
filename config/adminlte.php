@@ -145,9 +145,9 @@ return [
     */
 
     'sidebar_mini' => true,
-    'sidebar_collapse' => true,
-    'sidebar_collapse_auto_size' => false,
-    'sidebar_collapse_remember' => false,
+    'sidebar_collapse' => false,
+    'sidebar_collapse_auto_size' => true,
+    'sidebar_collapse_remember' => true,
     'sidebar_collapse_remember_no_transition' => true,
     'sidebar_scrollbar_theme' => 'os-theme-light',
     'sidebar_scrollbar_auto_hide' => 'l',
@@ -187,7 +187,7 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => '/index',
+    'dashboard_url' => '/',
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',
@@ -248,16 +248,20 @@ return [
                     'text'        => 'Juntas',
                     'route'         => 'admin.juntas.index',
                     'can'       => 'admin.juntas.index',
+                    'active' => ['admin/juntas*'],
                 ],
                 [
                     'text'        => 'Afiliados de juntas',
                     'route'         => 'admin.userjun.index',
                     'can'       => 'admin.userjun.index',
+                    'active' => ['admin/userjun*'],
+                    
                 ],
                 [
                     'text'        => 'Comisiones de afiliados',
                     'route'         => 'admin.comisions.index',
                     'can'       => 'admin.comisions.index',
+                    'active' => ['admin/comisions*'],
                 ]
 
 
@@ -271,12 +275,15 @@ return [
                 [
                     'text'        => 'Eventos',
                     'route'         => 'admin.eventos.index',
-                    'can'       => 'admin.eventos.index'
+                    'can'       => 'admin.eventos.index',
+                    'active' => ['admin/eventos*'],
+                    
                 ],
                 [
                     'text'        => 'Subir acta y asistencia',
                     'route'         => 'admin.actas.index',
                     //'can'       => 'admin.juntas.index',
+                    'active' => ['admin/actas*'],
                 ]
 
             ]
@@ -301,30 +308,26 @@ return [
             'text' => 'Categorías',
             'route'  => 'admin.categories.index',
             'icon' => 'fab fa-fw fa-buffer',
-            'active' => ['admin/categories*'],
             'can'       => 'admin.categories.index'
         ],
         [
             'text' => 'Etiquetas',
             'route'  => 'admin.tags.index',
             'icon' => 'far fa-fw fa-bookmark',
-            'active' => ['admin/tags*'],
             'can'       => 'admin.tags.index'
         ],
         [
             'text'        => 'Eps y Barrios',
-            'icon'        => '',
+            'icon'        => 'fas fa-map-signs fa-fw',
             'submenu'  =>[
                 [
                     'text' => 'EPS',
                     'route'  => 'admin.eps.index',
-                    'icon' => 'far fa-hospital fa-fw',
                    'active' => ['admin/eps*'],
                 ],
                 [
                     'text' => 'Barrios',
                     'route'  => 'admin.barrios.index',
-                    'icon' => 'fas fa-map-signs fa-fw',
                    'active' => ['admin/barrios*'],
                 ]
 
@@ -333,23 +336,23 @@ return [
         ],
         [
             'text'        => 'Censo Comunal',
-            'icon'        => '',
+            'icon'        => 'far fa-address-book',
             'submenu'  =>[
                 [
                     'text'       => 'Beneficiarios',
                     'route'        => 'admin.beneficiarios.index',
-                    'icon'      => 'fas fa-house-user',
+                    'active' => ['admin/beneficiarios*'],
                 ],
                 [
                     'text'       => 'Censo',
                     'route'        => 'admin.censo.index',
-                    'icon'      => 'far fa-address-book',
+                    'active' => ['admin/censo*'],
+
                 ]
 
             ]
            
         ],
-        ['header' => 'OPCIONES DE PAGINA PRINCIPAL'],
         [
             'text'       => 'Lista de Publicaciones',
             'route'        => 'admin.posts.index',
@@ -364,7 +367,7 @@ return [
         // 'can'       => 'admin.psuscripcion.index'
         ],
         [
-            'text'       => 'Pagos y Certificados de usuarios',
+            'text'       => 'Pagos y Certificados',
             'route'        => 'admin.psuscripcion.index',
             'icon'      => 'fas fa-fw fa-clipboard',
         // 'can'       => 'admin.posts.index'

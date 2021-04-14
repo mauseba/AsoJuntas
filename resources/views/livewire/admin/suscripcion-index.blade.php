@@ -62,9 +62,16 @@
                                 </form>
                             </td>
                             <td>
-                                <a class="btn btn-warning btn-sm"
-                                    href="{{route('admin.psuscripcion.buscador', $sus) }}"><i
-                                        class="fas fa-file"></i></a>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-warning btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fas fa-file"></i>
+                                    </button>
+                                    <div class="dropdown-menu">
+                                      <a class="dropdown-item" href="{{route('admin.psuscripcion.buscador', $sus) }}">I. afliados</a>
+                                      <a class="dropdown-item" href="#">Another action</a>
+                                      <a class="dropdown-item" href="#">Something else here</a>
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                     @endforeach

@@ -16,6 +16,16 @@
 
 
 @section('js')
+@if (session('error'))
+<script>
+    var session = '{{session('error')}}';
+    Swal.fire(
+    'Error',
+    session ,
+    'error'
+    )
+</script>
+@endif
 @if (session('warning'))
 <script>
     var session = '{{session('warning')}}';

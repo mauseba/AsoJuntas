@@ -35,6 +35,22 @@ class PsuscripcionController extends Controller
         return view('admin.psuscripcion.create', compact('juntas'));
     }
 
+
+    public function validar($data)
+    {
+        $validate = Psuscripcion::select('Mes','Junta_id')
+        ->where([
+            ['Mes',$data['Mes']],
+            ['Junta_id',$data['junta_id']]
+        ])->get();
+   
+        if (count($validate) == 0 && $data['tipo'] == 'suscripcion' ){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -53,16 +69,26 @@ class PsuscripcionController extends Controller
         ]);
 
         $data = $request->except('_token');
-
-        if ($request->hasFile('Comprobante'))
+            
+        if($this->validar($data))
         {
-            $data['Comprobante'] = Storage::put('Comprobantes', $request->file('Comprobante'));
+            
+            if ($request->hasFile('Comprobante'))
+            {
+                $data['Comprobante'] = Storage::put('Comprobantes', $request->file('Comprobante'));
+            }
+    
+    
+            $datos = Psuscripcion::create($data);
+    
+            return redirect()->route('admin.psuscripcion.index')->with('info', 'El registro de pago, se añadio con exito');
+        }else{
+
+            return redirect()->route('admin.psuscripcion.index')->with('error', 'Ya se añadio el recibo de pago, a la fecha seleccionada');
+
         }
 
-
-        $datos = Psuscripcion::create($data);
-
-        return redirect()->route('admin.psuscripcion.index')->with('info', 'El registro de pago, se añadio con exito');
+      
 
     }
 
@@ -112,23 +138,33 @@ class PsuscripcionController extends Controller
 
     }
     public function generarCertificado(Request $request)
-    {
-        $datosu = request()->except('_token','Tipo');
-        switch ($request['Tipo']) {
-            case '0':
-                $date = Carbon::now();
-                $pdf = PDF::loadView('Admin.pdf.certificadoAfil', compact('date','datosu'))->setPaper('letter')->stream('CertificadoAfiliado.pdf');
-                return $pdf;
-                break;
-            case '1':
-                $date = Carbon::now();
-                $pdf = PDF::loadView('Admin.pdf.certificadoRes', compact('date','datosu'))->setPaper('letter')->stream('CertificadoResiencia.pdf');
-                return $pdf;
-                break;      
-            default:
-                return redirect()->route('admin.juntas.index')->with('error', 'Seleccione una opcion valida');
-                break;
-        }
+    {   switch ($request['opcion']) {
+        case '0':
+                $datosu = request()->except('_token','Tipo','opcion');
+                switch ($request['Tipo']) {
+                    case '0':
+                        $date = Carbon::now();
+                        $pdf = PDF::loadView('Admin.pdf.certificadoAfil', compact('date','datosu'))->setPaper('letter')->stream('CertificadoAfiliado.pdf');
+                        return $pdf;
+                        break;
+                    case '1':
+                        $date = Carbon::now();
+                        $pdf = PDF::loadView('Admin.pdf.certificadoRes', compact('date','datosu'))->setPaper('letter')->stream('CertificadoResiencia.pdf');
+                        return $pdf;
+                        break;      
+                    default:
+                        return redirect()->route('admin.juntas.index')->with('error', 'Seleccione una opcion valida');
+                        break;
+                }
+            break;
+        case '1':
+            return redirect()->route('admin.psuscripcion.index')->with('error', 'El usuario no esta a paz y salvo con la junta');
+            break;
+        default:
+            return redirect()->route('admin.psuscripcion.index')->with('warning', 'seleccione una opcion valida');
+            break;
+    }
+       
     
     }
 
@@ -156,6 +192,21 @@ class PsuscripcionController extends Controller
 
     }
 
+    public function validarEdit($data,$junta)
+    {
+        $validate = Psuscripcion::select('Mes','Junta_id')
+        ->where([
+            ['Mes',$data['Mes']],
+            ['Junta_id',$data['junta_id']]
+        ])->get();
+   
+        if ((count($validate) == 0 && $data['tipo'] == 'suscripcion') || $junta == $data['junta_id']){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -176,16 +227,25 @@ class PsuscripcionController extends Controller
 
         $data = $request->except('_token');
 
-        
-        if ($request->hasFile('Comprobante'))
+        if($this->validarEdit($data, $psuscripcion['junta_id'] ))
         {
-            Storage::delete($psuscripcion->Comprobante);
-            $data['Comprobante'] = Storage::put('Comprobantes', $request->file('Comprobante'));
+            if ($request->hasFile('Comprobante'))
+            {
+                Storage::delete($psuscripcion->Comprobante);
+                $data['Comprobante'] = Storage::put('Comprobantes', $request->file('Comprobante'));
+            }
+    
+            $psuscripcion->update($data);
+    
+            return redirect()->route('admin.psuscripcion.index')->with('info', 'El registro de pago, se edito con exito');
+        }else{
+
+            return redirect()->route('admin.psuscripcion.index')->with('error', 'Ya se añadio el recibo de pago, a la fecha seleccionada');
+
         }
 
-        $psuscripcion->update($data);
-
-        return redirect()->route('admin.psuscripcion.index')->with('info', 'El registro de pago, se edito con exito');
+        
+     
 
     }
 
