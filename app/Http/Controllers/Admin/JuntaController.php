@@ -50,7 +50,7 @@ class JuntaController extends Controller
         
         $request->validate([
                 'FechaC'  => 'required',
-                'Nit'=>'required|unique:juntas|regex:/^\d{1,3}(?:\.\d\d\d)(?:\.\d\d\d)*(?:-\d{1,2})?$/',
+                'Nit'=>'required|unique:juntas|regex:/^\d{8,9}(?:-\d{1,2})?$/',
                 'Direccion' => 'required',
                 'Nombre' => 'required|unique:juntas',
                 'Correo' => 'required|email',
@@ -106,7 +106,7 @@ class JuntaController extends Controller
     {
         $request->validate([
             'FechaC'  => 'required',
-            'Nit'=>'required|regex:/^\d{1,3}(?:\.\d\d\d)(?:\.\d\d\d)*(?:-\d{1,2})?$/|unique:juntas,Nit,'.$junta->id,
+            'Nit'=>'required|regex:/^\d{8,9}(?:-\d{1,2})?$/|unique:juntas,Nit,'.$junta->id,
             'Direccion' => 'required',
             'Nombre' => 'required|unique:juntas,Nombre,'.$junta->id,
             'Correo' => 'required|email',

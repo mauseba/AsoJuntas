@@ -76,7 +76,7 @@
     <div class="col">
         <div class="form-group">
             {!! Form::label('Observaciones', 'Observaciones:') !!}
-            {!! Form::text('Observaciones', null, ['class' => 'form-control', 'placeholder' => 'Ingrese las observaciones']) !!}
+            {!! Form::text('Observaciones', null, ['class' => 'form-control', 'rows' => 4, 'cols' => 15, 'placeholder' => 'Ingrese las observaciones']) !!}
 
             @error('Observaciones')
                 <small class="text-danger">{{$message}}</small>

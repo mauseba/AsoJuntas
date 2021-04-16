@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-guest-layout>
 
 <div class="md:px-32 py-2 w-full">
     <ul class='flex cursor-pointer'>
@@ -311,13 +311,11 @@
         <h3 class="text-2xl text-white font-semibold">Beneficiarios</h3>                   
     </div> --}}
 </div>    
-</x-app-layout>
+</x-guest-layout>
 
 <script>
     $('#tipo_vivienda').on('change', function(){
         $("#escrituras").val($('#tipo_vivienda option:selected').attr('escrituras'));
     });
     
-        </script>
-
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+</script>

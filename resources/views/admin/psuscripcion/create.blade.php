@@ -3,6 +3,12 @@
 @section('title', 'Asojuntas')
 
 @section('content_header')
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Nota</strong> Al crear un registro de pago de tipo bimestral, ingrese el primer mes correspondiente al pago.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
     <h1>Pagos de Suscripcion</h1>
 @stop
 

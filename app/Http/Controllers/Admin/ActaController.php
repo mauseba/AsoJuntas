@@ -10,6 +10,13 @@ use Illuminate\Support\Facades\Storage;
 
 class ActaController extends Controller
 {
+    public function __construct(){
+
+        $this->middleware('can:admin.actas.index')->only('index');
+        $this->middleware('can:admin.actas.create')->only('create','store');
+        $this->middleware('can:admin.actas.edit')->only('edit, update');
+        $this->middleware('can:admin.actas.destroy')->only('destroy');
+    }
     /**
      * Display a listing of the resource.
      *

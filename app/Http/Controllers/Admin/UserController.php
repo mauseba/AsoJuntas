@@ -32,7 +32,7 @@ class UserController extends Controller
     {
         $user->roles()->sync($request->roles);
 
-        return redirect()->route('admin.users.edit', $user)->with('info','se asigno los roles correctamente');
+        return redirect()->route('admin.users.index')->with('info','se asigno los roles correctamente');
 
     }
 }

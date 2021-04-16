@@ -52,6 +52,10 @@ Route::resource('psuscripcion', PsuscripcionController::class)->except('show')->
 
 Route::resource('comisions', ComisionController::class)->except('show')->names('admin.comisions');
 
+
+Route::get('psuscripcion/{psuscripcion}/pazsalvo',[PsuscripcionController::class, 'pazsalvo'])->name('admin.psuscripcion.pazsalvo');
+Route::get('psuscripcion/{psuscripcion}/afiliacion',[PsuscripcionController::class, 'afiliacion'])->name('admin.psuscripcion.afiliacion');
+
 Route::get('psuscripcion/{psuscripcion}',[PsuscripcionController::class, 'buscador'])->name('admin.psuscripcion.buscador');
 Route::post('psuscripcion/certificado',[PsuscripcionController::class, 'certificado'])->name('admin.psuscripcion.certificado');
 Route::post('admin/psuscripcion/generarcertificado',[PsuscripcionController::class, 'generarCertificado'])->name('admin.psuscripcion.generarcer');

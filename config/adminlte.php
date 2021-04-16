@@ -145,9 +145,9 @@ return [
     */
 
     'sidebar_mini' => true,
-    'sidebar_collapse' => false,
+    'sidebar_collapse' => true,
     'sidebar_collapse_auto_size' => true,
-    'sidebar_collapse_remember' => true,
+    'sidebar_collapse_remember' => false,
     'sidebar_collapse_remember_no_transition' => true,
     'sidebar_scrollbar_theme' => 'os-theme-light',
     'sidebar_scrollbar_auto_hide' => 'l',
@@ -241,11 +241,11 @@ return [
             'can'       => 'admin.home'
         ],
         [
-            'text'        => 'Gestion de juntas',
-            'icon'        => 'fas fa-people-arrows',
-            'submenu'  =>[
+        'text'        => 'Gestion de juntas',
+        'icon'        => 'fas fa-people-arrows',
+        'submenu'  =>[
                 [
-                    'text'        => 'Juntas',
+                    'text'        => 'Juntas A. Comunales',
                     'route'         => 'admin.juntas.index',
                     'can'       => 'admin.juntas.index',
                     'active' => ['admin/juntas*'],
@@ -271,6 +271,7 @@ return [
         [
             'text'        => 'Gestion de Eventos',
             'icon'        => 'fas fa-calendar-alt',
+            'can'       => 'admin.eventos.index',
             'submenu'  =>[
                 [
                     'text'        => 'Eventos',
@@ -282,7 +283,7 @@ return [
                 [
                     'text'        => 'Subir acta y asistencia',
                     'route'         => 'admin.actas.index',
-                    //'can'       => 'admin.juntas.index',
+                    'can'       => 'admin.actas.index',
                     'active' => ['admin/actas*'],
                 ]
 
@@ -299,7 +300,7 @@ return [
             'text'        => 'Lista de roles',
             'route'         => 'admin.roles.index',
             'icon'        => 'fas fa-users-cog fa-fw',
-            //'can'       => 'admin.users.index'
+            'can'       => 'admin.users.index'
         ],
 
         ['header' => 'OPCIONES DE PAGINA PRINCIPAL'],
@@ -364,14 +365,14 @@ return [
             'text'       => 'Pagos de Juntas A.C',
             'route'        => 'admin.psuscripcion.index',
             'icon'      => 'fas fa-cash-register',
-        // 'can'       => 'admin.psuscripcion.index'
+            'can'       => 'admin.psuscripcion.index'
         ],
-        [
+       /* [
             'text'       => 'Pagos y Certificados',
             'route'        => 'admin.psuscripcion.index',
             'icon'      => 'fas fa-fw fa-clipboard',
-        // 'can'       => 'admin.posts.index'
-        ],
+            'can'       => 'admin.posts.index'
+        ],*/
        
     ],
     

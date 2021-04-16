@@ -28,7 +28,10 @@
                         <th>Mes de pago</th>
                         <th>Tipo pago</th>
                         <th>Comprobante</th>
-                        <th colspan="3">Acciones</th>
+                        <th>Observaciones</th>
+                        <th colspan="2">Certificados</th>
+                        <th colspan="2">Acciones</th>
+
                     </tr>
                 </thead>
 
@@ -46,33 +49,44 @@
                                     <i class="far fa-eye"></i>
                                 </a>
                             </td>
+                            <td>{{ $sus->Observaciones }}</td>
                             <td>
-
-                                <a class="btn btn-primary btn-sm" href="{{ route('admin.psuscripcion.edit', $sus) }}"><i
-                                        class="fas fa-pen-square"></i></a>
+                                @can('admin.psuscripcion.index')
+                                    <a class="btn btn-info btn-sm" href="{{ route('admin.psuscripcion.buscador', $sus) }}"><i class="fas fa-file-alt"></i></a>
+                                @endcan
                             </td>
                             <td>
-                                <form action="{{ route('admin.psuscripcion.destroy', $sus) }}" class="formulario-eliminar"
-                                    method="POST">
-                                    @csrf
-                                    @method('DELETE')
-
-                                    <button class="btn btn-danger btn-sm" type="submit"><i
-                                            class="fas fa-eraser"></i></button>
-                                </form>
-                            </td>
-                            <td>
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-warning btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fas fa-file"></i>
-                                    </button>
-                                    <div class="dropdown-menu">
-                                      <a class="dropdown-item" href="{{route('admin.psuscripcion.buscador', $sus) }}">I. afliados</a>
-                                      <a class="dropdown-item" href="#">Another action</a>
-                                      <a class="dropdown-item" href="#">Something else here</a>
+                                @can('admin.psuscripcion.index')
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-warning btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fas fa-file"></i>
+                                        </button>
+                                        <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="{{route('admin.psuscripcion.pazsalvo', $sus) }}">junta - Pazysalvo</a>
+                                        <a class="dropdown-item" href="{{route('admin.psuscripcion.afiliacion', $sus) }}">junta - Afiliacion</a>
+                                        </div>
                                     </div>
-                                </div>
+                                @endcan
                             </td>
+                            <td>
+                                @can('admin.psuscripcion.edit')
+                                    <a class="btn btn-primary btn-sm" href="{{ route('admin.psuscripcion.edit', $sus) }}"><i
+                                        class="fas fa-pen-square"></i></a>
+                                @endcan
+                            </td>
+                            <td>
+                                @can('admin.psuscripcion.destroy')
+                                    <form action="{{ route('admin.psuscripcion.destroy', $sus) }}" class="formulario-eliminar"
+                                        method="POST">
+                                        @csrf
+                                        @method('DELETE')
+
+                                        <button class="btn btn-danger btn-sm" type="submit"><i
+                                                class="fas fa-eraser"></i></button>
+                                    </form>
+                                @endcan
+                            </td>
+                            
                         </tr>
                     @endforeach
                 </tbody>

@@ -110,6 +110,24 @@ class RoleSeeder extends Seeder
                                 'description' => 'Editar Comisiones'])->syncRoles([$role1]);
         Permission::create(['name' => 'admin.comisions.destroy',
                                     'description' => 'Eliminar Comisiones'])->syncRoles([$role1]);  
+        
+        Permission::create(['name' => 'admin.psuscripcion.index',
+                                'description' => 'Ver listado de pagos'])->syncRoles([$role1]);
+        Permission::create(['name' => 'admin.psuscripcion.create',
+                                'description' => 'Crear pagos'])->syncRoles([$role1]);
+        Permission::create(['name' => 'admin.psuscripcion.edit',
+                                'description' => 'Editar pagos'])->syncRoles([$role1]);
+        Permission::create(['name' => 'admin.psuscripcion.destroy',
+                                    'description' => 'Eliminar pagos'])->syncRoles([$role1]);  
+        
+        Permission::create(['name' => 'admin.actas.index',
+                                'description' => 'Ver listado de actas'])->syncRoles([$role1]);
+        Permission::create(['name' => 'admin.actas.create',
+                                'description' => 'Crear actas y asistencia'])->syncRoles([$role1]);
+        Permission::create(['name' => 'admin.actas.edit',
+                                'description' => 'Editar actas y asistencias'])->syncRoles([$role1]);
+        Permission::create(['name' => 'admin.actas.destroy',
+                                    'description' => 'Eliminar actas y asistencias'])->syncRoles([$role1]);  
 }
 
 }

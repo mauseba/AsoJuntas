@@ -74,14 +74,15 @@
                     let Fe = moment(arg.event.start).format('YYYY-MM-DD');
                     let Hi = moment(arg.event.start).format('HH:mm:ss');
                     let Hf = moment(arg.event.end).format('HH:mm:ss');
-                    
+
+                    console.log(arg.event.extendedProps.descripcion);
                     $('#txtid').val(arg.event.id);    
                     $('#txtFecha').val(Fe);
                     $('#txtHoraInicial').val(Hi);
                     $('#txtHoraFinal').val(Hf);
                     $('#ddlJuntas').val();
                     $('#txtAsunto').val(arg.event.title);
-                    $('#txtDescripcion').val(arg.event.extendedProps.descripcion);
+                    $('#txtDescripcion').summernote("code", arg.event.extendedProps.descripcion);
 
                     $('#btnEditar').show();
                     $('#btnEliminar').show();

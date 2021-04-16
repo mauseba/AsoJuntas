@@ -116,7 +116,7 @@
 <div class="row">
     <div class="col-6">
         <div class="form-group">
-            {!! Form::label('Expedido', 'Lugar de expedicion del documento:') !!}
+            {!! Form::label('Expedido', 'Lugar de expedicion del doc. del afiliado:') !!}
             {!! Form::text('Expedido', null, ['class' => 'form-control']) !!}
         
         
@@ -130,7 +130,7 @@
     <div class="col">
         <div class="form-group">
             {!! Form::label('Tipo', 'Seleccione el tipo de certificado') !!}
-            {!! Form::select('Tipo',array('0'=>'Afiliacion','1'=>'Residencia'), null, ['class' => 'form-control']) !!}
+            {!! Form::select('Tipo',array('0'=>'Afiliacion','1'=>'Residencia','2'=>'Paz y Salvo'), null, ['class' => 'form-control']) !!}
         
         
             @error('Tipo')

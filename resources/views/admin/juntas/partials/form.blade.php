@@ -16,7 +16,7 @@
             <div class="col">
                 <div class="form-group">
                     {!! Form::label('Nit', 'Numero de Nit:') !!}
-                    {!! Form::text('Nit', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el numero de Nit de la junta']) !!}
+                    {!! Form::text('Nit', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el numero de Nit de la junta', 'maxlength'=>'12']) !!}
         
                     @error('Nit')
                         <small class="text-danger">{{$message}}</small>
@@ -27,7 +27,7 @@
         </div>
         
         <div class="form-group">
-            {!! Form::label('Direccion', 'Vereda/Barrio:') !!}
+            {!! Form::label('Direccion', 'Direccion de la junta:') !!}
             {!! Form::text('Direccion', null, ['class' => 'form-control', 'placeholder' => 'Ingrese de la ubicacion de la junta']) !!}
 
             @error('Direccion')
@@ -60,7 +60,7 @@
             <div class="col">
                 <div class="form-group">
                     {!! Form::label('Resolucion', 'Resolucion:') !!}
-                    {!! Form::text('Resolucion', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el correo de la junta ']) !!}
+                    {!! Form::text('Resolucion', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el correo de la junta ','maxlength'=>'4']) !!}
         
                     @error('Resolucion')
                         <small class="text-danger">{{$message}}</small>

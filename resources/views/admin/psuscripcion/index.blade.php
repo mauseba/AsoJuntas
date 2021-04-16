@@ -3,7 +3,7 @@
 @section('title', 'Asojuntas')
 
 @section('content_header')
-    @can('admin.posts.create')
+    @can('admin.psuscripcion.create')
         <a class="btn btn-success float-right" href="{{route('admin.psuscripcion.create')}}">Nuevo regitro de pago</a>
     @endcan
     <h1>Pagos de Suscripcion</h1>

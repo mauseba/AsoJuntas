@@ -119,7 +119,7 @@
     <div class="col">
         <div class="directivos form-group">
             {!! Form::label('Cargo', 'Cargo:') !!}
-            {!! Form::select('Cargo', array('afiliado'=>'Afiliado','presidente'=>'Presidente/a','secretario'=>'Secretario/a','tesorero'=>'Tesorero/a','fiscal'=>'Fiscal'),null, ['class' => 'form-control']) !!}
+            {!! Form::select('Cargo', array('afiliado'=>'Afiliado','presidente'=>'Presidente/a','vicepresidente'=>'Vicepresidente/a','secretario'=>'Secretario/a','tesorero'=>'Tesorero/a','fiscal'=>'Fiscal'),null, ['class' => 'form-control']) !!}
         
             @error('Cargo')
                 <small class="text-danger">{{$message}}</small>

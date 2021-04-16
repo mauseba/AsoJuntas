@@ -3,8 +3,9 @@
 @section('title', 'Asojuntas')
 
 @section('content_header')
-
-    <a class="btn btn-success float-right" href="{{route('admin.actas.create')}}">subir acta</a>
+    @can('admin.actas.create')
+        <a class="btn btn-success float-right" href="{{route('admin.actas.create')}}">subir acta</a>    
+    @endcan
     <h1>Subir Acta</h1>
 @stop
 

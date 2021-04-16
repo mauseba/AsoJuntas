@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-guest-layout>
 
     <div class="md:px-32 py-8 w-full">
         <div class="bg-green-700 shadow-2xl rounded-t-lg px-8 pt-6 pb-8  flex flex-col ">
@@ -283,7 +283,7 @@
             <h3 class="text-2xl text-white font-semibold">Beneficiarios</h3>                   
         </div> --}}
     </div>
-</x-app-layout>
+</x-guest-layout>
 
 <script>
     $('#tipo_vivienda').on('change', function() {

@@ -1,5 +1,5 @@
 
-<x-app-layout>
+<x-guest-layout>
     
     <div class="md:px-32 py-2 w-full">
         
@@ -50,7 +50,7 @@
         </div> --}}
         </div>
     </div>     
-</x-app-layout>
+</x-guest-layout>
 
 
   

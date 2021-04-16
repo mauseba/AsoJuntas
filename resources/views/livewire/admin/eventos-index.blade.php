@@ -30,12 +30,14 @@
                                 </a>
                             </td>
                             <td align="center">
-                                <a class="btn btn-light btn-sm" target="_blank" href="{{Storage::url($evento->url2)}}">
+                               <a class="btn btn-light btn-sm" target="_blank" href="{{Storage::url($evento->url2)}}">
                                     <i class="far fa-eye"></i>
-                                </a>
+                                </a>  
                             </td>
                             <td >
+                                @can('admin.actas.edit')
                                 <a type="button" class="btn btn-primary"  href="{{route('admin.actas.edit',$evento)}}" ><i class="fas fa-pen-square"></i></a>
+                                @endcan
                             </td>
                         </tr>
                     @endforeach

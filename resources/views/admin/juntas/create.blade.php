@@ -3,6 +3,12 @@
 @section('title', 'Asojuntas')
 
 @section('content_header')
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>Nota</strong> Procure cerciorarse en llenar todos los campos en cada pestaña, o no se guardaran los datos.
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
     <h1>Crear nueva junta</h1>
 @stop
 
@@ -30,13 +36,6 @@
                   @include('admin.juntas.partials.form')
   
               {!! Form::close() !!}         
-      </div>
-      <div class="card-footer">
-          @if (session('info'))
-            <div class="d-flex">
-                
-              </div>
-          @endif
       </div>
  </div>
 @stop
