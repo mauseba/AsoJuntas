@@ -34,7 +34,7 @@
             {!! Form::open(['route' => 'admin.psuscripcion.generarcer']) !!}
                 @include('admin.psuscripcion.partial.info')
                 
-                {!! Form::submit('Crear certificado', ['class' => 'btn btn-primary']) !!}
+                {!! Form::submit('Crear certificado', ['class' => 'btn btn-primary','target'=>'_blank']) !!}
                 
             {!! Form::close() !!}
         </div>

@@ -33,19 +33,20 @@
                         <td>{{$userju->Tipo}}</td>
 
                         <td with="10px">
-                            
-                            <a class="btn btn-primary btn-sm" href="{{route('admin.userjun.edit', $userju)}}"><i class="fas fa-pen-square"></i></a>
+                            @can('admin.userjun.edit')
+                                 <a class="btn btn-primary btn-sm" href="{{route('admin.userjun.edit', $userju)}}"><i class="fas fa-pen-square"></i></a>
+                            @endcan 
                             
                         </td>
                         <td with="10px">
+                            @can('admin.userjun.destroy')
+                                <form action="{{route('admin.userjun.destroy', $userju)}}" class="formulario-eliminar" method="POST">
+                                    @csrf
+                                    @method('DELETE')
 
-                            <form action="{{route('admin.userjun.destroy', $userju)}}" class="formulario-eliminar" method="POST">
-                                @csrf
-                                @method('DELETE')
-
-                                <button class="btn btn-danger btn-sm" type="submit"><i class="fas fa-eraser"></i></button>
-                            </form>
-                        
+                                    <button class="btn btn-danger btn-sm" type="submit"><i class="fas fa-eraser"></i></button>
+                                </form>
+                            @endcan
                         </td>
                     </tr>
                 @endforeach

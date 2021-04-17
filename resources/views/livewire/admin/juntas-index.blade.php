@@ -65,12 +65,12 @@
                             </td>
                             <td>
                                 @can('admin.juntas.destroy')
-                                <form action="{{route('admin.juntas.destroy', $junta)}}" class="formulario-eliminar" method="POST">
-                                    @csrf
-                                    @method('DELETE')
+                                    <form action="{{route('admin.juntas.destroy', $junta)}}" class="formulario-eliminar" method="POST">
+                                        @csrf
+                                        @method('DELETE')
 
-                                    <button class="btn btn-danger btn-sm" type="submit"><i class="fas fa-eraser"></i></button>
-                                </form>
+                                        <button class="btn btn-danger btn-sm" type="submit"><i class="fas fa-eraser"></i></button>
+                                    </form>
                                 @endcan 
                             </td>
                         </tr>

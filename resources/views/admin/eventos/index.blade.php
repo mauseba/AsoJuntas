@@ -12,8 +12,11 @@
             <div id='calendar'></div>   
         </div>
     </div>
+
+    @can('admin.eventos.create')
+         @include('admin.eventos.create') 
+    @endcan
     
-    @include('admin.eventos.create')
 
 @stop
 

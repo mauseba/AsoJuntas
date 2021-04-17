@@ -18,7 +18,9 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserjunController;
 use App\Http\Controllers\Admin\ActaController;
 use App\Http\Controllers\Admin\ComisionController;
+use App\Http\Controllers\Admin\PcertificadoController;
 use App\Http\Controllers\Admin\PsuscripcionController;
+
 
 Route::get('', [HomeController::class, 'index'])->middleware('can:admin.home', 'verified')->name('admin.home');
 
@@ -50,19 +52,27 @@ Route::resource('userjun', UserjunController::class)->except('show')->names('adm
 
 Route::resource('psuscripcion', PsuscripcionController::class)->except('show')->names('admin.psuscripcion');
 
+Route::resource('pcertificado', PcertificadoController::class)->except('show')->names('admin.pcertificado');
+
 Route::resource('comisions', ComisionController::class)->except('show')->names('admin.comisions');
 
+Route::group(['middleware' =>['auth','can:admin.certificados']],function () {
+    Route::get('psuscripcion/{psuscripcion}/pazsalvo',[PsuscripcionController::class, 'pazsalvo'])->name('admin.psuscripcion.pazsalvo');
+    Route::get('psuscripcion/{psuscripcion}/afiliacion',[PsuscripcionController::class, 'afiliacion'])->name('admin.psuscripcion.afiliacion');
 
-Route::get('psuscripcion/{psuscripcion}/pazsalvo',[PsuscripcionController::class, 'pazsalvo'])->name('admin.psuscripcion.pazsalvo');
-Route::get('psuscripcion/{psuscripcion}/afiliacion',[PsuscripcionController::class, 'afiliacion'])->name('admin.psuscripcion.afiliacion');
+    Route::get('psuscripcion/{psuscripcion}',[PsuscripcionController::class, 'buscador'])->name('admin.psuscripcion.buscador');
+    Route::post('psuscripcion/certificado',[PsuscripcionController::class, 'certificado'])->name('admin.psuscripcion.certificado');
+    Route::post('psuscripcion/generarcertificado',[PsuscripcionController::class, 'generarCertificado'])->name('admin.psuscripcion.generarcer');
 
-Route::get('psuscripcion/{psuscripcion}',[PsuscripcionController::class, 'buscador'])->name('admin.psuscripcion.buscador');
-Route::post('psuscripcion/certificado',[PsuscripcionController::class, 'certificado'])->name('admin.psuscripcion.certificado');
-Route::post('admin/psuscripcion/generarcertificado',[PsuscripcionController::class, 'generarCertificado'])->name('admin.psuscripcion.generarcer');
+    Route::get('pcertificado/{pcertificado}',[PcertificadoController::class, 'certificado'])->name('admin.pcertificado.certificado');
+});
 
 
-Route::get('admin/juntas/informe', [JuntaController::class, 'informe'])->middleware('auth')->name('admin.juntas.informe');
-Route::post('admin/juntas/generarinforme', [JuntaController::class, 'generar_informe'])->middleware('auth')->name('admin.juntas.generar');
+Route::group(['middleware' =>['auth','can:admin.informes']],function () {
+    Route::get('admin/juntas/informe', [JuntaController::class, 'informe'])->middleware('auth')->name('admin.juntas.informe');
+    Route::post('admin/juntas/generarinforme', [JuntaController::class, 'generar_informe'])->middleware('auth')->name('admin.juntas.generar');
 
-Route::get('admin/userjun/informe', [UserjunController::class, 'informe'])->middleware('auth')->name('admin.userjun.informe');
-Route::post('admin/userjun/generarinforme', [UserjunController::class, 'generar_informe'])->middleware('auth')->name('admin.userjun.generar');
+    Route::get('admin/userjun/informe', [UserjunController::class, 'informe'])->middleware('auth')->name('admin.userjun.informe');
+    Route::post('admin/userjun/generarinforme', [UserjunController::class, 'generar_informe'])->middleware('auth')->name('admin.userjun.generar');
+});
+

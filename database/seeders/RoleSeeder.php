@@ -127,7 +127,22 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'admin.actas.edit',
                                 'description' => 'Editar actas y asistencias'])->syncRoles([$role1]);
         Permission::create(['name' => 'admin.actas.destroy',
-                                    'description' => 'Eliminar actas y asistencias'])->syncRoles([$role1]);  
+                                    'description' => 'Eliminar actas y asistencias'])->syncRoles([$role1]); 
+
+        Permission::create(['name' => 'admin.pcertificado.index',
+                                'description' => 'Ver listado de certificados otorgados a usuarios que no pertenecen a la junta'])->syncRoles([$role2]);
+        Permission::create(['name' => 'admin.pcertificado.create',
+                                'description' => 'Crear registro de pago de certificado a usuarios que no pertenecen a la junta'])->syncRoles([$role2]);
+        Permission::create(['name' => 'admin.pcertificado.edit',
+                                'description' => 'Editar registro de pago de certificado que no pertenecen a la junta'])->syncRoles([$role2]);
+        Permission::create(['name' => 'admin.pcertificado.destroy',
+                                    'description' => 'Eliminar registro de pago de certificado que no pertenecen a la junta'])->syncRoles([$role2]); 
+        
+        
+        Permission::create(['name' => 'admin.informes',
+                                    'description' => 'Crear informes'])->syncRoles([$role1]);
+        Permission::create(['name' => 'admin.certificados',
+                                    'description' => 'Crear certificados'])->syncRoles([$role1]);
 }
 
 }

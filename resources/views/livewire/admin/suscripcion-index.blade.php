@@ -51,19 +51,19 @@
                             </td>
                             <td>{{ $sus->Observaciones }}</td>
                             <td>
-                                @can('admin.psuscripcion.index')
+                                @can('admin.certificados')
                                     <a class="btn btn-info btn-sm" href="{{ route('admin.psuscripcion.buscador', $sus) }}"><i class="fas fa-file-alt"></i></a>
                                 @endcan
                             </td>
                             <td>
-                                @can('admin.psuscripcion.index')
+                                @can('admin.certificados')
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-warning btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <i class="fas fa-file"></i>
                                         </button>
                                         <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="{{route('admin.psuscripcion.pazsalvo', $sus) }}">junta - Pazysalvo</a>
-                                        <a class="dropdown-item" href="{{route('admin.psuscripcion.afiliacion', $sus) }}">junta - Afiliacion</a>
+                                        <a class="dropdown-item"  target="_blank" href="{{route('admin.psuscripcion.pazsalvo', $sus) }}">junta - Pazysalvo</a>
+                                        <a class="dropdown-item"  target="_blank" href="{{route('admin.psuscripcion.afiliacion', $sus) }}">junta - Afiliacion</a>
                                         </div>
                                     </div>
                                 @endcan

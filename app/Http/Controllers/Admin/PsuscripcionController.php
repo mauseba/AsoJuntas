@@ -7,7 +7,6 @@ use App\Models\Junta;
 use Illuminate\Http\Request;
 use App\Models\Psuscripcion;
 use Barryvdh\DomPDF\Facade as PDF;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 use App\Models\UserJun;
 use Illuminate\Support\Arr;

@@ -36,7 +36,7 @@
         </h4><br>
         <p style="text-align:justify; font-size: 13pt;">
             El (la) señor(a) <strong  style="text-transform:uppercase;" >{{$datosu['nombre']}}</strong>  identificado(a) con {{$datosu['Tdocumento']}}  N° {{$datosu['Documento']}} expedida en {{$datosu['Expedido']}}, verificado
-            que se encuentra en la base de datos identificado con el numero {{$datosu['ID']}}, y con reconocimiento de la gobernación del 
+            que se encuentra en la base de datos identificado con el numero {{$datosu['id']}}, y con reconocimiento de la gobernación del 
             Huila, bajo código de registro n°0031 a fecha  de 31-01-2017. <br><br>
 
 

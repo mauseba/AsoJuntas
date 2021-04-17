@@ -12,11 +12,11 @@
 <div class="row">
     <div class="col-3">
         <div class="form-group">
-            {!! Form::label('ID', 'Id de afiliacion:') !!}
-            {!! Form::text('ID', $userl->id, ['class' => 'form-control', 'readonly']) !!}
+            {!! Form::label('id', 'Id de afiliacion:') !!}
+            {!! Form::text('id', $userl->id, ['class' => 'form-control', 'readonly']) !!}
     
     
-            @error('ID')
+            @error('id')
                 <span class="text-danger">{{ $message }}</span>
             @enderror
     

@@ -3,10 +3,14 @@
 @section('title', 'Asojuntas')
 
 @section('content_header')
+@can('admin.userjun.create')
+    <a class="btn btn-success float-right" href="{{route('admin.userjun.create')}}">Crear Afiliado</a>
+@endcan
 
-<a class="btn btn-success float-right" href="{{route('admin.userjun.create')}}">Crear usuario</a>
+@can('admin.informes')
+    <button class="btn btn-warning  float-right d-inline" data-toggle="modal" data-target="#exampleModal" data-backdrop="static" >Crear informe</button>
+@endcan
 
-<button class="btn btn-warning  float-right d-inline" data-toggle="modal" data-target="#exampleModal" data-backdrop="static" >Crear informe</button>
 <h1>Lista de afiliados de juntas</h1>
 
 @include('admin.userjun.informe') <br>

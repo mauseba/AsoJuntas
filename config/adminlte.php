@@ -242,6 +242,7 @@ return [
         ],
         [
         'text'        => 'Gestion de juntas',
+        'can'       => 'admin.juntas.index',
         'icon'        => 'fas fa-people-arrows',
         'submenu'  =>[
                 [
@@ -367,12 +368,19 @@ return [
             'icon'      => 'fas fa-cash-register',
             'can'       => 'admin.psuscripcion.index'
         ],
-       /* [
+        [
             'text'       => 'Pagos y Certificados',
-            'route'        => 'admin.psuscripcion.index',
-            'icon'      => 'fas fa-fw fa-clipboard',
-            'can'       => 'admin.posts.index'
-        ],*/
+            'route'        => 'admin.pcertificado.index',
+            'icon'      => 'fas fa-money-bill-wave',
+            'can'       => 'admin.pcertificado.index'
+        ],
+        [
+            'text'       => 'Solicitud de certificados',
+            'route'        => 'admin.pcertificado.create',
+            'icon'      => 'fas fa-money-bill-wave',
+            'can'       => 'admin.pcertificado.create'
+        ],
+        
        
     ],
     

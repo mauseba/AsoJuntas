@@ -3,7 +3,20 @@
 @section('title', 'Asojuntas')
 
 @section('content_header')
+    @if($errors->any())
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>ERROR!</strong><br> Porfavor corrige los siguientes errores:
+        <ul>
+            @foreach ( $errors->all()  as $error )
+            <li>{{$error}}</li> 
+            @endforeach
+        </ul>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </div>
+    @endif
     <h1>Crear Afiliados de junta</h1>
+    
 @stop
 
 @section('content')

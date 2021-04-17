@@ -3,8 +3,13 @@
 @section('title', 'Asojuntas')
 
 @section('content_header')
-    <a class="btn btn-success float-right d-inline" href="{{route('admin.juntas.create')}}">Nueva junta</a>
-    <button class="btn btn-warning  float-right d-inline" data-toggle="modal" data-target="#exampleModal" data-backdrop="static" >Crear informe</button>
+    @can('admin.juntas.create')
+        <a class="btn btn-success float-right d-inline" href="{{route('admin.juntas.create')}}">Nueva junta</a>  
+    @endcan
+    
+    @can('admin.informes')
+        <button class="btn btn-warning  float-right d-inline" data-toggle="modal" data-target="#exampleModal" data-backdrop="static" >Crear informe</button>
+    @endcan
     <h1>Mostrar lista de Juntas</h1>
     
     @include('admin.juntas.informe') <br>

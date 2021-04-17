@@ -13,6 +13,7 @@ use Barryvdh\DomPDF\Facade as PDF;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\UserJunExport;
 use App\Models\Comision;
+use Illuminate\Support\Facades\Validator;
 use PhpParser\Builder\Function_;
 
 class UserjunController extends Controller
@@ -60,22 +61,35 @@ class UserjunController extends Controller
      */
     public function store(Request $request)
     {
-    /*$request->validate([
-            'nombre[]'  => 'required|array',
-            'Tip_identificacion[]' => 'required',
-            'Num_identificacion[]'=>'numeric|required|unique:userjun|digits_between:7,11',
-            'Num_contacto[]'=> 'numeric|required',
-            'Niv_educacion[]' => 'required',
-            'Correo[]' => 'required|email',
-            'Cargo[]'=> 'required',
-            'junta_id[]'=> 'required'
-        ]);*/
+      $rules = array(
+        '*.nombre'  => 'required',
+        '*.Tip_identificacion' => 'required',
+        '*.Num_identificacion'=>'numeric|required|unique:user_juns|digits_between:7,11',
+        '*.Direccion' => 'required' ,
+        '*.Genero'  => 'required' ,
+        '*.Edad'  => 'numeric|required',
+        '*.Num_contacto'=> 'numeric|required',
+        '*.Niv_educacion' => 'required',
+        '*.Correo' => 'required|email',
+        '*.Cargo'=> 'required',
+        '*.junta_id'=> 'required'
+      );
 
-       $url = [];
+        $url = [];
+
         foreach($request->except('_token') as $key => $value) {
             for($i = 0; $i < count($value); ++$i) {
                 $url[$i][$key] = $value[$i];
             }
+        }
+
+        $validate=Validator::make($url, $rules);
+
+        if($validate->fails())
+        {
+            return redirect()->back()
+                ->withErrors($validate->errors())
+                ->withInput($url);
         }
        
        foreach($url as $ur){
