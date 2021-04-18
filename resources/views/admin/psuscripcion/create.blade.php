@@ -4,7 +4,11 @@
 
 @section('content_header')
     <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        <strong>Nota</strong> Al crear un registro de pago de tipo bimestral, ingrese el primer mes correspondiente al pago.
+        <strong>Nota</strong>
+        <ul>
+            <li>Al crear un registro de pago de tipo bimestral, ingrese el primer mes correspondiente al pago.</li>
+            <li>Al crear un registro de pago de tipo sucripcion, asegurese que no se ha creado un registro con anterioridad.</li>
+        </ul> 
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
         </button>

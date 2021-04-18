@@ -100,9 +100,10 @@ class PsuscripcionController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function validar($data)
+    public function validar($data,$junta)
     {
         if ($data['tipo']=='suscripcion'){
+
             $validate = Psuscripcion::select('Mes', 'Junta_id', 'tipo')
             ->where([
                 ['Mes', $data['Mes']],
@@ -113,9 +114,11 @@ class PsuscripcionController extends Controller
                 ['tipo', 'suscripcion']
             ])->get();
 
-            if (count($validate) == 0) {
+            if (count($validate) == 1 && $junta == $data['junta_id']) {
                 return true;
-            } else {
+            } elseif(count($validate) == 0) {
+                return true;
+            }else{
                 return false;
             }
         }
@@ -161,7 +164,7 @@ class PsuscripcionController extends Controller
 
                 $Ndata = Arr::set($data, 'Mes', $this->cambiarMes($data['Mes']));
 
-                if ($this->validar($Ndata)) {
+                if ($this->validar($Ndata,'')) {
                     if ($request->hasFile('Comprobante')) {
                         $Ndata['Comprobante'] = Storage::put('Comprobantes', $request->file('Comprobante'));
                     }
@@ -174,7 +177,7 @@ class PsuscripcionController extends Controller
 
             case 'suscripcion':
 
-                if ($this->validar($data)) {
+                if ($this->validar($data,'')) {
                     if ($request->hasFile('Comprobante')) {
                         $data['Comprobante'] = Storage::put('Comprobantes', $request->file('Comprobante'));
                     }
@@ -302,21 +305,6 @@ class PsuscripcionController extends Controller
         return view('admin.psuscripcion.edit', compact('juntas', 'psuscripcion'));
     }
 
-    public function validarEdit($data, $junta)
-    {
-        $validate = Psuscripcion::select('Mes', 'Junta_id')
-            ->where([
-                ['Mes', $data['Mes']],
-                ['Junta_id', $data['junta_id']]
-            ])->get();
-
-        if ((count($validate) == 0 && $data['tipo'] == 'suscripcion') || $junta == $data['junta_id']) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     /**
      * Update the specified resource in storage.
      *
@@ -336,20 +324,48 @@ class PsuscripcionController extends Controller
         ]);
 
         $data = $request->except('_token');
+        switch ($data['tipo']) {
+            case 'bimestral':
 
-        if ($this->validarEdit($data, $psuscripcion['junta_id'])) {
-            if ($request->hasFile('Comprobante')) {
-                Storage::delete($psuscripcion->Comprobante);
-                $data['Comprobante'] = Storage::put('Comprobantes', $request->file('Comprobante'));
-            }
+                $Ndata = Arr::set($data, 'Mes', $this->cambiarMes($data['Mes']));
 
-            $psuscripcion->update($data);
+                if ($this->validar($Ndata, $psuscripcion['junta_id'])) {
+                    if ($request->hasFile('Comprobante')) {
+                        Storage::delete($psuscripcion->Comprobante);
+                        $Ndata['Comprobante'] = Storage::put('Comprobantes', $request->file('Comprobante'));
+                    }
 
-            return redirect()->route('admin.psuscripcion.index')->with('info', 'El registro de pago, se edito con exito');
-        } else {
+                    $psuscripcion->update($Ndata);
 
-            return redirect()->route('admin.psuscripcion.index')->with('error', 'Ya se añadio el recibo de pago, a la fecha seleccionada');
+                    return redirect()->route('admin.psuscripcion.index')->with('info', 'El registro de pago, se edito con exito');
+                } else {
+                    return redirect()->route('admin.psuscripcion.index')->with('error', 'Ya se añadio el recibo de pago, a la fecha seleccionada');
+                }
+                break;
+
+            case 'suscripcion':
+
+                if ($this->validar($data, $psuscripcion['junta_id'])) {
+                    if ($request->hasFile('Comprobante')) {
+                        Storage::delete($psuscripcion->Comprobante);
+                        $data['Comprobante'] = Storage::put('Comprobantes', $request->file('Comprobante'));
+                    }
+        
+                    $psuscripcion->update($data);
+        
+                    return redirect()->route('admin.psuscripcion.index')->with('info', 'El registro de pago, se edito con exito');
+                } else {
+        
+                    return redirect()->route('admin.psuscripcion.index')->with('error', 'Ya se añadio el recibo de pago, a la fecha seleccionada');
+                }
+                break;
+
+            default:
+                return redirect()->route('admin.psuscripcion.index')->with('error', 'Algo salio mal');
+                break;
         }
+
+      
     }
 
     /**

@@ -106,7 +106,7 @@ class PcertificadoController extends Controller
                 return $pdf;
                 break;
             default:
-            return redirect()->route('admin.pcertificado.index')->with('error', 'Ha ocurrido un error');
+                return redirect()->route('admin.pcertificado.index')->with('error', 'Ha ocurrido un error');
                 break;
         }
 

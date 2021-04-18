@@ -45,6 +45,7 @@
                 <h2>INFORME DE JUNTAS DE ACCION COMUNAL</h2>
                 <h3>ASOJUNTAS - Asociacion de juntas de Accion comunal del municipio de Algeciras</h3>
                 <pre>
+                   Informe generado por: <strong>{{auth()->user()->name}}</strong>
                    Juntas registradas entre el: {{$input['txtFechaInicial']}}
                    hasta: {{$input['txtFechaFinal']}}
                 </pre>

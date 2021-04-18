@@ -44,6 +44,7 @@
                 <h2>INFORME DE AFILIADOS</h2>
                 <h3>ASOJUNTAS - Asociacion de juntas de Accion comunal del municipio de Algeciras</h3>
                 <pre>
+                    Informe generado por: <strong>{{auth()->user()->name}}</strong>
                     Afiliados registrados entre el: {{$input['txtFechaInicial']}}
                     hasta: {{$input['txtFechaFinal']}}
                  </pre>
