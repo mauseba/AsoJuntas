@@ -7,6 +7,7 @@
         <th>Direccion</th>
         <th>Nombre</th>
         <th>Correo</th>
+        <th>Resolucion</th>
         <th>D_Recibopago</th>
         <th>D_NIT</th>
         <th>D_Resolucion</th>
@@ -25,6 +26,7 @@
             <td>{{ $junta->Direccion }}</td>
             <td>{{ $junta->Nombre }}</td>
             <td>{{ $junta->Correo }}</td>
+            <td>{{ $junta->Resolucion }}</td>
             <td>{{ $junta->D_Recibopago }}</td>
             <td>{{ $junta->D_NIT }}</td>
             <td>{{ $junta->D_Resolucion }}</td>
