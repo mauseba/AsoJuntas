@@ -29,6 +29,19 @@
 </div>
 
 @stop
+@section('footer')
+    <div class="text-center">
+        <strong> 
+            Copyright © 2021 
+            <a href="/">Asojuntas</a>.
+        </strong>
+        All rights reserved.
+        <div class="float-right d-none d-sm-block">
+            <b>Version</b>
+            1.0
+        </div>
+    </div>
+@stop
 
 
 @section('js')

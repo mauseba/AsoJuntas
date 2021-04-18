@@ -37,6 +37,19 @@
     </div>
     <a class="btn btn-secondary" href="{{route('admin.eps.index')}}">Volver</a>
 @stop
+@section('footer')
+    <div class="text-center">
+        <strong> 
+            Copyright © 2021 
+            <a href="/">Asojuntas</a>.
+        </strong>
+        All rights reserved.
+        <div class="float-right d-none d-sm-block">
+            <b>Version</b>
+            1.0
+        </div>
+    </div>
+@stop
 
 @section('css')
     <link rel="stylesheet" href="/css/admin_custom.css">
