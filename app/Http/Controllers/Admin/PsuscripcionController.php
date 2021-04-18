@@ -133,7 +133,9 @@ class PsuscripcionController extends Controller
 
             if (count($validate) == 0) {
                 return true;
-            } else {
+            } elseif(count($validate) == 1 && $junta == $data['junta_id']) {
+                return true;
+            }else{
                 return false;
             }
         }
