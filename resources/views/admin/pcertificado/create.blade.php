@@ -9,6 +9,7 @@
 @section('content')
 <div class="card">
     <div class="card-header">
+        <p class="float-left">Usuario: <strong>{{auth()->user()->name}}</strong> </p>
         @can('admin.pcertificado.index')
         <a class="btn btn-danger float-right" href="{{route('admin.pcertificado.index')}}"><i class="fas fa-window-close"></i></a>
         @endcan
