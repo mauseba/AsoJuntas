@@ -47,7 +47,7 @@ return [
 
     'logo' => '<b>Aso</b>JUNTAS',
     'logo_img' => 'vendor/adminlte/dist/img/image.png',
-    'logo_img_class' => 'brand-image img-circle elevation-2',
+    'logo_img_class' => 'brand-image img-rounded elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
     'logo_img_alt' => 'Asojuntas',
