@@ -73,6 +73,7 @@
                 <th >Escrituras</td> 
                 <th >Sisben</td> 
                 <th  >Sub Vivienda</td> 
+                <th  >Sub Gobierno</td> 
                 <th >Piso</td> 
                 <th >Techo</td> 
                 <th >Pañete</td> 
@@ -98,6 +99,7 @@
                 <td>{{$censos->escrituras}}</td>
                 <td>{{$censos->sisben}}</td>
                 <td>{{$censos->sub_vivienda}}</td>
+                <td>{{$censos->sub_gobierno}}</td>
                 <td>{{$censos->piso}}</td>
                 <td>{{$censos->techo}}</td>
                 <td>{{$censos->pañete}}</td>
@@ -126,6 +128,7 @@
                 <th >EPS</th>
                 <th >Discapacidad</th>
                 <th >Nivel Educativo</th>
+                <th >Sub Gobierno</th>
                 <th >Afiliado</th>
                 
              
@@ -145,6 +148,7 @@
                             <td>{{$beneficiario->salud}}</td>
                             <td>{{$beneficiario->discap}}</td>
                             <td>{{$beneficiario->nivel_edu}}</td>
+                            <td>{{$beneficiario->sub_gobierno}}</td>
                             <td>{{$beneficiario->user['name']}}</td>
                         </tr>
             @endforeach

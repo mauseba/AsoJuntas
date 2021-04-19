@@ -155,6 +155,7 @@
                 <td>{{$beneficiario->salud}}</td>
                 <td>{{$beneficiario->discap}}</td>
                 <td>{{$beneficiario->nivel_edu}}</td>
+                <td>{{$beneficiario->sub_gobierno}}</td>
                 <td>{{$beneficiario->updated_at->format('Y-m-d')}}</td>
             </tr>
             @endforeach
