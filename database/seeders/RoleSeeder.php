@@ -75,6 +75,7 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'admin.barrios.destroy',
                             'description' => 'Eliminar barrio'])->syncRoles([$role1]);
 
+    
         Permission::create(['name' => 'admin.eventos.index',
                              'description' => 'Ver Calendario'])->syncRoles([$role1]);
         Permission::create(['name' => 'admin.eventos.create',
@@ -145,4 +146,8 @@ class RoleSeeder extends Seeder
                                     'description' => 'Crear certificados'])->syncRoles([$role1]);
 }
 
+    }
 }
+
+
+

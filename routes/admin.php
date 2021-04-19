@@ -42,6 +42,7 @@ Route::resource('censo', CensoController::class)->except('show')->names('admin.c
 
 Route::resource('beneficiarios', BeneficiariosController::class)->except('show')->names('admin.beneficiarios');
 
+
 Route::resource('juntas', JuntaController::class)->except('show')->names('admin.juntas');
 
 Route::resource('eventos', EventoController::class)->names('admin.eventos');

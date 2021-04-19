@@ -8,12 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Beneficiarios extends Model
 {
     use HasFactory;
-     
+
     // protected $fillable = ['name', 'tipo_doc', 'numero', 'edad','genero','tipo_salud','salud','discap','nivel_edu'];
     protected $table = 'beneficiarios';
 
     public function user()
     {
-        return $this->belongsTo('App\Models\User','user_id');
+        return $this->belongsTo('App\Models\User');
+    }
+    public function censo()
+    {
+        return $this->hasOne('App\Models\Censo\Censo');
     }
 }

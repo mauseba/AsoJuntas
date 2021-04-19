@@ -24,6 +24,7 @@ Route::get('beneficiarios', [BeneficiariosController::class, 'index'])->name('be
 Route::post('beneficiarios', [BeneficiariosController::class, 'store'])->middleware('auth');
 Route::patch('beneficiarios/{beneficiarios}', [BeneficiariosController::class, 'update'])->middleware('auth');;
 Route::get('beneficiarios/{beneficiarios}/edit', [BeneficiariosController::class, 'edit'])->middleware('auth');;
+Route::delete('beneficiarios/{beneficiarios}', [BeneficiariosController::class, 'destroy'])->middleware('auth');;
 
 Route::resource('censo', CensoController::class)->names('censo')->middleware('auth');
 

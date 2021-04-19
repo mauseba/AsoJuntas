@@ -40,7 +40,7 @@
         <tr>
             <td valign="top"><img src="{{asset('imagenes/logo.png')}}" alt="" width="150"/></td>
             <td align="right">
-                <h2>INFORME CENSO DATOS BÁSICOS </h2>
+                <h2>INFORME CENSO INDIVIDUAL </h2>
                 <h4>Generado por: {{ Auth::user()->name }} </h2>                
                 <h3>Asociación de juntas de Accion comunal del municipio de Algeciras</h3>
                 <pre>
@@ -52,11 +52,11 @@
 
     </table>
     <br/>
-    <table width="100%">
+   {{--  <table width="100%">
         <tr>
-            <td><h2>DATOS BÁSICOS</h2></td>
+            <td><h2>CENSO COMUNAL INDIVIDUAL</h2></td>
         </tr>
-    </table>
+    </table> --}}
     
     <table width="100%">
         <thead style="background-color: lightgray;">
@@ -73,12 +73,14 @@
                 <th >Escrituras</td> 
                 <th >Sisben</td> 
                 <th  >Sub Vivienda</td> 
+                <th  >Sub Gobierno</td> 
                 <th >Piso</td> 
                 <th >Techo</td> 
                 <th >Pañete</td> 
                 <th >Baños</td> 
                 <th >Baño Nuevo</td> 
-                <th >Vivienda Nueva</td>               
+                <th >Vivienda Nueva</td>                                             
+                <th >Actualizado</td>               
             </tr>
         </thead>
         <tbody>
@@ -97,12 +99,14 @@
                 <td>{{$censos->escrituras}}</td>
                 <td>{{$censos->sisben}}</td>
                 <td>{{$censos->sub_vivienda}}</td>
+                <td>{{$censos->sub_gobierno}}</td>
                 <td>{{$censos->piso}}</td>
                 <td>{{$censos->techo}}</td>
                 <td>{{$censos->pañete}}</td>
                 <td>{{$censos->baños}}</td>
                 <td>{{$censos->baño_nuevo}}</td>
-                <td>{{$censos->vivienda_nueva}}</td>   
+                <td>{{$censos->vivienda_nueva}}</td>                   
+                 <td>{{$censos->updated_at->format('Y-m-d')}}</td> 
             </tr>
             
             @endforeach
@@ -124,6 +128,7 @@
                 <th >EPS</th>
                 <th >Discapacidad</th>
                 <th >Nivel Educativo</th>
+                <th >Sub Gobierno</th>
                 <th >Afiliado</th>
                 
              
@@ -143,6 +148,7 @@
                             <td>{{$beneficiario->salud}}</td>
                             <td>{{$beneficiario->discap}}</td>
                             <td>{{$beneficiario->nivel_edu}}</td>
+                            <td>{{$beneficiario->sub_gobierno}}</td>
                             <td>{{$beneficiario->user['name']}}</td>
                         </tr>
             @endforeach

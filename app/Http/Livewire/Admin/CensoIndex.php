@@ -34,59 +34,48 @@ class CensoIndex extends Component
     public $baño_nuevo;
     public $vivienda_nueva;
     public $afiliado;
+    public $subsidio;
 
-    
-    public function updatingSearch(){
-        $this->resetPage();    
+
+    public function updatingSearch()
+    {
+        $this->resetPage();
     }
 
     public function render()
     {
-            
-        $censo = Censo::where('barrio', 'LIKE', '%' . $this->barrio .'%' )
-                    ->Where('direccion', 'LIKE', '%' . $this->direccion .'%')
-                    ->Where('tipo_vivienda', 'LIKE', '%' . $this->tipo_vivienda .'%')
-                    ->Where('energia', 'LIKE', '%' . $this->energia .'%')
-                    ->Where('gas', 'LIKE', '%' . $this->gas .'%')
-                    ->Where('agua', 'LIKE', '%' . $this->agua .'%')
-                    ->Where('alcantarilla', 'LIKE', '%' . $this->alcantarilla .'%')
-                    ->Where('sisben', 'LIKE', '%' . $this->sisben .'%')
-                    ->Where('sub_vivienda', 'LIKE', '%' . $this->sub_vivienda .'%')
-                    ->Where('piso', 'LIKE', '%' . $this->piso .'%')
-                    ->Where('techo', 'LIKE', '%' . $this->techo .'%')
-                    ->Where('pañete', 'LIKE', '%' . $this->pañete .'%')
-                    ->Where('baños', 'LIKE', '%' . $this->baños .'%')
-                    ->Where('baño_nuevo', 'LIKE', '%' . $this->baño_nuevo .'%')
-                    ->Where('vivienda_nueva', 'LIKE', '%' . $this->vivienda_nueva .'%')                
-                    ->Where('user_id', 'LIKE', '%' . $this->afiliado .'%')                
-                    ->paginate(10);
+        $user = User::all()->sortby('name');
 
-        
-        return view('livewire.admin.censo-index',compact('censo'));
-    }
-    public function exportar(){
-        set_time_limit(300);  
-        $censo = Censo::where('barrio', 'LIKE', '%' . $this->barrio .'%' )
-                    ->Where('direccion', 'LIKE', '%' . $this->direccion .'%')
-                    ->Where('tipo_vivienda', 'LIKE', '%' . $this->tipo_vivienda .'%')
-                    ->Where('energia', 'LIKE', '%' . $this->energia .'%')
-                    ->Where('gas', 'LIKE', '%' . $this->gas .'%')
-                    ->Where('agua', 'LIKE', '%' . $this->agua .'%')
-                    ->Where('alcantarilla', 'LIKE', '%' . $this->alcantarilla .'%')
-                    ->Where('sisben', 'LIKE', '%' . $this->sisben .'%')
-                    ->Where('sub_vivienda', 'LIKE', '%' . $this->sub_vivienda .'%')
-                    ->Where('piso', 'LIKE', '%' . $this->piso .'%')
-                    ->Where('techo', 'LIKE', '%' . $this->techo .'%')
-                    ->Where('pañete', 'LIKE', '%' . $this->pañete .'%')
-                    ->Where('baños', 'LIKE', '%' . $this->baños .'%')
-                    ->Where('baño_nuevo', 'LIKE', '%' . $this->baño_nuevo .'%')
-                    ->Where('vivienda_nueva', 'LIKE', '%' . $this->vivienda_nueva .'%')                
-                    ->Where('user_id', 'LIKE', '%' . $this->afiliado .'%')                                    
-                    ->get();
+        $censo = Censo::where('barrio', 'LIKE', '%' . $this->barrio . '%')
+            ->Where('direccion', 'LIKE', '%' . $this->direccion . '%')
+            ->Where('tipo_vivienda', 'LIKE', '%' . $this->tipo_vivienda . '%')
+            ->Where('energia', 'LIKE', '%' . $this->energia . '%')
+            ->Where('gas', 'LIKE', '%' . $this->gas . '%')
+            ->Where('agua', 'LIKE', '%' . $this->agua . '%')
+            ->Where('alcantarilla', 'LIKE', '%' . $this->alcantarilla . '%')
+            ->Where('sisben', 'LIKE', '%' . $this->sisben . '%')
+            ->Where('sub_vivienda', 'LIKE', '%' . $this->sub_vivienda . '%')
+            ->Where('piso', 'LIKE', '%' . $this->piso . '%')
+            ->Where('techo', 'LIKE', '%' . $this->techo . '%')
+            ->Where('pañete', 'LIKE', '%' . $this->pañete . '%')
+            ->Where('baños', 'LIKE', '%' . $this->baños . '%')
+            ->Where('baño_nuevo', 'LIKE', '%' . $this->baño_nuevo . '%')
+            ->Where('vivienda_nueva', 'LIKE', '%' . $this->vivienda_nueva . '%')
+            ->Where('sub_gobierno', 'LIKE', '%' . $this->subsidio . '%')
+            ->Where('user_id', 'LIKE',  $this->afiliado)
+            ->paginate(10);
 
-        $beneficiarios = Beneficiarios::all();
-       
-       $pdf = PDF::loadView('pdf.censo',compact('censo','beneficiarios'))->setPaper('letter', 'landscape')->stream('informeBeneficiarios.pdf');                
-       return $pdf;
+
+        return view('livewire.admin.censo-index', compact('censo', 'user'));
     }
-} 
+    public function exportar()
+    {
+        set_time_limit(300);
+        $censo = Censo::Where('user_id', 'LIKE',  $this->afiliado)
+            ->get();
+        $beneficiarios = Beneficiarios::Where('user_id', 'LIKE', $this->afiliado)
+            ->get();
+        $pdf = PDF::loadView('pdf.censo', compact('censo', 'beneficiarios'))->setPaper('a4', 'landscape')->output();
+        return response()->streamDownload(fn () => print($pdf), "Informe_Censo_Individual.pdf");
+    }
+}
