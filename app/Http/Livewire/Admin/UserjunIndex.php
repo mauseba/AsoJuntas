@@ -24,9 +24,7 @@ class UserjunIndex extends Component
         ->where('Num_identificacion', 'LIKE','%' . $this->search . '%')
         ->orWhere('juntas.Nombre', 'LIKE','%' . $this->search . '%')
         ->latest('id')
-        ->paginate();
-
-        
+        ->paginate();        
 
         return view('livewire.admin.userjun-index',compact('userj'));
     }

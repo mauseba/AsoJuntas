@@ -9,6 +9,7 @@
     @if ($userj->count())
         
         <div class="card-body table-responsive">
+            
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -56,7 +57,14 @@
         </div>
         
         <div class="card-footer">
-            {{$userj->links()}}
+            <div class="row">
+                <div class="col">
+                    {{$userj->links()}}
+                </div>
+                <div class="col">
+                    <p class="float-right">Cantidad de registros: <strong>{{$userj->count()}}</strong> </p>
+                </div>
+            </div>
         </div>
     @else
         <div class="card-body">

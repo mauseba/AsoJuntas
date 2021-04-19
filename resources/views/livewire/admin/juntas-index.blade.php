@@ -79,7 +79,14 @@
             </table>
         </div>
         <div class="card-footer">
-            {{$juntas->links()}}
+            <div class="row">
+                <div class="col">
+                    {{$juntas->links()}}
+                </div>
+                <div class="col">
+                    <p class="float-right">Cantidad de registros: <strong>{{$juntas->count()}}</strong> </p>
+                </div>
+            </div>
         </div>
     @else
 
