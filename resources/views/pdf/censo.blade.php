@@ -40,7 +40,7 @@
         <tr>
             <td valign="top"><img src="{{asset('imagenes/logo.png')}}" alt="" width="150"/></td>
             <td align="right">
-                <h2>INFORME CENSO DATOS BÁSICOS </h2>
+                <h2>INFORME CENSO INDIVIDUAL </h2>
                 <h4>Generado por: {{ Auth::user()->name }} </h2>                
                 <h3>Asociación de juntas de Accion comunal del municipio de Algeciras</h3>
                 <pre>
@@ -52,11 +52,11 @@
 
     </table>
     <br/>
-    <table width="100%">
+   {{--  <table width="100%">
         <tr>
-            <td><h2>DATOS BÁSICOS</h2></td>
+            <td><h2>CENSO COMUNAL INDIVIDUAL</h2></td>
         </tr>
-    </table>
+    </table> --}}
     
     <table width="100%">
         <thead style="background-color: lightgray;">
@@ -78,7 +78,8 @@
                 <th >Pañete</td> 
                 <th >Baños</td> 
                 <th >Baño Nuevo</td> 
-                <th >Vivienda Nueva</td>               
+                <th >Vivienda Nueva</td>                                             
+                <th >Actualizado</td>               
             </tr>
         </thead>
         <tbody>
@@ -102,7 +103,8 @@
                 <td>{{$censos->pañete}}</td>
                 <td>{{$censos->baños}}</td>
                 <td>{{$censos->baño_nuevo}}</td>
-                <td>{{$censos->vivienda_nueva}}</td>   
+                <td>{{$censos->vivienda_nueva}}</td>                   
+                 <td>{{$censos->updated_at->format('Y-m-d')}}</td> 
             </tr>
             
             @endforeach

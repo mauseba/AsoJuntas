@@ -4,9 +4,9 @@
 
 @section('content_header')
 
-   {{--  @can('admin.barrios.create')
-        <a class="btn btn-secondary btn-sm float-right" href="{{route('admin.beneficiar.create')}}">Ingresar Barrio/Vereda</a>
-    @endcan --}}
+    {{-- @can('admin.barrios.create') --}}
+        <a class="btn btn-secondary btn-sm float-right" href="{{route('admin.beneficiarios.create')}}">Agregar beneficiario</a>
+    {{-- @endcan --}}
     
     <h1>Listado Beneficiarios</h1>
 @stop

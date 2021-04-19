@@ -33,9 +33,8 @@
 
    
         @livewire('navigation')
-        @include('Slider.slider')
-       
-        <div class="min-h-screen">
+        {{-- @include('Slider.slider') --}}
+        <div class="">
 
             <!-- Page Content -->
             <main>

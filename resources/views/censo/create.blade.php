@@ -33,7 +33,7 @@
                   </label>
                   
                   <select name="barrio" class="form-select block w-full mt-1">
-                    <option selected hidden> -- Seleccionar -- </option>
+                    <option selected hidden>Seleccionar</option>
                     @foreach($barrios as $bar)
                       <option>{{$bar->name}}</option>
                     @endforeach                   
@@ -56,7 +56,7 @@
                    {{-- {{ Form::text('tipo_vivienda', Input::old('tipo_vivienda'), ['class'=> 'form-input mt-1 block w-full'])  }} --}}
                    <select id="tipo_vivienda" name="tipo_vivienda" class="form-select block w-full mt-1" onchange="escrituras();">
                     
-                    <option selected hidden> -- Seleccionar -- </option>
+                    <option selected hidden>Seleccionar</option>
                       <option escrituras="Si">Propia</option>
                       <option escrituras="No">Arriendo</option>
                       <option escrituras="No">Posada</option>
@@ -65,7 +65,7 @@
                   </div>
                   <div class="md:w-1/2 px-3 mb-6 md:mb-0">
                     <label class="text-gray-700" for="grid-city">
-                        {!! Form::label('escrituras', 'Escrituras') !!}
+                        {!! Form::label('escrituras', 'Escrituras/Documentos') !!}
                     </label>
                     
                     {{-- {{ Form::text('escrituras', Input::old('escrituras'), ['class'=> 'form-input mt-1 block w-full']) }} --}}
@@ -166,6 +166,27 @@
                 </div>
                 <div class="md:w-1/2 px-3 mb-6 md:mb-0">
                     <label class="text-gray-700">
+                        {!! Form::label('sub_gobierno', 'Subsidio del Gobierno') !!}
+                    </label>
+
+                    <select name="sub_gobierno" class="form-select block  mt-1">
+                        <option selected hidden value="">Seleccionar</option>    
+                        <option  >Ninguno</option>
+                        <option >Familias en Accion</option>
+                        <option >Jovenes en Accion</option>
+                        <option >Adulto Mayor</option>
+                        <option >Otro</option>
+                    </select>
+                    <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+                        <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20">
+                            <path
+                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                clip-rule="evenodd" fill-rule="evenodd"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+                    <label class="text-gray-700">
                         {!! Form::label('sisben', 'Puntaje Sisben') !!}
                
 
@@ -173,14 +194,12 @@
                      </label>
                      {{-- {{ Form::text('sisben', Input::old('sisben'), ['class'=> 'form-input mt-1 block w-full']) }} --}}
                      <select name="sisben" class="form-select block  mt-1">
-                        <option selected hidden value=""> -- Seleccionar -- </option>                  
-                        <option>No</option>  
-                        <option>0-10</option>
-                          <option>10-20</option>  
-                          <option>20-30</option>  
-                          <option>30-40</option>  
-                          <option>40-50</option>  
-                          <option>Mas de 50</option>                                                              
+                        <option selected hidden value="">Seleccionar</option>                  
+                    <option >No</option>
+                    <option >Grupo A</option>
+                    <option >Grupo B</option>
+                    <option >Grupo C</option>
+                    <option >Grupo D</option>                                                       
                       </select>
                 </div>
 

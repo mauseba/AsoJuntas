@@ -15,22 +15,25 @@ class CreateBeneficiariosTable extends Migration
     {
         Schema::create('beneficiarios', function (Blueprint $table) {
             $table->id();
-            
+
             $table->string('name');
             $table->string('tipo_doc');
             $table->integer('numero');
             $table->integer('edad');
             $table->string('genero');
-            $table->string('tipo_salud');
-            $table->string('salud');
-            $table->string('discap');
+            $table->string('nucleo_fam'); // tipo de nucleo familiar (conyuge,hijo,padre/madre)
+            $table->string('sub_gobierno'); // tipo de subsidio que recibe
+            $table->string('tipo_salud'); // Subsidio, contributivo
+            $table->string('salud'); // EPS
+            $table->string('barrio'); // Barrio
+            $table->string('discap'); // Discapacidad
             $table->string('nivel_edu');
-            
+
 
             $table->unsignedBigInteger('user_id'); //relacion con usuarios
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade'); // llave foranea
-        
+
             $table->timestamps();
         });
         Schema::create('eps', function (Blueprint $table) {

@@ -127,7 +127,10 @@
                 <th >EPS</th>
                 <th >Discapacidad</th>
                 <th >Nivel Educativo</th>
+                <th >Subsidio Gobierno</th>
+                <th >Barrio</th>
                 <th >Afiliado</th>
+                <th >Actualizado</th>
                 
              
             </tr>
@@ -146,7 +149,10 @@
                             <td>{{$beneficiario->salud}}</td>
                             <td>{{$beneficiario->discap}}</td>
                             <td>{{$beneficiario->nivel_edu}}</td>
-                            <td>{{$beneficiario->user['name']}}</td>
+                            <td>{{$beneficiario->sub_gobierno}}</td>
+                            <td>{{$beneficiario->barrio}}</td>
+                            <td>{{$beneficiario->user['name']}}</td>                            
+                            <td>{{$beneficiario->updated_at->format('Y-m-d')}}</td>
                         </tr>
             @endforeach
         </tbody>

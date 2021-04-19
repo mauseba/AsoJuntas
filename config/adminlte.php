@@ -243,7 +243,7 @@ return [
         [
             'text'        => 'Gestion de juntas',
             'icon'        => 'fas fa-people-arrows',
-            'submenu'  =>[
+            'submenu'  => [
                 [
                     'text'        => 'Juntas',
                     'route'         => 'admin.juntas.index',
@@ -262,12 +262,12 @@ return [
 
 
             ]
-           
+
         ],
         [
             'text'        => 'Gestion de Eventos',
             'icon'        => 'fas fa-calendar-alt',
-            'submenu'  =>[
+            'submenu'  => [
                 [
                     'text'        => 'Eventos',
                     'route'         => 'admin.eventos.index',
@@ -280,7 +280,7 @@ return [
                 ]
 
             ]
-           
+
         ],
         [
             'text'        => 'Usuarios',
@@ -296,7 +296,7 @@ return [
         ],
 
         ['header' => 'OPCIONES DE PAGINA PRINCIPAL'],
-        
+
         [
             'text' => 'Categorías',
             'route'  => 'admin.categories.index',
@@ -314,43 +314,43 @@ return [
         [
             'text'        => 'Eps y Barrios',
             'icon'        => '',
-            'submenu'  =>[
+            'submenu'  => [
                 [
                     'text' => 'EPS',
                     'route'  => 'admin.eps.index',
                     'icon' => 'far fa-hospital fa-fw',
-                   'active' => ['admin/eps*'],
+                    'active' => ['admin/eps*'],
                 ],
                 [
                     'text' => 'Barrios',
                     'route'  => 'admin.barrios.index',
                     'icon' => 'fas fa-map-signs fa-fw',
-                   'active' => ['admin/barrios*'],
+                    'active' => ['admin/barrios*'],
                 ]
 
             ]
-           
+
         ],
         [
             'text'        => 'Censo Comunal',
             'icon'        => '',
-            'submenu'  =>[
+            'submenu'  => [
                 [
                     'text'       => 'Beneficiarios',
                     'route'        => 'admin.beneficiarios.index',
                     'icon'      => 'fas fa-house-user',
                 ],
                 [
-                    'text'       => 'Censo',
+                    'text'       => 'Censo Individual',
                     'route'        => 'admin.censo.index',
                     'icon'      => 'far fa-address-book',
                 ]
 
             ]
-           
+
         ],
         ['header' => 'OPCIONES DE PAGINA PRINCIPAL'],
-        
+
         [
             'text'       => 'Lista de Publicaciones',
             'route'        => 'admin.posts.index',
@@ -362,17 +362,17 @@ return [
             'text'       => 'Pagos de Juntas A.C',
             'route'        => 'admin.psuscripcion.index',
             'icon'      => 'fas fa-fw fa-clipboard',
-        // 'can'       => 'admin.psuscripcion.index'
+            // 'can'       => 'admin.psuscripcion.index'
         ],
         [
             'text'       => 'Pagos y Certificados de usuarios',
             'route'        => 'admin.posts.index',
             'icon'      => 'fas fa-fw fa-clipboard',
-        // 'can'       => 'admin.posts.index'
+            // 'can'       => 'admin.posts.index'
         ],
-       
+
     ],
-    
+
 
     /*
     |--------------------------------------------------------------------------
