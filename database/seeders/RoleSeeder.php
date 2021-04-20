@@ -144,9 +144,9 @@ class RoleSeeder extends Seeder
                                     'description' => 'Crear informes'])->syncRoles([$role1]);
         Permission::create(['name' => 'admin.certificados',
                                     'description' => 'Crear certificados'])->syncRoles([$role1]);
-}
-
     }
+
+    
 }
 
 
