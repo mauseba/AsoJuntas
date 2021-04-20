@@ -6,15 +6,18 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Censo\Beneficiarios;
+use App\Models\Censo\Censo;
 use App\Models\Censo\Eps;
+use App\Models\Censo\Barrios;
+use App\Models\User;
 
 use Barryvdh\DomPDF\Facade as PDF;
 
-use App\Models\User;
+
 
 class BeneficiariosController extends Controller
 {
-   /*  public function __construct(){
+    /*  public function __construct(){
 
         $this->middleware('can:admin.barrios.index')->only('index');
         $this->middleware('can:admin.barrios.create')->only('create','store');
@@ -22,20 +25,21 @@ class BeneficiariosController extends Controller
         $this->middleware('can:admin.barrios.destroy')->only('destroy');
     } */
 
-    
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    
+
 
     public function index()
     {
         $eps = Eps::orderBy('name')->get(); // ordenar por nombre
-        $beneficiarios   = Beneficiarios::all();           
-        
-        return view('admin.beneficiarios.index',compact('beneficiarios','eps'));
+        $beneficiarios = Beneficiarios::all();
+
+
+        return view('admin.beneficiarios.index', compact('beneficiarios', 'eps'));
     }
 
     /**
@@ -45,7 +49,10 @@ class BeneficiariosController extends Controller
      */
     public function create()
     {
-        return view('admin.beneficiarios.create');
+        $user = User::all()->sortBy("name");;
+        $barrios = Barrios::orderBy('name')->get();
+        $eps = Eps::orderBy('name')->get();
+        return view('admin.beneficiarios.create', compact('user', 'eps'));
     }
 
     /**
@@ -57,29 +64,35 @@ class BeneficiariosController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-          
-            'name' => 'required|max:45',         
+            'nucleo_fam' => 'required|not_in:Seleccionar',
+            'name' => 'required|max:45',
             'numero' => 'required|max:10|',
-            'tipo_doc' => 'required|not_in: Tipo Doc',
+            'tipo_doc' => 'required|not_in:Seleccionar',
             'edad' => 'required|max:3',
-            'genero' =>'required|in:M,F,O',
-            'tipo_salud' =>'required|in:Ninguna,Subsidiado,Contributivo',
-            'salud'=>'required|not_in:EPS',
-            'discap'=>'required|not_in:Discapacidad',
-            'nivel_edu'=>'required|not_in:Nivel Edu',
-              
+            'genero' => 'required|in:M,F,O',
+            'tipo_salud' => 'required|in:Ninguna,Subsidiado,Contributivo',
+            'salud' => 'required',
+            'discap' => 'required|not_in:Discapacidad',
+            'sub_gobierno' => 'required|not_in:Seleccionar',
+            'nivel_edu' => 'required|not_in:Seleccionar',
+
+
         ]);
- 
-        $beneficiarios = Beneficiarios::create($request->all());
+
+        $beneficiarios = new Beneficiarios();
+
+
+        $barrio = Censo::where('user_id', $request->user_id)->pluck('barrio');
 
         $beneficiarios->name = $request->name;
-        if ($request->edad < 18 and $request->edad > 6 ) {
-            $beneficiarios->tipo_doc= "T.I";
-        }elseif($request->edad <= 7) {
-            $beneficiarios->tipo_doc= "R.C";
-        }else{
-            $beneficiarios->tipo_doc = $request->tipo_doc;
+        if ($request->edad < 18 and $request->edad > 7) {
+            $beneficiarios->tipo_doc = "T.I";
+        } elseif ($request->edad <= 7) {
+            $beneficiarios->tipo_doc = "R.C";
+        } elseif ($request->edad > 18) {
+            $beneficiarios->tipo_doc = "C.C";
         }
+
         $beneficiarios->numero = $request->numero;
         $beneficiarios->edad = $request->edad;
         $beneficiarios->genero = $request->genero;
@@ -87,9 +100,12 @@ class BeneficiariosController extends Controller
         $beneficiarios->salud = $request->salud;
         $beneficiarios->discap = $request->discap;
         $beneficiarios->nivel_edu = $request->nivel_edu;
-        // $beneficiarios->user_Id = $user->id;
-
-        return redirect()->route('admin.barrios.edit', $beneficiarios)->with('info', 'Barrio creado con éxito!');;
+        $beneficiarios->user_id = $request->user_id;
+        $beneficiarios->sub_gobierno = $request->sub_gobierno;
+        $beneficiarios->nucleo_fam = $request->nucleo_fam;
+        $beneficiarios->barrio = $barrio[0];
+        $beneficiarios->save();
+        return redirect()->route('admin.beneficiarios.edit', $beneficiarios)->with('info', 'Beneficiario creado con éxito!');;
     }
 
     /**
@@ -114,7 +130,7 @@ class BeneficiariosController extends Controller
         $eps = Eps::orderBy('name')->get(); // ordenar por nombre
         $beneficiarios = Beneficiarios::find($id);
 
-        return view('admin.beneficiarios.edit', compact('beneficiarios','eps'));
+        return view('admin.beneficiarios.edit', compact('beneficiarios', 'eps'));
     }
 
     /**
@@ -126,31 +142,35 @@ class BeneficiariosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+
         $request->validate([
-          
-            'name' => 'required|max:45',         
+            'nucleo_fam' => 'required|not_in:Seleccionar',
+            'name' => 'required|max:45',
             'numero' => 'required|max:10|',
-            'tipo_doc' => 'required|not_in: Tipo Doc',
+            'tipo_doc' => 'required|not_in:Seleccionar',
             'edad' => 'required|max:3',
-            'genero' =>'required|in:M,F,O',
-            'tipo_salud' =>'required|in:Ninguna,Subsidiado,Contributivo',
-            'salud'=>'required|not_in:EPS',
-            'discap'=>'required|not_in:Discapacidad',
-            'nivel_edu'=>'required|not_in:Nivel Edu',
-              
+            'genero' => 'required|in:M,F,O',
+            'tipo_salud' => 'required|in:Ninguna,Subsidiado,Contributivo',
+            'salud' => 'required',
+            'discap' => 'required|not_in:Discapacidad',
+            'sub_gobierno' => 'required|not_in:Seleccionar',
+            'nivel_edu' => 'required|not_in:Seleccionar',
+
         ]);
 
         //$user = auth()->user(); 
-        $beneficiarios= Beneficiarios::findOrFail($id);
-
+        $beneficiarios = Beneficiarios::findOrFail($id);
+        $barrio = Censo::where('user_id', $beneficiarios->user_id)->pluck('barrio');
+        if (isset($barrio[0]) == false) {
+            return redirect()->route('admin.beneficiarios.edit', $beneficiarios)->with('info', 'Beneficiario sin datos básicos registrados');;
+        }
         $beneficiarios->name = $request->name;
-        if ($request->edad < 18 and $request->edad > 6 ) {
-            $beneficiarios->tipo_doc= "T.I";
-        }elseif($request->edad <= 7) {
-            $beneficiarios->tipo_doc= "R.C";
-        }else{
-            $beneficiarios->tipo_doc = $request->tipo_doc;
+        if ($request->edad < 18 and $request->edad > 7) {
+            $beneficiarios->tipo_doc = "T.I";
+        } elseif ($request->edad <= 7) {
+            $beneficiarios->tipo_doc = "R.C";
+        } elseif ($request->edad > 18) {
+            $beneficiarios->tipo_doc = "C.C";
         }
         $beneficiarios->numero = $request->numero;
         $beneficiarios->edad = $request->edad;
@@ -158,9 +178,10 @@ class BeneficiariosController extends Controller
         $beneficiarios->tipo_salud = $request->tipo_salud;
         $beneficiarios->salud = $request->salud;
         $beneficiarios->discap = $request->discap;
+        $beneficiarios->sub_gobierno = $request->sub_gobierno;
         $beneficiarios->nivel_edu = $request->nivel_edu;
-        
-        
+        $beneficiarios->nucleo_fam = $request->nucleo_fam;
+        $beneficiarios->barrio = $barrio[0];
 
         $beneficiarios->save();
         return redirect()->route('admin.beneficiarios.edit', $beneficiarios)->with('info', 'Beneficiario actualizado con éxito!');;
@@ -177,6 +198,6 @@ class BeneficiariosController extends Controller
         $beneficiarios = Beneficiarios::find($id);
         $beneficiarios->delete();
 
-        return redirect()->route('admin.beneficiarios.index')->with('info', 'Beneficiario eliminado');;
+        return redirect()->route('admin.beneficiarios.index')->with('info', 'Beneficiario eliminado');
     }
 }
