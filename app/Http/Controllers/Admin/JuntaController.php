@@ -160,8 +160,6 @@ class JuntaController extends Controller
         
         return redirect()->route('admin.juntas.index',$junta)->with('info', 'La junta de accion comunal se actualizo correctamente');
     }
-        
-
     
 
     /**
@@ -203,12 +201,15 @@ class JuntaController extends Controller
         }
     }
 
+
     public function generar_pdf($input)
     {
         $info = Junta::select('*')
         ->whereBetween('FechaC',[$input['txtFechaInicial'],$input['txtFechaFinal']])
         ->get();
+
         $cuenta = count($info);
+
         if($cuenta > 0){
             $date = Carbon::now();
             $pdf = PDF::loadView('Admin.pdf.junta', compact('info','cuenta','input','date'))->setPaper('letter', 'landscape')->stream('informe.pdf');
@@ -217,6 +218,7 @@ class JuntaController extends Controller
             return redirect()->route('admin.juntas.index')->with('error', 'No se encuentra ningun registro en las fechas seleccionadas');
         }
     }
+    
     public function generar_excel(){
 
         return Excel::download(new JuntasExport , 'Junta-list.xlsx');

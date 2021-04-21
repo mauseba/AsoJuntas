@@ -21,5 +21,14 @@ class UserJun extends Model
         return $this->belongsTo(Comision::class);
     }
 
+    public function censo()
+    {
+       return $this->hasOne('App\Models\Censo\Censo');
+    }
+   public function beneficiarios()
+  {
+       return $this->hasMany('App\Models\Censo\Beneficiarios');
+   }
+
 
 }

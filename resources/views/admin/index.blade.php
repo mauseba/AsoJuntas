@@ -7,7 +7,8 @@
 @stop
 
 @section('content')
-    <p> IP de acceso: <strong>{{request()->ip()}}</strong> <br> Fecha de verificacion de email: <strong>{{auth()->user()->email_verified_at}}</strong> </p>
+    <p> IP de acceso: <strong>{{request()->ip()}}</strong> <br> Fecha de verificacion de email: <strong>{{auth()->user()->email_verified_at}}</strong> <br> 
+    Ultimo acceso: <strong>{{auth()->user()->last_login}}</strong>  </p>
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
           <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>

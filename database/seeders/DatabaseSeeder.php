@@ -41,7 +41,8 @@ class DatabaseSeeder extends Seeder
         $this->call(EstudioSeeder::class);
 
         $this->call(UserSeeder::class);
-        /*Comision::factory(6)->create();
+        
+        Comision::factory(6)->create();
         Category::factory(4)->create();
         Tag::factory(8)->create();
         $this->call(PostSeeder::class);
@@ -49,7 +50,7 @@ class DatabaseSeeder extends Seeder
         UserJun::factory(40)->create();
         $this->call(EventoSeeder::class);
         //Acta::factory(30)->create();
-        Psuscripcion::factory(10)->create();*/
+        Psuscripcion::factory(10)->create();
 
     }
 }

@@ -106,12 +106,5 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return route('profile.show');
     }
-    public function censo()
-     {
-        return $this->hasOne('App\Models\Censo\Censo');
-    }
-    public function beneficiarios()
-     {
-        return $this->hasMany('App\Models\Censo\Beneficiarios');
-    }
+   
 }

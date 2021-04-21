@@ -9,8 +9,9 @@ use App\Models\Censo\Beneficiarios;
 use App\Models\Censo\Censo;
 use App\Models\Censo\Eps;
 use App\Models\Censo\Barrios;
-use App\Models\User;
-
+use App\Models\Documento;
+use App\Models\Estudio;
+use App\Models\UserJun;
 use Barryvdh\DomPDF\Facade as PDF;
 
 
@@ -49,10 +50,17 @@ class BeneficiariosController extends Controller
      */
     public function create()
     {
-        $user = User::all()->sortBy("name");;
+        $users = UserJun::all();
+        $doc= Documento::pluck('nombre','tipo');
         $barrios = Barrios::orderBy('name')->get();
+        $estu = Estudio::pluck('nombre','prefijo');
         $eps = Eps::orderBy('name')->get();
-        return view('admin.beneficiarios.create', compact('user', 'eps'));
+        return view('admin.beneficiarios.create', compact('users', 'eps','doc','estu'));
+    }
+
+    public function busqueda(Request $request)
+    {
+
     }
 
     /**
@@ -78,6 +86,10 @@ class BeneficiariosController extends Controller
 
 
         ]);
+
+        $datos= $request->except('_token');
+
+
 
         $beneficiarios = new Beneficiarios();
 
