@@ -75,7 +75,7 @@ class CensoIndex extends Component
             ->get();
         $beneficiarios = Beneficiarios::Where('user_id', 'LIKE', $this->afiliado)
             ->get();
-        $pdf = PDF::loadView('pdf.censo', compact('censo', 'beneficiarios'))->setPaper('a4', 'landscape')->output();
-        return response()->streamDownload(fn () => print($pdf), "Informe_Censo_Individual.pdf");
+        $pdf = PDF::loadView('pdf.censo', compact('censo', 'beneficiarios'))->setPaper('a4', 'landscape')->stream('Informe_Censo_Individual.pdf');
+        return $pdf;
     }
 }
