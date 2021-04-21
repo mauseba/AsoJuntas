@@ -1,3 +1,4 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <x-guest-layout>
 
     <div class="md:px-32 py-2 w-full">
@@ -344,10 +345,10 @@
 </x-app-layout>
 
 <script>
-    $('#tipo_vivienda').on('change', function () {
+      $('#tipo_vivienda').on('change', function () {
         $("#escrituras").val($('#tipo_vivienda option:selected').attr('escrituras'));
     });
 
 </script>
 
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+
