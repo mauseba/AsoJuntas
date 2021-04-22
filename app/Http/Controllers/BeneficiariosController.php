@@ -26,6 +26,9 @@ class BeneficiariosController extends Controller
 
         $beneficiarios = Beneficiarios::where('user_id', '=', $user)->get();
         //$beneficiarios = Beneficiarios::orderBy('user_id', 'desc')->paginate(10); //llama a todos los beneficiarios
+        if (count($censo) == 0) {
+            return redirect()->route('censo.create')->with('alert', 'Registre primero los Datos Básicos');
+        }
 
         return view('beneficiarios.index', compact('beneficiarios', 'barrios', 'eps', 'user', 'censo'));
     }
@@ -70,6 +73,9 @@ class BeneficiariosController extends Controller
         $user = auth()->user();
         $beneficiarios = new Beneficiarios();
         $barrio = Censo::where('user_id', $request->user_id)->pluck('barrio');
+        if (isset($barrio) == false) {
+            return redirect()->route('censo.index')->with('alert', 'Beneficiario sin datos básicos registrados');;
+        }
 
         $beneficiarios->name = $request->name;
 
@@ -154,7 +160,7 @@ class BeneficiariosController extends Controller
         $user = auth()->user();
         $beneficiarios = Beneficiarios::findOrFail($beneficiarios->id);
         $barrio = Censo::where('user_id', $beneficiarios->user_id)->pluck('barrio');
-        if (isset($barrio[0]) == false) {
+        if (isset($barrio) == false) {
             return redirect()->route('censo.index')->with('alert', 'Beneficiario sin datos básicos registrados');;
         }
 
