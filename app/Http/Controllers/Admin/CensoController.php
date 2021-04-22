@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Censo\Censo;
 use App\Models\Censo\Beneficiarios;
 use App\Models\Censo\Barrios;
-use App\Models\User;
+use App\Models\UserJun;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade as PDF;
 
@@ -35,7 +35,7 @@ class CensoController extends Controller
      */
     public function create()
     {
-        $user = User::all()->sortBy("name");;
+        $user = UserJun::all()->sortBy("name");;
         $barrios = Barrios::orderBy('name')->get();
         return view('admin.censo.create', compact('barrios', 'user'));
     }
@@ -100,6 +100,7 @@ class CensoController extends Controller
 
         $censo->user_id = $request->user_id;
         $censo->save();
+        return redirect()->route('admin.censo.edit', $censo)->with('info', 'Datos básicos actualizados');
     }
 
     /**

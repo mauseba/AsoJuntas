@@ -8,8 +8,7 @@ use App\Models\Censo\Eps;
 use App\Models\Censo\Barrios;
 use App\Models\Censo\Censo;
 use App\Models\User;
-
-
+use App\Models\UserJun;
 use Barryvdh\DomPDF\Facade as PDF;
 use Livewire\Component;
 
@@ -44,7 +43,7 @@ class BeneficiariosIndex extends Component
 
     public function render()
     {
-        $user = User::all()->sortby('name');
+        $user = UserJun::all()->sortby('name');
         $epss = Eps::all()->sortby('name'); // ordenar por nombre
         $barrios = Barrios::all()->sortby('name');
 
@@ -86,5 +85,4 @@ class BeneficiariosIndex extends Component
         $pdf = PDF::loadView('pdf.beneficiarios', compact('beneficiarios'))->setPaper('a4', 'landscape')->stream('Informe_beneficiarios.pdf');
         return response()->streamDownload(fn () => print($pdf), "Informe_beneficiarios.pdf");
     }
-    
 }

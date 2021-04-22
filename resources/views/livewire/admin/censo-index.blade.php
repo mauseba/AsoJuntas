@@ -144,7 +144,12 @@
                 @endforeach
             </select>
             <a class="btn btn-danger text-white " wire:click="exportar">PDF</a>
+            
+            <div class="mt-2">Exportar General</div>
+            <a class="btn btn-danger text-white " wire:click="exportarGeneral">Informe General</a>
+        
         </div>
+        
 
 
 
