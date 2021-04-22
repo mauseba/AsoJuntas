@@ -19,13 +19,13 @@ use Illuminate\Support\Arr;
 
 class BeneficiariosController extends Controller
 {
-    /*  public function __construct(){
-
-        $this->middleware('can:admin.barrios.index')->only('index');
-        $this->middleware('can:admin.barrios.create')->only('create','store');
-        $this->middleware('can:admin.barrios.edit')->only('edit, update');
-        $this->middleware('can:admin.barrios.destroy')->only('destroy');
-    } */
+    public function __construct()
+    {
+        $this->middleware('can:admin.beneficiarios.index')->only('index');
+        $this->middleware('can:admin.beneficiarios.create')->only('create', 'store');
+        $this->middleware('can:admin.beneficiarios.edit')->only('edit, update');
+        $this->middleware('can:admin.beneficiarios.destroy')->only('destroy');
+    }
 
 
     /**

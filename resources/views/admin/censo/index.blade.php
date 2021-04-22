@@ -4,9 +4,9 @@
 
 @section('content_header')
 
-    {{-- @can('admin.censo.create') --}}
+    @can('admin.censo.create')
         <a class="btn btn-secondary btn-sm float-right" href="{{route('admin.censo.create')}}">Nuevos Datos básicos</a>
-    {{-- @endcan --}}
+    @endcan
     
     <h1>Censo comunal</h1>
 @stop
