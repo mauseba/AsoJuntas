@@ -34,7 +34,7 @@ class CreateCensoTable extends Migration
             $table->string('vivienda_nueva');
 
             $table->unsignedBigInteger('user_id'); //relacion con usuarios
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade'); // llave foranea
+            $table->foreign('user_id')->references('id')->on('user_juns')->onDelete('cascade'); // llave foranea
 
             $table->timestamps();
         });

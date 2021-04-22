@@ -13,7 +13,7 @@
             <div class="swiper-wrapper">
                 <div class="swiper-slide  bg-cover bg-center shadow-lg object-fill" style="background-image:url({{asset('imagenes/equipo.JPG')}})">
                         <div class="container mx-auto px-6 md:px-20 py-6 ">
-                            <div class="w-full md:w-1/2">
+                            <div class="w-50 md:w-1/2">
                                 <div class="md:border bg-opacity-50 bg-black border-green-300 md:p-10 ">
                                     <h3 class="text-5xl leading-tight text-white" style="font-family: Niconne, cursive;">Bienvenido a</h3>
                                     <h2 class="font-bold leading-tight text-6xl text-white">Asojuntas</h2>

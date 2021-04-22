@@ -43,6 +43,16 @@
 
 @section('js')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+    @if (session('error'))
+    <script>
+        var session = '{{session('error')}}';
+        Swal.fire(
+        'Error',
+        session ,
+        'error'
+        )
+    </script>
+    @endif
     <script>
         $(function() {
             $('#user').selectpicker();

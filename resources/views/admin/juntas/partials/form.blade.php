@@ -5,7 +5,7 @@
             <div class="col-3">
                 <div class="form-group">
                     {!! Form::label('FechaC', 'Fecha') !!}
-                    {!! Form::date('FechaC',\Carbon\Carbon::now(),['class' => 'form-control', 'readonly'])!!}
+                    {!! Form::date('FechaC',null,['class' => 'form-control', 'readonly'])!!}
                     
                     @error('FechaC')
                         <small class="text-danger">{{$message}}</small>

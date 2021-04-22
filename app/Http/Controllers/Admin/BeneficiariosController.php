@@ -13,6 +13,7 @@ use App\Models\Documento;
 use App\Models\Estudio;
 use App\Models\UserJun;
 use Barryvdh\DomPDF\Facade as PDF;
+use Illuminate\Support\Arr;
 
 
 
@@ -90,34 +91,27 @@ class BeneficiariosController extends Controller
         $datos= $request->except('_token');
 
 
-
-        $beneficiarios = new Beneficiarios();
-
-
-        $barrio = Censo::where('user_id', $request->user_id)->pluck('barrio');
-
-        $beneficiarios->name = $request->name;
-        if ($request->edad < 18 and $request->edad > 7) {
-            $beneficiarios->tipo_doc = "T.I";
-        } elseif ($request->edad <= 7) {
-            $beneficiarios->tipo_doc = "R.C";
-        } elseif ($request->edad > 18) {
-            $beneficiarios->tipo_doc = "C.C";
+        $barrio = Censo::where('user_id', $request->user_id)->get()->first();
+        
+        if ($barrio == null)
+        {
+            return redirect()->route('admin.beneficiarios.create')->with('error', 'No hay ningun barrios disponible');;
+        }else
+        {
+            $datos =  Arr::add($datos,'barrio',$barrio->barrio);
+        }
+    
+        if ($datos['edad']< 18 && $datos['edad'] > 7) {
+            $datos['tipo_doc'] = 'TI';
+        } elseif ($datos['edad']<= 7) {
+            $datos['tipo_doc']= "RC";
+        } else {
+            $datos['tipo_doc'] = "CC";
         }
 
-        $beneficiarios->numero = $request->numero;
-        $beneficiarios->edad = $request->edad;
-        $beneficiarios->genero = $request->genero;
-        $beneficiarios->tipo_salud = $request->tipo_salud;
-        $beneficiarios->salud = $request->salud;
-        $beneficiarios->discap = $request->discap;
-        $beneficiarios->nivel_edu = $request->nivel_edu;
-        $beneficiarios->user_id = $request->user_id;
-        $beneficiarios->sub_gobierno = $request->sub_gobierno;
-        $beneficiarios->nucleo_fam = $request->nucleo_fam;
-        $beneficiarios->barrio = $barrio[0];
-        $beneficiarios->save();
-        return redirect()->route('admin.beneficiarios.edit', $beneficiarios)->with('info', 'Beneficiario creado con éxito!');;
+        Beneficiarios::create($datos); 
+
+        return redirect()->route('admin.beneficiarios.index')->with('info', 'Beneficiario creado con éxito!');;
     }
 
     /**

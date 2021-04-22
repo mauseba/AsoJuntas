@@ -19,7 +19,6 @@ Route::get('tag/{tag}', [PostController::class, 'tag'])->name('posts.tag');
 Route::get('eventos', [EventoController::class, 'index'])->name('eventos.index');
 
 
-
 Route::get('beneficiarios', [BeneficiariosController::class, 'index'])->name('beneficiarios.index')->middleware('auth');;
 Route::post('beneficiarios', [BeneficiariosController::class, 'store'])->middleware('auth');
 Route::patch('beneficiarios/{beneficiarios}', [BeneficiariosController::class, 'update'])->middleware('auth');;
