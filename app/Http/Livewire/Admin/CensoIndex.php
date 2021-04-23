@@ -5,7 +5,7 @@ namespace App\Http\Livewire\Admin;
 use App\Models\Censo\Censo;
 use App\Models\Censo\Beneficiarios;
 use App\Models\Censo\Barrios;
-use App\Models\User;
+use App\Models\UserJun;
 use Barryvdh\DomPDF\Facade as PDF;
 use Livewire\Component;
 
@@ -44,7 +44,7 @@ class CensoIndex extends Component
 
     public function render()
     {
-        $user = User::all()->sortby('name');
+        $user = UserJun::all()->sortby('name');
 
         $censo = Censo::where('barrio', 'LIKE', '%' . $this->barrio . '%')
             ->Where('direccion', 'LIKE', '%' . $this->direccion . '%')
@@ -76,6 +76,35 @@ class CensoIndex extends Component
         $beneficiarios = Beneficiarios::Where('user_id', 'LIKE', $this->afiliado)
             ->get();
         $pdf = PDF::loadView('pdf.censo', compact('censo', 'beneficiarios'))->setPaper('a4', 'landscape')->stream('Informe_Censo_Individual.pdf');
+        return $pdf;
+    }
+    public function exportarGeneral()
+    {
+        set_time_limit(300);
+        $censo = Censo::where('barrio', 'LIKE', '%' . $this->barrio . '%')
+            ->Where('direccion', 'LIKE', '%' . $this->direccion . '%')
+            ->Where('tipo_vivienda', 'LIKE', '%' . $this->tipo_vivienda . '%')
+            ->Where('energia', 'LIKE', '%' . $this->energia . '%')
+            ->Where('gas', 'LIKE', '%' . $this->gas . '%')
+            ->Where('agua', 'LIKE', '%' . $this->agua . '%')
+            ->Where('alcantarilla', 'LIKE', '%' . $this->alcantarilla . '%')
+            ->Where('sisben', 'LIKE', '%' . $this->sisben . '%')
+            ->Where('sub_vivienda', 'LIKE', '%' . $this->sub_vivienda . '%')
+            ->Where('piso', 'LIKE', '%' . $this->piso . '%')
+            ->Where('techo', 'LIKE', '%' . $this->techo . '%')
+            ->Where('pañete', 'LIKE', '%' . $this->pañete . '%')
+            ->Where('baños', 'LIKE', '%' . $this->baños . '%')
+            ->Where('baño_nuevo', 'LIKE', '%' . $this->baño_nuevo . '%')
+            ->Where('vivienda_nueva', 'LIKE', '%' . $this->vivienda_nueva . '%')
+            ->Where('sub_gobierno', 'LIKE', '%' . $this->subsidio . '%')
+            ->Where('user_id', 'LIKE',  $this->afiliado)
+            ->paginate(10);
+
+        $clave = $censo->pluck('user_id');
+
+        $beneficiarios = Beneficiarios::Where('user_id', '=', $clave);
+
+        $pdf = PDF::loadView('pdf.censo', compact('censo', 'beneficiarios'))->setPaper('a4', 'landscape')->stream('Informe_Censo_General.pdf');
         return $pdf;
     }
 }

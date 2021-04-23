@@ -186,12 +186,11 @@
                 </label>
                 {{-- {{ Form::text('sisben', Input::old('sisben'), ['class'=> 'form-input mt-1 block w-full']) }} --}}
                 <select name="sub_gobierno" class="form-control ">
-                    <option selected hidden > Seleccionar </option>
-                    <option>No</option>
-                    <option>Grupo A</option>
-                    <option>Grupo B</option>
-                    <option>Grupo C</option>
-                    <option>Grupo D</option>
+                     <option >Ninguno</option>
+                    <option  >Familias en Accion</option>
+                    <option  >Jovenes en Accion</option>
+                    <option  >Adulto Mayor</option>
+                    <option  >Otro</option>
                 </select>
             </div>
             <div class="col-2">

@@ -182,21 +182,21 @@
                             <td>{{$beneficiario->updated_at->format('Y-m-d')}}</td>
 
                             <td>
-                                {{-- @can('admin.beneficiarios.edit') --}}
+                                @can('admin.beneficiarios.edit')
                                 <a class="btn btn-primary btn-sm"
                                     href="{{ route('admin.beneficiarios.edit', $beneficiario)}}"><i
                                         class="fas fa-pen-square"></i></a>
-                                {{-- @endcan --}}
+                                @endcan
                             </td>
                             <td>
-                                {{-- @can('admin.beneficiarios.destroy') --}}
+                                @can('admin.beneficiarios.destroy')
                                 <form action="{{route('admin.beneficiarios.destroy', $beneficiario)}}" method="POST">
                                     @csrf
                                     @method('delete')
                                     <button type="submit" class="btn btn-danger btn-sm"><i
                                             class="fas fa-eraser"></i></button>
                                 </form>
-                                {{-- @endcan --}}
+                                @endcan
                         </tr>
                         @endforeach
                     </tbody>

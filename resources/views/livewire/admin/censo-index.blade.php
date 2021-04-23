@@ -144,7 +144,12 @@
                 @endforeach
             </select>
             <a class="btn btn-danger text-white " wire:click="exportar">PDF</a>
+            
+            <div class="mt-2">Exportar General</div>
+            <a class="btn btn-danger text-white " wire:click="exportarGeneral">Informe General</a>
+        
         </div>
+        
 
 
 
@@ -207,18 +212,20 @@
                             <td>{{$censos->updated_at->format('Y-m-d')}}</td>
 
                             <td>
+                                @can('admin.censo.edit')
                                 <a class="btn btn-primary btn-sm" href="{{ route('admin.censo.edit', $censos)}}"><i
                                         class="fas fa-pen-square"></i></a>
-
+                                @endcan
                             </td>
                             <td>
+                               @can('admin.censo.destroy') 
                                 <form action="{{route('admin.censo.destroy', $censos)}}" method="POST">
                                     @csrf
                                     @method('delete')
                                     <button type="submit" class="btn btn-danger btn-sm"><i
                                             class="fas fa-eraser"></i></button>
                                 </form>
-
+                                @endcan
                             </td>
                         </tr>
                         @endforeach

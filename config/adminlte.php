@@ -325,11 +325,13 @@ return [
                 [
                     'text' => 'EPS',
                     'route'  => 'admin.eps.index',
+                    'can'       => 'admin.eps.index',
                     'active' => ['admin/eps*'],
                 ],
                 [
                     'text' => 'Barrios',
                     'route'  => 'admin.barrios.index',
+                    'can'       => 'admin.barrios.index',
                     'active' => ['admin/barrios*'],
                 ]
 
@@ -343,11 +345,14 @@ return [
                 [
                     'text'       => 'Beneficiarios',
                     'route'        => 'admin.beneficiarios.index',
+                    'can'       => 'admin.beneficiarios.index',
                     'active' => ['admin/beneficiarios*'],
+
                 ],
                 [
                     'text'       => 'Censo Individual',
                     'route'        => 'admin.censo.index',
+                    'can'       => 'admin.censo.index',
                     'active' => ['admin/censo*'],
 
                 ]
