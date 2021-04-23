@@ -378,7 +378,7 @@ return [
 
         ],
         [
-            'text'        => 'Censo Comunal',
+            'text'        => 'Pagos y Certificadosl',
             'icon'      => 'fas fa-cash-register',
             'can'       => 'admin.psuscripcion.index'||'admin.pcertificado.index',
             'submenu'  => [
@@ -389,7 +389,7 @@ return [
                     'active' => ['admin/psuscripcion*'],
                 ],
                 [
-                    'text'       => 'Pagos y Certificados',
+                    'text'       => 'Pagos no afiliados',
                     'route'        => 'admin.pcertificado.index',
                     'can'       => 'admin.pcertificado.index',
                     'active' => ['admin/pcertificado*'],
