@@ -23,6 +23,10 @@ class EstudioSeeder extends Seeder
             'nombre'=>'Secundaria'
         ]);
         Estudio::create([
+            'prefijo'=> 'media',
+            'nombre'=>'Edu. media'
+        ]);
+        Estudio::create([
             'prefijo'=>'universitaria',
             'nombre'=>'Universitaria'
         ]);
