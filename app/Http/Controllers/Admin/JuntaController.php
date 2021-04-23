@@ -212,7 +212,7 @@ class JuntaController extends Controller
 
         if($cuenta > 0){
             $date = Carbon::now();
-            $pdf = PDF::loadView('Admin.pdf.junta', compact('info','cuenta','input','date'))->setPaper('letter', 'landscape')->stream('informe.pdf');
+            $pdf = PDF::loadView('admin.pdf.junta', compact('info','cuenta','input','date'))->setPaper('letter', 'landscape')->stream('informe.pdf');
             return $pdf;
         }else{
             return redirect()->route('admin.juntas.index')->with('error', 'No se encuentra ningun registro en las fechas seleccionadas');

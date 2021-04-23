@@ -3,8 +3,8 @@
         <div class="row">
             <div class="col-3">
                 <div class="form-group">
-                    {!! Form::label('FechaC', 'Fecha') !!}
-                    {!! Form::date('FechaC',\Carbon\Carbon::now(),['class' => 'form-control', 'readonly'])!!}
+                    {!! Form::label('FechaC', 'Fecha de reagistro:') !!}
+                    {!! Form::date('FechaC',null,['class' => 'form-control'])!!}
                     
                     @error('FechaC')
                         <small class="text-danger">{{$message}}</small>

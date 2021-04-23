@@ -14,7 +14,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\UserJunExport;
 use App\Models\Comision;
 use Illuminate\Support\Facades\Validator;
-use PhpParser\Builder\Function_;
+
 
 class UserjunController extends Controller
 {
@@ -222,7 +222,7 @@ class UserjunController extends Controller
                 $cuenta = count($info);
                 if($cuenta > 0){
                     $date = Carbon::now();
-                    $pdf = PDF::loadView('Admin.pdf.userjuntas', compact('info','cuenta','date'))->setPaper('letter', 'landscape')->stream('informe.pdf');
+                    $pdf = PDF::loadView('admin.pdf.userjuntas', compact('info','cuenta','date'))->setPaper('letter', 'landscape')->stream('informe.pdf');
                     return $pdf;
                 }else{
                     return redirect()->route('admin.userjun.index')->with('error', 'No se encuentra ningun junta con el nombre señalado');
@@ -240,7 +240,7 @@ class UserjunController extends Controller
                     $cuenta = count($info);
                     if($cuenta > 0){
                         $date = Carbon::now();
-                        $pdf = PDF::loadView('Admin.pdf.userjun', compact('info','cuenta','input','date'))->setPaper('letter', 'landscape')->stream('informe.pdf');
+                        $pdf = PDF::loadView('admin.pdf.userjun', compact('info','cuenta','input','date'))->setPaper('letter', 'landscape')->stream('informe.pdf');
                         return $pdf;
                     }else{
                         return redirect()->route('admin.userjun.index')->with('error', 'No se encuentra ningun registro en las fechas seleccionadas');
