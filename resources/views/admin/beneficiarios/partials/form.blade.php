@@ -10,10 +10,7 @@
         </div>
     </div>
 </div>
-<div class="form-group">
-    {!! Form::label('barrio', 'Nucleo Familiar') !!}
-    {!! Form::text('barrio', array('Seleccionar','Conyuge'=>'Conyuge','Hijo/a'=>'Hijo/a','Padre/Madre'=>'Padre/Madre'),null, ['class' => 'form-control',]) !!}
-</div>
+
 <div class="form-group">
     {!! Form::label('nucleo_fam', 'Nucleo Familiar') !!}
     {!! Form::select('nucleo_fam', array('Seleccionar','Conyuge'=>'Conyuge','Hijo/a'=>'Hijo/a','Padre/Madre'=>'Padre/Madre'),null, ['class' => 'form-control']) !!}
