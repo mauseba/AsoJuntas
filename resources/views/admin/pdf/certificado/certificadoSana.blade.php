@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Certificado de residencia</title>
+    <title>Certificado de sana tenencia</title>
 
     <style type="text/css">
         html {
@@ -34,10 +34,13 @@
         <h3 align='center'>
             Certifica Que: 
         </h3><br>
-        <p style="text-align:justify; font-size: 13pt;">
-            El (la) señor(a) <strong  style="text-transform:uppercase;" >{{$datosu['nombre']}}</strong>  identificado(a) con {{$datosu['Tdocumento']}} N° {{$datosu['Documento']}} expedida en {{$datosu['Expedido']}}, verificándose y 
-            encontrándose que en el barrio {{$datosu['junta']}},  con direccion  {{$datosu['Direccion']}}. <br><br>
 
+        <p style="text-align:justify; font-size: 13pt;">
+            Yo <strong  style="text-transform:uppercase;" >{{$presi['nombre']}}</strong> identificado(a) con {{$presi['Tip_identificacion']}} N° {{$presi['Num_identificacion']}} expedida en {{$datosu['Expedido']}}, en mi calidad de presidente de la junta de acción 
+            comunal con reconocimiento legal expedido por la gobernación del Huila, certifico que el señor (ra) <strong  style="text-transform:uppercase;" >{{$datosu['nombre']}}</strong>  ,identificada (o) 
+            con la {{$datosu['Tdocumento']}} N° {{$datosu['Documento']}} expedida en {{$datosu['Expedido']}}, ha ejercido por un periodo mayor a cinco años la sana tenencia quieta libre y pacifica 
+            sobre el inmueble ubicado en la vereda {{$datosu['junta']}} , localizada en  {{$datosu['Direccion']}} del municipio de Algeciras  departamento del Huila, 
+            librando a la junta de acción comunal de responsabilidades ante cualquier proceso que tenga por objeto recuperar la posesión del bien.<br><br>
 
             Demostrando siempre ser una persona amable, honesta, trabajadora   y cumplidora con los deberes de la comunidad. <br><br>
             Dada en Algeciras-Huila, el día {{\Carbon\Carbon::now()->format('d')}} del mes {{\Carbon\Carbon::now()->locale('es')->isoFormat('MMMM')}} del {{\Carbon\Carbon::now()->format('Y')}}, a solicitud del  interesado.  <br><br> <br>
@@ -50,7 +53,7 @@
             <td valign="top">
                 <b>_________________________</b>
                 <h4><strong>MIRELLA SANDINO</strong></h4>
-                <p>C.C 52766132 <br> <strong>Cel.: 3142673007</strong><br><strong>PRESIDENTE</strong></p>
+                <p>C.C 52766132 <br> <strong>Cel.: 3142673007</strong><
             </td>
             <td align="center">
                 <p></p>
@@ -58,7 +61,7 @@
             <td align="right" valign="top">
                 <b>_________________________</b>
                 <h4><strong>YASMIN QUIMBAYO</strong></h4>
-                <p>C.C.36347833 <br> <strong>Cel.: 3113565174</strong><br><strong>SECRETARIA</strong></p>
+                <p>C.C.36347833 <br> <strong>Cel.: 3113565174</strong>
             </td>
         </tr>
     </table>

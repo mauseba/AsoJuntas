@@ -33,7 +33,7 @@
         </h2>
         <h3 align='center'>
             Certifica Que: 
-        </h4><br>
+        </h3><br>
         <p style="text-align:justify; font-size: 13pt;">
             La junta <strong  style="text-transform:uppercase;" >{{$junta->Nombre}}</strong>  identificada con  NIT  N° {{$junta->Nit}} y con resolucion N° {{$junta->Resolucion}}, bajo la dirección:
             {{$junta->Direccion}}, se encuentra a la fecha <strong>Paz y Salvo</strong> por todo concepto con la asociacion de juntas. <br><br>

@@ -6,7 +6,7 @@
                 <h1 class="text-4xl text-black text-left leading-8 font-bold mt-2 ">Publicaciones</h1><br>
                 
                 @foreach ($posts as $post)
-                    <article class="w-full h-80 bg-cover bg-center @if($loop->first) md:col-span-2 @endif" style="background-image: url(@if($post->image) {{Storage::url($post->image->url)}} @else https://cdn.pixabay.com/photo/2020/06/21/01/50/still-life-5322950__340.jpg @endif)">
+                    <article class="w-full h-80 bg-cover bg-center @if($loop->first) md:col-span-2 @endif" style="background-image: url(@if($post->image) {{asset(Storage::url($post->image->url))}} @else https://cdn.pixabay.com/photo/2020/06/21/01/50/still-life-5322950__340.jpg @endif)">
                         <div class="w-full h-full px-8 flex flex-col justify-center bg-black bg-opacity-50">
 
                             <h1 class="text-3xl text-white leading-8 font-bold mt-2">

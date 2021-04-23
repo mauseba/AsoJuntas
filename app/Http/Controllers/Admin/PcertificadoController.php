@@ -88,21 +88,21 @@ class PcertificadoController extends Controller
                 $datosu = $pcertificado->toArray();
                 $datosu['Estado'] = 'Entregado';
                 $pcertificado->update($datosu);
-                $pdf = PDF::loadView('Admin.pdf.certificado.certificadoRes', compact('datosu'))->setPaper('letter')->stream('CertificadoResiencia.pdf');
+                $pdf = PDF::loadView('admin.pdf.certificado.certificadoRes', compact('datosu'))->setPaper('letter')->stream('CertificadoResiencia.pdf');
                 return $pdf;
                 break;
             case 'afiliacion':
                 $datosu = $pcertificado->toArray();
                 $datosu['Estado'] = 'Entregado';
                 $pcertificado->update($datosu);
-                $pdf = PDF::loadView('Admin.pdf.certificado.certificadoAfil', compact('datosu'))->setPaper('letter')->stream('CertificadoAfiliado.pdf');
+                $pdf = PDF::loadView('admin.pdf.certificado.certificadoAfil', compact('datosu'))->setPaper('letter')->stream('CertificadoAfiliado.pdf');
                 return $pdf;
                 break;
             case 'paz-salvo':
                 $datosu = $pcertificado->toArray();
                 $datosu['Estado'] = 'Entregado';
                 $pcertificado->update($datosu);
-                $pdf = PDF::loadView('Admin.pdf.certificado.certificadoPaz', compact('datosu'))->setPaper('letter')->stream('CertificadoPazySAKVO.pdf');
+                $pdf = PDF::loadView('admin.pdf.certificado.certificadoPaz', compact('datosu'))->setPaper('letter')->stream('CertificadoPazySAKVO.pdf');
                 return $pdf;
                 break;
             default:
@@ -118,10 +118,7 @@ class PcertificadoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
-    }
+
 
     /**
      * Show the form for editing the specified resource.

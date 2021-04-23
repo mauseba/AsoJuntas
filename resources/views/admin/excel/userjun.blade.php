@@ -15,8 +15,8 @@
         <th>Cargo</th>
         <th>junta_id</th>
         <th>comision_id</th>
-        <th>created_at</th>
-        <th>updated_at</th>
+        <th>Creado el</th>
+        <th>Actualizado el</th>
     </tr>
     </thead>
     <tbody>

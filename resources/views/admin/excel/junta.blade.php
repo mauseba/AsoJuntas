@@ -13,8 +13,8 @@
         <th>D_Resolucion</th>
         <th>status</th>
         <th>Observaciones</th>
-        <th>created_at</th>
-        <th>updated_at</th>
+        <th>Creado el</th>
+        <th>Actualizado el</th>
     </tr>
     </thead>
     <tbody>
