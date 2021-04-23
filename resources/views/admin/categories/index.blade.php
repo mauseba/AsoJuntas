@@ -8,7 +8,7 @@
          <a class="btn btn-success float-right" href="{{route('admin.categories.create')}}">Agregar categoría</a>
     @endcan
 
-    <h1>Lista de categorías</h1>
+    <h1>Lista de Comisiones</h1>
 @stop
 
 @section('content')
