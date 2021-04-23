@@ -61,7 +61,7 @@
         {!! Form::label('direccion', 'Direccion/Finca') !!}
 
 
-        {{ Form::text('direccion', Input::old('direccion'), ['class'=> 'form-control']) }}
+        {{ Form::text('direccion', Input::old('direccion'), ['class'=> 'form-control','readonly' => 'true']) }}
 
         <div class="row justify-content-center">
             <div class="col-4">
@@ -91,7 +91,7 @@
                                       
                       </select> --}}
 
-                <input id="escrituras" name="escrituras" type="text" class="form-control" disabled>
+                <input id="escrituras" name="escrituras" type="text" class="form-control"  value="{{ $censo->escrituras }}" disabled>
             </div>
         </div>
         <hr class="pt-6" />

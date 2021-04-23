@@ -9,8 +9,11 @@ class Beneficiarios extends Model
 {
     use HasFactory;
 
-    // protected $fillable = ['name', 'tipo_doc', 'numero', 'edad','genero','tipo_salud','salud','discap','nivel_edu'];
-    protected $table = 'beneficiarios';
+    protected $fillable = [
+        'name', 'tipo_doc', 'numero', 'edad', 'genero', 'tipo_salud', 'salud', 'discap', 'nivel_edu', 'user_id', 'sub_gobierno',
+        'nucleo_fam', 'barrio',
+    ];
+    // protected $table = 'beneficiarios';
 
     public function user()
     {

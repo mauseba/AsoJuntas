@@ -120,7 +120,7 @@
                 <select wire:model="afiliado" class="form-control text-secondary text-sm">
                     <option value="" >Afiliado</option>
                     @foreach ($user as $users)
-                    <option value="{{ $users->id }}">{{ $users->name}}</option>
+                    <option value="{{ $users->id }}">{{ $users->nombre}}</option>
                     @endforeach
                 </select>
 
@@ -178,7 +178,7 @@
                             <td>{{$beneficiario->nivel_edu}}</td>
                             <td>{{$beneficiario->sub_gobierno}}</td>
                             <td>{{$beneficiario->barrio}}</td>
-                            <td>{{$beneficiario->user['id'].'-'.$beneficiario->user['name'] }}</td>
+                            <td>{{$beneficiario->nombre}}</td>
                             <td>{{$beneficiario->updated_at->format('Y-m-d')}}</td>
 
                             <td>

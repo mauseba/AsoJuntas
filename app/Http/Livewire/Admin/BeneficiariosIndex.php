@@ -6,8 +6,8 @@ namespace App\Http\Livewire\Admin;
 use App\Models\Censo\Beneficiarios;
 use App\Models\Censo\Eps;
 use App\Models\Censo\Barrios;
-use App\Models\Censo\Censo;
-use App\Models\User;
+use App\Models\Documento;
+use App\Models\Estudio;
 use App\Models\UserJun;
 use Barryvdh\DomPDF\Facade as PDF;
 use Livewire\Component;
@@ -45,13 +45,17 @@ class BeneficiariosIndex extends Component
     {
         $user = UserJun::all()->sortby('name');
         $epss = Eps::all()->sortby('name'); // ordenar por nombre
-        $barrios = Barrios::all()->sortby('name');
 
-        $beneficiarios = Beneficiarios::where('name', 'LIKE', '%' . $this->nombre . '%')
+        $doc = Documento::pluck('nombre', 'tipo');
+        $barrios = Barrios::orderBy('name')->get();
+        $estu = Estudio::pluck('nombre', 'prefijo');
+
+        $beneficiarios = Beneficiarios::join('user_juns', 'beneficiarios.user_id', '=', 'user_juns.id')->select('beneficiarios.*', 'user_juns.nombre')
+            ->where('name', 'LIKE', '%' . $this->nombre . '%')
             ->Where('tipo_doc', 'LIKE', '%' . $this->documento . '%')
             ->Where('numero', 'LIKE', '%' . $this->numero . '%')
-            ->whereBetween('edad', [$this->edad_min . '%', $this->edad_max . '%'])
-            ->Where('genero', 'LIKE', '%' . $this->genero . '%')
+            ->whereBetween('beneficiarios.edad', [$this->edad_min . '%', $this->edad_max . '%'])
+            ->Where('beneficiarios.genero', 'LIKE', '%' . $this->genero . '%')
             ->Where('tipo_salud', 'LIKE', '%' . $this->afiliacion . '%')
             ->Where('salud', 'LIKE', '%' . $this->eps . '%')
             ->Where('discap', 'LIKE', '%' . $this->discapacidad . '%')
@@ -63,16 +67,17 @@ class BeneficiariosIndex extends Component
 
             ->paginate(10);
 
-        return view('livewire.admin.beneficiarios-index', compact('beneficiarios', 'user', 'epss', 'barrios'));
+        return view('livewire.admin.beneficiarios-index', compact('beneficiarios', 'user', 'epss', 'barrios',));
     }
     public function exportar()
     {
-        set_time_limit(300);
-        $beneficiarios = Beneficiarios::where('name', 'LIKE', '%' . $this->nombre . '%')
+
+        $beneficiarios = Beneficiarios::join('user_juns', 'beneficiarios.user_id', '=', 'user_juns.id')->select('beneficiarios.*', 'user_juns.nombre')
+            ->where('name', 'LIKE', '%' . $this->nombre . '%')
             ->Where('tipo_doc', 'LIKE', '%' . $this->documento . '%')
             ->Where('numero', 'LIKE', '%' . $this->numero . '%')
-            ->whereBetween('edad', [$this->edad_min . '%', $this->edad_max . '%'])
-            ->Where('genero', 'LIKE', '%' . $this->genero . '%')
+            ->whereBetween('beneficiarios.edad', [$this->edad_min . '%', $this->edad_max . '%'])
+            ->Where('beneficiarios.genero', 'LIKE', '%' . $this->genero . '%')
             ->Where('tipo_salud', 'LIKE', '%' . $this->afiliacion . '%')
             ->Where('salud', 'LIKE', '%' . $this->eps . '%')
             ->Where('discap', 'LIKE', '%' . $this->discapacidad . '%')
@@ -82,7 +87,7 @@ class BeneficiariosIndex extends Component
             ->Where('user_id', 'LIKE',  $this->afiliado)
             ->get();
 
-        $pdf = PDF::loadView('pdf.beneficiarios', compact('beneficiarios'))->setPaper('a4', 'landscape')->stream('Informe_beneficiarios.pdf');
-        return $pdf;
+        $pdf = PDF::loadView('pdf.beneficiarios', compact('beneficiarios'))->setPaper('a4', 'landscape')->output();
+        return response()->stream(fn () => print($pdf), "Informe_beneficiarios.pdf");
     }
 }

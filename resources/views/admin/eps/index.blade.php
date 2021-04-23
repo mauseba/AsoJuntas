@@ -5,7 +5,7 @@
 @section('content_header')
 
     @can('admin.eps.create')
-        <a class="btn btn-secondary btn-sm float-right" href="{{route('admin.eps.create')}}">Ingresar EPS</a>
+        <a class="btn btn-success btn-sm float-right" href="{{route('admin.eps.create')}}">Ingresar EPS</a>
     @endcan
     
     <h1>Listado de EPS</h1>
