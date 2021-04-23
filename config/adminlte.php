@@ -241,8 +241,58 @@ return [
             'can'       => 'admin.home'
         ],
         [
+            
+            'text'        => 'Gestion de Admin',
+            'can'       => 'admin.users.index',
+            'icon'        => 'fas fa-users-cog fa-fw',
+            'submenu'  => [
+                [
+                    'text'        => 'Usuarios',
+                    'route'         => 'admin.users.index',
+                    'can'       => 'admin.users.index',
+                    'active' => ['admin/users*'],
+                ],
+                [
+                    'text'        => 'Lista de roles',
+                    'route'         => 'admin.roles.index',
+                    'can'       => 'admin.users.index',
+                    'active' => ['admin/roles*'],
+                ],
+
+            ]
+
+        ],
+        [
+            
+            'text'        => 'Publicaciones',
+            'can'       => 'admin.posts.index',
+            'icon'      => 'fas fa-fw fa-clipboard',
+            'submenu'  => [
+                [
+                    'text' => 'Categorías',
+                    'route'  => 'admin.categories.index',
+                    'can'       => 'admin.categories.index',
+                    'active' => ['admin/categories*'],
+                ],
+                [
+                    'text' => 'Etiquetas',
+                    'route'  => 'admin.tags.index',
+                    'can'       => 'admin.tags.index',
+                    'active' => ['admin/tags*'],
+                ],
+                [
+                    'text'       => 'Publicaciones',
+                    'route'        => 'admin.posts.index',
+                    'can'       => 'admin.posts.index',
+                    'active' => ['admin/posts*'],
+                ],
+
+            ]
+
+        ],
+        [
             'text'        => 'Gestion de juntas',
-            'can'       => 'admin.juntas.index',
+            'can'       => 'admin.juntas.index'||'admin.userjun.index',
             'icon'        => 'fas fa-people-arrows',
             'submenu'  => [
                 [
@@ -272,7 +322,7 @@ return [
         [
             'text'        => 'Gestion de Eventos',
             'icon'        => 'fas fa-calendar-alt',
-            'can'       => 'admin.eventos.index',
+            'can'       => 'admin.eventos.index'||'admin.actas.index',
             'submenu'  => [
                 [
                     'text'        => 'Eventos',
@@ -291,56 +341,11 @@ return [
             ]
 
         ],
-        [
-            'text'        => 'Usuarios',
-            'route'         => 'admin.users.index',
-            'icon'        => 'fas fa-users fa-fw',
-            'can'       => 'admin.users.index'
-        ],
-        [
-            'text'        => 'Lista de roles',
-            'route'         => 'admin.roles.index',
-            'icon'        => 'fas fa-users-cog fa-fw',
-            'can'       => 'admin.users.index'
-        ],
 
-        ['header' => 'OPCIONES DE PAGINA PRINCIPAL'],
-
-        [
-            'text' => 'Categorías',
-            'route'  => 'admin.categories.index',
-            'icon' => 'fab fa-fw fa-buffer',
-            'can'       => 'admin.categories.index'
-        ],
-        [
-            'text' => 'Etiquetas',
-            'route'  => 'admin.tags.index',
-            'icon' => 'far fa-fw fa-bookmark',
-            'can'       => 'admin.tags.index'
-        ],
-        [
-            'text'        => 'Eps y Barrios',
-            'icon'        => 'fas fa-map-signs fa-fw',
-            'submenu'  => [
-                [
-                    'text' => 'EPS',
-                    'route'  => 'admin.eps.index',
-                    'can'       => 'admin.eps.index',
-                    'active' => ['admin/eps*'],
-                ],
-                [
-                    'text' => 'Barrios',
-                    'route'  => 'admin.barrios.index',
-                    'can'       => 'admin.barrios.index',
-                    'active' => ['admin/barrios*'],
-                ]
-
-            ]
-
-        ],
         [
             'text'        => 'Censo Comunal',
             'icon'        => 'far fa-address-book',
+            'can'       => 'admin.censo.index'|| 'admin.censo.index',
             'submenu'  => [
                 [
                     'text'       => 'Beneficiarios',
@@ -355,30 +360,44 @@ return [
                     'can'       => 'admin.censo.index',
                     'active' => ['admin/censo*'],
 
-                ]
+                ],
+                [
+                    'text' => 'Barrios',
+                    'route'  => 'admin.barrios.index',
+                    'can'       => 'admin.barrios.index',
+                    'active' => ['admin/barrios*'],
+                ],
+                [
+                    'text' => 'EPS',
+                    'route'  => 'admin.eps.index',
+                    'can'       => 'admin.eps.index',
+                    'active' => ['admin/eps*'],
+                ],
 
             ]
 
         ],
         [
-            'text'       => 'Lista de Publicaciones',
-            'route'        => 'admin.posts.index',
-            'icon'      => 'fas fa-fw fa-clipboard',
-            'can'       => 'admin.posts.index'
-        ],
-        ['header' => 'PAGOS Y CERTIFICADOS'],
-        [
-            'text'       => 'Pagos de Juntas A.C',
-            'route'        => 'admin.psuscripcion.index',
+            'text'        => 'Censo Comunal',
             'icon'      => 'fas fa-cash-register',
-            'can'       => 'admin.psuscripcion.index'
-        ],
-        [
-            'text'       => 'Pagos y Certificados',
-            'route'        => 'admin.pcertificado.index',
-            'icon'      => 'fas fa-money-bill-wave',
-            'can'       => 'admin.pcertificado.index'
-        ],
+            'can'       => 'admin.psuscripcion.index'||'admin.pcertificado.index',
+            'submenu'  => [
+                [
+                    'text'       => 'Pagos de Juntas A.C',
+                    'route'        => 'admin.psuscripcion.index',
+                    'can'       => 'admin.psuscripcion.index',
+                    'active' => ['admin/psuscripcion*'],
+                ],
+                [
+                    'text'       => 'Pagos y Certificados',
+                    'route'        => 'admin.pcertificado.index',
+                    'can'       => 'admin.pcertificado.index',
+                    'active' => ['admin/pcertificado*'],
+                    
+                ],
+            ]
+
+        ],   
         [
             'text'       => 'Solicitud de certificados',
             'route'        => 'admin.pcertificado.create',
