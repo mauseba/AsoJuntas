@@ -72,8 +72,8 @@
                 <th >Alcantarilla</td>
                 <th >Escrituras</td> 
                 <th >Sisben</td> 
-                <th  >Sub Vivienda</td> 
-                <th  >Sub Gobierno</td> 
+                <th >Sub Vivienda</td> 
+                <th >Sub Gobierno</td> 
                 <th >Piso</td> 
                 <th >Techo</td> 
                 <th >Pañete</td> 
@@ -87,26 +87,26 @@
             @foreach ($censo as $censos)
             <tr>
                 
-                <td>{{$loop->iteration}}</td>
-                <td>{{$censos->user['name']}}</td>
-                <td>{{$censos->barrio}}</td>
-                <td>{{$censos->direccion}}</td>
-                <td>{{$censos->tipo_vivienda}}</td>
-                <td>{{$censos->energia}}</td>
-                <td>{{$censos->gas}}</td>
-                <td>{{$censos->agua}}</td>
-                <td>{{$censos->alcantarilla}}</td>
-                <td>{{$censos->escrituras}}</td>
-                <td>{{$censos->sisben}}</td>
-                <td>{{$censos->sub_vivienda}}</td>
-                <td>{{$censos->sub_gobierno}}</td>
-                <td>{{$censos->piso}}</td>
-                <td>{{$censos->techo}}</td>
-                <td>{{$censos->pañete}}</td>
-                <td>{{$censos->baños}}</td>
-                <td>{{$censos->baño_nuevo}}</td>
-                <td>{{$censos->vivienda_nueva}}</td>                   
-                 <td>{{$censos->updated_at->format('Y-m-d')}}</td> 
+                <td align="center">{{$loop->iteration}}</td>
+                <td align="center">{{$censos->nombre}}</td>
+                <td align="center">{{$censos->barrio}}</td>
+                <td align="center">{{$censos->direccion}}</td>
+                <td align="center">{{$censos->tipo_vivienda}}</td>
+                <td align="center">{{$censos->energia}}</td>
+                <td align="center">{{$censos->gas}}</td>
+                <td align="center">{{$censos->agua}}</td>
+                <td align="center">{{$censos->alcantarilla}}</td>
+                <td align="center">{{$censos->escrituras}}</td>
+                <td align="center">{{$censos->sisben}}</td>
+                <td align="center">{{$censos->sub_vivienda}}</td>
+                <td align="center">{{$censos->sub_gobierno}}</td>
+                <td align="center">{{$censos->piso}}</td>
+                <td align="center">{{$censos->techo}}</td>
+                <td align="center">{{$censos->pañete}}</td>
+                <td align="center">{{$censos->baños}}</td>
+                <td align="center">{{$censos->baño_nuevo}}</td>
+                <td align="center">{{$censos->vivienda_nueva}}</td>                   
+                <td align="center">{{$censos->updated_at->format('Y-m-d')}}</td> 
             </tr>
             
             @endforeach
@@ -138,18 +138,18 @@
             @foreach ($beneficiarios as $beneficiario)                
             <tr>
                                                   
-                            <td>{{$loop->iteration}}</td>
-                            <td>{{$beneficiario->name}}</td>
-                            <td>{{$beneficiario->tipo_doc}}</td>
-                            <td>{{$beneficiario->numero}}</td>
-                            <td>{{$beneficiario->edad}}</td>
-                            <td>{{$beneficiario->genero}}</td>
-                            <td>{{$beneficiario->tipo_salud}}</td>
-                            <td>{{$beneficiario->salud}}</td>
-                            <td>{{$beneficiario->discap}}</td>
-                            <td>{{$beneficiario->nivel_edu}}</td>
-                            <td>{{$beneficiario->sub_gobierno}}</td>
-                            <td>{{$beneficiario->user['name']}}</td>
+                            <td align="center">{{$loop->iteration}}</td>
+                            <td align="center">{{$beneficiario->name}}</td>
+                            <td align="center">{{$beneficiario->tipo_doc}}</td>
+                            <td align="center">{{$beneficiario->numero}}</td>
+                            <td align="center">{{$beneficiario->edad}}</td>
+                            <td align="center">{{$beneficiario->genero}}</td>
+                            <td align="center">{{$beneficiario->tipo_salud}}</td>
+                            <td align="center">{{$beneficiario->salud}}</td>
+                            <td align="center">{{$beneficiario->discap}}</td>
+                            <td align="center">{{$beneficiario->nivel_edu}}</td>
+                            <td align="center">{{$beneficiario->sub_gobierno}}</td>
+                            <td align="center">{{$beneficiario->nombre}}</td>
                         </tr>
             @endforeach
         </tbody>

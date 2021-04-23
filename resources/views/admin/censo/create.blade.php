@@ -39,11 +39,11 @@
         <div class="form-group">
                 {!! Form::label('user_id', 'Afiliado') !!}
 
-                <select id="user_id" name="user_id" class="form-control" >
+                <select id="user_id" name="user_id"  class="selectpicker" data-live-search="true" >
 
                     <option selected hidden>Seleccionar</option>
                     @foreach ($user as $users)
-                        <option value="{{ $users->id }}">{{ $users->name}}</option>
+                        <option data-subtext='{{$users->Num_identificacion}}' value="{{ $users->id }}">{{ $users->nombre}}</option>
                     @endforeach
                    
 
@@ -320,6 +320,7 @@
 
 @section('css')
 <link rel="stylesheet" href="/css/admin_custom.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
 @stop
 
 @section('js')
@@ -330,5 +331,21 @@
     });
 
 </script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+    @if (session('error'))
+    <script>
+        var session = '{{session('error')}}';
+        Swal.fire(
+        'Error',
+        session ,
+        'error'
+        )
+    </script>
+    @endif
+    <script>
+        $(function() {
+            $('#user').selectpicker();
+        });
+    </script>
 
 @endsection

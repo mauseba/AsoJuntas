@@ -136,17 +136,17 @@
             </div>
         </div>
         <div class="row mt-2">
-            <div class="mt-2">Exportar por afiliado</div>
-            <select wire:model="afiliado" class="form-select text-sm">
+            
+            <select wire:model="afiliado" class="form-select text-sm"  >
                 <option value="" selected> -- Seleccionar -- </option>
                 @foreach ($user as $users)
-                <option value="{{ $users->id }}">{{ $users->name}}</option>
+                <option value="{{ $users->id }}">{{ $users->nombre}}</option>
                 @endforeach
             </select>
-            <a class="btn btn-danger text-white " wire:click="exportar">PDF</a>
+            <a class="btn btn-danger text-white  ml-4 " wire:click="exportar">Informe Individual</a>
             
-            <div class="mt-2">Exportar General</div>
-            <a class="btn btn-danger text-white " wire:click="exportarGeneral">Informe General</a>
+            
+            <a class="btn btn-danger text-white ml-4" wire:click="exportarGeneral">Informe General</a>
         
         </div>
         
@@ -191,7 +191,7 @@
                         @foreach ($censo as $censos)
                         <tr>
                             <td>{{$loop->iteration}}</td>
-                            <td>{{ $censos->user['name']}}</td>
+                            <td>{{$censos->nombre}}</td>
                             <td>{{$censos->barrio}}</td>
                             <td>{{$censos->direccion}}</td>
                             <td>{{$censos->tipo_vivienda}}</td>

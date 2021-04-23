@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-6">
         <div class="form-group">
-            <label for="">seleccione el nombre del afiliado:</label><br>
+            <label for="">Seleccione el afiliado:</label><br>
             <select id="user" name="user_id" class="selectpicker" data-live-search="true" >
                 @foreach ($users as $user)
                         <option  data-subtext='{{$user->Num_identificacion}}' value={{$user->id}} >{{$user->nombre}}</option>
@@ -10,10 +10,7 @@
         </div>
     </div>
 </div>
-<div class="form-group">
-    {!! Form::label('barrio', 'Nucleo Familiar') !!}
-    {!! Form::text('barrio', array('Seleccionar','Conyuge'=>'Conyuge','Hijo/a'=>'Hijo/a','Padre/Madre'=>'Padre/Madre'),null, ['class' => 'form-control',]) !!}
-</div>
+
 <div class="form-group">
     {!! Form::label('nucleo_fam', 'Nucleo Familiar') !!}
     {!! Form::select('nucleo_fam', array('Seleccionar','Conyuge'=>'Conyuge','Hijo/a'=>'Hijo/a','Padre/Madre'=>'Padre/Madre'),null, ['class' => 'form-control']) !!}

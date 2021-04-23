@@ -16,11 +16,7 @@
 <!-- (Optional) Latest compiled and minified JavaScript translation files -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/i18n/defaults-*.min.js"></script>
 
-@if (session('info'))
-<div class="alert alert-success">
-    <strong>{{session('info')}}</strong>
-</div>
-@endif
+
 
 <div class="card">
     <div class="card-body">
@@ -276,5 +272,25 @@
 @stop
 
 @section('js')
+        @if (session('info'))
+    <script>
+        var session = '{{session('info')}}';
+        Swal.fire(
+        'Success',
+        session ,
+        'Success'
+        )
+    </script>
+    @endif
 
+     @if (session('error'))
+    <script>
+        var session = '{{session('error')}}';
+        Swal.fire(
+        'Error',
+        session ,
+        'Error'
+        )
+    </script>
+    @endif
 @endsection

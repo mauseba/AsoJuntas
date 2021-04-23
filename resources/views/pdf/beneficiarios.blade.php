@@ -54,58 +54,6 @@
 
 
     <br/>
-    {{-- <table width="100%">
-        <tr>
-            <td><h2>DATOS BÁSICOS</h2></td>
-        </tr>
-    </table>
-     --}}
-    {{-- <table width="100%">
-        <thead style="background-color: lightgray;">
-            <tr>
-                <th >Barrio</th>
-                <th >Direccion</td>
-                <th >Tipo Vivienda</td>
-                <th >Energia</td>
-                <th >Gas</td>
-                <th >Agua</td>
-                <th >Alcantarilla</td>
-                <th >Escrituras</td> 
-                <th >Sisben</td> 
-                <th  >Sub Vivienda</td> 
-                <th >Piso</td> 
-                <th >Techo</td> 
-                <th >Pañete</td> 
-                <th >Baños</td> 
-                <th >Baño Nuevo</td> 
-                <th >Vivienda Nueva</td>               
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($censo as $censos)
-            <tr>
-                <td>{{$censos->barrio}}</td>
-                <td>{{$censos->direccion}}</td>
-                <td>{{$censos->tipo_vivienda}}</td>
-                <td>{{$censos->energia}}</td>
-                <td>{{$censos->gas}}</td>
-                <td>{{$censos->agua}}</td>
-                <td>{{$censos->alcantarilla}}</td>
-                <td>{{$censos->escrituras}}</td>
-                <td>{{$censos->sisben}}</td>
-                <td>{{$censos->sub_vivienda}}</td>
-                <td>{{$censos->piso}}</td>
-                <td>{{$censos->techo}}</td>
-                <td>{{$censos->pañete}}</td>
-                <td>{{$censos->baños}}</td>
-                <td>{{$censos->baño_nuevo}}</td>
-                <td>{{$censos->vivienda_nueva}}</td>   
-            </tr>
-            @endforeach
-        </tbody>
-
-    </table> --}}
-    <br/>
     <table width="100%">
         <tr>
             <td><h2>BENEFICIARIOS</h2></td>
@@ -139,20 +87,20 @@
             @foreach ($beneficiarios as $beneficiario)
                         <tr>
                                                   
-                            <td>{{$loop->iteration}}</td>
-                            <td>{{$beneficiario->name}}</td>
-                            <td>{{$beneficiario->tipo_doc}}</td>
-                            <td>{{$beneficiario->numero}}</td>
-                            <td>{{$beneficiario->edad}}</td>
-                            <td>{{$beneficiario->genero}}</td>
-                            <td>{{$beneficiario->tipo_salud}}</td>
-                            <td>{{$beneficiario->salud}}</td>
-                            <td>{{$beneficiario->discap}}</td>
-                            <td>{{$beneficiario->nivel_edu}}</td>
-                            <td>{{$beneficiario->sub_gobierno}}</td>
-                            <td>{{$beneficiario->barrio}}</td>
-                            <td>{{$beneficiario->user['name']}}</td>                            
-                            <td>{{$beneficiario->updated_at->format('Y-m-d')}}</td>
+                            <td align="center">{{$loop->iteration}}</td>
+                            <td align="center">{{$beneficiario->name}}</td>
+                            <td align="center">{{$beneficiario->tipo_doc}}</td>
+                            <td align="center">{{$beneficiario->numero}}</td>
+                            <td align="center">{{$beneficiario->edad}}</td>
+                            <td align="center">{{$beneficiario->genero}}</td>
+                            <td align="center">{{$beneficiario->tipo_salud}}</td>
+                            <td align="center">{{$beneficiario->salud}}</td>
+                            <td align="center">{{$beneficiario->discap}}</td>
+                            <td align="center">{{$beneficiario->nivel_edu}}</td>
+                            <td align="center">{{$beneficiario->sub_gobierno}}</td>
+                            <td align="center">{{$beneficiario->barrio}}</td>
+                            <td align="center">{{$beneficiario->nombre}}</td>                            
+                            <td align="center">{{$beneficiario->updated_at->format('Y-m-d')}}</td>
                         </tr>
             @endforeach
         </tbody>

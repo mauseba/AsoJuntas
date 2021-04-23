@@ -80,13 +80,16 @@ class CensoController extends Controller
 
         $censo = new Censo();
 
+        $direccion = UserJun::select('Direccion')->where('id', $censo->user_id)->get()->first();
         $censo->barrio = $request->barrio;
-        $censo->direccion = $request->direccion;
+        $censo->direccion = $direccion->Direccion;
         $censo->tipo_vivienda = $request->tipo_vivienda;
         $censo->energia = $request->energia;
         $censo->gas = $request->gas;
         $censo->agua = $request->agua;
         $censo->alcantarilla = $request->alcantarilla;
+
+
 
 
         if ($request->tipo_vivienda == 'Propia') {
@@ -167,8 +170,10 @@ class CensoController extends Controller
 
         $censo = Censo::findOrFail($id);
 
+        $direccion = UserJun::select('Direccion')->where('id', $censo->user_id)->get()->first();
+
         $censo->barrio = $request->barrio;
-        $censo->direccion = $request->direccion;
+        $censo->direccion = $direccion->Direccion;
         $censo->tipo_vivienda = $request->tipo_vivienda;
         $censo->energia = $request->energia;
         $censo->gas = $request->gas;
