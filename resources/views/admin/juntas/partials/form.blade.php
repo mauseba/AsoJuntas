@@ -1,6 +1,29 @@
        
 <div class="tab-content">
-    <div id="home" class="container tab-pane active">  
+    <div id="home" class="container tab-pane active">
+        <div class="row mb-3">
+            <div class="col-6">
+                <div class="image-wrapper">
+                    @isset ($junta->image)
+                        <img id="picture" src="{{Storage::url($junta->image->url)}}">
+                    @else
+                        <img id="picture" src="{{asset('imagenes/Girasoles.jpg')}}">
+                    @endisset
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="form-group">
+                    {!! Form::label('file', 'Seleccione el logo de la junta:') !!}
+                    {!! Form::file('file', ['class' => 'form-control-file', 'accept' => 'image/*']) !!}
+
+                    @error('file')
+                        <span class="text-danger">{{$message}}</span>
+                    @enderror
+                </div>
+
+            </div>
+        </div>  
         <div class="row">
             <div class="col-3">
                 <div class="form-group">

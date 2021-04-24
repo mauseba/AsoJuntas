@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
         Storage::deleteDirectory('resolucion');
         Storage::deleteDirectory('Actas');
         Storage::deleteDirectory('Comprobantes');
+        Storage::deleteDirectory('logos');
         
         Storage::makeDirectory('posts');
         Storage::makeDirectory('NIT');
@@ -35,6 +36,7 @@ class DatabaseSeeder extends Seeder
         Storage::makeDirectory('resolucion');
         Storage::makeDirectory('Actas');
         Storage::makeDirectory('Comprobantes');
+        Storage::makeDirectory('logos');
 
         $this->call(RoleSeeder::class);
         $this->call(DocumentoSeeder::class);

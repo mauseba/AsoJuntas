@@ -10,12 +10,25 @@
         html {
             margin: 40pt 60pt;
         }
+        .imagen img{
+            width: 100%; 
+            max-width: 120px; 
+            height: auto;
+        }
     </style>
 </head>
 <body>
     <table width="100%">
         <tr>
-            <td valign="top"><img src="{{asset('imagenes/LogoCom.png')}}" alt="" width="100"/></td>
+            <td valign="top">
+                @isset ($junta->image)
+                    <div class="imagen">
+                        <img src="{{asset(Storage::url($junta->image->url))}}">
+                    </div>
+                @else
+                    <img src="{{asset('imagenes/LogoCom.png')}}" alt="" width="90"/>
+                @endisset
+            </td>
             <td align="center">
                 <h3 style="text-transform:uppercase;">REPUBLICA DE COLOMBIA <br>DEPARTAMENTO DEL HUILA <br> MUNICIPIO DE ALGECIRAS <br> JUNTA DE ACCIÓN COMUNAL <br>BARRIO {{$datosu['junta']}} <br>RESOLUCION {{$datosu['Resolucion']}} <br>Nit: {{$datosu['Nit']}}   </h3>
             </td>
@@ -36,7 +49,7 @@
         </h3><br>
 
         <p style="text-align:justify; font-size: 13pt;">
-            Yo <strong  style="text-transform:uppercase;" >{{$presi['nombre']}}</strong> identificado(a) con {{$presi['Tip_identificacion']}} N° {{$presi['Num_identificacion']}} expedida en {{$datosu['Expedido']}}, en mi calidad de presidente de la junta de acción 
+            Yo <strong  style="text-transform:uppercase;" >{{$presi['nombre']}}</strong> identificado(a) con {{$presi['Tip_identificacion']}} N° {{$presi['Num_identificacion']}}, en mi calidad de presidente de la junta de acción 
             comunal con reconocimiento legal expedido por la gobernación del Huila, certifico que el señor (ra) <strong  style="text-transform:uppercase;" >{{$datosu['nombre']}}</strong>  ,identificada (o) 
             con la {{$datosu['Tdocumento']}} N° {{$datosu['Documento']}} expedida en {{$datosu['Expedido']}}, ha ejercido por un periodo mayor a cinco años la sana tenencia quieta libre y pacifica 
             sobre el inmueble ubicado en la vereda {{$datosu['junta']}} , localizada en  {{$datosu['Direccion']}} del municipio de Algeciras  departamento del Huila, 

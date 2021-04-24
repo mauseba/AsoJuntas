@@ -61,6 +61,7 @@ class JuntaController extends Controller
             ]);
         
         $url = $request->except('_token');
+
         
         if ($request->hasFile('D_NIT') || $request->hasFile('D_Resolucion') || $request->hasFile('D_Recibopago')){
             $url['D_NIT'] = Storage::put('NIT', $request->file('D_NIT'));
@@ -69,6 +70,14 @@ class JuntaController extends Controller
         }
         
         $junta = Junta::create($url);
+
+        if ($request->file('file')) {
+            $url1 = Storage::put('logos', $request->file('file'));
+
+            $junta->image()->create([
+                'url' => $url1
+            ]);
+        }
         
         return redirect()->route('admin.juntas.create', $junta)->with('info', 'La junta de accion comunal se creó con éxito');
     }
@@ -92,6 +101,7 @@ class JuntaController extends Controller
      */
     public function edit(Junta $junta)
     {
+        
         return view('admin.juntas.edit',compact('junta'));
     }
 
@@ -117,7 +127,6 @@ class JuntaController extends Controller
             'status' => 'required|in:1,2'
         ]);
 
-       
         
         if ($request->hasFile('D_NIT') && $request->hasFile('D_Resolucion') && $request->hasFile('D_Recibopago')){
             $url = $request->except('_token');
@@ -157,6 +166,21 @@ class JuntaController extends Controller
             $url4= $request->except('D_NIT','D_Resolucion','D_Recibopago','_token');
             $junta->update($url4);
         }
+
+        if ($request->file('file')) {
+            $enl = Storage::put('logos', $request->file('file'));
+            if($junta->image){
+                Storage::delete($junta->image->url);
+
+                $junta->image->update([
+                    'url' => $enl
+                ]);
+            }else{
+                $junta->image()->create([
+                    'url' => $enl
+                ]);
+            }
+        }
         
         return redirect()->route('admin.juntas.index',$junta)->with('info', 'La junta de accion comunal se actualizo correctamente');
     }
@@ -172,6 +196,7 @@ class JuntaController extends Controller
     {
         Storage::delete($junta->D_Recibopago);
         Storage::delete($junta->D_NIT);
+        Storage::delete($junta->D_Resolucion);
         Storage::delete($junta->D_Resolucion);
 
         $junta->delete();

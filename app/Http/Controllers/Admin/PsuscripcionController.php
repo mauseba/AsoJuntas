@@ -305,22 +305,23 @@ class PsuscripcionController extends Controller
     {
         switch ($request['opcion']) {
             case '0':
+               // $post->image->url
+                $junta = Junta::where('Nit',$request['Nit'])->get()->first();
                 $datosu = request()->except('_token', 'Tipo', 'opcion');
                 switch ($request['Tipo']) {
                     case '0':  
-                        $pdf = PDF::loadView('admin.pdf.certificado.certificadoAfil', compact('datosu'))->setPaper('letter')->stream('CertificadoAfiliado.pdf');
+                        $pdf = PDF::loadView('admin.pdf.certificado.certificadoAfil', compact('datosu','junta'))->setPaper('letter')->stream('CertificadoAfiliado.pdf');
                         return $pdf;
                         break;
                     case '1':
-                        $pdf = PDF::loadView('admin.pdf.certificado.certificadoRes', compact('datosu'))->setPaper('letter')->stream('CertificadoResiencia.pdf');
+                        $pdf = PDF::loadView('admin.pdf.certificado.certificadoRes', compact('datosu','junta'))->setPaper('letter')->stream('CertificadoResiencia.pdf');
                         return $pdf;
                         break;
                     case '2':
-                        $pdf = PDF::loadView('admin.pdf.certificado.certificadoPaz', compact('datosu'))->setPaper('letter')->stream('CertificadoPazySalvo.pdf');
+                        $pdf = PDF::loadView('admin.pdf.certificado.certificadoPaz', compact('datosu','junta'))->setPaper('letter')->stream('CertificadoPazySalvo.pdf');
                         return $pdf;
                         break;
                     case '3':
-
                         $presi = UserJun::join('juntas', 'user_juns.junta_id', '=', 'juntas.id')
                         ->select('user_juns.*', 'juntas.Nit')
                         ->where([
@@ -329,13 +330,11 @@ class PsuscripcionController extends Controller
                         ])
                         ->get()->first();
 
-
-
                         if($presi == null){
                             return redirect()->route('admin.psuscripcion.index')->with('error', 'No hay presidentes en esta junta');
                         }
                       
-                        $pdf = PDF::loadView('admin.pdf.certificado.certificadoSana', compact('datosu','presi'))->setPaper('a4')->stream('CertificadoSanaTe.pdf');
+                        $pdf = PDF::loadView('admin.pdf.certificado.certificadoSana', compact('datosu','presi','junta'))->setPaper('a4')->stream('CertificadoSanaTe.pdf');
                         return $pdf;
                         break;
                     default:

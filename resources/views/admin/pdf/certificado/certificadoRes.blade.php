@@ -10,12 +10,25 @@
         html {
             margin: 40pt 60pt;
         }
+        .imagen img{
+            width: 100%; 
+            max-width: 130px; 
+            height: auto;
+        }
     </style>
 </head>
 <body>
     <table width="100%">
         <tr>
-            <td valign="top"><img src="{{asset('imagenes/LogoCom.png')}}" alt="" width="100"/></td>
+            <td valign="top">
+                @isset ($junta->image)
+                    <div class="imagen">
+                        <img src="{{asset(Storage::url($junta->image->url))}}">
+                    </div>
+                @else
+                    <img src="{{asset('imagenes/LogoCom.png')}}" alt="" width="100"/>
+                @endisset
+            </td>
             <td align="center">
                 <h3 style="text-transform:uppercase;">REPUBLICA DE COLOMBIA <br>DEPARTAMENTO DEL HUILA <br> MUNICIPIO DE ALGECIRAS <br> JUNTA DE ACCIÓN COMUNAL <br>BARRIO {{$datosu['junta']}} <br>RESOLUCION {{$datosu['Resolucion']}} <br>Nit: {{$datosu['Nit']}}   </h3>
             </td>

@@ -28,4 +28,11 @@ class Junta extends Model
     public function eventos(){
         return $this->belongsToMany(Evento::class);
     }
+
+    //Relacion uno a uno polimorfica
+
+    public function image(){
+        return $this->morphOne(Image::class, 'imageable');
+    }
+
 }

@@ -46,8 +46,36 @@
 @stop
 
 @section('css')
+<style>
+    .image-wrapper{
+             position: relative;
+             padding-bottom: 30%;
+         }
+ 
+         .image-wrapper img{
+             position: absolute;
+             object-fit: cover;
+             width: 30%;
+             height: 100%;
+         }
+ </style>
 @stop
 
 @section('js')
-    <script> console.log('Hi!'); </script>
+<script>
+        //Cambiar imagen
+        document.getElementById("file").addEventListener('change', cambiarImagen);
+
+        function cambiarImagen(event){
+            var file = event.target.files[0];
+
+            var reader = new FileReader();
+            reader.onload = (event) => {
+                document.getElementById("picture").setAttribute('src', event.target.result); 
+            };
+
+            reader.readAsDataURL(file);
+        }
+    </script>
+ 
 @stop
