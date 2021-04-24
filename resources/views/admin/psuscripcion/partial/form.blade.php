@@ -2,7 +2,7 @@
     <div class="col-3">
         <div class="form-group">
             {!! Form::label('FechaP', 'Fecha') !!}
-            {!! Form::date('FechaP',\Carbon\Carbon::now(),['class' => 'form-control', 'readonly'])!!}
+            {!! Form::date('FechaP',\Carbon\Carbon::now(),['class' => 'form-control'])!!}
             
             @error('FechaP')
                 <small class="text-danger">{{$message}}</small>
@@ -48,7 +48,7 @@
     <div class="col">
         <div class="form-group">
             {!! Form::label('tipo', 'Tipo de pago:') !!}
-            {!! Form::select('tipo',array('suscripcion'=>'Suscripcion','bimestral'=>'Bimestral'),null, ['class' => 'form-control']) !!}
+            {!! Form::select('tipo',array('suscripcion'=>'Suscripcion','bimestral'=>'Bimestral','anual'=>'Anual'),null, ['class' => 'form-control']) !!}
 
             @error('tipo')
                 <small class="text-danger">{{$message}}</small>

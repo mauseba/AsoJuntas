@@ -10,6 +10,7 @@ use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\Storage;
 use App\Models\UserJun;
 use Illuminate\Support\Arr;
+use Carbon\Carbon;
 
 class PsuscripcionController extends Controller
 {
@@ -102,42 +103,78 @@ class PsuscripcionController extends Controller
 
     public function validar($data,$junta)
     {
-        if ($data['tipo']=='suscripcion'){
+        switch ($data['tipo']) {
+            
+            case 'suscripcion':
 
-            $validate = Psuscripcion::select('Mes', 'Junta_id', 'tipo')
-            ->where([
-                ['Mes', $data['Mes']],
-                ['Junta_id', $data['junta_id']],
-                ['tipo', $data['tipo']]
-            ])->orWhere([
-                ['Junta_id', $data['junta_id']],
-                ['tipo', 'suscripcion']
-            ])->get();
+                $validate = Psuscripcion::select('Mes', 'Junta_id', 'tipo')
+                ->where([
+                    ['Mes', $data['Mes']],
+                    ['Junta_id', $data['junta_id']],
+                    ['tipo', $data['tipo']]
+                ])->orWhere([
+                    ['Junta_id', $data['junta_id']],
+                    ['tipo', 'suscripcion']
+                ])->get();
+    
+                if (count($validate) == 1 && $junta == $data['junta_id']) {
+                    return true;
+                } elseif(count($validate) == 0) {
+                    return true;
+                }else{
+                    return false;
+                }
 
-            if (count($validate) == 1 && $junta == $data['junta_id']) {
-                return true;
-            } elseif(count($validate) == 0) {
-                return true;
-            }else{
+                break;
+            case 'anual':
+
+                $validate = Psuscripcion::select('FechaP')
+                ->where([
+                    ['Junta_id',$data['junta_id']],
+                    ['tipo', $data['tipo']],
+                ])
+                ->get();
+            
+                if(count($validate) == 0){
+                    return true;
+                }elseif(count($validate) == 1 && $junta == $data['junta_id']){
+                    return true;
+                }
+                else{
+                    $date1= Carbon::parse($validate[0]->FechaP);
+                    $date1->addYear();
+                    $date2= Carbon::parse($data['FechaP']);
+
+                    if($date1->year == $date2->year && $date1->month <= $date2->month ){
+                        return true;
+                    }else{
+                        return false;
+                    }
+                }
+
+                break;
+            case 'bimestral':
+
+                $validate = Psuscripcion::select('Mes', 'Junta_id', 'tipo')
+                ->where([
+                    ['Mes', $data['Mes']],
+                    ['Junta_id', $data['junta_id']],
+                    ['tipo', $data['tipo']]
+                ])->get();
+    
+                if (count($validate) == 0) {
+                    return true;
+                } elseif(count($validate) == 1 && $junta == $data['junta_id']) {
+                    return true;
+                }else{
+                    return false;
+                }
+
+                break;
+        
+            default:
                 return false;
-            }
-        }
-        else
-        {
-            $validate = Psuscripcion::select('Mes', 'Junta_id', 'tipo')
-            ->where([
-                ['Mes', $data['Mes']],
-                ['Junta_id', $data['junta_id']],
-                ['tipo', $data['tipo']]
-            ])->get();
-
-            if (count($validate) == 0) {
-                return true;
-            } elseif(count($validate) == 1 && $junta == $data['junta_id']) {
-                return true;
-            }else{
-                return false;
-            }
+                break;
         }
         
     }
@@ -155,7 +192,7 @@ class PsuscripcionController extends Controller
             'Mes' => 'required',
             'junta_id' => 'required|numeric',
             'tipo' => 'required',
-            'Comprobante' => 'required|mimes:pdf,jpg,png,bmp,jpeg|max:250'
+            'Comprobante' => 'required|mimes:pdf,jpg,png,bmp,jpeg|max:350'
 
         ]);
 
@@ -163,7 +200,6 @@ class PsuscripcionController extends Controller
 
         switch ($data['tipo']) {
             case 'bimestral':
-
                 $Ndata = Arr::set($data, 'Mes', $this->cambiarMes($data['Mes']));
 
                 if ($this->validar($Ndata,'')) {
@@ -187,6 +223,19 @@ class PsuscripcionController extends Controller
                     return redirect()->route('admin.psuscripcion.index')->with('info', 'El registro de pago, se añadio con exito');
                 } else {
                     return redirect()->route('admin.psuscripcion.index')->with('error', 'Ya se añadio el recibo de pago, a la fecha seleccionada');
+                }
+                break;
+            
+            case 'anual':
+
+                if ($this->validar($data,'')) {
+                    if ($request->hasFile('Comprobante')) {
+                        $data['Comprobante'] = Storage::put('Comprobantes', $request->file('Comprobante'));
+                    }
+                    Psuscripcion::create($data);
+                    return redirect()->route('admin.psuscripcion.index')->with('info', 'El registro de pago, se añadio con exito');
+                } else {
+                    return redirect()->route('admin.psuscripcion.index')->with('error', 'Ya se añadio un  pago, al año actual');
                 }
                 break;
 
@@ -340,7 +389,7 @@ class PsuscripcionController extends Controller
             'Mes' => 'required',
             'junta_id' => 'required|numeric',
             'tipo' => 'required',
-            'Comprobante' => 'mimes:pdf,jpg,png,bmp,jpeg|max:250'
+            'Comprobante' => 'mimes:pdf,jpg,png,bmp,jpeg|max:350'
 
         ]);
 
@@ -380,7 +429,20 @@ class PsuscripcionController extends Controller
                     return redirect()->route('admin.psuscripcion.index')->with('error', 'Ya se añadio el recibo de pago, a la fecha seleccionada');
                 }
                 break;
+                case 'anual':
 
+                    if ($this->validar($data,$psuscripcion['junta_id'])) {
+                        if ($request->hasFile('Comprobante')) {
+                            Storage::delete($psuscripcion->Comprobante);
+                            $data['Comprobante'] = Storage::put('Comprobantes', $request->file('Comprobante'));
+                        }
+
+                        $psuscripcion->update($data);
+                        return redirect()->route('admin.psuscripcion.index')->with('info', 'El registro de pago, se añadio con exito');
+                    } else {
+                        return redirect()->route('admin.psuscripcion.index')->with('error', 'Ya se añadio un  pago, al año actual');
+                    }
+                break;
             default:
                 return redirect()->route('admin.psuscripcion.index')->with('error', 'Algo salio mal');
                 break;
