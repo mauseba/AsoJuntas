@@ -17,7 +17,7 @@
 </div>
 <div class="form-group">
     {!! Form::label('name', 'Nombre del Beneficiario') !!}
-    {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el nombre del beneficiario']) !!}
+    {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el nombre del beneficiario','pattern'=>'[A-Za-z]{1,45}']) !!}
 
 </div>
 <div class="form-group">
@@ -77,7 +77,9 @@
    </div>
    <div class="col-3">
         <div class="form-group">
-            {!! Form::label('discap', 'Discapacidad:') !!}
+            {!! Form::label('discap', 'Discapacidad:') !!} <a type="button" class="text-warning" data-toggle="modal"
+                        data-target=".bd-example-modal-lg"><i class="fas fa-info-circle"></i> </a>
+                        
             {!! Form::select('discap', array('Ninguna'=>'Ninguna',
             'Fisica'=>'Fisica',
             'Intelectual'=>'Intelectual',

@@ -7,20 +7,19 @@
 
 
         <div class="row">
-            <div class="col">
+            <div class="col-2">
                 <input wire:model="nombre" class="form-control text-sm" placeholder="Nombre">
             </div>
-            <div class="col-md-2">
+            <div class="col-1">
 
                 <select wire:model="documento" class="form-control text-muted text-sm">
                     <option value=""> Tipo Doc </option>
-                    <option value="R.C">R.C</option>
-                    <option value="T.I">T.I</option>
-                    <option value="C.C">C.C</option>
-                    {{-- <option value="C.E">C.E</option> --}}
+                     @foreach ($doc as $do)
+                    <option value="{{$do->tipo}}">{{$do->tipo}}</option>
+                    @endforeach
                 </select>
             </div>
-            <div class="col">
+            <div class="col-1">
                 <input wire:model="numero" class="form-control text-sm" placeholder="Numero">
             </div>
             <div class="col-md-2">
@@ -34,7 +33,7 @@
 
 
             </div>
-            <div class="col">
+            <div class="col-1">
 
                 <select wire:model="genero" class="form-control text-secondary text-sm">
                     <option value=""> Género </option>
@@ -43,7 +42,7 @@
                     <option value="O">Otro</option>
                 </select>
             </div>
-            <div class="col">
+            <div class="col-2">
 
                 <select wire:model="afiliacion" class="form-control text-secondary text-sm">
                     <option value="">TipoAfiliacion</option>
@@ -53,16 +52,7 @@
 
                 </select>
             </div>
-
-
-
-
-
-
-
-        </div>
-        <div class="row mt-2">
-            <div class="col">
+            <div class="col-2">
                 {{-- <input wire:model="eps" class="form-control" placeholder="EPS"> --}}
                 <select wire:model="eps" class="form-control text-secondary text-sm">
                     <option value="" selected>EPS</option>
@@ -74,6 +64,9 @@
 
                 </select>
             </div>
+        </div>
+        <div class="row mt-2">
+            
             <div class="col">
 
                 <select wire:model="discapacidad" class="form-control text-secondary text-sm">
@@ -90,10 +83,9 @@
             <div class="col-md">
                 <select wire:model="edu" class="form-control text-secondary text-sm">
                     <option value="">NivelEdu</option>
-                    <option>Ninguna</option>
-                    <option>Primaria</option>
-                    <option>Secundaria</option>
-                    <option>Universidad</option>
+                   @foreach ($estu as $edu)
+                    <option value="{{ $edu->prefijo }}">{{ $edu->nombre}}</option>
+                    @endforeach
                 </select>
             </div>
             <div class="col-md">
@@ -115,17 +107,20 @@
                 </select>
             </div>
             <div class="col">
-
-
+                <select wire:model="junta" class="form-control text-secondary text-sm">
+                    <option value="" >Junta</option>
+                    @foreach ($jun as $ju)
+                    <option value="{{ $ju->Nombre }}">{{ $ju->Nombre}}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="col">
                 <select wire:model="afiliado" class="form-control text-secondary text-sm">
                     <option value="" >Afiliado</option>
                     @foreach ($user as $users)
                     <option value="{{ $users->id }}">{{ $users->nombre}}</option>
                     @endforeach
                 </select>
-
-
-
             </div>
             <div class="col">
                 <a class="btn btn-danger text-white" wire:click="exportar">PDF</a>
@@ -155,6 +150,7 @@
                             <th>Subsidio<br>Gobierno</th>
                             <th>Barrio</th>
                             <th>Afiliado</th>
+                            <th>Junta</th>
                             <th>Actualizado</th>
                             <th colspan="2">
 
@@ -179,6 +175,7 @@
                             <td>{{$beneficiario->sub_gobierno}}</td>
                             <td>{{$beneficiario->barrio}}</td>
                             <td>{{$beneficiario->nombre}}</td>
+                            <td>{{$beneficiario->Nombre}}</td>
                             <td>{{$beneficiario->updated_at->format('Y-m-d')}}</td>
 
                             <td>

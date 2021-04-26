@@ -42,7 +42,8 @@ class CensoController extends Controller
      */
     public function create()
     {
-        $user = UserJun::all()->sortBy("name");;
+        $user = UserJun::all()->where('Cargo', 'afiliado');
+
         $barrios = Barrios::orderBy('name')->get();
         return view('admin.censo.create', compact('barrios', 'user'));
     }
@@ -58,7 +59,7 @@ class CensoController extends Controller
         $request->validate([
             'user_id' => 'required|not_in:Seleccionar',
             'barrio' => 'required|not_in:Seleccionar',
-            'direccion' => 'required',
+
             'tipo_vivienda' => 'required|not_in:Seleccionar',
             'user_id' => 'unique:censo',
             'sisben' => 'required|not_in:Seleccionar',
@@ -80,7 +81,7 @@ class CensoController extends Controller
 
         $censo = new Censo();
 
-        $direccion = UserJun::select('Direccion')->where('id', $censo->user_id)->get()->first();
+        $direccion = UserJun::select('Direccion')->where('id', $request->user_id)->get()->first();
         $censo->barrio = $request->barrio;
         $censo->direccion = $direccion->Direccion;
         $censo->tipo_vivienda = $request->tipo_vivienda;
@@ -134,7 +135,8 @@ class CensoController extends Controller
     {
         $barrios = Barrios::orderBy('name')->get();
 
-        $censo = Censo::find($id);
+        $censo = Censo::join('user_juns', 'censo.user_id', '=', 'user_juns.id')
+            ->select('censo.*', 'user_juns.nombre')->find($id);
 
         return view('admin.censo.edit', compact('censo', 'barrios'));
     }

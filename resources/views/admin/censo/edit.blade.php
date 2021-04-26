@@ -40,8 +40,7 @@
         
         <div class="form-group">
             <label> Afiliado:</label>
-           {{ $censo->user['name'] }}
-
+          {{ $censo->nombre}}
         </div>
         <div class="form-group">
 

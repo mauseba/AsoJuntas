@@ -23,4 +23,8 @@ class Beneficiarios extends Model
     {
         return $this->hasOne('App\Models\Censo\Censo');
     }
+    public function junta()
+    {
+        return $this->hasOne('App\Models\Junta');
+    }
 }

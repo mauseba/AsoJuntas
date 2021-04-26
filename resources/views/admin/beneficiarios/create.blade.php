@@ -33,7 +33,7 @@
            
         </div>
     </div>
-
+    @include('admin.beneficiarios.partials.discapacidades')
 
 @stop
 

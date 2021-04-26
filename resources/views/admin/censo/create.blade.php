@@ -7,16 +7,7 @@
 @stop
 
 @section('content')
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
 
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
-
-<!-- (Optional) Latest compiled and minified JavaScript translation files -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/i18n/defaults-*.min.js"></script>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 
 @if (session('info'))
@@ -64,10 +55,6 @@
         </div>
 
 
-        {!! Form::label('direccion', 'Direccion/Finca') !!}
-
-
-        {{ Form::text('direccion', Input::old('direccion'), ['class'=> 'form-control']) }}
 
         <div class="row justify-content-center">
             <div class="col-4">

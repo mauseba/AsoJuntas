@@ -9,6 +9,7 @@ use App\Models\Censo\Barrios;
 use App\Models\Documento;
 use App\Models\Estudio;
 use App\Models\UserJun;
+use App\Models\Junta;
 use Barryvdh\DomPDF\Facade as PDF;
 use Livewire\Component;
 
@@ -34,6 +35,7 @@ class BeneficiariosIndex extends Component
     public $afiliado;
     public $subsidio;
     public $barrio;
+    public $junta;
 
 
     public function updatingSearch()
@@ -43,14 +45,17 @@ class BeneficiariosIndex extends Component
 
     public function render()
     {
-        $user = UserJun::all()->sortby('name');
+        $user = UserJun::all()->where('Cargo', 'afiliado');
         $epss = Eps::all()->sortby('name'); // ordenar por nombre
-
-        $doc = Documento::pluck('nombre', 'tipo');
+        $doc = Documento::all();
         $barrios = Barrios::orderBy('name')->get();
-        $estu = Estudio::pluck('nombre', 'prefijo');
+        $estu = Estudio::all();
+        $jun = Junta::all()->sortby('Nombre');
 
-        $beneficiarios = Beneficiarios::join('user_juns', 'beneficiarios.user_id', '=', 'user_juns.id')->select('beneficiarios.*', 'user_juns.nombre')
+        $beneficiarios = Beneficiarios::join('user_juns', 'beneficiarios.user_id', '=', 'user_juns.id')
+            ->join('juntas', 'juntas.id', '=', 'user_juns.id')
+            ->select('beneficiarios.*', 'user_juns.nombre', 'user_juns.junta_id', 'juntas.Nombre')
+            ->where('juntas.Nombre', 'LIKE', $this->junta)
             ->where('name', 'LIKE', '%' . $this->nombre . '%')
             ->Where('tipo_doc', 'LIKE', '%' . $this->documento . '%')
             ->Where('numero', 'LIKE', '%' . $this->numero . '%')
@@ -64,15 +69,17 @@ class BeneficiariosIndex extends Component
             ->Where('barrio', 'LIKE', '%' . $this->barrio . '%')
             ->Where('user_id', 'LIKE',  $this->afiliado)
             ->orderBy('id', 'DESC')
+            ->paginate();
 
-            ->paginate(10);
-
-        return view('livewire.admin.beneficiarios-index', compact('beneficiarios', 'user', 'epss', 'barrios',));
+        return view('livewire.admin.beneficiarios-index', compact('beneficiarios', 'user', 'epss', 'barrios', 'estu', 'doc', 'jun'));
     }
     public function exportar()
     {
 
-        $beneficiarios = Beneficiarios::join('user_juns', 'beneficiarios.user_id', '=', 'user_juns.id')->select('beneficiarios.*', 'user_juns.nombre')
+        $beneficiarios = Beneficiarios::join('user_juns', 'beneficiarios.user_id', '=', 'user_juns.id')
+            ->join('juntas', 'juntas.id', '=', 'user_juns.id')
+            ->select('beneficiarios.*', 'user_juns.nombre', 'user_juns.junta_id', 'juntas.Nombre')
+            ->where('juntas.Nombre', 'LIKE', $this->junta)
             ->where('name', 'LIKE', '%' . $this->nombre . '%')
             ->Where('tipo_doc', 'LIKE', '%' . $this->documento . '%')
             ->Where('numero', 'LIKE', '%' . $this->numero . '%')
