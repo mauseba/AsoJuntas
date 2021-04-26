@@ -24,7 +24,7 @@
             </div>
           </div>
           <div class="carousel-item">
-            <img class="d-block w-100" src="{{asset('imagenes/junta.JPG')}}" alt="Second slide">
+            <img class="d-block w-100" src="{{asset('imagenes/junta.jpg')}}" alt="Second slide">
             <div class="carousel-caption d-none d-md-block">
                 <h1>ASOJUNTAS</h1>
                 <p>Asociacion de juntas de accion comunal del municipio de Algeciras</p>

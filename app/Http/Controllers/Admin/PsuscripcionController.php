@@ -193,7 +193,6 @@ class PsuscripcionController extends Controller
             'junta_id' => 'required|numeric',
             'tipo' => 'required',
             'Comprobante' => 'required|mimes:pdf,jpg,png,bmp,jpeg|max:350'
-
         ]);
 
         $data = $request->except('_token');

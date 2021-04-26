@@ -37,21 +37,21 @@
             </li>
         </ul>
     </div>
-    <div class="card-body">
-        <div class="tab-content">
-            <div id="home" class="container tab-pane active">  
+    <div class="card-body ">
+        <div class="tab-content ">
+            <div id="home" class="tab-pane active">  
                 <h3>Todos los afiliados a juntas</h3>
                 @livewire('admin.userjun-index') 
             </div>
-            <div id="menu1" class="container tab-pane table-responsive fade">
+            <div id="menu1" class="tab-pane fade">
                 <h3>Directivos de juntas</h3>
                 @livewire('admin.directivos-index')
             </div>
-            <div id="menu2" class="container tab-pane table-responsive fade">
+            <div id="menu2" class=" tab-pane fade">
                 <h3>Fiscales de juntas</h3>
                 @livewire('admin.fiscal-index')
             </div>
-            <div id="menu3" class="container tab-pane table-responsive fade">
+            <div id="menu3" class=" tab-pane fade">
                 <h3>Afil. comisiones especiales</h3>
                 @livewire('admin.especial-index')
             </div>

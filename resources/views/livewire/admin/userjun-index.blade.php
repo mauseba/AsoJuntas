@@ -1,5 +1,5 @@
 
-<div class="card">
+<div class="card ">
 
     <div class="card-header">
         <label for="">Buscar:</label>
@@ -13,6 +13,7 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
+                        <th>F. afiliacion</th>
                         <th>Identificacion</th>
                         <th>Nombre</th>
                         <th>Telefono</th>
@@ -27,6 +28,7 @@
                 <tbody>
                     @foreach ($userj as $userju)
                         <tr>
+                            <td>{{$userju->created_at}}</td>
                             <td>{{$userju->Num_identificacion}}</td>
                             <td>{{$userju->nombre}}</td>
                             <td>{{$userju->Num_contacto}}</td>
