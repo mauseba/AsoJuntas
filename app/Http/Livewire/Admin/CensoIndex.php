@@ -104,12 +104,14 @@ class CensoIndex extends Component
             ->Where('user_id', 'LIKE',  $this->afiliado)
             ->get();
 
+        $dato = $censo->pluck('user_id');
 
 
         $beneficiarios = Beneficiarios::join('user_juns', 'beneficiarios.user_id', '=', 'user_juns.id')
             ->join('juntas', 'juntas.id', '=', 'user_juns.id')
             ->select('beneficiarios.*', 'user_juns.nombre', 'user_juns.junta_id', 'juntas.Nombre')
             ->Where('user_id', 'LIKE', $this->afiliado)
+            ->WhereIn('user_id', $dato)
             ->get();
 
         $pdf = PDF::loadView('pdf.censo', compact('censo', 'beneficiarios'))->setPaper('a4', 'landscape')->output();
