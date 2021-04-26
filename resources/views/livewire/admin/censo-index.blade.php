@@ -2,11 +2,17 @@
 
     <div class="card-header">
         <div class="row">
-            <div class="col-md">
-                <input wire:model="barrio" class="form-control text-sm" placeholder="Barrio">
+            <div class="col-2">
+                {{-- <input wire:model="barrio" class="form-control text-sm" placeholder="Barrio"> --}}
+                 <select wire:model="barrio" class="form-control text-secondary text-sm">
+                    <option value="">Barrio</option>
+                    @foreach ($barrios as $bar)
+                    <option value="{{ $bar->name }}">{{ $bar->name}}</option>
+                    @endforeach
+                </select>
 
             </div>
-            <div class="col-md">
+            <div class="col-2">
                 <input wire:model="direccion" class="form-control text-sm" placeholder="Direccion">
             </div>
             <div class="col-md">
@@ -59,12 +65,15 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md">
+            <div class="col-1">
 
                 <select wire:model="sisben" class="form-control text-sm">
                     <option selected value="">Sisben</option>
-                    <option value="Si">Si</option>
-                    <option value="No">No</option>
+                    <option>No</option>
+                    <option>Grupo A</option>
+                    <option>Grupo B</option>
+                    <option>Grupo C</option>
+                    <option>Grupo D</option>
                 </select>
             </div>
             <div class="col-md">
@@ -134,22 +143,31 @@
                     <option>Otro</option>
                 </select>
             </div>
+            <div class="col-md">
+
+                <select wire:model="junta" class="form-control text-secondary text-sm">
+                    <option value="">Junta</option>
+                    @foreach ($jun as $ju)
+                    <option value="{{ $ju->Nombre }}">{{ $ju->Nombre}}</option>
+                    @endforeach
+                </select>
+            </div>
+
         </div>
         <div class="row mt-2">
-            
-            <select wire:model="afiliado" class="form-select text-sm"  >
-                <option value="" selected> -- Seleccionar -- </option>
-                @foreach ($user as $users)
-                <option value="{{ $users->id }}">{{ $users->nombre}}</option>
-                @endforeach
-            </select>
-            <a class="btn btn-danger text-white  ml-4 " wire:click="exportar">Informe Individual</a>
-            
-            
-            <a class="btn btn-danger text-white ml-4" wire:click="exportarGeneral">Informe General</a>
-        
+
+            <div class="col-lg-2">
+                <select id="user" wire:model="afiliado" class="form-control text-sm">
+                    <option selected="selected" value="">Afiliado</option>
+                    @foreach ($user as $users)
+                    <option value="{{ $users->id }}">{{ $users->nombre}}</option>
+                    @endforeach
+                </select>
+
+            </div>
+            <a class="btn btn-danger text-white  ml-4 " wire:click="exportar">PDF</a>
         </div>
-        
+
 
 
 
@@ -162,6 +180,7 @@
                     <thead>
                         <tr>
                             <th>#</th>
+                            <th>Junta</th>
                             <th>Afiliado</th>
                             <th>Barrio</th>
                             <th>Direccion</td>
@@ -191,6 +210,7 @@
                         @foreach ($censo as $censos)
                         <tr>
                             <td>{{$loop->iteration}}</td>
+                            <td>{{$censos->Nombre}}</td>
                             <td>{{$censos->nombre}}</td>
                             <td>{{$censos->barrio}}</td>
                             <td>{{$censos->direccion}}</td>
@@ -218,7 +238,7 @@
                                 @endcan
                             </td>
                             <td>
-                               @can('admin.censo.destroy') 
+                                @can('admin.censo.destroy')
                                 <form action="{{route('admin.censo.destroy', $censos)}}" method="POST">
                                     @csrf
                                     @method('delete')

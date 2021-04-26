@@ -78,6 +78,7 @@
                 <th >Subsidio Gobierno</th>
                 <th >Barrio</th>
                 <th >Afiliado</th>
+                <th >Junta</th>
                 <th >Actualizado</th>
                 
              
@@ -100,6 +101,7 @@
                             <td align="center">{{$beneficiario->sub_gobierno}}</td>
                             <td align="center">{{$beneficiario->barrio}}</td>
                             <td align="center">{{$beneficiario->nombre}}</td>                            
+                            <td align="center">{{$beneficiario->Nombre}}</td>                            
                             <td align="center">{{$beneficiario->updated_at->format('Y-m-d')}}</td>
                         </tr>
             @endforeach

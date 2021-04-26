@@ -7,16 +7,7 @@
 @stop
 
 @section('content')
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
 
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
-
-<!-- (Optional) Latest compiled and minified JavaScript translation files -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/i18n/defaults-*.min.js"></script>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 
 @if (session('info'))
@@ -37,17 +28,18 @@
     <div class="card-body">
         {{ Form::open(['route' => 'admin.censo.store']) }}
         <div class="form-group">
-                {!! Form::label('user_id', 'Afiliado') !!}
+            {!! Form::label('user_id', 'Afiliado') !!}
 
-                <select id="user_id" name="user_id"  class="selectpicker" data-live-search="true" >
+            <select id="user_id" name="user_id" class="selectpicker" data-live-search="true">
 
-                    <option selected hidden>Seleccionar</option>
-                    @foreach ($user as $users)
-                        <option data-subtext='{{$users->Num_identificacion}}' value="{{ $users->id }}">{{ $users->nombre}}</option>
-                    @endforeach
-                   
+                <option selected hidden>Seleccionar</option>
+                @foreach ($user as $users)
+                <option data-subtext='{{$users->Num_identificacion}}' value="{{ $users->id }}">{{ $users->nombre}}
+                </option>
+                @endforeach
 
-                </select>
+
+            </select>
         </div>
         <div class="form-group">
 
@@ -64,10 +56,6 @@
         </div>
 
 
-        {!! Form::label('direccion', 'Direccion/Finca') !!}
-
-
-        {{ Form::text('direccion', Input::old('direccion'), ['class'=> 'form-control']) }}
 
         <div class="row justify-content-center">
             <div class="col-4">
@@ -186,11 +174,11 @@
                 </label>
                 {{-- {{ Form::text('sisben', Input::old('sisben'), ['class'=> 'form-input mt-1 block w-full']) }} --}}
                 <select name="sub_gobierno" class="form-control ">
-                     <option >Ninguno</option>
-                    <option  >Familias en Accion</option>
-                    <option  >Jovenes en Accion</option>
-                    <option  >Adulto Mayor</option>
-                    <option  >Otro</option>
+                    <option>Ninguno</option>
+                    <option>Familias en Accion</option>
+                    <option>Jovenes en Accion</option>
+                    <option>Adulto Mayor</option>
+                    <option>Otro</option>
                 </select>
             </div>
             <div class="col-2">
@@ -201,14 +189,68 @@
 
                 </label>
                 {{-- {{ Form::text('sisben', Input::old('sisben'), ['class'=> 'form-input mt-1 block w-full']) }} --}}
-                <select name="sisben" class="form-control">
-                    <option selected hidden > Seleccionar </option>
-                    <option>No</option>
-                    <option>Grupo A</option>
-                    <option>Grupo B</option>
-                    <option>Grupo C</option>
-                    <option>Grupo D</option>
-                </select>
+                    <select  name="sisben"class="selectpicker" data-container="body" data-live-search="true">
+                        <option selected hidden> Seleccionar </option>
+                        <optgroup label="Grupo A" data-subtext="Pobreza extrema">
+                            <option>A1</option>
+                            <option>A2</option>
+                            <option>A3</option>
+                            <option>A4</option>
+                            <option>A5</option>                           
+                        </optgroup>
+                        <optgroup label="Grupo B" data-subtext="Pobreza moderada">
+                            <option>B1</option>
+                            <option>B2</option>
+                            <option>B3</option>
+                            <option>B4</option>
+                            <option>B5</option>                           
+                            <option>B6</option>                           
+                            <option>B7</option>                           
+                        </optgroup>
+                        <optgroup label="Grupo C" data-subtext="Vulnerable">
+                            <option>C1</option>
+                            <option>C2</option>
+                            <option>C3</option>
+                            <option>C4</option>
+                            <option>C5</option>                           
+                            <option>C6</option>                           
+                            <option>C7</option>                           
+                            <option>C8</option>                           
+                            <option>C9</option>                           
+                            <option>C10</option>                           
+                            <option>C11</option>                           
+                            <option>C12</option>                           
+                            <option>C13</option>                           
+                            <option>C14</option>                           
+                            <option>C15</option>                           
+                            <option>C16</option>                           
+                            <option>C17</option>                           
+                            <option>C18</option>                           
+                        </optgroup>
+                        <optgroup label="Grupo D" data-subtext="No pobre, No vulnerable">
+                            <option>D1</option>
+                            <option>D2</option>
+                            <option>D3</option>
+                            <option>D4</option>
+                            <option>D5</option>                           
+                            <option>D6</option>                           
+                            <option>D7</option>                           
+                            <option>D8</option>                           
+                            <option>D9</option>                           
+                            <option>D10</option>                           
+                            <option>D11</option>                           
+                            <option>D12</option>                           
+                            <option>D13</option>                           
+                            <option>D14</option>                           
+                            <option>D15</option>                           
+                            <option>D16</option>                           
+                            <option>D17</option>                           
+                            <option>D18</option>                            
+                            <option>D19</option>                            
+                            <option>D20</option>                            
+                            <option>D21</option>                            
+                        </optgroup>
+                    </select>
             </div>
 
         </div>
@@ -331,21 +373,24 @@
     });
 
 </script>
- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
-    @if (session('error'))
-    <script>
-        var session = '{{session('error')}}';
-        Swal.fire(
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+@if (session('error'))
+<script>
+    var session = '{{session('
+    error ')}}';
+    Swal.fire(
         'Error',
-        session ,
+        session,
         'error'
-        )
-    </script>
-    @endif
-    <script>
-        $(function() {
-            $('#user').selectpicker();
-        });
-    </script>
+    )
+
+</script>
+@endif
+<script>
+    $(function () {
+        $('#user').selectpicker();
+    });
+
+</script>
 
 @endsection

@@ -51,17 +51,15 @@ class BeneficiariosController extends Controller
      */
     public function create()
     {
-        $users = UserJun::all();
-        $doc= Documento::pluck('nombre','tipo');
-        $barrios = Barrios::orderBy('name')->get();
-        $estu = Estudio::pluck('nombre','prefijo');
+        $users = UserJun::all()->where('Cargo', 'afiliado');
+        $doc = Documento::pluck('nombre', 'tipo');
+        $estu = Estudio::pluck('nombre', 'prefijo');
         $eps = Eps::orderBy('name')->get();
-        return view('admin.beneficiarios.create', compact('users', 'eps','doc','estu'));
+        return view('admin.beneficiarios.create', compact('users', 'eps', 'doc', 'estu'));
     }
 
     public function busqueda(Request $request)
     {
-
     }
 
     /**
@@ -84,32 +82,30 @@ class BeneficiariosController extends Controller
             'discap' => 'required|not_in:Discapacidad',
             'sub_gobierno' => 'required|not_in:Seleccionar',
             'nivel_edu' => 'required|not_in:Seleccionar',
-
+            'user_id' => 'required',
 
         ]);
 
-        $datos= $request->except('_token');
+        $datos = $request->except('_token');
 
 
         $barrio = Censo::where('user_id', $request->user_id)->get()->first();
-        
-        if ($barrio == null)
-        {
-            return redirect()->route('admin.beneficiarios.create')->with('error', 'No hay ningun barrios disponible');;
-        }else
-        {
-            $datos =  Arr::add($datos,'barrio',$barrio->barrio);
+
+        if ($barrio == null) {
+            return redirect()->route('admin.beneficiarios.create')->with('error', 'El afiliado no tiene datos básicos registrados');;
+        } else {
+            $datos =  Arr::add($datos, 'barrio', $barrio->barrio);
         }
-    
-        if ($datos['edad']< 18 && $datos['edad'] > 7) {
+
+        if ($datos['edad'] < 18 && $datos['edad'] > 7) {
             $datos['tipo_doc'] = 'TI';
-        } elseif ($datos['edad']<= 7) {
-            $datos['tipo_doc']= "RC";
+        } elseif ($datos['edad'] <= 7) {
+            $datos['tipo_doc'] = "RC";
         } else {
             $datos['tipo_doc'] = "CC";
         }
 
-        Beneficiarios::create($datos); 
+        Beneficiarios::create($datos);
 
         return redirect()->route('admin.beneficiarios.index')->with('info', 'Beneficiario creado con éxito!');;
     }
@@ -134,9 +130,11 @@ class BeneficiariosController extends Controller
     public function edit($id)
     {
         $eps = Eps::orderBy('name')->get(); // ordenar por nombre
-        $beneficiarios = Beneficiarios::find($id);
-
-        return view('admin.beneficiarios.edit', compact('beneficiarios', 'eps'));
+        $beneficiarios = Beneficiarios::join('user_juns', 'beneficiarios.user_id', '=', 'user_juns.id')
+            ->select('beneficiarios.*', 'user_juns.nombre')->find($id);
+        $doc = Documento::all();
+        $estu = Estudio::all();
+        return view('admin.beneficiarios.edit', compact('beneficiarios', 'eps', 'doc', 'estu'));
     }
 
     /**
@@ -172,11 +170,11 @@ class BeneficiariosController extends Controller
         }
         $beneficiarios->name = $request->name;
         if ($request->edad < 18 and $request->edad > 7) {
-            $beneficiarios->tipo_doc = "T.I";
+            $beneficiarios->tipo_doc = "TI";
         } elseif ($request->edad <= 7) {
-            $beneficiarios->tipo_doc = "R.C";
+            $beneficiarios->tipo_doc = "RC";
         } elseif ($request->edad > 18) {
-            $beneficiarios->tipo_doc = "C.C";
+            $beneficiarios->tipo_doc = "CC";
         }
         $beneficiarios->numero = $request->numero;
         $beneficiarios->edad = $request->edad;

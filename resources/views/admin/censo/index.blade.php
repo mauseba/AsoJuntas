@@ -37,12 +37,11 @@
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+   
 @stop
 
 @section('js')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+   
     @if (session('error'))
     <script>
         var session = '{{session('error')}}';
@@ -53,6 +52,7 @@
         )
     </script>
     @endif
+    
     <script>
         $(function() {
             $('#user').selectpicker();

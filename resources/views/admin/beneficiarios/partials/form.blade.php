@@ -77,7 +77,9 @@
    </div>
    <div class="col-3">
         <div class="form-group">
-            {!! Form::label('discap', 'Discapacidad:') !!}
+            {!! Form::label('discap', 'Discapacidad:') !!} <a type="button" class="text-warning" data-toggle="modal"
+                        data-target=".bd-example-modal-lg"><i class="fas fa-info-circle"></i> </a>
+                        
             {!! Form::select('discap', array('Ninguna'=>'Ninguna',
             'Fisica'=>'Fisica',
             'Intelectual'=>'Intelectual',

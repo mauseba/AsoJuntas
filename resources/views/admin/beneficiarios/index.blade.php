@@ -13,11 +13,7 @@
 
 @section('content')
 
-    @if (session('info'))
-        <div class="alert alert-success">
-            <strong>{{session('info')}}</strong>
-        </div>
-    @endif
+
 
     @livewire('admin.beneficiarios-index')
 @stop
@@ -47,7 +43,7 @@
     Swal.fire(
     'Operacion Completada',
     session ,
-    'success'
+    'Success'
     )
 </script>
 @endif

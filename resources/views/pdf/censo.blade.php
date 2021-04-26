@@ -40,7 +40,7 @@
         <tr>
             <td valign="top"><img src="{{asset('imagenes/logo.png')}}" alt="" width="150"/></td>
             <td align="right">
-                <h2>INFORME CENSO INDIVIDUAL </h2>
+                <h2>INFORME CENSO COMUNAL </h2>
                 <h4>Generado por: {{ Auth::user()->name }} </h2>                
                 <h3>Asociación de juntas de Accion comunal del municipio de Algeciras</h3>
                 <pre>
@@ -52,16 +52,17 @@
 
     </table>
     <br/>
-   {{--  <table width="100%">
+    <table width="100%">
         <tr>
-            <td><h2>CENSO COMUNAL INDIVIDUAL</h2></td>
+            <td><h2>DATOS BÁSICOS</h2></td>
         </tr>
-    </table> --}}
+    </table>
     
     <table width="100%">
         <thead style="background-color: lightgray;">
             <tr>
                 <th >#</th>
+                <th >Junta</th>
                 <th >Afiliado</th>
                 <th >Barrio</th>
                 <th >Direccion</td>
@@ -88,6 +89,7 @@
             <tr>
                 
                 <td align="center">{{$loop->iteration}}</td>
+                <td align="center">{{$censos->Nombre}}</td>
                 <td align="center">{{$censos->nombre}}</td>
                 <td align="center">{{$censos->barrio}}</td>
                 <td align="center">{{$censos->direccion}}</td>
@@ -114,6 +116,11 @@
 
     </table>
     <table width="100%">
+        <tr>
+            <td><h2>BENEFICIARIOS</h2></td>
+        </tr>
+    </table>
+    <table width="100%">
         
         <thead style="background-color: lightgray;">
             <tr>
@@ -130,6 +137,8 @@
                 <th >Nivel Educativo</th>
                 <th >Sub Gobierno</th>
                 <th >Afiliado</th>
+                <th >Junta</th>
+                <th >Actualizado</th>
                 
              
             </tr>
@@ -150,6 +159,8 @@
                             <td align="center">{{$beneficiario->nivel_edu}}</td>
                             <td align="center">{{$beneficiario->sub_gobierno}}</td>
                             <td align="center">{{$beneficiario->nombre}}</td>
+                            <td align="center">{{$beneficiario->Nombre}}</td>
+                            <td align="center">{{$beneficiario->updated_at->format('Y-m-d')}}</td>
                         </tr>
             @endforeach
         </tbody>
