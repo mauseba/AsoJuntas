@@ -17,7 +17,7 @@
 </div>
 <div class="form-group">
     {!! Form::label('name', 'Nombre del Beneficiario') !!}
-    {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el nombre del beneficiario','pattern'=>'[A-Za-z]{1,45}']) !!}
+    {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el nombre del beneficiario']) !!}
 
 </div>
 <div class="form-group">

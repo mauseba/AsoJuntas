@@ -195,14 +195,69 @@
 
                 </label>
                 {{-- {{ Form::text('sisben', Input::old('sisben'), ['class'=> 'form-input mt-1 block w-full']) }} --}}
-                <select name="sisben" class="form-control">
-                    
-                    <option @if( $censo->sisben == "No" ) selected @endif>No</option>
-                    <option @if( $censo->sisben == "Grupo A" ) selected @endif>Grupo A</option>
-                    <option @if( $censo->sisben == "Grupo B" ) selected @endif>Grupo B</option>
-                    <option @if( $censo->sisben == "Grupo C" ) selected @endif>Grupo C</option>
-                    <option @if( $censo->sisben == "Grupo D" ) selected @endif>Grupo D</option>
+                <select  name="sisben"class="selectpicker" data-container="body" data-live-search="true">
+                        
+                        <optgroup label="Grupo A" data-subtext="Pobreza extrema">
+                            <option @if( $censo->sisben == "A1" ) selected @endif>A1</option>
+                            <option @if( $censo->sisben == "A2" ) selected @endif>A2</option>
+                            <option @if( $censo->sisben == "A3" ) selected @endif>A3</option>
+                            <option @if( $censo->sisben == "A4" ) selected @endif>A4</option>
+                            <option @if( $censo->sisben == "A5" ) selected @endif>A5</option>                           
+                        </optgroup>
+                        <optgroup label="Grupo B" data-subtext="Pobreza moderada">
+                            <option @if( $censo->sisben == "B1" ) selected @endif>B1</option>
+                            <option @if( $censo->sisben == "B2" ) selected @endif>B2</option>
+                            <option @if( $censo->sisben == "B3" ) selected @endif>B3</option>
+                            <option @if( $censo->sisben == "B4" ) selected @endif>B4</option>
+                            <option @if( $censo->sisben == "B5" ) selected @endif>B5</option>                           
+                            <option @if( $censo->sisben == "B6" ) selected @endif>B6</option>                           
+                            <option @if( $censo->sisben == "B7" ) selected @endif>B7</option>                           
+                        </optgroup>
+                        <optgroup label="Grupo C" data-subtext="Vulnerable">
+                            <option @if( $censo->sisben == "C1" ) selected @endif>C1</option>
+                            <option @if( $censo->sisben == "C2" ) selected @endif>C2</option>
+                            <option @if( $censo->sisben == "C3" ) selected @endif>C3</option>
+                            <option @if( $censo->sisben == "C4" ) selected @endif>C4</option>
+                            <option @if( $censo->sisben == "C5" ) selected @endif>C5</option>                           
+                            <option @if( $censo->sisben == "C6" ) selected @endif>C6</option>                           
+                            <option @if( $censo->sisben == "C7" ) selected @endif>C7</option>                           
+                            <option @if( $censo->sisben == "C8" ) selected @endif>C8</option>                           
+                            <option @if( $censo->sisben == "C9" ) selected @endif>C9</option>                           
+                            <option @if( $censo->sisben == "C10" ) selected @endif>C10</option>                           
+                            <option @if( $censo->sisben == "C11" ) selected @endif>C11</option>                           
+                            <option @if( $censo->sisben == "C12" ) selected @endif>C12</option>                           
+                            <option @if( $censo->sisben == "C13" ) selected @endif>C13</option>                           
+                            <option @if( $censo->sisben == "C14" ) selected @endif>C14</option>                           
+                            <option @if( $censo->sisben == "C15" ) selected @endif>C15</option>                           
+                            <option @if( $censo->sisben == "C16" ) selected @endif>C16</option>                           
+                            <option @if( $censo->sisben == "C17" ) selected @endif>C17</option>                           
+                            <option @if( $censo->sisben == "C18" ) selected @endif>C18</option>                           
+                        </optgroup>
+                        <optgroup label="Grupo D" data-subtext="No pobre, No vulnerable">
+                            <option @if( $censo->sisben == "D1" ) selected @endif>D1</option>
+                            <option @if( $censo->sisben == "D2" ) selected @endif>D2</option>
+                            <option @if( $censo->sisben == "D3" ) selected @endif>D3</option>
+                            <option @if( $censo->sisben == "D4" ) selected @endif>D4</option>
+                            <option @if( $censo->sisben == "D5" ) selected @endif>D5</option>                           
+                            <option @if( $censo->sisben == "D6" ) selected @endif>D6</option>                           
+                            <option @if( $censo->sisben == "D7" ) selected @endif>D7</option>                           
+                            <option @if( $censo->sisben == "D8" ) selected @endif>D8</option>                           
+                            <option @if( $censo->sisben == "D9" ) selected @endif>D9</option>                           
+                            <option @if( $censo->sisben == "D10" ) selected @endif>D10</option>                           
+                            <option @if( $censo->sisben == "D11" ) selected @endif>D11</option>                           
+                            <option @if( $censo->sisben == "D12" ) selected @endif>D12</option>                           
+                            <option @if( $censo->sisben == "D13" ) selected @endif>D13</option>                           
+                            <option @if( $censo->sisben == "D14" ) selected @endif>D14</option>                           
+                            <option @if( $censo->sisben == "D15" ) selected @endif>D15</option>                           
+                            <option @if( $censo->sisben == "D16" ) selected @endif>D16</option>                           
+                            <option @if( $censo->sisben == "D17" ) selected @endif>D17</option>                           
+                            <option @if( $censo->sisben == "D18" ) selected @endif>D18</option>                            
+                            <option @if( $censo->sisben == "D19" ) selected @endif>D19</option>                            
+                            <option @if( $censo->sisben == "D20" ) selected @endif>D20</option>                            
+                            <option @if( $censo->sisben == "D21" ) selected @endif>D21</option>                            
+                        </optgroup>
                 </select>
+                
             </div>
 
         </div>
@@ -315,7 +370,7 @@
 @stop
 
 @section('js')
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
 <script>
     $('#tipo_vivienda').on('change', function () {
         $("#escrituras").val($('#tipo_vivienda option:selected').attr('escrituras'));
