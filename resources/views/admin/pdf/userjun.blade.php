@@ -66,6 +66,7 @@
         <thead style="background-color: lightgray;">
             <tr>
                 <th>No. documento</th>
+                <th>F. afiliacion</th>
                 <th>Nombre</th>
                 <th>Tipo de doc.</th>
                 <th>Genero</th>
@@ -84,6 +85,7 @@
             @foreach ($info as $inf)
             <tr>
                 <th scope="row">{{$inf->Num_identificacion}}</th>
+                <td align="center">{{$userju->created_at}}</td>
                 <td align="center">{{$inf->nombre}}</td>
                 <td align="center">{{$inf->Tip_identificacion}}</td>
                 <td align="center">{{($inf->Genero)}}</td>
@@ -95,6 +97,7 @@
                 <td align="center">{{$inf->Nombre}}</td>
                 <td align="center">{{$inf->comision}}</td>
                 <td align="center">{{$inf->Tipo}}</td>
+                
                 
             </tr>
             @endforeach

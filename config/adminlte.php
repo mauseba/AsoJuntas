@@ -345,7 +345,7 @@ return [
         [
             'text'        => 'Censo Comunal',
             'icon'        => 'far fa-address-book',
-            'can'       => 'admin.censo.index'|| 'admin.censo.index',
+            'can'       => 'admin.censo.index'||'admin.beneficiarios.index',
             'submenu'  => [
                 [
                     'text'       => 'Beneficiarios',
