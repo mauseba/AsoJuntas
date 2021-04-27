@@ -67,14 +67,7 @@
         <div class="row">
             <div class="col-1">
 
-                <select wire:model="sisben" class="form-control text-sm">
-                    <option selected value="">Sisben</option>
-                    <option>No</option>
-                    <option>Grupo A</option>
-                    <option>Grupo B</option>
-                    <option>Grupo C</option>
-                    <option>Grupo D</option>
-                </select>
+                <input wire:model="sisben" class="form-control text-sm" placeholder="Direccion">
             </div>
             <div class="col-md">
 
@@ -146,7 +139,7 @@
             <div class="col-md">
 
                 <select wire:model="junta" class="form-control text-secondary text-sm">
-                    <option value="">Junta</option>
+                    <option selected value="">Junta</option>
                     @foreach ($jun as $ju)
                     <option value="{{ $ju->Nombre }}">{{ $ju->Nombre}}</option>
                     @endforeach
