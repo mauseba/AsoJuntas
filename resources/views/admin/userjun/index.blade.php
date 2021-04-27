@@ -86,49 +86,49 @@
 
 @section('js')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
-@if (session('info'))
+    @if (session('info'))
+        <script>
+            var session = '{{session('info')}}';
+            Swal.fire(
+            'Operacion Completada',
+            session ,
+            'success'
+            )
+        </script>
+    @endif
+    @if (session('error'))
+        <script>
+            var session = '{{session('error')}}';
+            Swal.fire(
+            'Operacion no Completada',
+            session ,
+            'error'
+            )
+        </script>
+    @endif
     <script>
-        var session = '{{session('info')}}';
-        Swal.fire(
-        'Operacion Completada',
-        session ,
-        'success'
-        )
-    </script>
-@endif
-@if (session('error'))
-    <script>
-        var session = '{{session('error')}}';
-        Swal.fire(
-        'Operacion no Completada',
-        session ,
-        'error'
-        )
-    </script>
-@endif
-<script>
-    $(function() {
-        $('#excel').click(function(){
-            $("#oppdf").hide();
-        });
-
-        $("#pdf").click(function(){
-            $("#oppdf").show();
-            $('#junta').click(function(){
-                $("#tiempo").hide();
-                $("#juntas").show();
-                $("#ddlJuntas").val('default').selectpicker("refresh");
+        $(function() {
+            $('#excel').click(function(){
+                $("#oppdf").hide();
             });
-            $('#fecha').click(function(){
-                $("#juntas").hide();
-                $("#tiempo").show();
-                $('#txtFechaInicial').val("");
-                $('#txtFechaFinal').val("");
-            });
-        });
 
-        $('#ddlJuntas').selectpicker();
-        
-    });
-</script>
+            $("#pdf").click(function(){
+                $("#oppdf").show();
+                $('#junta').click(function(){
+                    $("#tiempo").hide();
+                    $("#juntas").show();
+                    $("#ddlJuntas").val('default').selectpicker("refresh");
+                });
+                $('#fecha').click(function(){
+                    $("#juntas").hide();
+                    $("#tiempo").show();
+                    $('#txtFechaInicial').val("");
+                    $('#txtFechaFinal').val("");
+                });
+            });
+
+            $('#ddlJuntas').selectpicker();
+            
+        });
+    </script>
 @stop

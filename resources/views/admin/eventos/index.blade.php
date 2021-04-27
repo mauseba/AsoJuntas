@@ -43,14 +43,13 @@
 @section('js')
 
     <script src='{{asset('vendor/fullcalendar/main.js')}}'></script>>
-    <script src='{{asset('vendor/fullcalendar/locales/es.js')}}'></script>>
+    <script src='{{asset('vendor/fullcalendar/locales/es.js')}}'></script>
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.33/moment-timezone.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-
-
+    <script src="{{asset('vendor/summernote/summernote-es-ES.js')}}"></script>
     <script>
         $(function(){
             var calendarEl = document.getElementById('calendar');
@@ -118,7 +117,17 @@
         })
 
         $('#txtDescripcion').summernote({
-            height: 300
+            toolbar: [
+                ['style', ['style']],
+                ['font', ['bold', 'underline', 'clear']],
+                ['fontname', ['fontname']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['table', ['table']],
+                ['insert', ['link', 'picture', 'video']],
+            ],
+            height: 300,
+            lang: 'es-ES'
         });
 
         $('#ddlJuntas').selectpicker();

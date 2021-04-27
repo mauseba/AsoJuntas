@@ -69,7 +69,7 @@
     <script src="https://cdn.ckeditor.com/ckeditor5/24.0.0/classic/ckeditor.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/24.0.0/classic/translations/es.js"></script>
-    <script src="{{ asset('js/summernote-es-ES.js') }}"></script>
+    <script src="{{asset('vendor/summernote/summernote-es-ES.js')}}"></script>
     <script>
         $(document).ready( function() {
             $("#name").stringToSlug({
@@ -91,8 +91,18 @@
         } );
 
         $('#body').summernote({
+            toolbar: [
+                ['style', ['style']],
+                ['font', ['bold', 'underline', 'clear']],
+                ['fontname', ['fontname']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['table', ['table']],
+                ['insert', ['link', 'picture', 'video']],
+            ],
             height: 400,
             lang: 'es-ES' 
+
         });
         
         //Cambiar imagen
