@@ -10,7 +10,7 @@
                 <div class="col-6"  >
                     <div class="form-group" >
                         {!! Form::label('nombre', 'Nombre/Apellidos:') !!}
-                        {!! Form::text('nombre[]', null, ['class' => 'form-control','maxlength' => '50','placeholder' => 'Ingrese el nombre del afiliado','pattern' => "[a-zA-Z ]{2,50}",'required']) !!}
+                        {!! Form::text('nombre[]', null, ['class' => 'form-control','maxlength' => '50','placeholder' => 'Ingrese el nombre del afiliado']) !!}
                     
                         @error('nombre')
                             <small class="text-danger">{{$message}}</small>
