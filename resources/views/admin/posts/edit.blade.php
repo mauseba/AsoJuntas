@@ -69,7 +69,8 @@
     <script src="{{asset('vendor/jQuery-Plugin-stringToSlug-1.3/jquery.stringToSlug.min.js')}}"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/24.0.0/classic/ckeditor.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
-
+    <script src="https://cdn.ckeditor.com/ckeditor5/24.0.0/classic/translations/es.js"></script>
+<script src="{{ asset('js/summernote-es-ES.js') }}"></script>
     <script>
         $(document).ready( function() {
             $("#name").stringToSlug({
@@ -80,13 +81,19 @@
         });
 
         ClassicEditor
-        .create( document.querySelector( '#extract' ) )
+        .create( document.querySelector( '#extract' ),{
+             language: {
+                 ui: 'es',
+                 content: 'es'
+             }
+        })
         .catch( error => {
             console.error( error );
         } );
 
         $('#body').summernote({
             height: 400
+            lang: 'es-ES' 
         });
 
         //Cambiar imagen
