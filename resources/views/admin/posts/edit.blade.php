@@ -80,13 +80,19 @@
         });
 
         ClassicEditor
-        .create( document.querySelector( '#extract' ) )
+        .create( document.querySelector( '#extract' ),{
+             language: {
+                 ui: 'es',
+                 content: 'es'
+             }
+        })
         .catch( error => {
             console.error( error );
         } );
 
         $('#body').summernote({
             height: 400
+            lang: 'es-ES' 
         });
 
         //Cambiar imagen
