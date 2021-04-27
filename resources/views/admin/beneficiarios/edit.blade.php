@@ -39,7 +39,7 @@
         <div class="form-group">
             <label>Nombre</label>
             <input required value="{{ $beneficiarios->name }}" name="name" class="form-control " type="text"
-                placeholder="Nombre" pattern="[A-Za-z]{1,45}"/>
+                placeholder="Nombre" />
         </div>
         <div class="row">
             <div class="form-group col">
