@@ -59,23 +59,6 @@
     <table width="100%">
         <tr>
             <td valign="top">
-                <b>_________________________</b>
-                <h4><strong>MIRELLA SANDINO</strong></h4>
-                <p>C.C 52766132 <br> <strong>Cel.: 3142673007</strong><br><strong>PRESIDENTE</strong></p>
-            </td>
-            <td align="center">
-                <p></p>
-            </td>
-            <td align="right" valign="top">
-                <b>_________________________</b>
-                <h4><strong>YASMIN QUIMBAYO</strong></h4>
-                <p>C.C.36347833 <br> <strong>Cel.: 3113565174</strong><br><strong>SECRETARIA</strong></p>
-            </td>
-        </tr>
-    </table>
-    <table width="100%">
-        <tr>
-            <td valign="top">
                 <b></b>
             </td>
             <td align="center">

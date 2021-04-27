@@ -85,7 +85,8 @@
         } );
 
         $('#body').summernote({
-            height: 400
+            height: 400,
+            lang: "da-DK"
         });
 
         //Cambiar imagen

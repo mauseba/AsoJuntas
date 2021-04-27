@@ -85,7 +85,7 @@
             @foreach ($info as $inf)
             <tr>
                 <th scope="row">{{$inf->Num_identificacion}}</th>
-                <td align="center">{{$userju->created_at}}</td>
+                <td align="center">{{$inf->created_at}}</td>
                 <td align="center">{{$inf->nombre}}</td>
                 <td align="center">{{$inf->Tip_identificacion}}</td>
                 <td align="center">{{($inf->Genero)}}</td>
