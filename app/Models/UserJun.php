@@ -9,7 +9,7 @@ class UserJun extends Model
 {
     use HasFactory;
     
-    protected $fillable = ['nombre','Tip_identificacion','Num_identificacion','Direccion','Genero','estrato','Edad','Num_contacto','Niv_educacion','Correo','Cargo','junta_id','comision_id'];
+    protected $fillable = ['FechaC','nombre','Tip_identificacion','Num_identificacion','Direccion','Genero','estrato','Edad','Num_contacto','Niv_educacion','Correo','Cargo','junta_id','comision_id'];
 
     //Relacion uno a muchos inversa
     public function juntas(){

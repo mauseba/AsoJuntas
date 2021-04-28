@@ -2,6 +2,7 @@
     <thead>
     <tr>
         <th>id</th>
+        <th>Fecha de afiliacion</th>
         <th>nombre</th>
         <th>Tip_identificacion</th>
         <th>Num_identificacion	</th>
@@ -23,6 +24,7 @@
     @foreach($userjuns as $userjun)
         <tr>
             <td>{{ $userjun->id }}</td>
+            <td>{{ $userjun->FechaC }}</td>
             <td>{{ $userjun->nombre }}</td>
             <td>{{ $userjun->Tip_identificacion }}</td>
             <td>{{ $userjun->Num_identificacion }}</td>

@@ -106,7 +106,6 @@ class PsuscripcionController extends Controller
         switch ($data['tipo']) {
             
             case 'suscripcion':
-
                 $validate = Psuscripcion::select('Mes', 'Junta_id', 'tipo')
                 ->where([
                     ['Mes', $data['Mes']],
@@ -116,7 +115,7 @@ class PsuscripcionController extends Controller
                     ['Junta_id', $data['junta_id']],
                     ['tipo', 'suscripcion']
                 ])->get();
-    
+
                 if (count($validate) == 1 && $junta == $data['junta_id']) {
                     return true;
                 } elseif(count($validate) == 0) {
@@ -155,19 +154,27 @@ class PsuscripcionController extends Controller
                 break;
             case 'bimestral':
 
-                $validate = Psuscripcion::select('Mes', 'Junta_id', 'tipo')
+                $validate = Psuscripcion::select('Mes', 'Junta_id', 'tipo','FechaP')
                 ->where([
                     ['Mes', $data['Mes']],
                     ['Junta_id', $data['junta_id']],
                     ['tipo', $data['tipo']]
                 ])->get();
+                
     
                 if (count($validate) == 0) {
                     return true;
-                } elseif(count($validate) == 1 && $junta == $data['junta_id']) {
+                }elseif(count($validate) == 1 && $junta == $data['junta_id']) {
                     return true;
                 }else{
-                    return false;
+                    $val=count($validate)-1;
+                    $date1= Carbon::parse($validate[$val]->FechaP);
+                    $date2= Carbon::parse($data['FechaP']);
+                    if($date1->year < $date2->year ){
+                        return true;
+                    }else{
+                        return false;
+                    }
                 }
 
                 break;

@@ -130,7 +130,7 @@
     <div class="col">
         <div class="form-group">
             {!! Form::label('Tipo', 'Seleccione el tipo de certificado') !!}
-            {!! Form::select('Tipo',array('0'=>'Afiliacion','1'=>'Residencia','2'=>'Paz y Salvo','3'=>'Sana Sentencia'), null, ['class' => 'form-control']) !!}
+            {!! Form::select('Tipo',array('0'=>'Afiliacion','1'=>'Residencia','2'=>'Paz y Salvo','3'=>'Sana Tenencia'), null, ['class' => 'form-control']) !!}
         
         
             @error('Tipo')

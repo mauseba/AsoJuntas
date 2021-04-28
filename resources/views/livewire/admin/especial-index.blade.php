@@ -11,6 +11,7 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
+                        <th>F. afiliacion</th>
                         <th>Identificacion</th>
                         <th>Nombre</th>
                         <th>Correo</th>
@@ -25,6 +26,7 @@
                 <tbody>
                     @foreach ($userj as $userju)
                         <tr>
+                            <td>{{$userju->FechaC}}</td>
                             <td>{{$userju->Num_identificacion}}</td>
                             <td>{{$userju->nombre}}</td>
                             <td>{{$userju->Correo}}</td>

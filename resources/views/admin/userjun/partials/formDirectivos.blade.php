@@ -1,4 +1,17 @@
 <div class="row">
+    <div class="col-3">
+        <div class="form-group">
+            {!! Form::label('FechaC', 'Fecha de registro') !!}
+            {!! Form::date('FechaC',\Carbon\Carbon::now(),['class' => 'form-control'])!!}
+            
+            @error('FechaC')
+                <small class="text-danger">{{$message}}</small>
+            @enderror
+        
+        </div>
+    </div>
+</div>
+<div class="row">
     <div class="col-6"  >
         <div class="form-group" >
             {!! Form::label('nombre', 'Nombre/Apellidos:') !!}

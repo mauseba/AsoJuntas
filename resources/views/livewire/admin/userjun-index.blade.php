@@ -28,7 +28,7 @@
                 <tbody>
                     @foreach ($userj as $userju)
                         <tr>
-                            <td>{{$userju->created_at}}</td>
+                            <td>{{$userju->FechaC}}</td>
                             <td>{{$userju->Num_identificacion}}</td>
                             <td>{{$userju->nombre}}</td>
                             <td>{{$userju->Num_contacto}}</td>

@@ -62,7 +62,8 @@ class UserjunController extends Controller
     public function store(Request $request)
     {
       $rules = array(
-        '*.nombre'  => 'required',
+        '*.FechaC'  => 'required|date',
+        '*.nombre'  => 'required|regex:/^[\pL\s\-]+$/u',
         '*.Tip_identificacion' => 'required',
         '*.Num_identificacion'=>'numeric|required|unique:user_juns|digits_between:7,11',
         '*.Direccion' => 'required' ,
@@ -151,7 +152,8 @@ class UserjunController extends Controller
     {
       
         $request->validate([
-            'nombre'  => 'required',
+            'FechaC'  => 'required|date',
+            'nombre'  => 'required|regex:/^[\pL\s\-]+$/u',
             'Tip_identificacion' => 'required',
             'Num_identificacion'=>'numeric|required|digits_between:7,11|unique:user_juns,Num_identificacion,'.$userjun->id,
             'Direccion' => 'required' ,
