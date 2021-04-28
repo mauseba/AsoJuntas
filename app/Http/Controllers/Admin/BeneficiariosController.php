@@ -72,7 +72,7 @@ class BeneficiariosController extends Controller
     {
         $request->validate([
             'nucleo_fam' => 'required|not_in:Seleccionar',
-            'name' => 'required|max:45',
+            'name' => 'required|regex:/^[\pL\s\-]+$/u|max:45',
             'numero' => 'required|max:10|',
             'tipo_doc' => 'required|not_in:Seleccionar',
             'edad' => 'required|max:3',
@@ -149,7 +149,7 @@ class BeneficiariosController extends Controller
 
         $request->validate([
             'nucleo_fam' => 'required|not_in:Seleccionar',
-            'name' => 'required|max:45',
+            'name' => 'required|regex:/^[\pL\s\-]+$/u|max:45',
             'numero' => 'required|max:10|',
             'tipo_doc' => 'required|not_in:Seleccionar',
             'edad' => 'required|max:3',
