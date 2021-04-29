@@ -154,8 +154,8 @@ class PaginaAdminTest extends TestCase
         $this->post(route('admin.posts.store'),[
             'name' => 'post de prueba',
             'slug' => Str::slug('post de prueba'),
-            'extract' =>'Laborum voluptatem sit magnam dolorum placeat. Iste dolorem ut nobis eius eligendi dolor non cum. Dolorem error reiciendis provident odit omnis. Consectetur aliquam rem dolores autem iure enim.',
-            'body' => 'Quia saepe optio et velit voluptas. Et dolor ex aut et. Laboriosam molestias totam ratione sit vero ipsa. Inventore ut nulla alias vero. Distinctio delectus quisquam distinctio sed aliquid. Voluptatibus tenetur doloremque non fugiat. Aut ullam velit ut. Eos et ad et fuga quasi beatae enim. Ipsum sit voluptatem dolores accusantium eum quod sed. Aliquid ut temporibus et explicabo consequatur est maiores. Unde repudiandae dolores doloremque. Fugiat aut dolores cupiditate accusamus voluptas. Aut rerum dolorem ad nam qui dolor. Error et reprehenderit aut eveniet. Veritatis similique praesentium architecto quidem et. Dolorem accusantium dignissimos eligendi atque quia corrupti in. Deserunt repudiandae magnam fugit ipsum. Voluptate',
+            'extract' =>' Extracto de prueba ',
+            'body' =>'Contenido de prueba',
             'status' => '1',
             'tag' =>$tag->id,
             'user_id' => $user->id,
@@ -182,5 +182,27 @@ class PaginaAdminTest extends TestCase
 
     }
 
+     /** @test */
+     public function un_usuario_se_loguea(){
+
+        $this->withoutMiddleware();
+
+        //Given-> Teniendo
+        $user = User::factory()->create();
+        
+        //when-> Cuando
+        $response = $this->post('login', [
+            'email' => $user->email,
+            'password' => 'password',
+        ]);
+
+
+        //then-> Entonces
+        
+        
+        $response->assertRedirect('/');
+        $this->assertAuthenticatedAs($user);
+
+    }
 
 }

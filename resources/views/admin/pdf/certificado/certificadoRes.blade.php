@@ -30,7 +30,7 @@
                 @endisset
             </td>
             <td align="center">
-                <h3 style="text-transform:uppercase;">REPUBLICA DE COLOMBIA <br>DEPARTAMENTO DEL HUILA <br> MUNICIPIO DE ALGECIRAS <br> JUNTA DE ACCIÓN COMUNAL <br>BARRIO {{$datosu['junta']}} <br>RESOLUCION {{$datosu['Resolucion']}} <br>Nit: {{$datosu['Nit']}}   </h3>
+                <h3 style="text-transform:uppercase;">REPUBLICA DE COLOMBIA <br>DEPARTAMENTO DEL HUILA <br> MUNICIPIO DE ALGECIRAS <br> JUNTA DE ACCIÓN COMUNAL <br>{{$datosu['junta']}} <br>RESOLUCION {{$datosu['Resolucion']}} <br>Nit: {{$datosu['Nit']}}   </h3>
             </td>
             <td align="right" valign="top"><img src="{{asset('imagenes/colombia.png')}}" alt="" width="120"/></td>
         </tr>
@@ -49,7 +49,7 @@
         </h3><br>
         <p style="text-align:justify; font-size: 13pt;">
             El (la) señor(a) <strong  style="text-transform:uppercase;" >{{$datosu['nombre']}}</strong>  identificado(a) con {{$datosu['Tdocumento']}} N° {{$datosu['Documento']}} expedida en {{$datosu['Expedido']}}, verificándose y 
-            encontrándose que en el barrio {{$datosu['junta']}},  con direccion  {{$datosu['Direccion']}}. <br><br>
+            encontrándose que en el sector de {{$datosu['junta']}},  con direccion  {{$datosu['Direccion']}}. <br><br>
 
 
             Demostrando siempre ser una persona amable, honesta, trabajadora   y cumplidora con los deberes de la comunidad. <br><br>
@@ -62,16 +62,14 @@
         <tr>
             <td valign="top">
                 <b>_________________________</b>
-                <h4><strong>MIRELLA SANDINO</strong></h4>
-                <p>C.C 52766132 <br> <strong>Cel.: 3142673007</strong><br><strong>PRESIDENTE</strong></p>
+                <p><strong style="text-transform:uppercase;" >{{$presi->nombre}}</strong> <br>{{$presi->Tip_identificacion}} No. {{$presi->Num_identificacion}} <br> tel: {{$presi->Num_contacto}}<br><strong style="text-transform:uppercase;">{{$presi->Cargo}}</strong></p>
             </td>
             <td align="center">
                 <p></p>
             </td>
             <td align="right" valign="top">
                 <b>_________________________</b>
-                <h4><strong>YASMIN QUIMBAYO</strong></h4>
-                <p>C.C.36347833 <br> <strong>Cel.: 3113565174</strong><br><strong>SECRETARIA</strong></p>
+                <p><strong style="text-transform:uppercase;" >{{$secr->nombre}}</strong><br>{{$secr->Tip_identificacion}} {{$secr->Num_identificacion}}<br> tel: {{$secr->Num_contacto}}<br><strong style="text-transform:uppercase;">{{$secr->Cargo}}</strong></p>
             </td>
         </tr>
     </table>

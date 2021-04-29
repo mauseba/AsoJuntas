@@ -30,13 +30,13 @@
                 @endisset
             </td>
             <td align="center">
-                <h3 style="text-transform:uppercase;">REPUBLICA DE COLOMBIA <br>DEPARTAMENTO DEL HUILA <br> MUNICIPIO DE ALGECIRAS <br> JUNTA DE ACCIÓN COMUNAL <br>BARRIO {{$datosu['junta']}} <br>RESOLUCION {{$datosu['Resolucion']}} <br>Nit: {{$datosu['Nit']}}   </h3>
+                <h3 style="text-transform:uppercase;">REPUBLICA DE COLOMBIA <br>DEPARTAMENTO DEL HUILA <br> MUNICIPIO DE ALGECIRAS <br> JUNTA DE ACCIÓN COMUNAL <br>{{$datosu['junta']}} <br>RESOLUCION {{$datosu['Resolucion']}} <br>Nit: {{$datosu['Nit']}}   </h3>
             </td>
             <td align="right" valign="top"><img src="{{asset('imagenes/colombia.png')}}" alt="" width="120"/></td>
         </tr>
     </table>
 
-    <hr style="height:2px;" color="black"><br><br><br>
+    <hr style="height:2px;" color="black"><br><br>
 
     
 
@@ -60,21 +60,19 @@
 
             Firma En constancia, 
         </p>
-    </div><br><br><br>
+    </div><br><br>
     <table width="100%">
         <tr>
             <td valign="top">
                 <b>_________________________</b>
-                <h4><strong>MIRELLA SANDINO</strong></h4>
-                <p>C.C 52766132 <br> <strong>Cel.: 3142673007</strong><
+                <p><strong style="text-transform:uppercase;" >{{$presi->nombre}}</strong> <br>{{$presi->Tip_identificacion}} No. {{$presi->Num_identificacion}} <br> tel: {{$presi->Num_contacto}}<br><strong style="text-transform:uppercase;">{{$presi->Cargo}}</strong></p>
             </td>
             <td align="center">
                 <p></p>
             </td>
             <td align="right" valign="top">
                 <b>_________________________</b>
-                <h4><strong>YASMIN QUIMBAYO</strong></h4>
-                <p>C.C.36347833 <br> <strong>Cel.: 3113565174</strong>
+                <p><strong style="text-transform:uppercase;" >{{$secr->nombre}}</strong><br>{{$secr->Tip_identificacion}} {{$secr->Num_identificacion}}<br> tel: {{$secr->Num_contacto}}<br><strong style="text-transform:uppercase;">{{$secr->Cargo}}</strong></p>
             </td>
         </tr>
     </table>

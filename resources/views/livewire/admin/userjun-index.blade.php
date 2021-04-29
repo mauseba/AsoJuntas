@@ -2,8 +2,16 @@
 <div class="card ">
 
     <div class="card-header">
-        <label for="">Buscar:</label>
-        <input wire:model="search" class="form-control" placeholder="Puede ingresar documento o junta de una afiliado">
+        <div class="row">
+            <div class="col-9">
+                <label for="">Buscar:</label>
+                <input wire:model="search" class="form-control" placeholder="Puede ingresar nombre o junta de una afiliado">
+            </div>
+            <div class="col-3">
+                <label for="">Buscar por cedula:</label>
+                <input wire:model="cedul" class="form-control" placeholder="Ingresar el documento">
+            </div>
+        </div>
     </div>
 
     @if ($userj->count())

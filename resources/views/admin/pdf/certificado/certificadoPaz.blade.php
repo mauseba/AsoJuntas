@@ -30,7 +30,7 @@
                 @endisset
             </td>
             <td align="center">
-                <h3 style="text-transform:uppercase;">REPUBLICA DE COLOMBIA <br>DEPARTAMENTO DEL HUILA <br> MUNICIPIO DE ALGECIRAS <br> JUNTA DE ACCIÓN COMUNAL <br>BARRIO {{$datosu['junta']}} <br>RESOLUCION {{$datosu['Resolucion']}} <br>Nit: {{$datosu['Nit']}}   </h3>
+                <h3 style="text-transform:uppercase;">REPUBLICA DE COLOMBIA <br>DEPARTAMENTO DEL HUILA <br> MUNICIPIO DE ALGECIRAS <br> JUNTA DE ACCIÓN COMUNAL <br>{{$datosu['junta']}} <br>RESOLUCION {{$datosu['Resolucion']}} <br>Nit: {{$datosu['Nit']}}   </h3>
             </td>
             <td align="right" valign="top"><img src="{{asset('imagenes/colombia.png')}}" alt="" width="120"/></td>
         </tr>
@@ -63,8 +63,7 @@
             </td>
             <td align="center">
                 <b>_________________________</b>
-                <h4><strong>CARLOS ZAMORA</strong></h4>
-                <p>C.C 12.255.648 <br> <strong>Cel.:32127170677</strong><br><strong>TESORERO (a)</strong></p>
+                <p><strong style="text-transform:uppercase;" >{{$teso->nombre}}</strong> <br>{{$teso->Tip_identificacion}} No. {{$teso->Num_identificacion}} <br> tel: {{$teso->Num_contacto}}<br><strong style="text-transform:uppercase;">{{$teso->Cargo}}</strong></p>
             </td>
             <td align="right" valign="top">
                 <b></b>

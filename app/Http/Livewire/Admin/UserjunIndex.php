@@ -14,18 +14,39 @@ class UserjunIndex extends Component
 
     protected $paginationTheme = "bootstrap";
 
+    public $cedul;
+
     public $search;
 
     public function render()
     {
-        $userj = UserJun::join('juntas','user_juns.junta_id', '=','juntas.id')
-        ->join('comisions','user_juns.comision_id','=','comisions.id')
-        ->select('user_juns.*','juntas.Nombre','comisions.comision')
-        ->where('Num_identificacion', 'LIKE','%' . $this->search . '%')
-        ->orWhere('juntas.Nombre', 'LIKE','%' . $this->search . '%')
-        ->latest('id')
-        ->paginate();        
-
+        if($this->search){
+            $userj = UserJun::join('juntas','user_juns.junta_id', '=','juntas.id')
+            ->join('comisions','user_juns.comision_id','=','comisions.id')
+            ->select('user_juns.*','juntas.Nombre','comisions.comision')
+            ->where('juntas.Nombre', 'LIKE','%' . $this->search . '%')
+            ->orWhere('user_juns.nombre', 'LIKE','%' . $this->search . '%')
+            ->latest('id')
+            ->paginate();   
+            
+        }elseif($this->cedul){
+            $userj = UserJun::join('juntas','user_juns.junta_id', '=','juntas.id')
+            ->join('comisions','user_juns.comision_id','=','comisions.id')
+            ->select('user_juns.*','juntas.Nombre','comisions.comision')
+            ->where('Num_identificacion', 'LIKE','%' . $this->cedul . '%')
+            ->latest('id')
+            ->paginate();  
+            
+        }else{
+            $userj = UserJun::join('juntas','user_juns.junta_id', '=','juntas.id')
+            ->join('comisions','user_juns.comision_id','=','comisions.id')
+            ->select('user_juns.*','juntas.Nombre','comisions.comision')
+            ->latest('id')
+            ->paginate();  
+            
+        }
+      
         return view('livewire.admin.userjun-index',compact('userj'));
+        
     }
 }

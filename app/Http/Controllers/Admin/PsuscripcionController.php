@@ -311,20 +311,71 @@ class PsuscripcionController extends Controller
     {
         switch ($request['opcion']) {
             case '0':
-               // $post->image->url
+                
                 $junta = Junta::where('Nit',$request['Nit'])->get()->first();
                 $datosu = request()->except('_token', 'Tipo', 'opcion');
+
                 switch ($request['Tipo']) {
-                    case '0':  
-                        $pdf = PDF::loadView('admin.pdf.certificado.certificadoAfil', compact('datosu','junta'))->setPaper('letter')->stream('CertificadoAfiliado.pdf');
+                    case '0': 
+                        $presi = UserJun::join('juntas', 'user_juns.junta_id', '=', 'juntas.id')
+                        ->select('user_juns.nombre','Tip_identificacion','Num_identificacion','Cargo','Num_contacto','juntas.Nit')
+                        ->where([
+                            ['juntas.Nit',$request['Nit']],
+                            ['user_juns.Cargo', 'presidente']
+                        ])
+                        ->get()->first();
+                        $secr = UserJun::join('juntas', 'user_juns.junta_id', '=', 'juntas.id')
+                        ->select('user_juns.nombre','Tip_identificacion','Num_identificacion','Cargo','Num_contacto','juntas.Nit')
+                        ->where([
+                            ['juntas.Nit',$request['Nit']],
+                            ['user_juns.Cargo', 'secretario']
+                        ])
+                        ->get()->first();
+
+                        if($presi==null && $secr==null){
+                            return redirect()->route('admin.psuscripcion.index')->with('error', 'En la junta seleccionada, no ha secreataria/o o presidente');
+                        }
+
+                        $pdf = PDF::loadView('admin.pdf.certificado.certificadoAfil', compact('datosu','junta','presi','secr'))->setPaper('letter')->stream('CertificadoAfiliado.pdf');
                         return $pdf;
                         break;
                     case '1':
-                        $pdf = PDF::loadView('admin.pdf.certificado.certificadoRes', compact('datosu','junta'))->setPaper('letter')->stream('CertificadoResiencia.pdf');
+                        $presi = UserJun::join('juntas', 'user_juns.junta_id', '=', 'juntas.id')
+                        ->select('user_juns.nombre','Tip_identificacion','Num_identificacion','Cargo','Num_contacto','juntas.Nit')
+                        ->where([
+                            ['juntas.Nit',$request['Nit']],
+                            ['user_juns.Cargo', 'presidente']
+                        ])
+                        ->get()->first();
+                        $secr = UserJun::join('juntas', 'user_juns.junta_id', '=', 'juntas.id')
+                        ->select('user_juns.nombre','Tip_identificacion','Num_identificacion','Cargo','Num_contacto','juntas.Nit')
+                        ->where([
+                            ['juntas.Nit',$request['Nit']],
+                            ['user_juns.Cargo', 'secretario']
+                        ])
+                        ->get()->first();
+
+                        if($presi==null && $secr==null){
+                            return redirect()->route('admin.psuscripcion.index')->with('error', 'En la junta seleccionada, no ha secreataria/o o presidente');
+                        }
+
+                        $pdf = PDF::loadView('admin.pdf.certificado.certificadoRes', compact('datosu','junta','presi','secr'))->setPaper('letter')->stream('CertificadoResidencia.pdf');
                         return $pdf;
                         break;
                     case '2':
-                        $pdf = PDF::loadView('admin.pdf.certificado.certificadoPaz', compact('datosu','junta'))->setPaper('letter')->stream('CertificadoPazySalvo.pdf');
+                        $teso = UserJun::join('juntas', 'user_juns.junta_id', '=', 'juntas.id')
+                        ->select('user_juns.nombre','Tip_identificacion','Num_identificacion','Cargo','Num_contacto','juntas.Nit')
+                        ->where([
+                            ['juntas.Nit',$request['Nit']],
+                            ['user_juns.Cargo', 'tesorero']
+                        ])
+                        ->get()->first();
+
+                        if($teso == null){
+                            return redirect()->route('admin.psuscripcion.index')->with('error', 'No hay tesoreros en esta junta');
+                        }
+
+                        $pdf = PDF::loadView('admin.pdf.certificado.certificadoPaz', compact('datosu','junta','teso'))->setPaper('letter')->stream('CertificadoPazySalvo.pdf');
                         return $pdf;
                         break;
                     case '3':
@@ -336,11 +387,19 @@ class PsuscripcionController extends Controller
                         ])
                         ->get()->first();
 
-                        if($presi == null){
+                        $secr = UserJun::join('juntas', 'user_juns.junta_id', '=', 'juntas.id')
+                        ->select('user_juns.nombre','Tip_identificacion','Num_identificacion','Cargo','Num_contacto','juntas.Nit')
+                        ->where([
+                            ['juntas.Nit',$request['Nit']],
+                            ['user_juns.Cargo', 'secretario']
+                        ])
+                        ->get()->first();
+
+                        if($presi==null && $secr==null){
                             return redirect()->route('admin.psuscripcion.index')->with('error', 'No hay presidentes en esta junta');
                         }
                       
-                        $pdf = PDF::loadView('admin.pdf.certificado.certificadoSana', compact('datosu','presi','junta'))->setPaper('a4')->stream('CertificadoSanaTe.pdf');
+                        $pdf = PDF::loadView('admin.pdf.certificado.certificadoSana', compact('datosu','presi','junta','secr'))->setPaper('a4')->stream('CertificadoSanaTe.pdf');
                         return $pdf;
                         break;
                     default:
