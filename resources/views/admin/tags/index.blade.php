@@ -36,7 +36,7 @@
                             </td>
                             <td width="10px">
                                 @can('admin.tags.destroy')
-                                    <form action="{{route('admin.tags.destroy', $tag)}}" method="POST">
+                                    <form action="{{route('admin.tags.destroy', $tag)}}" class="formulario-eliminar"  method="POST">
                                         @csrf
                                         @method('delete')
                                         <button class="btn btn-danger btn-sm" type="submit"><i class="fas fa-eraser"></i></button>
@@ -75,24 +75,24 @@
         'success'
         )
     </script>
-        <script>
-           $('.formulario-eliminar').submit(function(e){
-            e.preventDefault();
-            Swal.fire({
-                title: '¿Estas seguro?',
-                text: "No se podra revertir esta operacion",
-                type: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Si, Eliminar registro!'
-                }).then((result) => {
-                if (result.value) {
-            
-                    this.submit();
-                }
-                })
+    <script>
+        $('.formulario-eliminar').submit(function(e){
+        e.preventDefault();
+        Swal.fire({
+            title: '¿Estas seguro?',
+            text: "No se podra revertir esta operacion",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, Eliminar registro!'
+            }).then((result) => {
+            if (result.value) {
+        
+                this.submit();
+            }
             })
-        </script>
+        })
+    </script>
 @endif
 @stop
