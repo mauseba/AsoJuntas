@@ -47,7 +47,7 @@ class CensoIndex extends Component
 
     public function render()
     {
-        $user = UserJun::all()->where('Cargo', 'afiliado');
+        $user = UserJun::all();
         $jun = Junta::orderBy('Nombre')->get();
         $barrios = Barrios::orderBy('name')->get();
 

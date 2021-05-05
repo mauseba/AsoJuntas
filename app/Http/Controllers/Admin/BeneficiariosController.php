@@ -51,7 +51,7 @@ class BeneficiariosController extends Controller
      */
     public function create()
     {
-        $users = UserJun::all()->where('Cargo', 'afiliado');
+        $users = UserJun::all();
         $doc = Documento::pluck('nombre', 'tipo');
         $estu = Estudio::pluck('nombre', 'prefijo');
         $eps = Eps::orderBy('name')->get();
