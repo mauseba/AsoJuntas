@@ -45,7 +45,7 @@ class BeneficiariosIndex extends Component
 
     public function render()
     {
-        $user = UserJun::all()->where('Cargo', 'afiliado');
+        $user = UserJun::all();
         $epss = Eps::all()->sortby('name'); // ordenar por nombre
         $doc = Documento::all();
         $barrios = Barrios::orderBy('name')->get();

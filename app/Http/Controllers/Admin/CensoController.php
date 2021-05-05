@@ -42,7 +42,7 @@ class CensoController extends Controller
      */
     public function create()
     {
-        $user = UserJun::all()->where('Cargo', 'afiliado');
+        $user = UserJun::all();
 
         $barrios = Barrios::orderBy('name')->get();
         return view('admin.censo.create', compact('barrios', 'user'));
