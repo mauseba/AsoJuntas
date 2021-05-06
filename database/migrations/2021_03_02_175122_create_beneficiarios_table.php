@@ -13,6 +13,12 @@ class CreateBeneficiariosTable extends Migration
      */
     public function up()
     {
+        Schema::create('eps', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('name');
+            $table->timestamps();
+        });
+
         Schema::create('beneficiarios', function (Blueprint $table) {
             $table->id();
 
@@ -24,21 +30,19 @@ class CreateBeneficiariosTable extends Migration
             $table->string('nucleo_fam'); // tipo de nucleo familiar (conyuge,hijo,padre/madre)
             $table->string('sub_gobierno'); // tipo de subsidio que recibe
             $table->string('tipo_salud'); // Subsidio, contributivo
-            $table->string('salud'); // EPS
-            $table->string('barrio'); // Barrio
+
             $table->string('discap'); // Discapacidad
             $table->string('nivel_edu');
+
+
+            $table->unsignedBigInteger('salud'); //relacion con eps
+            $table->foreign('salud')->references('id')->on('eps')->onDelete('cascade'); // llave foranea
 
 
             $table->unsignedBigInteger('user_id'); //relacion con usuarios
 
             $table->foreign('user_id')->references('id')->on('user_juns')->onDelete('cascade'); // llave foranea
 
-            $table->timestamps();
-        });
-        Schema::create('eps', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('name');
             $table->timestamps();
         });
     }
@@ -51,5 +55,6 @@ class CreateBeneficiariosTable extends Migration
     public function down()
     {
         Schema::dropIfExists('beneficiarios');
+        Schema::dropIfExists('eps');
     }
 }

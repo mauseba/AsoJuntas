@@ -181,7 +181,7 @@
                             <td>
                                 @can('admin.beneficiarios.edit')
                                 <a class="btn btn-primary btn-sm"
-                                    href="{{ route('admin.beneficiarios.edit', $beneficiario)}}"><i
+                                    href="{{ route('admin.beneficiarios.edit', $beneficiario)}}" title="Editar"><i
                                         class="fas fa-pen-square"></i></a>
                                 @endcan
                             </td>
@@ -190,7 +190,7 @@
                                 <form action="{{route('admin.beneficiarios.destroy', $beneficiario)}}" method="POST">
                                     @csrf
                                     @method('delete')
-                                    <button type="submit" class="btn btn-danger btn-sm"><i
+                                    <button type="submit" class="btn btn-danger btn-sm" title="Eliminar"><i
                                             class="fas fa-eraser"></i></button>
                                 </form>
                                 @endcan

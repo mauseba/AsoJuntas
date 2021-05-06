@@ -19,7 +19,44 @@
         </div>
     @endif
 
-    @livewire('admin.censo-index')
+   <div class="card">
+    <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#home">General</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" id="men1" href="#menu1">Individual</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" id="men2" href="#menu2">Afil. Censados</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" id="men3" href="#menu3">Afil. No censados</a>
+            </li>
+        </ul>
+    </div>
+    <div class="card-body ">
+        <div class="tab-content ">
+            <div id="home" class="tab-pane active">  
+                <h3>Listado de Censos</h3>
+                @livewire('admin.censo-index')
+            </div>
+            <div id="menu1" class="tab-pane fade">
+                <h3>Censo Individual</h3>
+                @livewire('admin.censo-individual-index')
+            </div>
+            <div id="menu2" class=" tab-pane fade">
+                <h3>Listado Afil. Censados</h3>
+                @livewire('admin.censados-index')
+            </div>
+            <div id="menu3" class=" tab-pane fade">
+                <h3>Listado Afil. No Censados</h3>
+                @livewire('admin.no-censados-index')
+            </div>
+        </div>   
+    </div>
+</div>
 @stop
 
 @section('footer')

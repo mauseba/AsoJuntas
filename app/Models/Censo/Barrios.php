@@ -9,10 +9,14 @@ class Barrios extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name'];
+    protected   $fillable = ['name'];
 
-    public function barrios(){
+    public function barrios()
+    {
         return $this->belongsTo(Barrios::class);
     }
-
+    public function censo()
+    {
+        return $this->belongsTo(Censo::class);
+    }
 }

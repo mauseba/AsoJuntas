@@ -53,8 +53,9 @@ class BeneficiariosIndex extends Component
         $jun = Junta::all()->sortby('Nombre');
 
         $beneficiarios = Beneficiarios::join('user_juns', 'beneficiarios.user_id', '=', 'user_juns.id')
+
             ->join('juntas', 'juntas.id', '=', 'user_juns.id')
-            ->select('beneficiarios.*', 'user_juns.nombre', 'user_juns.junta_id', 'juntas.Nombre')
+            ->select('beneficiarios.*', 'user_juns.nombre', 'user_juns.junta_id', 'juntas.Nombre', 'censo.barrio')
             ->where('juntas.Nombre', 'LIKE', $this->junta)
             ->where('name', 'LIKE', '%' . $this->nombre . '%')
             ->Where('tipo_doc', 'LIKE', '%' . $this->documento . '%')
@@ -65,8 +66,8 @@ class BeneficiariosIndex extends Component
             ->Where('salud', 'LIKE', '%' . $this->eps . '%')
             ->Where('discap', 'LIKE', '%' . $this->discapacidad . '%')
             ->Where('nivel_edu', 'LIKE', '%' . $this->edu . '%')
-            ->Where('sub_gobierno', 'LIKE', '%' . $this->subsidio . '%')
-            ->Where('barrio', 'LIKE', '%' . $this->barrio . '%')
+            ->Where('beneficiarios.sub_gobierno', 'LIKE', '%' . $this->subsidio . '%')
+
             ->Where('user_id', 'LIKE',  $this->afiliado)
             ->orderBy('id', 'DESC')
             ->paginate();

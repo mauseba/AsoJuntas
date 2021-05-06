@@ -50,7 +50,7 @@
                     <select name="barrio" class="form-select block w-full mt-1">
                         <option selected hidden>Seleccionar</option>
                         @foreach($barrios as $bar)
-                        <option>{{$bar->name}}</option>
+                        <option value="{{$bar->id}}">{{$bar->name}}</option>
                         @endforeach
                     </select>
 

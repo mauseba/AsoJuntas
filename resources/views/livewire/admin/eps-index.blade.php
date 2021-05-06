@@ -20,7 +20,7 @@
                     <td>{{$entidad->name}}</td>
                     <td width="10px">
                         @can('admin.eps.edit')
-                            <a class="btn btn-primary btn-sm" href="{{ route('admin.eps.edit', $entidad)}}"><i class="fas fa-pen-square"></i></a>
+                            <a class="btn btn-primary btn-sm" href="{{ route('admin.eps.edit', $entidad)}}" title="Editar"><i class="fas fa-pen-square"></i></a>
                         @endcan
                     </td>
                     <td width="10px">
@@ -28,7 +28,7 @@
                             <form action="{{route('admin.eps.destroy', $entidad)}}" method="POST">
                                 @csrf
                                 @method('delete')
-                                <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-eraser"></i></button>
+                                <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-eraser" title="Eliminar"></i></button>
                             </form>
                         @endcan
 

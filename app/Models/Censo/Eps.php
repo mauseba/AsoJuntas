@@ -11,8 +11,12 @@ class Eps extends Model
 
     protected $fillable = ['name'];
 
-    public function eps(){
+    public function eps()
+    {
         return $this->belongsTo(Eps::class);
     }
-
+    public function beneficiarios()
+    {
+        return $this->belongsTo(Censo::class);
+    }
 }

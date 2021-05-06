@@ -12,10 +12,19 @@ class Censo extends Model
     protected $table = 'censo';
     //protected $fillable = ['barrio','direccion','tipo_vivienda','energia','gas','agua','alcantarilla','escrituras','sisben','sub_vivienda','piso','techo','pañete','baños','baño_nuevo','vivienda_nueva'];
     public function user()
-     {
+    {
         return $this->belongsTo('App\Models\UserJun');
     }
-    public function beneficiarios(){
+    public function beneficiarios()
+    {
         return $this->hasMany('App\Models\Censo\Beneficiarios');
+    }
+    public function eps()
+    {
+        return $this->hasMany('App\Models\Censo\Eps');
+    }
+    public function barrios()
+    {
+        return $this->belongsTo('App\Models\Censo\Barrios');
     }
 }

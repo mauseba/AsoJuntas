@@ -50,7 +50,7 @@
             <select name="barrio" class="form-control">
                 
                 @foreach($barrios as $bar)
-                <option @if ($censo->barrio == $bar->name)   selected @endif>{{$bar->name}}</option>
+                <option @if ($censo->barrio == $bar->id)   selected @endif value="{{$bar->id}}">{{$bar->name}}</option>
                 @endforeach
             </select>
 
@@ -60,7 +60,7 @@
         {!! Form::label('direccion', 'Direccion/Finca') !!}
 
 
-        {{ Form::text('direccion', Input::old('direccion'), ['class'=> 'form-control','readonly' => 'true']) }}
+       <input  type="text" class="form-control"  value="{{ $censo->Direccion }}" disabled>
 
         <div class="row justify-content-center">
             <div class="col-4">

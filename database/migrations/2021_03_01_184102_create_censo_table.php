@@ -13,10 +13,16 @@ class CreateCensoTable extends Migration
      */
     public function up()
     {
+        Schema::create('barrios', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('name');
+            $table->timestamps();
+        });
+
         Schema::create('censo', function (Blueprint $table) {
             $table->id();
-            $table->string('barrio');
-            $table->string('direccion');
+
+
             $table->string('tipo_vivienda');
             $table->string('energia');
             $table->string('gas');
@@ -33,14 +39,12 @@ class CreateCensoTable extends Migration
             $table->string('baño_nuevo');
             $table->string('vivienda_nueva');
 
+            $table->unsignedBigInteger('barrio'); //relacion con barrios
+            $table->foreign('barrio')->references('id')->on('barrios')->onDelete('cascade'); // llave foranea
+
             $table->unsignedBigInteger('user_id'); //relacion con usuarios
             $table->foreign('user_id')->references('id')->on('user_juns')->onDelete('cascade'); // llave foranea
 
-            $table->timestamps();
-        });
-        Schema::create('barrios', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('name');
             $table->timestamps();
         });
     }
@@ -53,5 +57,6 @@ class CreateCensoTable extends Migration
     public function down()
     {
         Schema::dropIfExists('censo');
+        Schema::dropIfExists('barrios');
     }
 }

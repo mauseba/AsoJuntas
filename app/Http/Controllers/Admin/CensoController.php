@@ -81,9 +81,9 @@ class CensoController extends Controller
 
         $censo = new Censo();
 
-        $direccion = UserJun::select('Direccion')->where('id', $request->user_id)->get()->first();
+
         $censo->barrio = $request->barrio;
-        $censo->direccion = $direccion->Direccion;
+
         $censo->tipo_vivienda = $request->tipo_vivienda;
         $censo->energia = $request->energia;
         $censo->gas = $request->gas;
@@ -136,7 +136,7 @@ class CensoController extends Controller
         $barrios = Barrios::orderBy('name')->get();
 
         $censo = Censo::join('user_juns', 'censo.user_id', '=', 'user_juns.id')
-            ->select('censo.*', 'user_juns.nombre')->find($id);
+            ->select('censo.*', 'user_juns.nombre', 'user_juns.Direccion')->find($id);
 
         return view('admin.censo.edit', compact('censo', 'barrios'));
     }
@@ -172,10 +172,10 @@ class CensoController extends Controller
 
         $censo = Censo::findOrFail($id);
 
-        $direccion = UserJun::select('Direccion')->where('id', $censo->user_id)->get()->first();
+
 
         $censo->barrio = $request->barrio;
-        $censo->direccion = $direccion->Direccion;
+
         $censo->tipo_vivienda = $request->tipo_vivienda;
         $censo->energia = $request->energia;
         $censo->gas = $request->gas;
