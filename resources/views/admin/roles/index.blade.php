@@ -29,7 +29,7 @@
                             <a class="btn btn-primary btn-sm" href="{{route("admin.roles.edit",$role)}}" ><i class="fas fa-pen-square"></i></a>
                         </td>
                         <td width="10px">
-                            <form action="{{route('admin.roles.destroy', $role)}}" method="POST">
+                            <form action="{{route('admin.roles.destroy', $role)}}" class="formulario-eliminar"  method="POST">
                                 @csrf
                                 @method('delete')
                                 <button class="btn btn-danger btn-sm" type="submit"><i class="fas fa-eraser"></i></button>
@@ -71,4 +71,23 @@
             )
         </script>
     @endif
+    <script>
+        $('.formulario-eliminar').submit(function(e){
+        e.preventDefault();
+        Swal.fire({
+            title: '¿Estas seguro?',
+            text: "No se podra revertir esta operacion",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, Eliminar registro!'
+            }).then((result) => {
+            if (result.value) {
+        
+                this.submit();
+            }
+            })
+        })
+    </script>
 @stop

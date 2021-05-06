@@ -292,7 +292,8 @@ return [
         ],
         [
             'text'        => 'Gestion de juntas',
-            'can'       => 'admin.juntas.index'||'admin.userjun.index',
+            'can'       => 'admin.juntas.index',
+            'can'       => 'admin.userjun.index',
             'icon'        => 'fas fa-people-arrows',
             'submenu'  => [
                 [
@@ -322,7 +323,8 @@ return [
         [
             'text'        => 'Gestion de Eventos',
             'icon'        => 'fas fa-calendar-alt',
-            'can'       => 'admin.eventos.index'||'admin.actas.index',
+            'can'       => 'admin.eventos.index',
+            'can'       => 'admin.actas.index',
             'submenu'  => [
                 [
                     'text'        => 'Eventos',
@@ -345,7 +347,8 @@ return [
         [
             'text'        => 'Censo Comunal',
             'icon'        => 'far fa-address-book',
-            'can'       => 'admin.censo.index'||'admin.beneficiarios.index',
+            'can'       => 'admin.censo.index',
+            'can'       => 'admin.beneficiarios.index',
             'submenu'  => [
                 [
                     'text'       => 'Beneficiarios',
@@ -380,7 +383,7 @@ return [
         [
             'text'        => 'Pagos y Certificados',
             'icon'      => 'fas fa-cash-register',
-            'can'       => 'admin.psuscripcion.index'||'admin.pcertificado.index',
+            'can'       => 'admin.psuscripcion.index',
             'submenu'  => [
                 [
                     'text'       => 'Pagos de Juntas A.C',

@@ -311,7 +311,7 @@ class PsuscripcionController extends Controller
     {
         switch ($request['opcion']) {
             case '0':
-                
+
                 $junta = Junta::where('Nit',$request['Nit'])->get()->first();
                 $datosu = request()->except('_token', 'Tipo', 'opcion');
 
@@ -396,7 +396,7 @@ class PsuscripcionController extends Controller
                         ->get()->first();
 
                         if($presi==null && $secr==null){
-                            return redirect()->route('admin.psuscripcion.index')->with('error', 'No hay presidentes en esta junta');
+                            return redirect()->route('admin.psuscripcion.index')->with('error', 'En la junta seleccionada, no hay secreataria/o o presidente');
                         }
                       
                         $pdf = PDF::loadView('admin.pdf.certificado.certificadoSana', compact('datosu','presi','junta','secr'))->setPaper('a4')->stream('CertificadoSanaTe.pdf');
