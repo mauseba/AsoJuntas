@@ -50,4 +50,34 @@
     )
 </script>
 @endif
+<script>
+    $(document).ready(function(){
+        $('#junta').on('change',function(){
+            var nombre= $(this).val();
+            if(nombre != ''){
+                $.ajax({
+                    url: "{{url('admin/pcertificado/nit')}}",
+                    type: "POST",
+                    data:{
+                        name : nombre,
+                        '_token' : $("meta[name='csrf-token']").attr("content")   
+                    },
+                    success:function(msg){
+                        $('#nit').empty();
+                        $('#resolucion').empty();
+                        $('#nit').val(msg['Nit']);
+                        $('#resolucion').val(msg['Resolucion']);
+                    },
+                    error: function(){
+                        Swal.fire(
+                        'Operacion no Completada',
+                        'Hubo un error en la operacion' ,
+                        'error'
+                        )
+                    }
+                })
+            }
+        });
+    });
+</script>
 @endsection

@@ -20,7 +20,7 @@ use App\Http\Controllers\Admin\ActaController;
 use App\Http\Controllers\Admin\ComisionController;
 use App\Http\Controllers\Admin\PcertificadoController;
 use App\Http\Controllers\Admin\PsuscripcionController;
-
+use App\Models\Pcertificado;
 
 Route::get('', [HomeController::class, 'index'])->middleware('can:admin.home', 'verified')->name('admin.home');
 
@@ -57,7 +57,9 @@ Route::middleware('verified')->group(function () {
     Route::resource('pcertificado', PcertificadoController::class)->except('show')->names('admin.pcertificado');
     
     Route::resource('comisions', ComisionController::class)->except('show')->names('admin.comisions');
-        
+
+    Route::post('pcertificado/nit',[PcertificadoController::class, 'nitJunta']);
+    
     
     
     Route::group(['middleware' =>['auth','can:admin.certificados']],function () {

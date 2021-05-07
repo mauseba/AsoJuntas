@@ -7,6 +7,7 @@ use App\Models\Junta;
 use Illuminate\Http\Request;
 use App\Models\Pcertificado;
 use App\Models\Documento;
+use App\Models\UserJun;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
@@ -81,28 +82,103 @@ class PcertificadoController extends Controller
                 
     }
 
+    public function nitJunta(Request $request){
+
+        $nombre = request()->except('_token');
+
+        $msg = Junta::select('Nit','Resolucion')
+        ->where('Nombre', $nombre)
+        ->get()->first();
+
+        return response()->json($msg);
+
+    }
+
     public function certificado(Pcertificado $pcertificado)
     {
+        $junta = Junta::where('Nit',$pcertificado->Nit)->get()->first();
+
         switch ($pcertificado->tipo) {
             case 'residencia':
                 $datosu = $pcertificado->toArray();
                 $datosu['Estado'] = 'Entregado';
+                
+
+                $presi = UserJun::join('juntas', 'user_juns.junta_id', '=', 'juntas.id')
+                ->select('user_juns.nombre','Tip_identificacion','Num_identificacion','Cargo','Num_contacto','juntas.Nit')
+                ->where([
+                    ['juntas.Nit',$pcertificado->Nit],
+                    ['user_juns.Cargo', 'presidente']
+                ])
+                ->get()->first();
+
+                $secr = UserJun::join('juntas', 'user_juns.junta_id', '=', 'juntas.id')
+                ->select('user_juns.nombre','Tip_identificacion','Num_identificacion','Cargo','Num_contacto','juntas.Nit')
+                ->where([
+                    ['juntas.Nit',$pcertificado->Nit],
+                    ['user_juns.Cargo', 'secretario']
+                ])
+                ->get()->first();
+
+                if($presi==null || $secr==null){
+                    return redirect()->route('admin.pcertificado.index')->with('error', 'En la junta seleccionada, no ha secreataria/o o presidente');
+                }
+
                 $pcertificado->update($datosu);
-                $pdf = PDF::loadView('admin.pdf.certificado.certificadoRes', compact('datosu'))->setPaper('letter')->stream('CertificadoResiencia.pdf');
+                
+                $pdf = PDF::loadView('admin.pdf.certificado.certificadoRes', compact('datosu','presi','secr','junta'))->setPaper('letter')->stream('CertificadoResiencia.pdf');
                 return $pdf;
                 break;
             case 'afiliacion':
                 $datosu = $pcertificado->toArray();
                 $datosu['Estado'] = 'Entregado';
+                
+
+                $presi = UserJun::join('juntas', 'user_juns.junta_id', '=', 'juntas.id')
+                ->select('user_juns.nombre','Tip_identificacion','Num_identificacion','Cargo','Num_contacto','juntas.Nit')
+                ->where([
+                    ['juntas.Nit',$pcertificado->Nit],
+                    ['user_juns.Cargo', 'presidente']
+                ])
+                ->get()->first();
+
+                $secr = UserJun::join('juntas', 'user_juns.junta_id', '=', 'juntas.id')
+                ->select('user_juns.nombre','Tip_identificacion','Num_identificacion','Cargo','Num_contacto','juntas.Nit')
+                ->where([
+                    ['juntas.Nit',$pcertificado->Nit],
+                    ['user_juns.Cargo', 'secretario']
+                ])
+                ->get()->first();
+
+                if($presi==null || $secr==null){
+                    return redirect()->route('admin.pcertificado.index')->with('error', 'En la junta seleccionada, no ha secreataria/o o presidente');
+                }
+
                 $pcertificado->update($datosu);
-                $pdf = PDF::loadView('admin.pdf.certificado.certificadoAfil', compact('datosu'))->setPaper('letter')->stream('CertificadoAfiliado.pdf');
+
+                $pdf = PDF::loadView('admin.pdf.certificado.certificadoAfil', compact('datosu','presi','secr','junta'))->setPaper('letter')->stream('CertificadoAfiliado.pdf');
                 return $pdf;
                 break;
             case 'paz-salvo':
                 $datosu = $pcertificado->toArray();
                 $datosu['Estado'] = 'Entregado';
+                
+
+                $teso = UserJun::join('juntas', 'user_juns.junta_id', '=', 'juntas.id')
+                ->select('user_juns.nombre','Tip_identificacion','Num_identificacion','Cargo','Num_contacto','juntas.Nit')
+                ->where([
+                    ['juntas.Nit',$pcertificado->Nit],
+                    ['user_juns.Cargo', 'tesorero']
+                ])
+                ->get()->first();
+
+                if($teso == null){
+                    return redirect()->route('admin.pcertificado.index')->with('error', 'No hay tesoreros en esta junta');
+                }
+
                 $pcertificado->update($datosu);
-                $pdf = PDF::loadView('admin.pdf.certificado.certificadoPaz', compact('datosu'))->setPaper('letter')->stream('CertificadoPazySAKVO.pdf');
+
+                $pdf = PDF::loadView('admin.pdf.certificado.certificadoPaz', compact('datosu','junta','teso'))->setPaper('letter')->stream('CertificadoPazySAKVO.pdf');
                 return $pdf;
                 break;
             default:

@@ -13,7 +13,7 @@
     <div class="col-3">
         <div class="form-group">
             {!! Form::label('id', 'Id de afiliacion:') !!}
-            {!! Form::text('id', $userl->id, ['class' => 'form-control', 'readonly']) !!}
+            {!! Form::text('id', null, ['class' => 'form-control','id'=>'id', 'readonly']) !!}
     
     
             @error('id')
@@ -28,7 +28,7 @@
     <div class="col">
         <div class="form-group">
             {!! Form::label('junta', 'Junta de accion comunal:') !!}
-            {!! Form::text('junta', $userl->Nombre, ['class' => 'form-control', 'readonly']) !!}
+            {!! Form::text('junta', null, ['class' => 'form-control','id'=>'junta', 'readonly']) !!}
     
     
             @error('junta')
@@ -41,7 +41,7 @@
     <div class="col">
         <div class="form-group">
             {!! Form::label('Nit', 'Nit de la junta A.C:') !!}
-            {!! Form::text('Nit', $userl->Nit, ['class' => 'form-control', 'readonly']) !!}
+            {!! Form::text('Nit', null, ['class' => 'form-control','id'=>'Nit', 'readonly']) !!}
     
     
             @error('Nit')
@@ -53,7 +53,7 @@
     <div class="col">
         <div class="form-group">
             {!! Form::label('Resolucion', 'Resolucion de la junta A.C:') !!}
-            {!! Form::text('Resolucion', $userl->Resolucion, ['class' => 'form-control', 'readonly']) !!}
+            {!! Form::text('Resolucion', null, ['class' => 'form-control','id'=>'Resolucion', 'readonly']) !!}
     
     
             @error('Resolucion')
@@ -67,7 +67,7 @@
     <div class="col">   
         <div class="form-group">
             {!! Form::label('nombre', 'Nombre del afiliado:') !!}
-            {!! Form::text('nombre', $userl->nombre, ['class' => 'form-control', 'readonly']) !!}
+            {!! Form::text('nombre', null, ['class' => 'form-control','id'=>'nombre', 'readonly']) !!}
 
 
             @error('nombre')
@@ -79,7 +79,7 @@
     <div class="col">
         <div class="form-group">
             {!! Form::label('Direccion', 'Direccion del afiliado:') !!}
-            {!! Form::text('Direccion', $userl->Direccion, ['class' => 'form-control', 'readonly']) !!}
+            {!! Form::text('Direccion', null, ['class' => 'form-control','id'=>'Direccion', 'readonly']) !!}
     
     
             @error('Direccion')
@@ -91,7 +91,7 @@
     <div class="col">
         <div class="form-group">
             {!! Form::label('Tdocumento', 'Tipo de documento:') !!}
-            {!! Form::text('Tdocumento', $userl->Tip_identificacion, ['class' => 'form-control', 'readonly']) !!}
+            {!! Form::text('Tdocumento', null, ['class' => 'form-control','id'=>'Tdocumento', 'readonly']) !!}
     
     
             @error('Tdocumento')
@@ -103,7 +103,7 @@
     <div class="col">
         <div class="form-group">
             {!! Form::label('Documento', 'N. documento:') !!}
-            {!! Form::text('Documento', $userl->Num_identificacion, ['class' => 'form-control', 'readonly']) !!}
+            {!! Form::text('Documento', null, ['class' => 'form-control','id'=>'Documento', 'readonly']) !!}
     
     
             @error('Documento')

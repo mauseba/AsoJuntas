@@ -276,37 +276,24 @@ class PsuscripcionController extends Controller
 
         if ($users->count() == 0) {
             return redirect()->route('admin.psuscripcion.index')->with('warning', 'No hay afiliados a esta junta');
-        } else {
-            $userl = UserJun::join('juntas', 'user_juns.junta_id', '=', 'juntas.id')
-                ->select('user_juns.*', 'juntas.Nit', 'juntas.Nombre', 'juntas.Resolucion')
-                ->where('user_juns.id', $users[0]->user_id)
-                ->get()
-                ->first();
-        }
+        } 
 
-        return view('admin.psuscripcion.buscador', compact('users', 'userl'));
+        return view('admin.psuscripcion.buscador', compact('users'));
     }
 
     public function certificado(Request $request)
     {
-        if ($request['usuario'] == "Seleccione...") {
-
-            return redirect()->route('admin.psuscripcion.index')->with('warning', 'seleccione una opcion valida');
-        } else {
-            $userl = UserJun::join('juntas', 'user_juns.junta_id', '=', 'juntas.id')
-                ->select('user_juns.*', 'juntas.Nit', 'juntas.Nombre', 'juntas.Resolucion')
-                ->where('user_juns.id', $request['usuario'])
-                ->get()
-                ->first();
-
-            $users = UserJun::join('juntas', 'user_juns.junta_id', '=', 'juntas.id')
-                ->select('user_juns.id as user_id', 'user_juns.Num_identificacion', 'juntas.id')
-                ->where('juntas.id', $userl->junta_id)
-                ->get();
-
-            return view('admin.psuscripcion.buscador', compact('userl', 'users'));
-        }
+        $dato = request()->except('_token');
+        
+        $userl = UserJun::join('juntas', 'user_juns.junta_id', '=', 'juntas.id')
+            ->select('user_juns.*', 'juntas.Nit', 'juntas.Nombre', 'juntas.Resolucion')
+            ->where('user_juns.id', $dato['user'])
+            ->get()
+            ->first();
+        return response()->json($userl);
+    
     }
+
     public function generarCertificado(Request $request)
     {
         switch ($request['opcion']) {
@@ -332,9 +319,10 @@ class PsuscripcionController extends Controller
                         ])
                         ->get()->first();
 
-                        if($presi==null && $secr==null){
+                        if($presi==null || $secr==null){
                             return redirect()->route('admin.psuscripcion.index')->with('error', 'En la junta seleccionada, no ha secreataria/o o presidente');
                         }
+                
 
                         $pdf = PDF::loadView('admin.pdf.certificado.certificadoAfil', compact('datosu','junta','presi','secr'))->setPaper('letter')->stream('CertificadoAfiliado.pdf');
                         return $pdf;
@@ -355,7 +343,7 @@ class PsuscripcionController extends Controller
                         ])
                         ->get()->first();
 
-                        if($presi==null && $secr==null){
+                        if($presi==null || $secr==null){
                             return redirect()->route('admin.psuscripcion.index')->with('error', 'En la junta seleccionada, no ha secreataria/o o presidente');
                         }
 
@@ -395,7 +383,7 @@ class PsuscripcionController extends Controller
                         ])
                         ->get()->first();
 
-                        if($presi==null && $secr==null){
+                        if($presi==null || $secr==null){
                             return redirect()->route('admin.psuscripcion.index')->with('error', 'En la junta seleccionada, no hay secreataria/o o presidente');
                         }
                       

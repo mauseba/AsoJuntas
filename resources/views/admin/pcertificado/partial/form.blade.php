@@ -31,7 +31,7 @@
     <div class="col">
         <div class="form-group">
             {!! Form::label('Nit', 'Nit de la junta A.C:') !!}
-            {!! Form::text('Nit', null, ['class' => 'form-control']) !!}
+            {!! Form::text('Nit', null, ['class' => 'form-control','id' => 'nit','readonly']) !!}
     
     
             @error('Nit')
@@ -43,7 +43,7 @@
     <div class="col">
         <div class="form-group">
             {!! Form::label('Resolucion', 'Resolucion de la junta A.C:') !!}
-            {!! Form::text('Resolucion', null, ['class' => 'form-control','maxlength'=>'4']) !!}
+            {!! Form::text('Resolucion', null, ['class' => 'form-control','id' => 'resolucion','readonly']) !!}
     
     
             @error('Resolucion')
