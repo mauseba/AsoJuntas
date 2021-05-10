@@ -255,7 +255,7 @@
                             <td>{{$loop->iteration}}</td>
                             <td>{{$censos->Nombre}}</td>
                             <td>{{$censos->nombre}}</td>
-                            <td>{{$censos->name}}</td>
+                            <td>{{$censos->Name}}</td>
                             <td>{{$censos->Direccion}}</td>
                             <td>{{$censos->tipo_vivienda}}</td>
                             <td>{{$censos->energia}}</td>

@@ -14,16 +14,20 @@ class CensadosIndex extends Component
 
     protected $paginationTheme = "bootstrap";
 
-    public $search;
+    public $nombre;
+    public $documento;
+    public $junta;
+
 
     public function render()
     {
         $userj = UserJun::join('juntas', 'user_juns.junta_id', '=', 'juntas.id')
             ->join('comisions', 'user_juns.comision_id', '=', 'comisions.id')
             ->join('censo', 'user_juns.id', '=', 'censo.user_id')
-            ->select('user_juns.*', 'juntas.Nombre', 'comisions.comision', 'censo.user_id',)
-            ->where('Num_identificacion', 'LIKE', '%' . $this->search . '%')
-            ->orWhere('juntas.Nombre', 'LIKE', '%' . $this->search . '%')
+            ->select('user_juns.*', 'juntas.Nombre', 'comisions.comision', 'censo.user_id', 'comisions.Tipo')
+            ->where('Num_identificacion', 'LIKE', '%' . $this->documento . '%')
+            ->where('user_juns.nombre', 'LIKE', '%' . $this->nombre . '%')
+            ->where('juntas.Nombre', 'LIKE', '%' . $this->junta . '%')
             ->latest('id')
             ->paginate();
 
@@ -31,15 +35,18 @@ class CensadosIndex extends Component
     }
     public function exportar()
     {
-        $userj = UserJun::join('juntas', 'user_juns.junta_id', '=', 'juntas.id')
+        $info = UserJun::join('juntas', 'user_juns.junta_id', '=', 'juntas.id')
             ->join('comisions', 'user_juns.comision_id', '=', 'comisions.id')
             ->join('censo', 'user_juns.id', '=', 'censo.user_id')
-            ->select('user_juns.*', 'juntas.Nombre', 'comisions.comision', 'censo.user_id')
+            ->select('user_juns.*', 'juntas.Nombre', 'comisions.comision', 'censo.user_id', 'comisions.Tipo')
+            ->where('Num_identificacion', 'LIKE', '%' . $this->documento . '%')
+            ->where('user_juns.nombre', 'LIKE', '%' . $this->nombre . '%')
+            ->where('juntas.Nombre', 'LIKE', '%' . $this->junta . '%')
             ->get();
 
 
 
-        $pdf = PDF::loadView('pdf.censo', compact('userj'))->setPaper('a4', 'landscape')->output();
-        return response()->streamDownload(fn () => print($pdf), "Informe_CensoComunal.pdf");
+        $pdf = PDF::loadView('pdf.censados', compact('info'))->setPaper('a4', 'landscape')->output();
+        return response()->streamDownload(fn () => print($pdf), "Informe_AfiliadosCensados.pdf");
     }
 }

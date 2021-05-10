@@ -51,7 +51,11 @@ class BeneficiariosController extends Controller
      */
     public function create()
     {
-        $users = UserJun::all();
+        $users = UserJun::join('juntas', 'user_juns.junta_id', '=', 'juntas.id')
+            ->join('comisions', 'user_juns.comision_id', '=', 'comisions.id')
+            ->join('censo', 'user_juns.id', '=', 'censo.user_id')
+            ->select('user_juns.*', 'juntas.Nombre', 'comisions.comision', 'censo.user_id', 'comisions.Tipo')
+            ->get();
         $doc = Documento::pluck('nombre', 'tipo');
         $estu = Estudio::pluck('nombre', 'prefijo');
         $eps = Eps::orderBy('name')->get();
@@ -89,13 +93,7 @@ class BeneficiariosController extends Controller
         $datos = $request->except('_token');
 
 
-        $barrio = Censo::where('user_id', $request->user_id)->get()->first();
 
-        if ($barrio == null) {
-            return redirect()->route('admin.beneficiarios.create')->with('error', 'El afiliado no tiene datos básicos registrados');;
-        } else {
-            $datos =  Arr::add($datos, 'barrio', $barrio->barrio);
-        }
 
         if ($datos['edad'] < 18 && $datos['edad'] > 7) {
             $datos['tipo_doc'] = 'TI';
@@ -164,10 +162,7 @@ class BeneficiariosController extends Controller
 
         //$user = auth()->user(); 
         $beneficiarios = Beneficiarios::findOrFail($id);
-        $barrio = Censo::where('user_id', $beneficiarios->user_id)->pluck('barrio');
-        if (isset($barrio[0]) == false) {
-            return redirect()->route('admin.beneficiarios.edit', $beneficiarios)->with('info', 'Beneficiario sin datos básicos registrados');;
-        }
+
         $beneficiarios->name = $request->name;
         if ($request->edad < 18 and $request->edad > 7) {
             $beneficiarios->tipo_doc = "TI";
@@ -185,7 +180,7 @@ class BeneficiariosController extends Controller
         $beneficiarios->sub_gobierno = $request->sub_gobierno;
         $beneficiarios->nivel_edu = $request->nivel_edu;
         $beneficiarios->nucleo_fam = $request->nucleo_fam;
-        $beneficiarios->barrio = $barrio[0];
+
 
         $beneficiarios->save();
         return redirect()->route('admin.beneficiarios.edit', $beneficiarios)->with('info', 'Beneficiario actualizado con éxito!');;

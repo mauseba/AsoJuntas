@@ -56,7 +56,7 @@
                 {{-- <input wire:model="eps" class="form-control" placeholder="EPS"> --}}
                 <select wire:model="eps" class="form-control text-secondary text-sm">
                     <option value="" selected>EPS</option>
-                    <option>Ninguna</option>
+                    
                     @foreach ($epss as $entidad)
                     <option value="{{$entidad->name}}">{{$entidad->name}}</option>
                     @endforeach
@@ -169,11 +169,11 @@
                             <td>{{$beneficiario->edad}}</td>
                             <td>{{$beneficiario->genero}}</td>
                             <td>{{$beneficiario->tipo_salud}}</td>
-                            <td>{{$beneficiario->salud}}</td>
+                            <td>{{$beneficiario->namE}}</td>
                             <td>{{$beneficiario->discap}}</td>
                             <td>{{$beneficiario->nivel_edu}}</td>
                             <td>{{$beneficiario->sub_gobierno}}</td>
-                            <td>{{$beneficiario->barrio}}</td>
+                            <td>{{$beneficiario->Name}}</td>
                             <td>{{$beneficiario->nombre}}</td>
                             <td>{{$beneficiario->Nombre}}</td>
                             <td>{{$beneficiario->updated_at->format('Y-m-d')}}</td>
