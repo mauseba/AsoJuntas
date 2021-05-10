@@ -11,24 +11,20 @@
         @if ($users)
             <div class="card-header">
                 <a class="btn btn-danger float-right" href="{{route('admin.psuscripcion.index')}}"><i class="fas fa-window-close"></i></a>
-                <form action="{{route('admin.psuscripcion.certificado')}}" method="POST">
-                    @csrf
-                    <div class="row">
-                        <div class="col-3">
-                            <div class="form-group">
-                                <label for="">seleccione la identificacion del afiliado:</label><br>
-                                <select id="user" name="usuario" class="selectpicker" data-live-search="true" >
-                                    <option selected>Seleccione...</option>
-                                    @foreach ($users as $user)
-                                        <option value={{$user->user_id}} >{{$user->Num_identificacion}}</option>
-                                    @endforeach
-                                </select>
-                                <button type="submit" class="btn btn-success" ><i class="fa fa-search" aria-hidden="true"></i></button>
-                            </div>
+                <div class="row">
+                    <div class="col-3">
+                        <div class="form-group">
+                            <label for="">seleccione la identificacion del afiliado:</label><br>
+                            <select id="user" name="usuario" class="selectpicker" data-live-search="true" >
+                                <option selected>Seleccione...</option>
+                                @foreach ($users as $user)
+                                    <option value={{$user->user_id}} >{{$user->Num_identificacion}}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
-                </form>
-            </div>
+                </div>
+
         @endif
         <div class="card-body">
             {!! Form::open(['route' => 'admin.psuscripcion.generarcer']) !!}
@@ -60,12 +56,52 @@
 @stop
 
 @section('js')
-    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
     <script>
-        $(function() {
-            $('#user').selectpicker();
+        $(document).ready(function(){
+        $('#user').selectpicker();
+        $('#user').on('change',function(){
+            var user= $(this).val();
+            nuevoData={
+                user: user,
+                '_token' : $("meta[name='csrf-token']").attr("content"),
+            }
+            if(user != ''){
+                $.ajax({
+                    url: "{{url('admin/psuscripcion/certificado')}}",
+                    type: "POST",
+                    data: nuevoData,
+                    success:function(msg){
+                        $('#id').empty();
+                        $('#junta').empty();
+                        $('#Nit').empty();
+                        $('#Resolucion').empty();
+                        $('#nombre').empty();
+                        $('#Direccion').empty();
+                        $('#Tdocumento').empty();
+                        $('#Documento').empty();
+                        $('#Expedido').empty(); 
+
+                        $('#id').val(msg['id']);
+                        $('#junta').val(msg['Nombre']);
+                        $('#Nit').val(msg['Nit']);
+                        $('#Resolucion').val(msg['Resolucion']);
+                        $('#nombre').val(msg['nombre']);
+                        $('#Direccion').val(msg['Direccion']);
+                        $('#Tdocumento').val(msg['Tip_identificacion']);
+                        $('#Documento').val(msg['Num_identificacion']);
+                    },
+                    error: function(){
+                        Swal.fire(
+                        'Operacion no Completada',
+                        'Hubo un error en la operacion' ,
+                        'error'
+                        )
+                    }
+                })
+            }
         });
+    });
     </script>
     @if (session('error'))
     <script>
@@ -77,4 +113,5 @@
         )
     </script>
     @endif
+    
 @stop
