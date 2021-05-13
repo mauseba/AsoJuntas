@@ -80,6 +80,8 @@ class CensoIndividualIndex extends Component
             ->get();
 
         $pdf = PDF::loadView('pdf.censo', compact('censo', 'beneficiarios'))->setPaper('a4', 'landscape')->output();
-        return response()->streamDownload(fn () => print($pdf), "Informe_CensoIndividual.pdf");
+        return response()->streamDownload(function () use ($pdf) {
+            echo $pdf->stream();
+        }, "Informe_CensoIndividual.pdf");
     }
 }
