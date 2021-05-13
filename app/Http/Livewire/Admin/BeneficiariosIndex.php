@@ -53,24 +53,28 @@ class BeneficiariosIndex extends Component
         $jun = Junta::all()->sortby('Nombre');
 
         $beneficiarios = Beneficiarios::join('user_juns', 'beneficiarios.user_id', '=', 'user_juns.id')
-
+            ->join('censo', 'censo.user_id', '=', 'beneficiarios.user_id')
             ->join('juntas', 'juntas.id', '=', 'user_juns.id')
-            ->select('beneficiarios.*', 'user_juns.nombre', 'user_juns.junta_id', 'juntas.Nombre', 'censo.barrio')
+            ->join('barrios', 'barrios.id', '=', 'censo.barrio')
+            ->join('eps', 'eps.id', '=', 'beneficiarios.salud')
+            ->select('beneficiarios.*', 'user_juns.nombre', 'user_juns.junta_id', 'juntas.Nombre', 'censo.barrio', 'barrios.Name', 'eps.namE')
             ->where('juntas.Nombre', 'LIKE', $this->junta)
-            ->where('name', 'LIKE', '%' . $this->nombre . '%')
+            ->where('beneficiarios.name', 'LIKE', '%' . $this->nombre . '%')
             ->Where('tipo_doc', 'LIKE', '%' . $this->documento . '%')
             ->Where('numero', 'LIKE', '%' . $this->numero . '%')
             ->whereBetween('beneficiarios.edad', [$this->edad_min . '%', $this->edad_max . '%'])
             ->Where('beneficiarios.genero', 'LIKE', '%' . $this->genero . '%')
             ->Where('tipo_salud', 'LIKE', '%' . $this->afiliacion . '%')
-            ->Where('salud', 'LIKE', '%' . $this->eps . '%')
+            ->Where('eps.namE', 'LIKE', '%' . $this->eps . '%')
             ->Where('discap', 'LIKE', '%' . $this->discapacidad . '%')
             ->Where('nivel_edu', 'LIKE', '%' . $this->edu . '%')
             ->Where('beneficiarios.sub_gobierno', 'LIKE', '%' . $this->subsidio . '%')
-
-            ->Where('user_id', 'LIKE',  $this->afiliado)
+            ->where('barrios.Name', 'LIKE', '%' . $this->barrio . '%')
+            ->Where('beneficiarios.user_id', 'LIKE',  $this->afiliado)
             ->orderBy('id', 'DESC')
             ->paginate();
+
+
 
         return view('livewire.admin.beneficiarios-index', compact('beneficiarios', 'user', 'epss', 'barrios', 'estu', 'doc', 'jun'));
     }
@@ -78,21 +82,24 @@ class BeneficiariosIndex extends Component
     {
 
         $beneficiarios = Beneficiarios::join('user_juns', 'beneficiarios.user_id', '=', 'user_juns.id')
+            ->join('censo', 'censo.user_id', '=', 'beneficiarios.user_id')
             ->join('juntas', 'juntas.id', '=', 'user_juns.id')
-            ->select('beneficiarios.*', 'user_juns.nombre', 'user_juns.junta_id', 'juntas.Nombre')
+            ->join('barrios', 'barrios.id', '=', 'censo.barrio')
+            ->join('eps', 'eps.id', '=', 'beneficiarios.salud')
+            ->select('beneficiarios.*', 'user_juns.nombre', 'user_juns.junta_id', 'juntas.Nombre', 'censo.barrio', 'barrios.Name', 'eps.namE')
             ->where('juntas.Nombre', 'LIKE', $this->junta)
-            ->where('name', 'LIKE', '%' . $this->nombre . '%')
+            ->where('beneficiarios.name', 'LIKE', '%' . $this->nombre . '%')
             ->Where('tipo_doc', 'LIKE', '%' . $this->documento . '%')
             ->Where('numero', 'LIKE', '%' . $this->numero . '%')
             ->whereBetween('beneficiarios.edad', [$this->edad_min . '%', $this->edad_max . '%'])
             ->Where('beneficiarios.genero', 'LIKE', '%' . $this->genero . '%')
             ->Where('tipo_salud', 'LIKE', '%' . $this->afiliacion . '%')
-            ->Where('salud', 'LIKE', '%' . $this->eps . '%')
+            ->Where('eps.namE', 'LIKE', '%' . $this->eps . '%')
             ->Where('discap', 'LIKE', '%' . $this->discapacidad . '%')
             ->Where('nivel_edu', 'LIKE', '%' . $this->edu . '%')
-            ->Where('sub_gobierno', 'LIKE', '%' . $this->subsidio . '%')
-            ->Where('barrio', 'LIKE',  $this->barrio)
-            ->Where('user_id', 'LIKE',  $this->afiliado)
+            ->Where('beneficiarios.sub_gobierno', 'LIKE', '%' . $this->subsidio . '%')
+            ->where('barrios.Name', 'LIKE', '%' . $this->barrio . '%')
+            ->Where('beneficiarios.user_id', 'LIKE',  $this->afiliado)
             ->get();
 
         $pdf = PDF::loadView('pdf.beneficiarios', compact('beneficiarios'))->setPaper('a4', 'landscape')->output();

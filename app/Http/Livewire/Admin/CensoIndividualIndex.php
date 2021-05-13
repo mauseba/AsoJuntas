@@ -62,23 +62,24 @@ class CensoIndividualIndex extends Component
         $censo = Censo::join('user_juns', 'censo.user_id', '=', 'user_juns.id')
             ->join('juntas', 'juntas.id', '=', 'user_juns.id')
             ->join('barrios', 'barrios.id', '=', 'censo.barrio')
-            ->select('censo.*', 'user_juns.nombre', 'user_juns.junta_id', 'juntas.Nombre', 'user_juns.Direccion', 'barrios.name', 'user_juns.nombre')
+            ->select('censo.*', 'user_juns.nombre', 'user_juns.junta_id', 'juntas.Nombre', 'user_juns.Direccion', 'barrios.Name')
             ->where('juntas.Nombre', 'LIKE', '%' .  $this->junta . '%')
             ->Where('user_juns.nombre', 'LIKE', '%' .  $this->afiliado . '%')
             ->orderBy('id', 'DESC')
             ->get();
 
 
-
+        $dato = $censo->pluck('user_id');
 
         $beneficiarios = Beneficiarios::join('user_juns', 'beneficiarios.user_id', '=', 'user_juns.id')
+            ->join('censo', 'censo.user_id', '=', 'beneficiarios.user_id')
             ->join('juntas', 'juntas.id', '=', 'user_juns.id')
-            ->select('beneficiarios.*', 'user_juns.nombre', 'user_juns.junta_id', 'juntas.Nombre')
-            ->Where('user_id', 'LIKE', $this->afiliado)
-
+            ->join('barrios', 'barrios.id', '=', 'censo.barrio')
+            ->select('beneficiarios.*', 'user_juns.nombre', 'user_juns.junta_id', 'juntas.Nombre', 'censo.barrio', 'barrios.Name')
+            ->WhereIn('beneficiarios.user_id', $dato)
             ->get();
 
         $pdf = PDF::loadView('pdf.censo', compact('censo', 'beneficiarios'))->setPaper('a4', 'landscape')->output();
-        return response()->streamDownload(fn () => print($pdf), "Informe_CensoComunal.pdf");
+        return response()->streamDownload(fn () => print($pdf), "Informe_CensoIndividual.pdf");
     }
 }

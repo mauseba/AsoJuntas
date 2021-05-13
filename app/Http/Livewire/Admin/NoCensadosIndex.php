@@ -13,32 +13,48 @@ class NoCensadosIndex extends Component
 
     protected $paginationTheme = "bootstrap";
 
-    public $search;
+    public $nombre;
+    public $documento;
+    public $junta;
 
     public function render()
     {
+        $censados = UserJun::join('censo', 'user_juns.id', '=', 'censo.user_id')
+            ->select('user_juns.*',  'censo.user_id')
+            ->pluck('user_id');
+
         $userj = UserJun::join('juntas', 'user_juns.junta_id', '=', 'juntas.id')
             ->join('comisions', 'user_juns.comision_id', '=', 'comisions.id')
-            ->join('censo', 'user_juns.id', '!=', 'censo.user_id')
-            ->select('user_juns.*', 'juntas.Nombre', 'comisions.comision', 'censo.user_id',)
-            ->where('Num_identificacion', 'LIKE', '%' . $this->search . '%')
-            ->orWhere('juntas.Nombre', 'LIKE', '%' . $this->search . '%')
+            ->select('user_juns.*', 'juntas.Nombre', 'comisions.comision',  'comisions.Tipo')
+            ->where('Num_identificacion', 'LIKE', '%' . $this->documento . '%')
+            ->where('user_juns.nombre', 'LIKE', '%' . $this->nombre . '%')
+            ->where('juntas.Nombre', 'LIKE', '%' . $this->junta . '%')
+            ->whereNotIn('user_juns.id', $censados)
             ->latest('id')
             ->paginate();
 
-        return view('livewire.admin.censados-index', compact('userj'));
+
+
+        return view('livewire.admin.no-censados-index', compact('userj'));
     }
     public function exportar()
     {
-        $userj = UserJun::join('juntas', 'user_juns.junta_id', '=', 'juntas.id')
+        $censados = UserJun::join('censo', 'user_juns.id', '=', 'censo.user_id')
+            ->select('user_juns.*',  'censo.user_id')
+            ->pluck('user_id');
+
+
+        $info = UserJun::join('juntas', 'user_juns.junta_id', '=', 'juntas.id')
             ->join('comisions', 'user_juns.comision_id', '=', 'comisions.id')
-            ->join('censo', 'user_juns.id', '!=', 'censo.user_id')
-            ->select('user_juns.*', 'juntas.Nombre', 'comisions.comision', 'censo.user_id')
+            ->select('user_juns.*', 'juntas.Nombre', 'comisions.comision',  'comisions.Tipo')
+            ->where('Num_identificacion', 'LIKE', '%' . $this->documento . '%')
+            ->where('user_juns.nombre', 'LIKE', '%' . $this->nombre . '%')
+            ->where('juntas.Nombre', 'LIKE', '%' . $this->junta . '%')
+            ->whereNotIn('user_juns.id', $censados)
             ->get();
 
 
-
-        $pdf = PDF::loadView('pdf.censo', compact('userj'))->setPaper('a4', 'landscape')->output();
-        return response()->streamDownload(fn () => print($pdf), "Informe_CensoComunal.pdf");
+        $pdf = PDF::loadView('pdf.NoCensados', compact('info'))->setPaper('a4', 'landscape')->output();
+        return response()->streamDownload(fn () => print($pdf), "Informe_AfiliadosNoCensados.pdf");
     }
 }

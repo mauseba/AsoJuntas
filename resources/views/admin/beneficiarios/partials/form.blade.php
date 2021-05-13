@@ -67,9 +67,9 @@
             {!! Form::label('salud', 'EPS:') !!}
         
             <select name="salud" class="form-control">
-                <option>Ninguna</option>
+                
                 @foreach ($eps as $entidad)
-                <option>{{$entidad->name}}</option>
+                <option value="{{$entidad->id }}">{{$entidad->name}}</option>
                 @endforeach
             </select>
 

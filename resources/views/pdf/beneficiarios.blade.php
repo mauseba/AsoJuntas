@@ -44,8 +44,7 @@
                 <h4>Generado por: {{ Auth::user()->name }} </h2>
                 <h3>Asociación de juntas de Accion comunal del municipio de Algeciras</h3>
                 <pre>
-                  {{--  Juntas registradas entre el: {{$input['txtFechaInicial']}}
-                   hasta: {{$input['txtFechaFinal']}} --}}
+                  Beneficiarios en total: <strong>{{$beneficiarios->count()}}</strong>
                 </pre>
             </td>
         </tr>
@@ -95,11 +94,11 @@
                             <td align="center">{{$beneficiario->edad}}</td>
                             <td align="center">{{$beneficiario->genero}}</td>
                             <td align="center">{{$beneficiario->tipo_salud}}</td>
-                            <td align="center">{{$beneficiario->salud}}</td>
+                            <td align="center">{{$beneficiario->namE}}</td>
                             <td align="center">{{$beneficiario->discap}}</td>
                             <td align="center">{{$beneficiario->nivel_edu}}</td>
                             <td align="center">{{$beneficiario->sub_gobierno}}</td>
-                            <td align="center">{{$beneficiario->barrio}}</td>
+                            <td align="center">{{$beneficiario->Name}}</td>
                             <td align="center">{{$beneficiario->nombre}}</td>                            
                             <td align="center">{{$beneficiario->Nombre}}</td>                            
                             <td align="center">{{$beneficiario->updated_at->format('Y-m-d')}}</td>

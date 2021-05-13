@@ -34,7 +34,7 @@ class CensoIndex extends Component
     public $baños;
     public $baño_nuevo;
     public $vivienda_nueva;
-    public $afiliado;
+
     public $subsidio;
     public $junta;
 
@@ -54,9 +54,9 @@ class CensoIndex extends Component
         $censo = Censo::join('user_juns', 'censo.user_id', '=', 'user_juns.id')
             ->join('juntas', 'juntas.id', '=', 'user_juns.id')
             ->join('barrios', 'barrios.id', '=', 'censo.barrio')
-            ->select('censo.*', 'user_juns.nombre', 'user_juns.junta_id', 'juntas.Nombre', 'user_juns.Direccion', 'barrios.name')
+            ->select('censo.*', 'user_juns.nombre', 'user_juns.junta_id', 'juntas.Nombre', 'user_juns.Direccion', 'barrios.Name')
             ->where('juntas.Nombre', 'LIKE', '%' .  $this->junta . '%')
-            ->where('barrios.name', 'LIKE', '%' . $this->barrio . '%')
+            ->where('barrios.Name', 'LIKE', '%' . $this->barrio . '%')
             ->Where('user_juns.Direccion', 'LIKE', '%' . $this->direccion . '%')
             ->Where('tipo_vivienda', 'LIKE', '%' . $this->tipo_vivienda . '%')
             ->Where('energia', 'LIKE', '%' . $this->energia . '%')
@@ -72,8 +72,8 @@ class CensoIndex extends Component
             ->Where('baño_nuevo', 'LIKE', '%' . $this->baño_nuevo . '%')
             ->Where('vivienda_nueva', 'LIKE', '%' . $this->vivienda_nueva . '%')
             ->Where('sub_gobierno', 'LIKE', '%' . $this->subsidio . '%')
-            ->Where('user_id', 'LIKE',  $this->afiliado)
-            ->orderBy('id', 'DESC')
+
+            ->latest('id')
             ->paginate();
 
 
@@ -84,10 +84,11 @@ class CensoIndex extends Component
         set_time_limit(300);
         $censo = Censo::join('user_juns', 'censo.user_id', '=', 'user_juns.id')
             ->join('juntas', 'juntas.id', '=', 'user_juns.id')
-            ->select('censo.*', 'user_juns.nombre', 'user_juns.junta_id', 'juntas.Nombre')
+            ->join('barrios', 'barrios.id', '=', 'censo.barrio')
+            ->select('censo.*', 'user_juns.nombre', 'user_juns.junta_id', 'juntas.Nombre', 'user_juns.Direccion', 'barrios.Name')
             ->where('juntas.Nombre', 'LIKE', '%' .  $this->junta . '%')
-            ->where('barrio', 'LIKE', '%' . $this->barrio . '%')
-            ->Where('censo.direccion', 'LIKE', '%' . $this->direccion . '%')
+            ->where('barrios.Name', 'LIKE', '%' . $this->barrio . '%')
+            ->Where('user_juns.Direccion', 'LIKE', '%' . $this->direccion . '%')
             ->Where('tipo_vivienda', 'LIKE', '%' . $this->tipo_vivienda . '%')
             ->Where('energia', 'LIKE', '%' . $this->energia . '%')
             ->Where('gas', 'LIKE', '%' . $this->gas . '%')
@@ -102,18 +103,23 @@ class CensoIndex extends Component
             ->Where('baño_nuevo', 'LIKE', '%' . $this->baño_nuevo . '%')
             ->Where('vivienda_nueva', 'LIKE', '%' . $this->vivienda_nueva . '%')
             ->Where('sub_gobierno', 'LIKE', '%' . $this->subsidio . '%')
-            ->Where('user_id', 'LIKE',  $this->afiliado)
+
             ->get();
 
         $dato = $censo->pluck('user_id');
 
 
         $beneficiarios = Beneficiarios::join('user_juns', 'beneficiarios.user_id', '=', 'user_juns.id')
+            ->join('censo', 'censo.user_id', '=', 'beneficiarios.user_id')
             ->join('juntas', 'juntas.id', '=', 'user_juns.id')
-            ->select('beneficiarios.*', 'user_juns.nombre', 'user_juns.junta_id', 'juntas.Nombre')
-            ->Where('user_id', 'LIKE', $this->afiliado)
-            ->WhereIn('user_id', $dato)
+            ->join('barrios', 'barrios.id', '=', 'censo.barrio')
+            ->select('beneficiarios.*', 'user_juns.nombre', 'user_juns.junta_id', 'juntas.Nombre', 'censo.barrio', 'barrios.Name')
+            ->WhereIn('beneficiarios.user_id', $dato)
             ->get();
+
+
+
+
 
         $pdf = PDF::loadView('pdf.censo', compact('censo', 'beneficiarios'))->setPaper('a4', 'landscape')->output();
         return response()->streamDownload(fn () => print($pdf), "Informe_CensoComunal.pdf");

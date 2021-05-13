@@ -140,9 +140,9 @@
                 </label>
                 <div class="relative inline-block text-gray-700">
                     <select name="salud" class="form-control">
-                        <option @if ( $beneficiarios->salud == 'Ninguna') selected="selected" @endif>Ninguna</option>
+                        
                         @foreach ($eps as $entidad)
-                        <option @if ( $beneficiarios->salud == $entidad->name) selected="selected"
+                        <option @if ( $beneficiarios->salud == $entidad->id) selected="selected"
                             @endif>{{$entidad->name}} </option>
                         @endforeach
                     </select>

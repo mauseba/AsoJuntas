@@ -11,11 +11,14 @@
             font-family: Verdana, Arial, sans-serif;
         }
         table{
-            font-size: x-small;
+            font-size: x-small;'
+           
         }
+        
         tfoot tr td{
             font-weight: bold;
             font-size: x-small;
+           
         }
         .gray {
             background-color: lightgray
@@ -44,24 +47,24 @@
                 <h4>Generado por: {{ Auth::user()->name }} </h2>                
                 <h3>Asociación de juntas de Accion comunal del municipio de Algeciras</h3>
                 <pre>
-                  {{--  Juntas registradas entre el: {{$input['txtFechaInicial']}}
-                   hasta: {{$input['txtFechaFinal']}} --}}
+                  Censos en total: {{$censo->count()}}
                 </pre>
             </td>
         </tr>
 
     </table>
     <br/>
-    <table width="100%">
+    @foreach ($censo as $censos)
+    <table width="100%" style="background-color: lightgray;">
         <tr>
-            <td><h2>DATOS BÁSICOS</h2></td>
+            <td><h4>{{$loop->iteration.'.-'.$censos->nombre}}</h4></td>
         </tr>
     </table>
     
-    <table width="100%">
+    <table width="100%" >
         <thead style="background-color: lightgray;">
             <tr>
-                <th >#</th>
+                
                 <th >Junta</th>
                 <th >Afiliado</th>
                 <th >Barrio</th>
@@ -85,14 +88,14 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($censo as $censos)
+           
             <tr>
                 
-                <td align="center">{{$loop->iteration}}</td>
+               
                 <td align="center">{{$censos->Nombre}}</td>
                 <td align="center">{{$censos->nombre}}</td>
-                <td align="center">{{$censos->barrio}}</td>
-                <td align="center">{{$censos->direccion}}</td>
+                <td align="center">{{$censos->Name}}</td>
+                <td align="center">{{$censos->Direccion}}</td>
                 <td align="center">{{$censos->tipo_vivienda}}</td>
                 <td align="center">{{$censos->energia}}</td>
                 <td align="center">{{$censos->gas}}</td>
@@ -111,21 +114,17 @@
                 <td align="center">{{$censos->updated_at->format('Y-m-d')}}</td> 
             </tr>
             
-            @endforeach
+            
         </tbody>
 
     </table>
-    <table width="100%">
-        <tr>
-            <td><h2>BENEFICIARIOS</h2></td>
-        </tr>
-    </table>
+   
     <table width="100%">
         
         <thead style="background-color: lightgray;">
             <tr>
                
-                <th >#</th>
+               
                 <th >Nombre</th>
                 <th >Tipo_Doc</th>
                 <th >Numero</th>
@@ -144,10 +143,13 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($beneficiarios as $beneficiario)                
+            @foreach ($beneficiarios as $beneficiario)
+            @if ($censos->user_id == $beneficiario->user_id)
+                
+                           
             <tr>
                                                   
-                            <td align="center">{{$loop->iteration}}</td>
+                           
                             <td align="center">{{$beneficiario->name}}</td>
                             <td align="center">{{$beneficiario->tipo_doc}}</td>
                             <td align="center">{{$beneficiario->numero}}</td>
@@ -162,10 +164,12 @@
                             <td align="center">{{$beneficiario->Nombre}}</td>
                             <td align="center">{{$beneficiario->updated_at->format('Y-m-d')}}</td>
                         </tr>
+                        @endif 
             @endforeach
         </tbody>
 
     </table>
+      @endforeach
     <br/>
     
 
