@@ -156,7 +156,7 @@
                             <td align="center">{{$beneficiario->edad}}</td>
                             <td align="center">{{$beneficiario->genero}}</td>
                             <td align="center">{{$beneficiario->tipo_salud}}</td>
-                            <td align="center">{{$beneficiario->salud}}</td>
+                            <td align="center">{{$beneficiario->namE}}</td>
                             <td align="center">{{$beneficiario->discap}}</td>
                             <td align="center">{{$beneficiario->nivel_edu}}</td>
                             <td align="center">{{$beneficiario->sub_gobierno}}</td>

@@ -113,7 +113,8 @@ class CensoIndex extends Component
             ->join('censo', 'censo.user_id', '=', 'beneficiarios.user_id')
             ->join('juntas', 'juntas.id', '=', 'user_juns.id')
             ->join('barrios', 'barrios.id', '=', 'censo.barrio')
-            ->select('beneficiarios.*', 'user_juns.nombre', 'user_juns.junta_id', 'juntas.Nombre', 'censo.barrio', 'barrios.Name')
+            ->join('eps', 'eps.id', '=', 'beneficiarios.salud')
+            ->select('beneficiarios.*', 'user_juns.nombre', 'user_juns.junta_id', 'juntas.Nombre', 'censo.barrio', 'barrios.Name', 'eps.namE')
             ->WhereIn('beneficiarios.user_id', $dato)
             ->get();
 
