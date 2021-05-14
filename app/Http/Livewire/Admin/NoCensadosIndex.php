@@ -55,6 +55,8 @@ class NoCensadosIndex extends Component
 
 
         $pdf = PDF::loadView('pdf.NoCensados', compact('info'))->setPaper('a4', 'landscape')->output();
-        return response()->streamDownload(fn () => print($pdf), "Informe_AfiliadosNoCensados.pdf");
+        return response()->streamDownload(function () use ($pdf) {
+            echo $pdf->stream();
+        }, "Informe_AfiliadosNoCensados.pdf");
     }
 }
