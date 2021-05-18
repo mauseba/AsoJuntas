@@ -51,10 +51,11 @@ class NoCensadosIndex extends Component
             ->where('user_juns.nombre', 'LIKE', '%' . $this->nombre . '%')
             ->where('juntas.Nombre', 'LIKE', '%' . $this->junta . '%')
             ->whereNotIn('user_juns.id', $censados)
+            ->orderby('juntas.Nombre', 'ASC')
             ->get();
 
 
-        $pdf = PDF::loadView('pdf.NoCensados', compact('info'))->setPaper('a4', 'landscape')->output();
+        $pdf = PDF::loadView('pdf.NoCensados', compact('info'))->setPaper('a4', 'landscape');
         return response()->streamDownload(function () use ($pdf) {
             echo $pdf->stream();
         }, "Informe_AfiliadosNoCensados.pdf");

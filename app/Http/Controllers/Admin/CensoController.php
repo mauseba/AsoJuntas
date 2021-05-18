@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Censo\Censo;
 use App\Models\Censo\Beneficiarios;
-use App\Models\Censo\Barrios;
+// use App\Models\Censo\Barrios;
 use App\Models\UserJun;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade as PDF;
@@ -28,11 +28,9 @@ class CensoController extends Controller
     {
 
 
-        $censo = Censo::all();
-        $barrios = Barrios::orderBy('name')->get();
-        $beneficiarios = Beneficiarios::all();
 
-        return view('admin.censo.index', compact('censo', 'barrios', 'beneficiarios'));
+
+        return view('admin.censo.index');
     }
 
     /**
@@ -42,10 +40,11 @@ class CensoController extends Controller
      */
     public function create()
     {
-        $user = UserJun::all();
+        $censo = Censo::pluck('user_id');
+        $user = UserJun::all()->whereNotIn('id', $censo);
 
-        $barrios = Barrios::orderBy('name')->get();
-        return view('admin.censo.create', compact('barrios', 'user'));
+        // $barrios = Barrios::orderBy('name')->get();
+        return view('admin.censo.create', compact(/* 'barrios', */'user'));
     }
 
     /**
@@ -58,8 +57,7 @@ class CensoController extends Controller
     {
         $request->validate([
             'user_id' => 'required|not_in:Seleccionar',
-            'barrio' => 'required|not_in:Seleccionar',
-
+            // 'barrio' => 'required|not_in:Seleccionar',
             'tipo_vivienda' => 'required|not_in:Seleccionar',
             'user_id' => 'unique:censo',
             'sisben' => 'required|not_in:Seleccionar',
@@ -79,26 +77,18 @@ class CensoController extends Controller
         ]);
 
 
+
         $censo = new Censo();
 
 
-        $censo->barrio = $request->barrio;
+        // $censo->barrio = $request->barrio;
 
         $censo->tipo_vivienda = $request->tipo_vivienda;
+        $censo->escrituras = $request->escrituras;
         $censo->energia = $request->energia;
         $censo->gas = $request->gas;
         $censo->agua = $request->agua;
         $censo->alcantarilla = $request->alcantarilla;
-
-
-
-
-        if ($request->tipo_vivienda == 'Propia') {
-            $censo->escrituras = "Si";
-        } else {
-            $censo->escrituras = "No";
-        }
-
         $censo->sisben = $request->sisben;
         $censo->sub_vivienda = $request->sub_vivienda;
         $censo->piso = $request->piso;
@@ -110,6 +100,7 @@ class CensoController extends Controller
         $censo->vivienda_nueva = $request->vivienda_nueva;
 
         $censo->user_id = $request->user_id;
+
         $censo->save();
         return redirect()->route('admin.censo.edit', $censo)->with('info', 'Datos básicos actualizados');
     }
@@ -133,12 +124,12 @@ class CensoController extends Controller
      */
     public function edit($id)
     {
-        $barrios = Barrios::orderBy('name')->get();
+        // $barrios = Barrios::orderBy('name')->get();
 
         $censo = Censo::join('user_juns', 'censo.user_id', '=', 'user_juns.id')
             ->select('censo.*', 'user_juns.nombre', 'user_juns.Direccion')->find($id);
 
-        return view('admin.censo.edit', compact('censo', 'barrios'));
+        return view('admin.censo.edit', compact('censo'/* , 'barrios' */));
     }
 
     /**
@@ -151,8 +142,8 @@ class CensoController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'barrio' => 'required',
-            'direccion' => 'required',
+            // 'barrio' => 'required',
+            // 'direccion' => 'required',
             'tipo_vivienda' => 'required|not_in:0',
             'user_id' => 'unique:censo',
             'sisben' => 'required|not_in:0',
@@ -174,21 +165,14 @@ class CensoController extends Controller
 
 
 
-        $censo->barrio = $request->barrio;
+        // $censo->barrio = $request->barrio;
 
         $censo->tipo_vivienda = $request->tipo_vivienda;
+        $censo->escrituras = $request->escrituras;
         $censo->energia = $request->energia;
         $censo->gas = $request->gas;
         $censo->agua = $request->agua;
         $censo->alcantarilla = $request->alcantarilla;
-
-        if ($request->tipo_vivienda == 'Propia') {
-            $censo->escrituras = "Si";
-        } else {
-            $censo->escrituras = "No";
-        }
-
-
         $censo->sisben = $request->sisben;
         $censo->sub_vivienda = $request->sub_vivienda;
         $censo->piso = $request->piso;

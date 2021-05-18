@@ -15,7 +15,7 @@
             </div>
 
             <div class="col-lg-2">
-                <input wire:model="afiliado" class="form-control text-sm" placeholder="Afiliado">
+                <input wire:model="afiliado" class="form-control text-sm" placeholder="Nombre del Afiliado">
 
             </div>
             <a class="btn btn-danger text-white  ml-4 " wire:click="exportar">PDF</a>
@@ -34,7 +34,7 @@
                             <th>#</th>
                             <th>Junta</th>
                             <th>Afiliado</th>
-                            <th>Barrio</th>
+                            {{-- <th>Barrio</th> --}}
                             <th>Direccion</td>
                             <th>Tipo Vivienda</td>
                             <th>Energia</td>
@@ -64,7 +64,7 @@
                             <td>{{$loop->iteration}}</td>
                             <td>{{$censos->Nombre}}</td>
                             <td>{{$censos->nombre}}</td>
-                            <td>{{$censos->name}}</td>
+                            {{-- <td>{{$censos->name}}</td> --}}
                             <td>{{$censos->Direccion}}</td>
                             <td>{{$censos->tipo_vivienda}}</td>
                             <td>{{$censos->energia}}</td>

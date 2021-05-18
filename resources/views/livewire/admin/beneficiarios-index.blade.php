@@ -98,14 +98,14 @@
                     <option>Otro</option>
                 </select>
             </div>
-            <div class="col-md">
+           {{--  <div class="col-md">
                 <select wire:model="barrio" class="form-control text-secondary text-sm">
                     <option value="">Barrio</option>
                      @foreach ($barrios as $bar)
                     <option value="{{ $bar->name }}">{{ $bar->name}}</option>
                     @endforeach
                 </select>
-            </div>
+            </div> --}}
             <div class="col">
                 <select wire:model="junta" class="form-control text-secondary text-sm">
                     <option value="" >Junta</option>
@@ -148,7 +148,7 @@
                             <th>Discapacidad</th>
                             <th>Nivel Educativo</th>
                             <th>Subsidio<br>Gobierno</th>
-                            <th>Barrio</th>
+                            {{-- <th>Barrio</th> --}}
                             <th>Afiliado</th>
                             <th>Junta</th>
                             <th>Actualizado</th>
@@ -173,7 +173,7 @@
                             <td>{{$beneficiario->discap}}</td>
                             <td>{{$beneficiario->nivel_edu}}</td>
                             <td>{{$beneficiario->sub_gobierno}}</td>
-                            <td>{{$beneficiario->Name}}</td>
+                            {{-- <td>{{$beneficiario->Name}}</td> --}}
                             <td>{{$beneficiario->nombre}}</td>
                             <td>{{$beneficiario->Nombre}}</td>
                             <td>{{$beneficiario->updated_at->format('Y-m-d')}}</td>

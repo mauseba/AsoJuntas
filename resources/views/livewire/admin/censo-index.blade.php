@@ -2,15 +2,14 @@
 
     <div class="card-header">
         <div class="row">
-            <div class="col-2">
-                {{-- <input wire:model="barrio" class="form-control text-sm" placeholder="Barrio"> --}}
-                 <select wire:model="barrio" class="form-control text-secondary text-sm">
-                    <option value="">Barrio</option>
-                    @foreach ($barrios as $bar)
-                    <option value="{{ $bar->name }}">{{ $bar->name}}</option>
+            <div class="col-md">
+
+                <select wire:model="junta" class="form-control text-secondary text-sm">
+                    <option selected value="">Junta</option>
+                    @foreach ($jun as $ju)
+                    <option value="{{ $ju->Nombre }}">{{ $ju->Nombre}}</option>
                     @endforeach
                 </select>
-
             </div>
             <div class="col-2">
                 <input wire:model="direccion" class="form-control text-sm" placeholder="Direccion">
@@ -58,9 +57,10 @@
             <div class="col-md">
 
                 <select wire:model="escrituras" class="form-control text-sm">
-                    <option selected value="">Escrituras</option>
-                    <option value="Si">Si</option>
-                    <option value="No">No</option>
+                    <option selected value="">Escrituras/Documentos</option>
+                    <option value="Escrituras">Escrituras</option>
+                    <option value="Documentos">Documentos</option>
+                    <option value="Ninguno">Ninguno</option>
                 </select>
             </div>
         </div>
@@ -198,7 +198,7 @@
                     <option>Otro</option>
                 </select>
             </div>
-            <div class="col-md">
+            {{-- <div class="col-md">
 
                 <select wire:model="junta" class="form-control text-secondary text-sm">
                     <option selected value="">Junta</option>
@@ -206,7 +206,7 @@
                     <option value="{{ $ju->Nombre }}">{{ $ju->Nombre}}</option>
                     @endforeach
                 </select>
-            </div>
+            </div> --}}
              <a class="btn btn-danger text-white   " wire:click="exportar">PDF</a>
         </div>
 
@@ -225,7 +225,7 @@
                             <th>#</th>
                             <th>Junta</th>
                             <th>Afiliado</th>
-                            <th>Barrio</th>
+                            {{-- <th>Barrio</th> --}}
                             <th>Direccion</td>
                             <th>Tipo Vivienda</td>
                             <th>Energia</td>
@@ -255,7 +255,7 @@
                             <td>{{$loop->iteration}}</td>
                             <td>{{$censos->Nombre}}</td>
                             <td>{{$censos->nombre}}</td>
-                            <td>{{$censos->Name}}</td>
+                            {{-- <td>{{$censos->Name}}</td> --}}
                             <td>{{$censos->Direccion}}</td>
                             <td>{{$censos->tipo_vivienda}}</td>
                             <td>{{$censos->energia}}</td>

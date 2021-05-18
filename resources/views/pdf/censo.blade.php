@@ -67,7 +67,7 @@
                 
                 <th >Junta</th>
                 <th >Afiliado</th>
-                <th >Barrio</th>
+                {{-- <th >Barrio</th> --}}
                 <th >Direccion</td>
                 <th >Tipo Vivienda</td>
                 <th >Energia</td>
@@ -94,7 +94,7 @@
                
                 <td align="center">{{$censos->Nombre}}</td>
                 <td align="center">{{$censos->nombre}}</td>
-                <td align="center">{{$censos->Name}}</td>
+                {{-- <td align="center">{{$censos->Name}}</td> --}}
                 <td align="center">{{$censos->Direccion}}</td>
                 <td align="center">{{$censos->tipo_vivienda}}</td>
                 <td align="center">{{$censos->energia}}</td>
