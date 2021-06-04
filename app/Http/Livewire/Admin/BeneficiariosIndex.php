@@ -5,7 +5,7 @@ namespace App\Http\Livewire\Admin;
 
 use App\Models\Censo\Beneficiarios;
 use App\Models\Censo\Eps;
-use App\Models\Censo\Barrios;
+// use App\Models\Censo\Barrios;
 use App\Models\Documento;
 use App\Models\Estudio;
 use App\Models\UserJun;
@@ -48,16 +48,16 @@ class BeneficiariosIndex extends Component
         $user = UserJun::all();
         $epss = Eps::all()->sortby('name'); // ordenar por nombre
         $doc = Documento::all();
-        $barrios = Barrios::orderBy('name')->get();
+        // $barrios = Barrios::orderBy('name')->get();
         $estu = Estudio::all();
         $jun = Junta::all()->sortby('Nombre');
 
         $beneficiarios = Beneficiarios::join('user_juns', 'beneficiarios.user_id', '=', 'user_juns.id')
             ->join('censo', 'censo.user_id', '=', 'beneficiarios.user_id')
-            ->join('juntas', 'juntas.id', '=', 'user_juns.id')
-            ->join('barrios', 'barrios.id', '=', 'censo.barrio')
+            ->join('juntas', 'juntas.id', '=', 'user_juns.junta_id')
+            // ->join('barrios', 'barrios.id', '=', 'censo.barrio')
             ->join('eps', 'eps.id', '=', 'beneficiarios.salud')
-            ->select('beneficiarios.*', 'user_juns.nombre', 'user_juns.junta_id', 'juntas.Nombre', 'censo.barrio', 'barrios.Name', 'eps.namE')
+            ->select('beneficiarios.*', 'user_juns.nombre', 'user_juns.junta_id', 'juntas.Nombre', /* 'censo.barrio',  'barrios.Name',*/ 'eps.namE')
             ->where('juntas.Nombre', 'LIKE', $this->junta)
             ->where('beneficiarios.name', 'LIKE', '%' . $this->nombre . '%')
             ->Where('tipo_doc', 'LIKE', '%' . $this->documento . '%')
@@ -69,24 +69,24 @@ class BeneficiariosIndex extends Component
             ->Where('discap', 'LIKE', '%' . $this->discapacidad . '%')
             ->Where('nivel_edu', 'LIKE', '%' . $this->edu . '%')
             ->Where('beneficiarios.sub_gobierno', 'LIKE', '%' . $this->subsidio . '%')
-            ->where('barrios.Name', 'LIKE', '%' . $this->barrio . '%')
+            // ->where('barrios.Name', 'LIKE', '%' . $this->barrio . '%')
             ->Where('beneficiarios.user_id', 'LIKE',  $this->afiliado)
             ->orderBy('id', 'DESC')
             ->paginate();
 
 
 
-        return view('livewire.admin.beneficiarios-index', compact('beneficiarios', 'user', 'epss', 'barrios', 'estu', 'doc', 'jun'));
+        return view('livewire.admin.beneficiarios-index', compact('beneficiarios', 'user', 'epss', /* 'barrios', */ 'estu', 'doc', 'jun'));
     }
     public function exportar()
     {
 
         $beneficiarios = Beneficiarios::join('user_juns', 'beneficiarios.user_id', '=', 'user_juns.id')
             ->join('censo', 'censo.user_id', '=', 'beneficiarios.user_id')
-            ->join('juntas', 'juntas.id', '=', 'user_juns.id')
-            ->join('barrios', 'barrios.id', '=', 'censo.barrio')
+            ->join('juntas', 'juntas.id', '=', 'user_juns.junta_id')
+            // ->join('barrios', 'barrios.id', '=', 'censo.barrio')
             ->join('eps', 'eps.id', '=', 'beneficiarios.salud')
-            ->select('beneficiarios.*', 'user_juns.nombre', 'user_juns.junta_id', 'juntas.Nombre', 'censo.barrio', 'barrios.Name', 'eps.namE')
+            ->select('beneficiarios.*', 'user_juns.nombre', 'user_juns.junta_id', 'juntas.Nombre', /* 'censo.barrio',  'barrios.Name',*/ 'eps.namE')
             ->where('juntas.Nombre', 'LIKE', $this->junta)
             ->where('beneficiarios.name', 'LIKE', '%' . $this->nombre . '%')
             ->Where('tipo_doc', 'LIKE', '%' . $this->documento . '%')
@@ -98,8 +98,9 @@ class BeneficiariosIndex extends Component
             ->Where('discap', 'LIKE', '%' . $this->discapacidad . '%')
             ->Where('nivel_edu', 'LIKE', '%' . $this->edu . '%')
             ->Where('beneficiarios.sub_gobierno', 'LIKE', '%' . $this->subsidio . '%')
-            ->where('barrios.Name', 'LIKE', '%' . $this->barrio . '%')
+            // ->where('barrios.Name', 'LIKE', '%' . $this->barrio . '%')
             ->Where('beneficiarios.user_id', 'LIKE',  $this->afiliado)
+            ->orderBy('id', 'DESC')
             ->get();
 
         $pdf = PDF::loadView('pdf.beneficiarios', compact('beneficiarios'))->setPaper('a4', 'landscape');

@@ -41,7 +41,7 @@
 
             </select>
         </div>
-        <div class="form-group">
+        {{-- <div class="form-group">
 
             {!! Form::label('barrio', 'Barrio/Vereda') !!}
 
@@ -53,7 +53,7 @@
                 @endforeach
             </select>
 
-        </div>
+        </div> --}}
 
 
 
@@ -64,14 +64,7 @@
 
                 {{-- {{ Form::text('tipo_vivienda', Input::old('tipo_vivienda'), ['class'=> 'form-input mt-1 block w-full'])  }}
                 --}}
-                <select id="tipo_vivienda" name="tipo_vivienda" class="form-control" onchange="escrituras();">
-
-                    <option selected hidden>Seleccionar</option>
-                    <option escrituras="Si">Propia</option>
-                    <option escrituras="No">Arriendo</option>
-                    <option escrituras="No">Posada</option>
-
-                </select>
+                <select id="firstmenu" name="tipo_vivienda" class="form-control" ></select>
             </div>
             <div class="col-4">
 
@@ -85,7 +78,7 @@
                                       
                       </select> --}}
 
-                <input id="escrituras" name="escrituras" type="text" class="form-control" disabled>
+                <select id="secondmenu" name="escrituras" type="text" class="form-control" ></select>
             </div>
         </div>
         <hr class="pt-6" />
@@ -367,12 +360,81 @@
 
 @section('js')
 
-<script>
+{{-- <script>
     $('#tipo_vivienda').on('change', function () {
         $("#escrituras").val($('#tipo_vivienda option:selected').attr('escrituras'));
     });
 
+</script> --}}
+
+<script>
+    var items = [{
+    name: 'Seleccionar',
+    value: '',
+    subitems: []
+  },
+  {
+    name: 'Propia',
+    value: 'Propia',
+    subitems: [{
+        name: 'Escrituras',
+        value: 'Escrituras'
+      },
+      {
+        name: 'Documentos',
+        value: 'Documentos'
+      }
+    ]
+  },
+  {
+    name: 'Arriendo',
+    value: 'Arriendo',
+    subitems: [{
+        name: 'Ninguno',
+        value: 'Ninguno'
+      }      
+    ]
+  },
+  {
+    name: 'Posada',
+    value: 'Posada',
+    subitems: [{
+        name: 'Ninguno',
+        value: 'Ninguno'
+      }
+    ]
+  }
+];
+
+
+$(function() {
+  var temp = {};
+
+  $.each(items, function() {
+    $("<option />")
+      .attr("value", this.value)
+      .html(this.name)
+      .appendTo("#firstmenu");
+    temp[this.value] = this.subitems;
+  });
+
+  $("#firstmenu").change(function() {
+    var value = $(this).val();
+    var menu = $("#secondmenu");
+
+    menu.empty();
+    $.each(temp[value], function() {
+      $("<option />")
+        .attr("value", this.value)
+        .html(this.name)
+        .appendTo(menu);
+    });
+  }).change();
+
+
+});
 </script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
 @if (session('error'))
 <script>

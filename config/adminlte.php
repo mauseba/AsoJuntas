@@ -241,7 +241,7 @@ return [
             'can'       => 'admin.home'
         ],
         [
-            
+
             'text'        => 'Gestion de Admin',
             'can'       => 'admin.users.index',
             'icon'        => 'fas fa-users-cog fa-fw',
@@ -263,7 +263,7 @@ return [
 
         ],
         [
-            
+
             'text'        => 'Publicaciones',
             'can'       => 'admin.posts.index',
             'icon'      => 'fas fa-fw fa-clipboard',
@@ -351,25 +351,25 @@ return [
             'can'       => 'admin.beneficiarios.index',
             'submenu'  => [
                 [
-                    'text'       => 'Beneficiarios',
-                    'route'        => 'admin.beneficiarios.index',
-                    'can'       => 'admin.beneficiarios.index',
-                    'active' => ['admin/beneficiarios*'],
-
-                ],
-                [
-                    'text'       => 'Censo Individual',
+                    'text'       => 'Censo ',
                     'route'        => 'admin.censo.index',
                     'can'       => 'admin.censo.index',
                     'active' => ['admin/censo*'],
 
                 ],
                 [
+                    'text'       => 'Beneficiarios',
+                    'route'        => 'admin.beneficiarios.index',
+                    'can'       => 'admin.beneficiarios.index',
+                    'active' => ['admin/beneficiarios*'],
+
+                ],
+                /*  [
                     'text' => 'Barrios',
                     'route'  => 'admin.barrios.index',
                     'can'       => 'admin.barrios.index',
                     'active' => ['admin/barrios*'],
-                ],
+                ], */
                 [
                     'text' => 'EPS',
                     'route'  => 'admin.eps.index',
@@ -396,11 +396,11 @@ return [
                     'route'        => 'admin.pcertificado.index',
                     'can'       => 'admin.pcertificado.index',
                     'active' => ['admin/pcertificado*'],
-                    
+
                 ],
             ]
 
-        ],   
+        ],
         [
             'text'       => 'Solicitud de certificados',
             'route'        => 'admin.pcertificado.create',

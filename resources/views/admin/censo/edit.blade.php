@@ -42,7 +42,7 @@
             <label> Afiliado:</label>
           {{ $censo->nombre}}
         </div>
-        <div class="form-group">
+        {{-- <div class="form-group">
 
             {!! Form::label('barrio', 'Barrio/Vereda') !!}
 
@@ -54,7 +54,7 @@
                 @endforeach
             </select>
 
-        </div>
+        </div> --}}
 
 
         {!! Form::label('direccion', 'Direccion/Finca') !!}
@@ -69,14 +69,17 @@
 
                 {{-- {{ Form::text('tipo_vivienda', Input::old('tipo_vivienda'), ['class'=> 'form-input mt-1 block w-full'])  }}
                 --}}
-                <select id="tipo_vivienda" name="tipo_vivienda" class="form-control" onchange="escrituras();">
+               {{--  <select id="tipo_vivienda" name="tipo_vivienda" class="form-control" onchange="escrituras();">
 
                     
                     <option @if ($censo->tipo_vivienda == "Propia")   selected @endif escrituras="Si">Propia</option>
                     <option @if ($censo->tipo_vivienda == "Arriendo")   selected @endif escrituras="No">Arriendo</option>
                     <option @if ($censo->tipo_vivienda == "Posada")   selected @endif escrituras="No">Posada</option>
 
-                </select>
+                </select> --}}
+                <select   id="firstmenu" name="tipo_vivienda" class="form-control" >
+               
+            </select>
             </div>
             <div class="col-4">
 
@@ -90,7 +93,10 @@
                                       
                       </select> --}}
 
-                <input id="escrituras" name="escrituras" type="text" class="form-control"  value="{{ $censo->escrituras }}" disabled>
+                {{-- <input id="escrituras" name="escrituras" type="text" class="form-control"  value="{{ $censo->escrituras }}" disabled> --}}
+                <select  id="secondmenu" name="escrituras" type="text" class="form-control" >
+                    <option >{{old('escrituras')}}</option>
+                </select>
             </div>
         </div>
         <hr class="pt-6" />
@@ -371,11 +377,82 @@
 
 @section('js')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
-<script>
+{{-- <script>
     $('#tipo_vivienda').on('change', function () {
         $("#escrituras").val($('#tipo_vivienda option:selected').attr('escrituras'));
     });
 
+</script> --}}
+
+<script>
+    var items = [{
+    name: 'Seleccionar',
+    value: '',
+    subitems: [{
+        name: 'Seleccionar Tipo de vivienda',
+        value: ''
+      }]
+  },
+  {
+    name: 'Propia',
+    value: 'Propia',
+    subitems: [{
+        name: 'Escrituras',
+        value: 'Escrituras'
+      },
+      {
+        name: 'Documentos',
+        value: 'Documentos'
+      }
+    ]
+  },
+  {
+    name: 'Arriendo',
+    value: 'Arriendo',
+    subitems: [{
+        name: 'Ninguno',
+        value: 'Ninguno'
+      }      
+    ]
+  },
+  {
+    name: 'Posada',
+    value: 'Posada',
+    subitems: [{
+        name: 'Ninguno',
+        value: 'Ninguno'
+      }
+    ]
+  }
+];
+
+
+$(function() {
+  var temp = {};
+
+  $.each(items, function() {
+    $("<option />")
+      .attr("value", this.value)
+      .html(this.name)
+      .appendTo("#firstmenu");
+    temp[this.value] = this.subitems;
+  });
+
+  $("#firstmenu").change(function() {
+    var value = $(this).val();
+    var menu = $("#secondmenu");
+
+    menu.empty();
+    $.each(temp[value], function() {
+      $("<option />")
+        .attr("value", this.value)
+        .html(this.name)
+        .appendTo(menu);
+    });
+  }).change();
+
+
+});
 </script>
 
 @endsection

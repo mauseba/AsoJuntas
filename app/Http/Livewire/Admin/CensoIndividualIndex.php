@@ -42,30 +42,30 @@ class CensoIndividualIndex extends Component
     {
         $user = UserJun::all();
         $jun = Junta::orderBy('Nombre')->get();
-        $barrios = Barrios::orderBy('name')->get();
+        // $barrios = Barrios::orderBy('name')->get();
 
         $censo = Censo::join('user_juns', 'censo.user_id', '=', 'user_juns.id')
-            ->join('juntas', 'juntas.id', '=', 'user_juns.id')
-            ->join('barrios', 'barrios.id', '=', 'censo.barrio')
-            ->select('censo.*', 'user_juns.nombre', 'user_juns.junta_id', 'juntas.Nombre', 'user_juns.Direccion', 'barrios.name', 'user_juns.nombre')
+            ->join('juntas', 'juntas.id', '=', 'user_juns.junta_id')
+            // ->join('barrios', 'barrios.id', '=', 'censo.barrio')
+            ->select('censo.*', 'user_juns.nombre', 'user_juns.junta_id', 'juntas.Nombre', 'user_juns.Direccion'/* , 'barrios.Name' */)
             ->where('juntas.Nombre', 'LIKE', '%' .  $this->junta . '%')
             ->Where('user_juns.nombre', 'LIKE', '%' .  $this->afiliado . '%')
             ->orderBy('id', 'DESC')
             ->paginate();
 
 
-        return view('livewire.admin.censo-individual-index', compact('censo', 'user', 'jun', 'barrios'));
+        return view('livewire.admin.censo-individual-index', compact('censo', 'user', 'jun'/* , 'barrios' */));
     }
 
     public function exportar()
     {
         $censo = Censo::join('user_juns', 'censo.user_id', '=', 'user_juns.id')
-            ->join('juntas', 'juntas.id', '=', 'user_juns.id')
-            ->join('barrios', 'barrios.id', '=', 'censo.barrio')
-            ->select('censo.*', 'user_juns.nombre', 'user_juns.junta_id', 'juntas.Nombre', 'user_juns.Direccion', 'barrios.Name')
+            ->join('juntas', 'juntas.id', '=', 'user_juns.junta_id')
+            // ->join('barrios', 'barrios.id', '=', 'censo.barrio')
+            ->select('censo.*', 'user_juns.nombre', 'user_juns.junta_id', 'juntas.Nombre', 'user_juns.Direccion'/* , 'barrios.Name' */)
             ->where('juntas.Nombre', 'LIKE', '%' .  $this->junta . '%')
             ->Where('user_juns.nombre', 'LIKE', '%' .  $this->afiliado . '%')
-            ->orderBy('id', 'DESC')
+            ->orderBy('user_juns.nombre', 'DESC')
             ->get();
 
 
@@ -73,13 +73,15 @@ class CensoIndividualIndex extends Component
 
         $beneficiarios = Beneficiarios::join('user_juns', 'beneficiarios.user_id', '=', 'user_juns.id')
             ->join('censo', 'censo.user_id', '=', 'beneficiarios.user_id')
-            ->join('juntas', 'juntas.id', '=', 'user_juns.id')
-            ->join('barrios', 'barrios.id', '=', 'censo.barrio')
-            ->select('beneficiarios.*', 'user_juns.nombre', 'user_juns.junta_id', 'juntas.Nombre', 'censo.barrio', 'barrios.Name')
+            ->join('juntas', 'juntas.id', '=', 'user_juns.junta_id')
+            // ->join('barrios', 'barrios.id', '=', 'censo.barrio')
+            ->join('eps', 'eps.id', '=', 'beneficiarios.salud')
+            ->select('beneficiarios.*', 'user_juns.nombre', 'user_juns.junta_id', 'juntas.Nombre', /* 'censo.barrio',  'barrios.Name',*/ 'eps.namE')
             ->WhereIn('beneficiarios.user_id', $dato)
+            ->orderBy('id', 'DESC')
             ->get();
 
-        $pdf = PDF::loadView('pdf.censo', compact('censo', 'beneficiarios'))->setPaper('a4', 'landscape')->output();
+        $pdf = PDF::loadView('pdf.censo', compact('censo', 'beneficiarios'))->setPaper('a4', 'landscape');
         return response()->streamDownload(function () use ($pdf) {
             echo $pdf->stream();
         }, "Informe_CensoIndividual.pdf");

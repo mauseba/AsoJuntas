@@ -42,6 +42,7 @@ class CensadosIndex extends Component
             ->where('Num_identificacion', 'LIKE', '%' . $this->documento . '%')
             ->where('user_juns.nombre', 'LIKE', '%' . $this->nombre . '%')
             ->where('juntas.Nombre', 'LIKE', '%' . $this->junta . '%')
+            ->latest('id')
             ->get();
 
 
