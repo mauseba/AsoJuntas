@@ -102,7 +102,7 @@ class BeneficiariosIndex extends Component
             ->Where('beneficiarios.user_id', 'LIKE',  $this->afiliado)
             ->get();
 
-        $pdf = PDF::loadView('pdf.beneficiarios', compact('beneficiarios'))->setPaper('a4', 'landscape')->output();
+        $pdf = PDF::loadView('pdf.beneficiarios', compact('beneficiarios'))->setPaper('a4', 'landscape');
         return response()->streamDownload(function () use ($pdf) {
             echo $pdf->stream();
         }, "Informe_beneficiarios.pdf");

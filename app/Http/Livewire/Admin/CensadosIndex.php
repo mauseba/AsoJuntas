@@ -46,7 +46,7 @@ class CensadosIndex extends Component
 
 
 
-        $pdf = PDF::loadView('pdf.censados', compact('info'))->setPaper('a4', 'landscape')->output();
+        $pdf = PDF::loadView('pdf.censados', compact('info'))->setPaper('a4', 'landscape');
         return response()->streamDownload(function () use ($pdf) {
             echo $pdf->stream();
         }, "Informe_AfiliadosCensados.pdf");
