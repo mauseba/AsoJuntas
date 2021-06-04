@@ -44,7 +44,7 @@
             </div>
             <div id="menu1" class="tab-pane fade">
                 <h3>Censo Individual</h3>
-                @livewire('admin.censo-individual-index')
+               @livewire('admin.censo-individual-index')
             </div>
             <div id="menu2" class=" tab-pane fade">
                 <h3>Listado Afil. Censados</h3>

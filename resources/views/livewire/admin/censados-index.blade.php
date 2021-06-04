@@ -15,66 +15,62 @@
                 <a class="btn btn-danger text-white   " wire:click="exportar">PDF</a>
             </div>
         </div>
-
-
-
     </div>
 
+    
     @if ($userj->count())
+        <div class="card-body table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>F. afiliacion</th>
+                        <th>Identificacion</th>
+                        <th>Nombre</th>
+                        <th>Telefono</th>
+                        <th>Correo</th>
+                        <th>Cargo</th>
+                        <th>Junta</th>
+                        <th>Comision</th>
 
-    <div class="card-body table-responsive">
+                        {{-- <th colspan="2">Censado</th> --}}
+                    </tr>
+                </thead>
 
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>F. afiliacion</th>
-                    <th>Identificacion</th>
-                    <th>Nombre</th>
-                    <th>Telefono</th>
-                    <th>Correo</th>
-                    <th>Cargo</th>
-                    <th>Junta</th>
-                    <th>Comision</th>
+                <tbody>
+                    @foreach ($userj as $userju)
+                    <tr>
+                        <td>{{$userju->created_at}}</td>
+                        <td>{{$userju->Num_identificacion}}</td>
+                        <td>{{$userju->nombre}}</td>
+                        <td>{{$userju->Num_contacto}}</td>
+                        <td>{{$userju->Correo}}</td>
+                        <td>{{$userju->Cargo}}</td>
+                        <td>{{$userju->Nombre}}</td>
+                        <td>{{$userju->comision}}</td>
+                        <td>
 
-                    {{-- <th colspan="2">Censado</th> --}}
-                </tr>
-            </thead>
+                        </td>
 
-            <tbody>
-                @foreach ($userj as $userju)
-                <tr>
-                    <td>{{$userju->created_at}}</td>
-                    <td>{{$userju->Num_identificacion}}</td>
-                    <td>{{$userju->nombre}}</td>
-                    <td>{{$userju->Num_contacto}}</td>
-                    <td>{{$userju->Correo}}</td>
-                    <td>{{$userju->Cargo}}</td>
-                    <td>{{$userju->Nombre}}</td>
-                    <td>{{$userju->comision}}</td>
-                    <td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
 
-                    </td>
-
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
-
-    <div class="card-footer">
-        <div class="row">
-            <div class="col">
-                {{$userj->links()}}
-            </div>
-            <div class="col">
-                <p class="float-right">Cantidad de registros: <strong>{{$userj->count()}}</strong> </p>
+        <div class="card-footer">
+            <div class="row">
+                <div class="col">
+                    {{$userj->links()}}
+                </div>
+                <div class="col">
+                    <p class="float-right">Cantidad de registros: <strong>{{$userj->count()}}</strong> </p>
+                </div>
             </div>
         </div>
-    </div>
     @else
-    <div class="card-body">
-        <strong>No hay ningún registro ...</strong>
-    </div>
+        <div class="card-body">
+            <strong>No hay ningún registro ...</strong>
+        </div>
     @endif
 
     <script>
@@ -97,6 +93,5 @@
                 })
             })
         })
-
     </script>
 </div>
